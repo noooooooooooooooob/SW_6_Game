@@ -10,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpHeight;
     public float jump_time_to_peak;
     public float jump_time_to_descent;
+    public float crouchSize;
+
 
 
     private float jump_velocity;
@@ -47,6 +49,16 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
         Debug.Log("Gravitiy " + getGravity());
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            transform.localScale = new Vector2(transform.localScale.x, crouchSize * transform.localScale.y);
+        }
+        if (Input.GetKeyUp(KeyCode.DownArrow))
+        {
+
+            transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y / crouchSize);
+        }
     }
 
     float getGravity()
