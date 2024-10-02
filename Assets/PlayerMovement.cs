@@ -48,7 +48,16 @@ public class PlayerMovement : MonoBehaviour
             }
             isGrounded = false;
         }
-        Debug.Log("Gravitiy " + getGravity());
+
+        Debug.Log(Input.GetAxis("Horizontal"));
+        if (moveX > 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        if (moveX < 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -56,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-
             transform.localScale = new Vector2(transform.localScale.x, transform.localScale.y / crouchSize);
         }
     }
