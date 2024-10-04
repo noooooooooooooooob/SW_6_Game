@@ -7,10 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
 
     public float speed = 5.0f;
-    public float jumpHeight;
-    public float jump_time_to_peak;
-    public float jump_time_to_descent;
-    public float crouchSize;
+    public float jumpHeight = 10;
+    public float jump_time_to_peak = 1;
+    public float jump_time_to_descent = 0.5f;
+    public float crouchSize = 0.5f;
 
     public Transform body;
 
