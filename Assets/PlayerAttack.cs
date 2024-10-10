@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    public AttackType attackType;
     public string targetTag = "Enemy"; // Tag of the objects you want to destroy
     public SpriteRenderer attackSprite;
     public Collider2D attackRange; // Assign the attack range collider here
