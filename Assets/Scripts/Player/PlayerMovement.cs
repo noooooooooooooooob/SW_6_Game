@@ -12,8 +12,13 @@ public class PlayerMovement : MonoBehaviour
     public float jump_time_to_descent = 0.5f;
     public float crouchSize = 0.5f;
 
-    public Transform body;
+    public float platformTime = 5f;
+    public float disableTime = 0.2f;
 
+    public Transform body;
+    public Collider2D playerCollider;
+    Collider2D plat1;
+    Collider2D plat2;
 
     private float jump_velocity;
     private float jump_gravity;
@@ -21,10 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private bool isGrounded = false;
+    private bool isOnPlatform = false;
     private bool hasDoubleJump = false;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerCollider = GetComponent<Collider2D>();
+        plat1 = GameObject.Find("1st floor").GetComponent<Collider2D>();
+        plat2 = GameObject.Find("2nd floor").GetComponent<Collider2D>();
         body = transform.Find("BodyPivot");
         jump_velocity = 2 * jumpHeight / jump_time_to_peak;
         jump_gravity = 2 * jumpHeight / (jump_time_to_peak * jump_time_to_peak);
@@ -35,11 +44,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Get horizontal and vertical inputs
-        float moveX = Input.GetAxis("Horizontal");
-
-        rb.velocity = new Vector2(moveX * speed, rb.velocity.y);
-        rb.velocity += Vector2.down * getGravity() * Time.deltaTime; //Velocity decreases overtime with set gravity
+        rb.velocity += Vector2.down * GetGravity() * Time.deltaTime; //Velocity decreases overtime with set gravity
 
         if (Input.GetButtonDown("Jump") && (isGrounded || hasDoubleJump))
         {
@@ -52,33 +57,32 @@ public class PlayerMovement : MonoBehaviour
             isGrounded = false;
         }
 
-        // Debug.Log(Input.GetAxis("Horizontal"));
-        // if (moveX > 0)
-        // {
-        //     transform.rotation = Quaternion.Euler(0, 0, 0);
-        // }
-        // if (moveX < 0)
-        // {
-        //     transform.rotation = Quaternion.Euler(0, 180, 0);
-        // }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        if (isOnPlatform == true)
         {
-            if (body != null)
+            if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                body.localScale = new Vector2(body.localScale.x, crouchSize * body.localScale.y);
+                Debug.Log("Pressed down");
+                StartCoroutine(DisablePlayerCollider(disableTime));
             }
+
+            platformTime -= Time.deltaTime;
         }
-        if (Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.S))
+
+        if (platformTime <= 0)
         {
-            if (body != null)
-            {
-                body.localScale = new Vector2(body.localScale.x, body.localScale.y / crouchSize);
-            }
+            plat1.enabled = false;
+            plat2.enabled = false;
         }
+        else
+        {
+            plat1.enabled = true;
+            plat2.enabled = true;
+        }
+
     }
 
-    float getGravity()
+    float GetGravity()
     {
         if (rb.velocity.y < 0.0f)
         {
@@ -87,12 +91,36 @@ public class PlayerMovement : MonoBehaviour
         else return fall_gravity;
     }
 
+    private IEnumerator DisablePlayerCollider(float disableTime)
+    {
+        playerCollider.enabled = false;
+        yield return new WaitForSeconds(disableTime);
+        playerCollider.enabled = true;
+    }
+
+
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Ground")
         {
             isGrounded = true;
             hasDoubleJump = true;
+            platformTime = 5f;
+        }
+        else if (other.gameObject.tag == "platform")
+        {
+            Debug.Log("On Platform");
+            isGrounded = true;
+            hasDoubleJump = true;
+            isOnPlatform = true;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "platform")
+        {
+            isOnPlatform = false;
         }
     }
 }
