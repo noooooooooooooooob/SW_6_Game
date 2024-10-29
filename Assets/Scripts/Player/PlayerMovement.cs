@@ -16,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     public float disableTime = 0.2f;
 
     public Transform body;
-    public Collider2D playerCollider;
     Collider2D plat1;
     Collider2D plat2;
 
@@ -24,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private float jump_gravity;
     private float fall_gravity;
 
+    private Collider2D playerCollider;
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private bool isOnPlatform = false;
@@ -32,8 +32,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
-        plat1 = GameObject.Find("1st floor").GetComponent<Collider2D>();
-        plat2 = GameObject.Find("2nd floor").GetComponent<Collider2D>();
+        plat1 = GameObject.Find("2nd floor").GetComponent<Collider2D>();
+        plat2 = GameObject.Find("3rd floor").GetComponent<Collider2D>();
         body = transform.Find("BodyPivot");
         jump_velocity = 2 * jumpHeight / jump_time_to_peak;
         jump_gravity = 2 * jumpHeight / (jump_time_to_peak * jump_time_to_peak);
