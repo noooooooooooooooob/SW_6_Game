@@ -8,7 +8,7 @@ public class inventory : MonoBehaviour
     private GameObject[] itemsMini;
     private List<string> inventorys = new List<string>();
     private int inventorySize = 3;
-    private float[] arrPosX = { -3.8f, -3f, -2.2f };
+    private float[] arrPosX = { -4.1f, -3f, -1.9f };
     private List<GameObject> spawnedItems = new List<GameObject>();
 
     void Start()
