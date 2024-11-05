@@ -172,4 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemType: 2
-  speed: 1
+  speed: 4
+  inventorys: {fileID: 0}
