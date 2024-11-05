@@ -9,12 +9,13 @@ public class Note : MonoBehaviour
     Rigidbody2D rigid;
     public float[] spawnPoints;
     public Sprite[] sprites;
+    SpriteRenderer spriteRenderer;
     float spawnPointY;
     public float spawnPointX;
     public float speed;
     bool isBoardered;
     bool isHit;
-    SpriteRenderer spriteRenderer;
+
     public bool isLeft;
     public bool isRight;
     public bool isUp;
@@ -26,20 +27,10 @@ public class Note : MonoBehaviour
         spriteRenderer=GetComponent<SpriteRenderer>();
         spawnPointY=spawnPoints[Random.Range(0,3)]; // 스폰포인트 랜덤
         transform.position=new Vector2(spawnPointX,spawnPointY);
+
         int coloridx=Random.Range(0,3);
-        switch(coloridx)
-        {
-            case 0:
-                spriteRenderer.color=new Color(1,0,0,1);
-                break;
-            case 1:
-                spriteRenderer.color=new Color(0,1,0,1);
-                break;
-            case 2:
-                spriteRenderer.color=new Color(0,0,1,1);
-                break;
-        }
         int arrowidx=Random.Range(0,4);
+
         isLeft=false;
         isRight=false;
         isUp=false;
@@ -59,7 +50,9 @@ public class Note : MonoBehaviour
                 isDown=true;
                 break;
         }
-        /*
+        
+        //coloridx [ Red, Green, Blue ]
+        //arrowidx [ Left, Right, Up, Down]
         if(coloridx==0&&arrowidx==0)
             spriteRenderer.sprite=sprites[0];
         else if(coloridx==0&&arrowidx==1)
@@ -84,7 +77,7 @@ public class Note : MonoBehaviour
             spriteRenderer.sprite=sprites[10];
         else if(coloridx==2&&arrowidx==3)
             spriteRenderer.sprite=sprites[11];
-        */
+        
         isHit=false;
         
     }
