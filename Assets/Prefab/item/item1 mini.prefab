@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6818436514370600712}
   - component: {fileID: 184502587046795402}
+  - component: {fileID: 3672771297288241302}
   m_Layer: 0
   m_Name: item1 mini
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &3672771297288241302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8814745103609411739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f331e5f2d8e79dc4fbcc29fa760003a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deleteRadius: 5
