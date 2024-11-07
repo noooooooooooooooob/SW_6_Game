@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     Collider2D plat1;
     Collider2D plat2;
 
+    Animator animator;
+
     private float jump_velocity;
     private float jump_gravity;
     private float fall_gravity;
@@ -27,9 +29,9 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded = false;
     private bool isOnPlatform = false;
-    private bool hasDoubleJump = false;
     void Start()
     {
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<Collider2D>();
         plat1 = GameObject.Find("2nd floor").GetComponent<Collider2D>();
@@ -45,16 +47,19 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         rb.velocity += Vector2.down * GetGravity() * Time.deltaTime; //Velocity decreases overtime with set gravity
+        animator.SetFloat("Yvelocity", rb.velocity.y);
+        animator.SetBool("IsAttacking", false);
 
-        if (Input.GetButtonDown("Jump") && (isGrounded || hasDoubleJump))
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
             //Initial velocity starts at jump_velocity
             rb.velocity = new Vector2(rb.velocity.x, jump_velocity);
-            if (!isGrounded)
-            {
-                hasDoubleJump = false;
-            }
+            animator.SetBool("IsJumping", true);
             isGrounded = false;
+        }
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            animator.SetBool("IsAttacking", true);
         }
 
 
@@ -103,15 +108,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "Ground")
         {
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsMoving", true);
             isGrounded = true;
-            hasDoubleJump = true;
             platformTime = 5f;
         }
         else if (other.gameObject.tag == "platform")
         {
             Debug.Log("On Platform");
             isGrounded = true;
-            hasDoubleJump = true;
+            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsMoving", false);
             isOnPlatform = true;
         }
     }
