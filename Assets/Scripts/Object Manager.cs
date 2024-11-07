@@ -13,7 +13,7 @@ public class ObjectManager : MonoBehaviour
     void Awake()
     {
         cnt=0;
-        note = new GameObject[100];
+        note = new GameObject[1000];
 
         Generate();
         makeObj();
@@ -30,8 +30,6 @@ public class ObjectManager : MonoBehaviour
     
     void makeObj()
     {
-        if(cnt>=100)
-            cnt=0;
         note[cnt++].SetActive(true);
         Invoke("makeObj",noteSpawnTime);
     }
@@ -39,6 +37,10 @@ public class ObjectManager : MonoBehaviour
     void Update()
     {
         
-        
+        if(cnt>=1000)
+        {
+            cnt=0;
+            Generate();
+        }
     }
 }
