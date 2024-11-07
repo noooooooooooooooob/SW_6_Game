@@ -84,7 +84,13 @@ public class Note : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
+        if(!isHit)
+            transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
+        else
+        {
+            
+        }
+
     }
 
 
