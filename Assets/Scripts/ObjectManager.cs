@@ -8,7 +8,7 @@ public class ObjectManager : MonoBehaviour
     public GameObject notePrefab;
     public float noteSpawnTime;
     GameObject[] note;
-    int cnt;
+    static int cnt;
 
     void Awake()
     {
@@ -25,6 +25,7 @@ public class ObjectManager : MonoBehaviour
         {
             note[i] = Instantiate(notePrefab);
             note[i].SetActive(false);
+            note[i].GetComponent<Note>().prefabIdx=i;
         }
     }
     

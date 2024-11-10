@@ -3643,6 +3643,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarFill: {fileID: 1428852359}
+  maxHealth: 1000
+  changeRate: 5
 --- !u!114 &2118998696
 MonoBehaviour:
   m_ObjectHideFlags: 0

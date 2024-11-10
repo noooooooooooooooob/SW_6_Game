@@ -15,6 +15,7 @@ public class Note : MonoBehaviour
     public float speed;
     bool isBoardered;
     bool isHit;
+    public float prefabIdx; // Object Manager 안에서 배열 인덱스
 
     public bool isLeft;
     public bool isRight;
@@ -79,7 +80,6 @@ public class Note : MonoBehaviour
             spriteRenderer.sprite=sprites[11];
         
         isHit=false;
-        
     }
 
     void Update()
