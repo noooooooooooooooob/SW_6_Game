@@ -48,7 +48,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb.velocity += Vector2.down * GetGravity() * Time.deltaTime; //Velocity decreases overtime with set gravity
         animator.SetFloat("Yvelocity", rb.velocity.y);
-        animator.SetBool("IsAttacking", false);
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -57,9 +56,10 @@ public class PlayerMovement : MonoBehaviour
             animator.SetBool("IsJumping", true);
             isGrounded = false;
         }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
-            animator.SetBool("IsAttacking", true);
+            animator.SetTrigger("IsAttacking");
         }
 
 

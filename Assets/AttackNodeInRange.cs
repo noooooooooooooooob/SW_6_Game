@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,18 +6,25 @@ using UnityEngine;
 public class AttackNodeInRange : MonoBehaviour
 {
     bool hasNote = false;
-    bool deleteNode = false;
-
+    bool attack = false;
     private FloorChecker floorChecker;
     public bool playerInRange = false;
+
+    private bool left = false;
+    private bool right = false;
+    private bool up = false;
+    private bool down = false;
+    private bool deleteNote = false;
 
     void Start()
     {
         floorChecker = GetComponentInChildren<FloorChecker>();
     }
 
-    public void OnChildTrigger(){
-        if (floorChecker!= null){
+    public void OnChildTrigger()
+    {
+        if (floorChecker != null)
+        {
             playerInRange = floorChecker.hasPlayer;
         }
     }
@@ -24,20 +32,36 @@ public class AttackNodeInRange : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (hasNote)
         {
-            if (hasNote)
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                deleteNode = true;
+                attack = true;
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                left = true;
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                right = true;
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                up = true;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                down = true;
             }
         }
-
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.tag == "Note")
         {
+
             hasNote = true;
         }
     }
@@ -46,11 +70,37 @@ public class AttackNodeInRange : MonoBehaviour
     {
         if (other.gameObject.tag == "Note")
         {
-            if (deleteNode && playerInRange)
+            Note note = other.gameObject.GetComponent<Note>();
+            if (attack && playerInRange)
+            {
+                if (note.isLeft && left)
+                {
+                    deleteNote = true;
+                }
+                if (note.isRight && right)
+                {
+                    deleteNote = true;
+                }
+                if (note.isUp && up)
+                {
+                    deleteNote = true;
+                }
+                if (note.isDown && down)
+                {
+                    deleteNote = true;
+                }
+            }
+            if (deleteNote)
             {
                 Destroy(other.gameObject);
-                deleteNode = false;
+                attack = false;
                 hasNote = false;
+                deleteNote = false;
+
+                left = false;
+                right = false;
+                up = false;
+                down = false;
             }
         }
     }
