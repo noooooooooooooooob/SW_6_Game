@@ -777,6 +777,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notePrefab: {fileID: 8012933125453678080, guid: 4460797cf03493a47b6e689adc7f43a5, type: 3}
   noteSpawnTime: 1
+  isSlow: 0
 --- !u!4 &218951623
 Transform:
   m_ObjectHideFlags: 0
@@ -2726,6 +2727,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1846185150}
   - component: {fileID: 1846185151}
+  - component: {fileID: 1846185152}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -2767,6 +2769,23 @@ MonoBehaviour:
   - {fileID: 8814745103609411739, guid: e670683cd3d00384d8ca2446c378d6de, type: 3}
   - {fileID: 9114695181800895860, guid: 4b8143308fe76e1409ca978613912658, type: 3}
   - {fileID: 5948926716114525798, guid: a024a0137ff158b4c8709152a6b7a6b4, type: 3}
+  ST: {fileID: 1846185152}
+--- !u!114 &1846185152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846185148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b502c3f1bf347344afa90d0e0157ccd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minX: -13
+  maxX: 13
+  minY: -5
+  maxY: 5
 --- !u!1 &1932489472
 GameObject:
   m_ObjectHideFlags: 0
