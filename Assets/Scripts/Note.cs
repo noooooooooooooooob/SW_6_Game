@@ -14,13 +14,16 @@ public class Note : MonoBehaviour
     public float spawnPointX;
     public float speed;
     bool isBoardered;
-    bool isHit;
+    public bool isHit;
     public float prefabIdx; // Object Manager 안에서 배열 인덱스
 
     public bool isLeft;
     public bool isRight;
     public bool isUp;
     public bool isDown;
+
+    // 체력 변화 처리 클래스 연결
+    public HealthBarController healthBarController;
 
     void Awake()
     {
@@ -95,20 +98,20 @@ public class Note : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag=="Ground"
-           || collision.gameObject.tag=="Player")
+        if(collision.gameObject.tag=="Ground")
         {
             Destroy(gameObject);
         }
-        /*
-        if(collision.gameObject.tag=="Ground")
+        else if(collision.gameObject.tag=="Player")
         {
-            isHit=false;
+            HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+            if(healthBarController!=null){
+            HealthBarController.Instance.TakeDamage(30f);}
+            else{
+                Debug.LogError("HealthBarController not found on Player object.");
+            }
+            Destroy(gameObject);
+            
         }
-        if(collision.gameObject.tag=="Player")
-        {
-            isHit=true;
-        }
-        */
     }
 }
