@@ -106,7 +106,7 @@ public class Note : MonoBehaviour
         {
             HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
             if(healthBarController!=null){
-            HealthBarController.Instance.TakeDamage(30f);}
+            HealthBarController.Instance.TakeDamage();}
             else{
                 Debug.LogError("HealthBarController not found on Player object.");
             }
