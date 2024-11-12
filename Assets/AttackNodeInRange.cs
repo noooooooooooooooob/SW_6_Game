@@ -15,6 +15,7 @@ public class AttackNodeInRange : MonoBehaviour
     private bool up = false;
     private bool down = false;
     private bool deleteNote = false;
+    public HealthBarController healthBarController;
 
     void Start()
     {
@@ -101,6 +102,12 @@ public class AttackNodeInRange : MonoBehaviour
                 right = false;
                 up = false;
                 down = false;
+                HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+                if(healthBarController!=null){
+                HealthBarController.Instance.Heal();}
+                else{
+                    Debug.LogError("HealthBarController not found on Player object.");
+                }
             }
         }
     }
