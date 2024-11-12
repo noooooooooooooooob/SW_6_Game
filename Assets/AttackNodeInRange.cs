@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class AttackNodeInRange : MonoBehaviour
@@ -103,8 +104,13 @@ public class AttackNodeInRange : MonoBehaviour
                 up = false;
                 down = false;
                 HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-                if(healthBarController!=null){
-                HealthBarController.Instance.Heal();}
+                if(healthBarController!=null)
+                {
+                    if(!note.isNotacted)
+                        HealthBarController.Instance.Heal();
+                    else
+                        HealthBarController.Instance.TakeDamage();
+                }
                 else{
                     Debug.LogError("HealthBarController not found on Player object.");
                 }
