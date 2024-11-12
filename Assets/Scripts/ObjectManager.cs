@@ -8,12 +8,13 @@ public class ObjectManager : MonoBehaviour
     public GameObject notePrefab;
     public float noteSpawnTime;
     GameObject[] note;
-    static int cnt;
-
+    int cnt;
+    public bool isSlow;
     void Awake()
     {
         cnt=0;
         note = new GameObject[1000];
+        isSlow=false;
 
         Generate();
         makeObj();
@@ -25,12 +26,16 @@ public class ObjectManager : MonoBehaviour
         {
             note[i] = Instantiate(notePrefab);
             note[i].SetActive(false);
-            note[i].GetComponent<Note>().prefabIdx=i;
+            
+            
         }
     }
     
     void makeObj()
     {
+        if(isSlow){
+                note[cnt].GetComponent<Note>().speed*=0.5f;
+            }
         note[cnt++].SetActive(true);
         Invoke("makeObj",noteSpawnTime);
     }
