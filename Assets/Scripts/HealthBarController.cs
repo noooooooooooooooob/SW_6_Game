@@ -15,6 +15,9 @@ public class HealthBarController : MonoBehaviour
     private const float HIGH_THRESHOLD = 0.3f;  // 30%
     private const float LOW_THRESHOLD = 0.1f;   // 10%
 
+    //공격력 상승
+    public bool isDamageUp;
+
     private void Awake()
     {
         if (Instance == null)
@@ -26,6 +29,7 @@ public class HealthBarController : MonoBehaviour
             Destroy(gameObject);
             Debug.LogError("Multiple instances of HealthBarController detected. Destroying duplicate");
         }
+        isDamageUp=false;
     }
 
     private void Start() => SetHealth(maxHealth * 0.5f); // 체력을 절반으로 시작
@@ -51,6 +55,10 @@ public class HealthBarController : MonoBehaviour
         else if (healthPercentage <= LOW_THRESHOLD)
         {
             amount += 40f * (1 - healthPercentage);
+        }
+
+        if(isDamageUp){
+            amount*=5f;
         }
 
         // 체력을 증가시키고 최대 체력으로 제한

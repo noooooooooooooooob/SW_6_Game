@@ -10,7 +10,9 @@ public class inventory : MonoBehaviour
     private int inventorySize = 3;
     private float[] arrPosX = { -4.1f, -3f, -1.9f };
     private List<GameObject> spawnedItems = new List<GameObject>();
+    
     public StopSlow ST;
+    public DamageDown DD;
 
     void Start()
     {
@@ -100,15 +102,34 @@ public class inventory : MonoBehaviour
                 Slow slow = FindObjectOfType<Slow>();
                 if (slow != null)
                 {
-                    
                     slow.SlowNotes(); 
-                    Invoke("Norm",2f);
+                    Invoke("stopslow",5f);
                 }
                 else
                 {
                     Debug.LogWarning("Slow 객체를 찾을 수 없습니다.");
                 }
             }
+             if (inventorys[slotIndex] == "3")
+            {
+               
+            }
+             if (inventorys[slotIndex] == "4")
+            {
+                DamageUp DU = FindAnyObjectByType<DamageUp>();
+                if (DU != null)
+                {
+                    DU.Start(); 
+                    Invoke("damagedown",4f);
+                }
+                else
+                {
+                    Debug.LogWarning("DU 객체를 찾을 수 없습니다.");
+                }
+            }
+
+
+        
 
 
             inventorys[slotIndex] = null;
@@ -118,9 +139,17 @@ public class inventory : MonoBehaviour
             Debug.Log("해당 슬롯에 아이템이 없습니다.");
         }
     }
-    void Norm(){
+
+    //item 2 정상화
+    void stopslow(){
        ST.Normalization();
-    
-            
+        
     }
+
+    //item 4 정상화
+    void damagedown(){
+       DD.Normalization();
+        
+    }
+
 }
