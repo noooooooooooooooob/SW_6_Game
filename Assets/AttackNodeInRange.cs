@@ -36,24 +36,24 @@ public class AttackNodeInRange : MonoBehaviour
 
         if (hasNote)
         {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                attack = true;
-            }
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                attack = true;
                 left = true;
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                attack = true;
                 right = true;
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                attack = true;
                 up = true;
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                attack = true;
                 down = true;
             }
         }
