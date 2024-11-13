@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 135186d5f39aef64bb5974217008fea1
+guid: 6928961417c055d4fbca8bf6fc6409d0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Running-Blue_0
+      name: Player_AttackUp-Blue_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 705b3e857a0b11f44809c1a72bb1ec65
-      internalID: 1610453658
+      spriteID: cd20c9eead5d2ef449ebc4b48e296419
+      internalID: 903648522
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_1
+      name: Player_AttackUp-Blue_1
       rect:
         serializedVersion: 2
         x: 100
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4e8061bf45eb5414483d6959ff9fa512
-      internalID: -1233134197
+      spriteID: 5e8d2ba9a39b201498c3401d8d807390
+      internalID: 1033244806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_2
+      name: Player_AttackUp-Blue_2
       rect:
         serializedVersion: 2
         x: 200
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b32603cf11891947a3375edaa7fcbc3
-      internalID: -734547886
+      spriteID: 0037f54ca75370448a9b5ea803992397
+      internalID: -1590477342
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_3
+      name: Player_AttackUp-Blue_3
       rect:
         serializedVersion: 2
         x: 300
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d802db3a7199e5e4eb5ffa0a94aa5927
-      internalID: -1575110799
+      spriteID: fa50332047021954892dfec27a50cf2f
+      internalID: 1848990128
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_4
+      name: Player_AttackUp-Blue_4
       rect:
         serializedVersion: 2
         x: 400
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b1f27e08e40236448a82793ed0ed84a2
-      internalID: 548702076
+      spriteID: b79b1d62f899ea14b80c84c11b1525a0
+      internalID: -1057619826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_5
+      name: Player_AttackUp-Blue_5
       rect:
         serializedVersion: 2
         x: 500
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a594b86307a7a674691264cc345b347a
-      internalID: 1337696191
+      spriteID: 5576315616ef14b4a88b6123f6c58178
+      internalID: 1789942109
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_6
+      name: Player_AttackUp-Blue_6
       rect:
         serializedVersion: 2
         x: 600
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8c503eaeb1a75fc4ea1d338ea0de3e0c
-      internalID: 311451375
+      spriteID: 504f65118a6c76b439ac7495394c7c18
+      internalID: 59530525
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Running-Blue_7
+      name: Player_AttackUp-Blue_7
       rect:
         serializedVersion: 2
         x: 700
@@ -271,71 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9df8543f5902bb8479bba414a3c52830
-      internalID: 758885921
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Running-Blue_8
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 28453ade4dbb9a24d8b0a7151dc1f907
-      internalID: -1294218386
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Running-Blue_9
-      rect:
-        serializedVersion: 2
-        x: 900
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55d466a103f7b6546a337e2484f898c2
-      internalID: -1750541561
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Running-Blue_10
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cd1a7bf0c524fe44da387bb6ae7ebfb3
-      internalID: -673831661
+      spriteID: 969344ca70c13dc41810a364b8db8b51
+      internalID: -848290268
       vertices: []
       indices: 
       edges: []
@@ -351,17 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Running-Blue_0: 1610453658
-      Player_Running-Blue_1: -1233134197
-      Player_Running-Blue_10: -673831661
-      Player_Running-Blue_2: -734547886
-      Player_Running-Blue_3: -1575110799
-      Player_Running-Blue_4: 548702076
-      Player_Running-Blue_5: 1337696191
-      Player_Running-Blue_6: 311451375
-      Player_Running-Blue_7: 758885921
-      Player_Running-Blue_8: -1294218386
-      Player_Running-Blue_9: -1750541561
+      Player_AttackUp-Blue_0: 903648522
+      Player_AttackUp-Blue_1: 1033244806
+      Player_AttackUp-Blue_2: -1590477342
+      Player_AttackUp-Blue_3: 1848990128
+      Player_AttackUp-Blue_4: -1057619826
+      Player_AttackUp-Blue_5: 1789942109
+      Player_AttackUp-Blue_6: 59530525
+      Player_AttackUp-Blue_7: -848290268
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
