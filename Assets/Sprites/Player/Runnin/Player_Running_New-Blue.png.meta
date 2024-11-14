@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ae3e53627455e440999e7a5ba14993b
+guid: f072afe26f88a93459c1a064547838b9
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_Attack-Green_0
+      name: Player_Running_New-Blue_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: be5e2f04422f6534c9b2e65c8c5a4b06
-      internalID: 1882883839
+      spriteID: ae9f96d031b17df4cba9df3c1a280c97
+      internalID: -132314580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_1
+      name: Player_Running_New-Blue_1
       rect:
         serializedVersion: 2
         x: 100
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cc6ac90f0a7395448688bdfa2910fc6
-      internalID: -1840991190
+      spriteID: fc5c427d573bbfc41991dafe3fa471f7
+      internalID: -665074480
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_2
+      name: Player_Running_New-Blue_2
       rect:
         serializedVersion: 2
         x: 200
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4f643250011b9fe4ea9c451939d6c578
-      internalID: -692231599
+      spriteID: 7108ca580efec354396080ac1dc214b8
+      internalID: 1993056253
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_3
+      name: Player_Running_New-Blue_3
       rect:
         serializedVersion: 2
         x: 300
@@ -187,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eab448971e02db049be1767ab0569db3
-      internalID: -1716924607
+      spriteID: 50a92c16d9aba3f40a1e3b5c7b861cc1
+      internalID: -1381753301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_4
+      name: Player_Running_New-Blue_4
       rect:
         serializedVersion: 2
         x: 400
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1def9ee2bd6fa1d4c820c4e55c67f117
-      internalID: 1796895839
+      spriteID: 4eb024d107faf30408441356d6c55437
+      internalID: 363959145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_5
+      name: Player_Running_New-Blue_5
       rect:
         serializedVersion: 2
         x: 500
@@ -229,14 +229,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0b1026aeb7819d6418382c91eaa09f51
-      internalID: -909935080
+      spriteID: d0ffd0ebf34c6a843bb9487f2d018861
+      internalID: -1773574501
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_6
+      name: Player_Running_New-Blue_6
       rect:
         serializedVersion: 2
         x: 600
@@ -250,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64920e9d42f35bb4387c937231813c48
-      internalID: 16321854
+      spriteID: fc5591220b178e64bba75a9ac597afd9
+      internalID: -1638167712
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_7
+      name: Player_Running_New-Blue_7
       rect:
         serializedVersion: 2
         x: 700
@@ -271,14 +271,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3181334b289e59b458507e9ba15783a2
-      internalID: -1367033602
+      spriteID: 5ec25d312c0efd3479485ba8ae25e225
+      internalID: -714467142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_Attack-Green_8
+      name: Player_Running_New-Blue_8
       rect:
         serializedVersion: 2
         x: 800
@@ -292,155 +292,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c5cd13f10b28def48a8e19121bb61878
-      internalID: -892471995
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_9
-      rect:
-        serializedVersion: 2
-        x: 900
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc633db7ee99fc945b47a0fb784f7906
-      internalID: 1399565841
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_10
-      rect:
-        serializedVersion: 2
-        x: 1000
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7c57ff6f6fc8a0341ad23c708d97437e
-      internalID: 44434000
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_11
-      rect:
-        serializedVersion: 2
-        x: 1100
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 77d2ac96fb9964a439186fea6af97e57
-      internalID: -672082451
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_12
-      rect:
-        serializedVersion: 2
-        x: 1200
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05fc06357d06a8348b07da61b66f6f27
-      internalID: 566785836
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_13
-      rect:
-        serializedVersion: 2
-        x: 1300
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f244734f2565e1743821fef2033e593c
-      internalID: -596257578
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_14
-      rect:
-        serializedVersion: 2
-        x: 1400
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e5a944745cea614aad687b0f085bd82
-      internalID: 258332918
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_Attack-Green_15
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 0
-        width: 100
-        height: 70
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1cb1570b7bc4ab34e80628c411f1b4b6
-      internalID: 1388217629
+      spriteID: 52a4e9e0232a70a4ba619b51b3c54b79
+      internalID: -1133740457
       vertices: []
       indices: 
       edges: []
@@ -456,22 +309,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_Attack-Green_0: 1882883839
-      Player_Attack-Green_1: -1840991190
-      Player_Attack-Green_10: 44434000
-      Player_Attack-Green_11: -672082451
-      Player_Attack-Green_12: 566785836
-      Player_Attack-Green_13: -596257578
-      Player_Attack-Green_14: 258332918
-      Player_Attack-Green_15: 1388217629
-      Player_Attack-Green_2: -692231599
-      Player_Attack-Green_3: -1716924607
-      Player_Attack-Green_4: 1796895839
-      Player_Attack-Green_5: -909935080
-      Player_Attack-Green_6: 16321854
-      Player_Attack-Green_7: -1367033602
-      Player_Attack-Green_8: -892471995
-      Player_Attack-Green_9: 1399565841
+      Player_Running_New-Blue_0: -132314580
+      Player_Running_New-Blue_1: -665074480
+      Player_Running_New-Blue_2: 1993056253
+      Player_Running_New-Blue_3: -1381753301
+      Player_Running_New-Blue_4: 363959145
+      Player_Running_New-Blue_5: -1773574501
+      Player_Running_New-Blue_6: -1638167712
+      Player_Running_New-Blue_7: -714467142
+      Player_Running_New-Blue_8: -1133740457
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

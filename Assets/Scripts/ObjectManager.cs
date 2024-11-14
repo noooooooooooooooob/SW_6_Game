@@ -26,17 +26,19 @@ public class ObjectManager : MonoBehaviour
         {
             note[i] = Instantiate(notePrefab);
             note[i].SetActive(false);
-            
-            
         }
     }
     
     void makeObj()
     {
-        if(isSlow){
-                note[cnt].GetComponent<Note>().speed*=0.5f;
-            }
+        if(isSlow)
+        {
+            note[cnt].GetComponent<Note>().speed*=0.5f;
+        }
         note[cnt++].SetActive(true);
+           
+        if(cnt>=1000)
+            cnt=0;
         Invoke("makeObj",noteSpawnTime);
     }
 
@@ -46,7 +48,6 @@ public class ObjectManager : MonoBehaviour
         if(cnt>=1000)
         {
             cnt=0;
-            Generate();
         }
     }
 }

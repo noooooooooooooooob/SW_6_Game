@@ -4,6 +4,7 @@ using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Note : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Note : MonoBehaviour
     bool isBoardered;
     public bool isHit;
     int arrowidx;
+    int coloridx;
 
     public bool isLeft;
     public bool isRight;
@@ -31,6 +33,10 @@ public class Note : MonoBehaviour
     public bool isNotacted;
     public bool isFaded;
     public float op;
+    public bool isSame;
+    public int playerColor;
+    float s;
+    float plus;
 
 
     // 체력 변화 처리 클래스 연결
@@ -49,14 +55,17 @@ public class Note : MonoBehaviour
         isOpposite=false;
         isNotacted=false;
         isFaded=false;
-
-        int coloridx=Random.Range(0,3);
+        isSame=false;
+        
+        coloridx=Random.Range(0,3);
         arrowidx=Random.Range(0,4);
 
         isLeft=false;
         isRight=false;
         isUp=false;
         isDown=false;
+        playerColor=1;
+        s=0;
         switch(arrowidx)
         {
             case 0:
@@ -107,10 +116,11 @@ public class Note : MonoBehaviour
     {
         if(isChange)
         {
-            locateChange();
+            s=Mathf.Asin((transform.position.y)/4);
+            Invoke("locateChange",0.8f);
             isChange=false;
         }
-        if(isFaded)
+        if(isFaded && transform.position.x<=0)
         {
             isFaded=false;
             fadeNodes();
@@ -138,17 +148,26 @@ public class Note : MonoBehaviour
             }
             isOpposite=false;
         }
+        if(isSame)
+        {
+            isSame=false;
+            sameColor();
+        }
         transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
 
     }
 
+    void SetActiveFalseNote()
+    {
+        gameObject.SetActive(false);
+    }
+
     void locateChange()
     {
-        spawnPointYidx++;
-        if(spawnPointYidx>2)
-            spawnPointYidx=0;
-        transform.position = new Vector2(transform.position.x, spawnPoints[spawnPointYidx]);
-        Invoke("locateChange",changeSpeed);
+        
+        transform.position = new Vector2(transform.position.x, 3 * Mathf.Sin(s));
+        s+=Mathf.PI/64;
+        Invoke("locateChange",0.015625f);
     }
 
     void fadeNodes()
@@ -156,23 +175,56 @@ public class Note : MonoBehaviour
         spriteRenderer.color=new Color(1,1,1,1.0f*op);
         if(op<=0.0f)
             return;
-        op-=0.3f;
-        Invoke("fadeNodes",1.0f);
+        op-=0.1f;
+        Invoke("fadeNodes",0.1f);
+    }
+
+    void sameColor()
+    {
+        coloridx=playerColor;
+        if(coloridx==0&&arrowidx==0)
+            spriteRenderer.sprite=sprites[0];
+        else if(coloridx==0&&arrowidx==1)
+            spriteRenderer.sprite=sprites[1];
+        else if(coloridx==0&&arrowidx==2)
+            spriteRenderer.sprite=sprites[2];
+        else if(coloridx==0&&arrowidx==3)
+            spriteRenderer.sprite=sprites[3];
+        else if(coloridx==1&&arrowidx==0)
+            spriteRenderer.sprite=sprites[4];
+        else if(coloridx==1&&arrowidx==1)
+            spriteRenderer.sprite=sprites[5];
+        else if(coloridx==1&&arrowidx==2)
+            spriteRenderer.sprite=sprites[6];
+        else if(coloridx==1&&arrowidx==3)
+            spriteRenderer.sprite=sprites[7];
+        else if(coloridx==2&&arrowidx==0)
+            spriteRenderer.sprite=sprites[8];
+        else if(coloridx==2&&arrowidx==1)
+            spriteRenderer.sprite=sprites[9];
+        else if(coloridx==2&&arrowidx==2)
+            spriteRenderer.sprite=sprites[10];
+        else if(coloridx==2&&arrowidx==3)
+            spriteRenderer.sprite=sprites[11];
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.gameObject.tag=="Ground")
         {
             HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-            if(healthBarController!=null)
+            if(healthBarController!=null && !isNotacted)
             {
                 HealthBarController.Instance.TakeDamage();
+            }
+            else if(healthBarController!=null && isNotacted)
+            {
+                HealthBarController.Instance.Heal();
             }
             else
             {
                 Debug.LogError("HealthBarController not found on Player object.");
             }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if(collision.gameObject.tag=="Player")
         {
@@ -185,7 +237,7 @@ public class Note : MonoBehaviour
             {
                 Debug.LogError("HealthBarController not found on Player object.");
             }
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
