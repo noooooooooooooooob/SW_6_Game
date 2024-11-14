@@ -2575,7 +2575,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   notePrefab: {fileID: 8012933125453678080, guid: 4460797cf03493a47b6e689adc7f43a5, type: 3}
   noteSpawnTime: 1
+  noteSpawnTimeMin: 0.5
+  noteSpawnTimeMax: 2
   isSlow: 0
+  changingNoteLocation: 0
+  oppositeNoteArrow: 0
+  notActedNote: 0
+  fadeNote: 0
+  unifyNote: 0
 --- !u!4 &218951623
 Transform:
   m_ObjectHideFlags: 0

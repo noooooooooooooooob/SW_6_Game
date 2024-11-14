@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoints:
-  - 2.5
+  - 2.1
   - -1
   - -3.5
   sprites:
@@ -151,10 +151,9 @@ MonoBehaviour:
   - {fileID: -133921453, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: 1166440532, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: -1872376632, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  spawnPointX: 12
+  spawnPointX: 10
   speed: 5
   isHit: 0
-  prefabIdx: 0
   isLeft: 0
   isRight: 0
   isUp: 0
@@ -164,6 +163,9 @@ MonoBehaviour:
   isOpposite: 0
   isNotacted: 0
   isFaded: 0
+  op: 0
+  isSame: 0
+  playerColor: 0
   healthBarController: {fileID: 0}
 --- !u!50 &6437169392336306601
 Rigidbody2D:

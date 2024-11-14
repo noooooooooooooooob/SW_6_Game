@@ -229,9 +229,13 @@ public class Note : MonoBehaviour
         else if(collision.gameObject.tag=="Player")
         {
             HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-            if(healthBarController!=null)
+            if(healthBarController!=null && !isNotacted)
             {
                 HealthBarController.Instance.TakeDamage();
+            }
+            else if(healthBarController!=null && isNotacted)
+            {
+                HealthBarController.Instance.Heal();
             }
             else
             {
