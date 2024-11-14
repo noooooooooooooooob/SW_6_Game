@@ -3569,6 +3569,7 @@ MonoBehaviour:
   maxHealth: 1000
   changeRate: 40
   mininumDamage: 5
+  isDamageUp: 0
 --- !u!1 &976874395
 GameObject:
   m_ObjectHideFlags: 0
@@ -3929,6 +3930,7 @@ MonoBehaviour:
   - {fileID: 8814745103609411739, guid: a7563f13185379f45bd0a6a69d7720dd, type: 3}
   - {fileID: 9114695181800895860, guid: bd5bce66a293e434eab9881e9b01c74f, type: 3}
   - {fileID: 5948926716114525798, guid: 587373b90cb545f4187aac2ff739e8a1, type: 3}
+  - {fileID: 6332972770984799521, guid: fc8b37554e1fc074e855cd14e6e098a3, type: 3}
   spawnTime: 1
 --- !u!4 &1342375225
 Transform:
@@ -4476,6 +4478,7 @@ GameObject:
   - component: {fileID: 1846185150}
   - component: {fileID: 1846185151}
   - component: {fileID: 1846185152}
+  - component: {fileID: 1846185153}
   m_Layer: 0
   m_Name: Inventory
   m_TagString: Untagged
@@ -4517,7 +4520,9 @@ MonoBehaviour:
   - {fileID: 8814745103609411739, guid: e670683cd3d00384d8ca2446c378d6de, type: 3}
   - {fileID: 9114695181800895860, guid: 4b8143308fe76e1409ca978613912658, type: 3}
   - {fileID: 5948926716114525798, guid: a024a0137ff158b4c8709152a6b7a6b4, type: 3}
+  - {fileID: 7539801368238617961, guid: 302a4986327129e489712b67bd432506, type: 3}
   ST: {fileID: 1846185152}
+  DD: {fileID: 1846185153}
 --- !u!114 &1846185152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4534,6 +4539,18 @@ MonoBehaviour:
   maxX: 13
   minY: -5
   maxY: 5
+--- !u!114 &1846185153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1846185148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dd6f5b33ff3e34a9e7393db3bac0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1855060293
 PrefabInstance:
   m_ObjectHideFlags: 0
