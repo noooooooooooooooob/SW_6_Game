@@ -8,9 +8,13 @@ using UnityEngine.Rendering;
 
 public class Note : MonoBehaviour
 {
+    bool chkgoboss;
+    public GameObject player;
+    public GameObject Boss;
     Rigidbody2D rigid;
     public float[] spawnPoints;
     public Sprite[] sprites;
+    public Sprite[] notActedNodes;
     SpriteRenderer spriteRenderer;
     int spawnPointYidx;
     float spawnPointY;
@@ -21,6 +25,10 @@ public class Note : MonoBehaviour
     int arrowidx;
     int coloridx;
 
+
+    public bool isRed;
+    public bool isGreen;
+    public bool isBlue;
     public bool isLeft;
     public bool isRight;
     public bool isUp;
@@ -51,7 +59,7 @@ public class Note : MonoBehaviour
         spawnPointY=spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
         transform.position=new Vector2(spawnPointX,spawnPointY);
 
-        isChange=false;
+        isChange=true;
         isOpposite=false;
         isNotacted=false;
         isFaded=false;
@@ -59,6 +67,22 @@ public class Note : MonoBehaviour
         
         coloridx=Random.Range(0,3);
         arrowidx=Random.Range(0,4);
+
+        isRed=false;
+        isGreen=false;
+        isBlue=false;
+        switch(coloridx)
+        {
+            case 0:
+                isRed=true;
+                break;
+            case 1:
+                isGreen=true;
+                break;
+            case 2:
+                isBlue=true;
+                break;
+        }
 
         isLeft=false;
         isRight=false;
@@ -114,46 +138,70 @@ public class Note : MonoBehaviour
 
     void Update()
     {
-        if(isChange)
+        if(isHit)
         {
-            s=Mathf.Asin((transform.position.y)/4);
-            Invoke("locateChange",0.8f);
-            isChange=false;
-        }
-        if(isFaded && transform.position.x<=0)
-        {
-            isFaded=false;
-            fadeNodes();
-        }
-        if(isOpposite)
-        {
-            switch(arrowidx)
+            transform.Translate(3.0f * speed*Time.deltaTime,0,0);
+            if(chkgoboss)
             {
-                case 0:
-                    isLeft=false;
-                    isRight=true;
-                    break;
-                case 1:
-                    isRight=false;
-                    isLeft=true;
-                    break;
-                case 2:
-                    isUp=false;
-                    isDown=true;
-                    break;
-                case 3:
-                    isDown=false;
-                    isUp=true;
-                    break;
+                s=0;
+                gotoboss();
+                chkgoboss=false;
             }
-            isOpposite=false;
         }
-        if(isSame)
+        else
         {
-            isSame=false;
-            sameColor();
+            if(isChange)
+            {
+                s=Mathf.Asin((transform.position.y)/4);
+                Invoke("locateChange",0.4f);
+                isChange=false;
+            }
+            if(isFaded && transform.position.x<=8.0f)
+            {
+                isFaded=false;
+                fadeNodes();
+            }
+            if(isOpposite)
+            {
+                switch(arrowidx)
+                {
+                    case 0:
+                        isLeft=false;
+                        isRight=true;
+                        break;
+                    case 1:
+                        isRight=false;
+                        isLeft=true;
+                        break;
+                    case 2:
+                        isUp=false;
+                        isDown=true;
+                        break;
+                    case 3:
+                        isDown=false;
+                        isUp=true;
+                        break;
+                }
+                isOpposite=false;
+            }
+            if(isSame)
+            {
+                isSame=false;
+                sameColor();
+            }
+            if(isNotacted)
+            {
+                if(arrowidx==0)
+                    spriteRenderer.sprite=notActedNodes[0];
+                else if(arrowidx==1)
+                    spriteRenderer.sprite=notActedNodes[1];
+                else if(arrowidx==2)
+                    spriteRenderer.sprite=notActedNodes[2];
+                else if(arrowidx==3)
+                    spriteRenderer.sprite=notActedNodes[3];
+            }
+            transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
         }
-        transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
 
     }
 
@@ -162,10 +210,19 @@ public class Note : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    void gotoboss()
+    {
+        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s)+spawnPointY);
+        s+=Mathf.PI/128;
+        Invoke("gotoboss",0.015625f);
+    }
+
     void locateChange()
     {
-        
-        transform.position = new Vector2(transform.position.x, 3 * Mathf.Sin(s));
+        if(transform.position.x<=-3.0f && transform.position.y>=spawnPointY-0.2f
+            && transform.position.y<=spawnPointY+0.2f)
+            return;
+        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s)+spawnPointY);
         s+=Mathf.PI/64;
         Invoke("locateChange",0.015625f);
     }
@@ -174,9 +231,25 @@ public class Note : MonoBehaviour
     {
         spriteRenderer.color=new Color(1,1,1,1.0f*op);
         if(op<=0.0f)
+        {
+            inFadeNodes();
             return;
+        }
         op-=0.1f;
-        Invoke("fadeNodes",0.1f);
+        Invoke("fadeNodes",0.08f);
+    }
+
+    void inFadeNodes()
+    {
+        if(op>=1.0f)
+            return;
+        if(transform.position.x<=-0.5f && op<=1.0f)
+        {
+            op+=0.1f;
+            spriteRenderer.color=new Color(1,1,1,1.0f*op);
+        }
+
+        Invoke("inFadeNodes",0.08f);
     }
 
     void sameColor()
@@ -228,6 +301,8 @@ public class Note : MonoBehaviour
         }
         else if(collision.gameObject.tag=="Player")
         {
+            isHit=true;
+            chkgoboss=true;
             HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
             if(healthBarController!=null && !isNotacted)
             {
@@ -236,6 +311,19 @@ public class Note : MonoBehaviour
             else if(healthBarController!=null && isNotacted)
             {
                 HealthBarController.Instance.Heal();
+            }
+            else
+            {
+                Debug.LogError("HealthBarController not found on Player object.");
+            }
+            //gameObject.SetActive(false);
+        }
+        else if(collision.gameObject.tag=="Boss" && isHit)
+        {
+            HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+            if(healthBarController!=null)
+            {
+                HealthBarController.Instance.TakeDamage();
             }
             else
             {

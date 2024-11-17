@@ -151,9 +151,17 @@ MonoBehaviour:
   - {fileID: -133921453, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: 1166440532, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: -1872376632, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
+  notActedNodes:
+  - {fileID: -1146959148, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
+  - {fileID: 1332314163, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
+  - {fileID: 1969790148, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
+  - {fileID: 713219347, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
   spawnPointX: 10
   speed: 5
   isHit: 0
+  isRed: 0
+  isGreen: 0
+  isBlue: 0
   isLeft: 0
   isRight: 0
   isUp: 0
