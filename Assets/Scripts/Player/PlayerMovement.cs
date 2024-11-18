@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float platformTime = 5f;
     public float disableTime = 0.2f;
     public bool isAttacking = false;
+    public GameObject smokeJumpUpPrefab;
+    public GameObject smokeJumpDownPrefab;
 
     Collider2D plat1;
     Collider2D plat2;
@@ -17,9 +19,9 @@ public class PlayerMovement : MonoBehaviour
     private Collider2D playerCollider;
     private Rigidbody2D rb;
     private Transform playerTransform;
-    private Vector2 vecGravity; 
+    private Vector2 vecGravity;
 
-    private int currentFloor;
+    public int currentFloor;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -33,13 +35,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Jump") && platformTime > 0 && currentFloor<3)
+        if (Input.GetButtonDown("Jump") && platformTime > 0 && currentFloor < 3)
         {
+            Instantiate(smokeJumpUpPrefab, playerTransform.position, Quaternion.identity);
             currentFloor++;
             playerTransform.position = new Vector2(playerTransform.position.x, playerTransform.position.y + 3f);
         }
 
-        if(rb.velocity.y < 0)
+        if (rb.velocity.y < 0)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier) * Time.deltaTime;
         }
@@ -48,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
+                Instantiate(smokeJumpDownPrefab, playerTransform.position, Quaternion.identity);
+
                 currentFloor--;
                 playerTransform.position = new Vector2(playerTransform.position.x, playerTransform.position.y - 3f);
             }
@@ -77,5 +82,5 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    
+
 }

@@ -4,19 +4,24 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    public enum animations{
+    public enum animations
+    {
         blue_run,
         blue_attack_side,
         blue_attack_up,
         blue_attack_down,
+        blue_idle,
         red_run,
         red_attack_side,
         red_attack_up,
         red_attack_down,
+        red_idle,
         green_run,
         green_attack_side,
         green_attack_up,
-        green_attack_down
+        green_attack_down,
+        green_idle
+
     }
 
     public float attackDelay = 0.3f;
@@ -32,7 +37,7 @@ public class PlayerAnimations : MonoBehaviour
 
     void Start()
     {
-        playerMovement = GetComponent<PlayerMovement>();        
+        playerMovement = GetComponent<PlayerMovement>();
         playerElement = GetComponent<PlayerElement>();
         animator = GetComponent<Animator>();
 
@@ -57,7 +62,22 @@ public class PlayerAnimations : MonoBehaviour
             ChangeAnimationState(GetAttackAnimation("side"));
         }
 
-        if (pressedAttack)
+        if (playerMovement.currentFloor > 1 && !pressedAttack)
+        {
+            switch (playerElement.playerCurrentElement)
+            {
+                case ColorEnum.blue:
+                    ChangeAnimationState(animations.blue_idle);
+                    break;
+                case ColorEnum.green:
+                    ChangeAnimationState(animations.green_idle);
+                    break;
+                default:
+                    ChangeAnimationState(animations.red_idle);
+                    break;
+            }
+        }
+        else if (pressedAttack)
         {
             if (!isAttacking)
             {
@@ -73,33 +93,34 @@ public class PlayerAnimations : MonoBehaviour
 
     animations GetAttackAnimation(string direction)
     {
-        if (playerElement.red)
+        switch (playerElement.playerCurrentElement)
         {
-            if (direction == "up") return animations.red_attack_up;
-            if (direction == "down") return animations.red_attack_down;
-            return animations.red_attack_side;
+            case ColorEnum.blue:
+                if (direction == "up") return animations.blue_attack_up;
+                if (direction == "down") return animations.blue_attack_down;
+                return animations.blue_attack_side;
+            case ColorEnum.green:
+                if (direction == "up") return animations.green_attack_up;
+                if (direction == "down") return animations.green_attack_down;
+                return animations.green_attack_side;
+            default:
+                if (direction == "up") return animations.red_attack_up;
+                if (direction == "down") return animations.red_attack_down;
+                return animations.red_attack_side;
         }
-        else if (playerElement.blue)
-        {
-            if (direction == "up") return animations.blue_attack_up;
-            if (direction == "down") return animations.blue_attack_down;
-            return animations.blue_attack_side;
-        }
-        else if (playerElement.green)
-        {
-            if (direction == "up") return animations.green_attack_up;
-            if (direction == "down") return animations.green_attack_down;
-            return animations.green_attack_side;
-        }
-        return animations.blue_run; // default case
     }
 
     animations GetRunAnimation()
     {
-        if (playerElement.red) return animations.red_run;
-        if (playerElement.blue) return animations.blue_run;
-        if (playerElement.green) return animations.green_run;
-        return animations.blue_run; // default case
+        switch (playerElement.playerCurrentElement)
+        {
+            case ColorEnum.blue:
+                return animations.blue_run;
+            case ColorEnum.green:
+                return animations.green_run;
+            default:
+                return animations.red_run;
+        }
     }
 
     void HandleAnimationState()
@@ -114,7 +135,7 @@ public class PlayerAnimations : MonoBehaviour
 
     void ChangeAnimationState(animations newState)
     {
-       if(currentState == newState) return;
+        if (currentState == newState) return;
 
         Debug.Log("Changing state to: " + newState.ToString());
         animator.Play(newState.ToString());

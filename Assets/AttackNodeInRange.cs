@@ -17,10 +17,14 @@ public class AttackNodeInRange : MonoBehaviour
     private bool down = false;
     private bool deleteNote = false;
     public HealthBarController healthBarController;
+    private GameObject player;
+    private PlayerElement playerElement;
 
     void Start()
     {
         floorChecker = GetComponentInChildren<FloorChecker>();
+        player = GameObject.Find("Player");
+        playerElement = player.GetComponent<PlayerElement>();
     }
 
     public void OnChildTrigger()
@@ -73,7 +77,7 @@ public class AttackNodeInRange : MonoBehaviour
         if (other.gameObject.tag == "Note")
         {
             Note note = other.gameObject.GetComponent<Note>();
-            if (attack && playerInRange)
+            if (attack && playerInRange && playerElement.playerCurrentElement == note.noteColor)
             {
                 if (note.isLeft && left)
                 {
@@ -104,14 +108,15 @@ public class AttackNodeInRange : MonoBehaviour
                 up = false;
                 down = false;
                 HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-                if(healthBarController!=null)
+                if (healthBarController != null)
                 {
-                    if(!note.isNotacted)
+                    if (!note.isNotacted)
                         HealthBarController.Instance.Heal();
                     else
                         HealthBarController.Instance.TakeDamage();
                 }
-                else{
+                else
+                {
                     Debug.LogError("HealthBarController not found on Player object.");
                 }
             }
