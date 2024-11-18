@@ -31,6 +31,7 @@ public class Note : MonoBehaviour
     public bool isRed;
     public bool isGreen;
     public bool isBlue;
+    public ArrowDirectionEnum noteArrowDirection;
     public bool isLeft;
     public bool isRight;
     public bool isUp;
@@ -98,15 +99,19 @@ public class Note : MonoBehaviour
         switch (arrowidx)
         {
             case 0:
+                noteArrowDirection = ArrowDirectionEnum.left;
                 isLeft = true;
                 break;
             case 1:
+                noteArrowDirection = ArrowDirectionEnum.right;
                 isRight = true;
                 break;
             case 2:
+                noteArrowDirection = ArrowDirectionEnum.up;
                 isUp = true;
                 break;
             case 3:
+                noteArrowDirection = ArrowDirectionEnum.down;
                 isDown = true;
                 break;
         }

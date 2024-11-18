@@ -6,19 +6,15 @@ using UnityEngine;
 
 public class AttackNodeInRange : MonoBehaviour
 {
-    bool hasNote = false;
-    bool attack = false;
+    public bool hasNote = false;
+    public bool attack = false;
     private FloorChecker floorChecker;
     public bool playerInRange = false;
 
-    private bool left = false;
-    private bool right = false;
-    private bool up = false;
-    private bool down = false;
-    private bool deleteNote = false;
     public HealthBarController healthBarController;
     private GameObject player;
     private PlayerElement playerElement;
+    public ArrowDirectionEnum arrowDirection;
 
     void Start()
     {
@@ -38,29 +34,40 @@ public class AttackNodeInRange : MonoBehaviour
     void Update()
     {
 
-        if (hasNote)
+        if (hasNote && playerInRange)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 attack = true;
-                left = true;
+                arrowDirection = ArrowDirectionEnum.left;
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 attack = true;
-                right = true;
+                arrowDirection = ArrowDirectionEnum.right;
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 attack = true;
-                up = true;
+                arrowDirection = ArrowDirectionEnum.up;
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
                 attack = true;
-                down = true;
+                arrowDirection = ArrowDirectionEnum.down;
             }
         }
+        else if (!playerInRange)
+        {
+            attack = false;
+        }
+    }
+
+    void ShakeAttackBar()
+    {
+        AttackRangeShaker attackRangeShaker = GetComponentInParent<AttackRangeShaker>();
+        attackRangeShaker.StartShaking();
+
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -77,47 +84,45 @@ public class AttackNodeInRange : MonoBehaviour
         if (other.gameObject.tag == "Note")
         {
             Note note = other.gameObject.GetComponent<Note>();
-            if (attack && playerInRange && playerElement.playerCurrentElement == note.noteColor)
+            if (attack && playerInRange)
             {
-                if (note.isLeft && left)
+                if (note.noteArrowDirection == arrowDirection && playerElement.playerCurrentElement == note.noteColor)
                 {
-                    deleteNote = true;
-                }
-                if (note.isRight && right)
-                {
-                    deleteNote = true;
-                }
-                if (note.isUp && up)
-                {
-                    deleteNote = true;
-                }
-                if (note.isDown && down)
-                {
-                    deleteNote = true;
-                }
-            }
-            if (deleteNote)
-            {
-                Destroy(other.gameObject);
-                attack = false;
-                hasNote = false;
-                deleteNote = false;
+                    Destroy(other.gameObject);
+                    attack = false;
+                    hasNote = false;
+                    arrowDirection = ArrowDirectionEnum.none;
 
-                left = false;
-                right = false;
-                up = false;
-                down = false;
-                HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-                if (healthBarController != null)
-                {
-                    if (!note.isNotacted)
-                        HealthBarController.Instance.Heal();
+                    HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+                    if (healthBarController != null)
+                    {
+                        if (!note.isNotacted)
+                            HealthBarController.Instance.Heal();
+                        else
+                            HealthBarController.Instance.TakeDamage();
+                    }
                     else
-                        HealthBarController.Instance.TakeDamage();
+                    {
+                        Debug.LogError("HealthBarController not found on Player object.");
+                    }
                 }
                 else
                 {
-                    Debug.LogError("HealthBarController not found on Player object.");
+                    ShakeAttackBar();
+                    Destroy(other.gameObject);
+                    attack = false;
+                    hasNote = false;
+                    arrowDirection = ArrowDirectionEnum.none;
+
+                    HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+                    if (healthBarController != null)
+                    {
+                        HealthBarController.Instance.TakeDamage();
+                    }
+                    else
+                    {
+                        Debug.LogError("HealthBarController not found on Player object.");
+                    }
                 }
             }
         }

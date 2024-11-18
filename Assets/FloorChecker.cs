@@ -11,7 +11,6 @@ public class FloorChecker : MonoBehaviour
 
     void Start()
     {
-
         AttackNodeInRange parent = GetComponentInParent<AttackNodeInRange>();
     }
 
