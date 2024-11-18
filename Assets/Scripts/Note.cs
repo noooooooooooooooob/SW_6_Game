@@ -5,16 +5,20 @@ using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.UIElements;
 
 public class Note : MonoBehaviour
 {
-    bool chkgoboss;
+    float Y;
+    public bool chkgoboss;
     public GameObject player;
     public GameObject Boss;
     Rigidbody2D rigid;
     public float[] spawnPoints;
+    public float[] spawnPointschangelocate;
     public Sprite[] sprites;
     public Sprite[] notActedNodes;
+    public Sprite[] oppositeNodes;
     SpriteRenderer spriteRenderer;
     int spawnPointYidx;
     float spawnPointY;
@@ -59,7 +63,7 @@ public class Note : MonoBehaviour
         spawnPointY=spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
         transform.position=new Vector2(spawnPointX,spawnPointY);
 
-        isChange=true;
+        isChange=false;
         isOpposite=false;
         isNotacted=false;
         isFaded=false;
@@ -143,6 +147,11 @@ public class Note : MonoBehaviour
             transform.Translate(3.0f * speed*Time.deltaTime,0,0);
             if(chkgoboss)
             {
+                isChange=false;
+                isOpposite=false;
+                isNotacted=false;
+                isFaded=false;
+                isSame=false;
                 s=0;
                 gotoboss();
                 chkgoboss=false;
@@ -152,8 +161,10 @@ public class Note : MonoBehaviour
         {
             if(isChange)
             {
-                s=Mathf.Asin((transform.position.y)/4);
-                Invoke("locateChange",0.4f);
+                Y=spawnPointschangelocate[Random.Range(0,1)];
+                transform.position=new Vector2(transform.position.x,Y);
+                s=Mathf.Asin(Y/4);
+                Invoke("locateChange",Random.Range(0.2f,0.6f));
                 isChange=false;
             }
             if(isFaded && transform.position.x<=8.0f)
@@ -163,6 +174,7 @@ public class Note : MonoBehaviour
             }
             if(isOpposite)
             {
+                spriteRenderer.sprite=oppositeNodes[coloridx*4+arrowidx];
                 switch(arrowidx)
                 {
                     case 0:
@@ -219,10 +231,15 @@ public class Note : MonoBehaviour
 
     void locateChange()
     {
-        if(transform.position.x<=-3.0f && transform.position.y>=spawnPointY-0.2f
-            && transform.position.y<=spawnPointY+0.2f)
+        if((transform.position.x<=-3.0f) && 
+            (
+            (transform.position.y>=spawnPoints[0]-0.2f && transform.position.y<=spawnPoints[0]+0.2f) ||
+            (transform.position.y>=spawnPoints[1]-0.2f && transform.position.y<=spawnPoints[1]+0.2f) ||
+            (transform.position.y>=spawnPoints[2]-0.2f && transform.position.y<=spawnPoints[2]+0.2f)
+            ) ||
+            isHit)
             return;
-        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s)+spawnPointY);
+        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s)+Y);
         s+=Mathf.PI/64;
         Invoke("locateChange",0.015625f);
     }
@@ -282,7 +299,7 @@ public class Note : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag=="Ground")
+        if(collision.gameObject.tag=="Ground" || collision.gameObject.tag=="Player")
         {
             HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
             if(healthBarController!=null && !isNotacted)
@@ -299,35 +316,12 @@ public class Note : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
-        else if(collision.gameObject.tag=="Player")
-        {
-            isHit=true;
-            chkgoboss=true;
-            HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-            if(healthBarController!=null && !isNotacted)
-            {
-                HealthBarController.Instance.TakeDamage();
-            }
-            else if(healthBarController!=null && isNotacted)
-            {
-                HealthBarController.Instance.Heal();
-            }
-            else
-            {
-                Debug.LogError("HealthBarController not found on Player object.");
-            }
-            //gameObject.SetActive(false);
-        }
         else if(collision.gameObject.tag=="Boss" && isHit)
         {
             HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
             if(healthBarController!=null)
             {
-                HealthBarController.Instance.TakeDamage();
-            }
-            else
-            {
-                Debug.LogError("HealthBarController not found on Player object.");
+                HealthBarController.Instance.Heal();
             }
             gameObject.SetActive(false);
         }

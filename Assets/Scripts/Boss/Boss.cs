@@ -40,7 +40,9 @@ public class Boss : MonoBehaviour
         if(noteScript!=null && collision.gameObject.tag=="Note")
         {
             if(noteScript.isHit)
+            { 
                 Deal();
+            }
         }
     }
 }
