@@ -10,10 +10,11 @@ public class Boss : MonoBehaviour
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
 
+    public HealthBarController healthBarController;
     void Start()
     {
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
-        spriteRenderer=GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -25,21 +26,21 @@ public class Boss : MonoBehaviour
         }
     }
     void Deal()
-    {
-        spriteRenderer.color=new Color(1,0,0,1);
-        Invoke("restoration",0.3f);
+    { 
+        spriteRenderer.color = new Color(1, 0, 0, 1);
+        Invoke("restoration", 0.3f);
     }
     void restoration()
     {
-        spriteRenderer.color=new Color(1,1,1,1);
+        spriteRenderer.color = new Color(1, 1, 1, 1);
     }
-    
+
     void OnTriggerEnter2D(Collider2D collision)
-    {
+    { // 노트랑 부딪히면 딜 함수 호출
         Note noteScript = collision.GetComponent<Note>();
-        if(noteScript!=null && collision.gameObject.tag=="Note")
+        if (noteScript != null && collision.gameObject.tag == "Note")
         {
-            if(noteScript.isHit)
+            if (noteScript.isHit)
                 Deal();
         }
     }

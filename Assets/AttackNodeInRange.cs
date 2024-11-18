@@ -59,11 +59,10 @@ public class AttackNodeInRange : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other) // 공격범위에 들어왔을때
     {
         if (other.gameObject.tag == "Note")
         {
-
             hasNote = true;
         }
     }
@@ -94,7 +93,7 @@ public class AttackNodeInRange : MonoBehaviour
             }
             if (deleteNote)
             {
-                Destroy(other.gameObject);
+                note.StartMovingToBoss();
                 attack = false;
                 hasNote = false;
                 deleteNote = false;
@@ -103,17 +102,6 @@ public class AttackNodeInRange : MonoBehaviour
                 right = false;
                 up = false;
                 down = false;
-                HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-                if(healthBarController!=null)
-                {
-                    if(!note.isNotacted)
-                        HealthBarController.Instance.Heal();
-                    else
-                        HealthBarController.Instance.TakeDamage();
-                }
-                else{
-                    Debug.LogError("HealthBarController not found on Player object.");
-                }
             }
         }
     }
@@ -123,6 +111,11 @@ public class AttackNodeInRange : MonoBehaviour
         if (other.gameObject.tag == "Note")
         {
             hasNote = false;
+            Note note = other.gameObject.GetComponent<Note>();
+            if(note!=null)
+            {
+                note.StartMovingToPlayer();
+            }
         }
     }
 }
