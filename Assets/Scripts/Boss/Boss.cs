@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
+    SpriteRenderer spriteRenderer;
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
 
     void Start()
     {
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
+        spriteRenderer=GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -19,6 +22,25 @@ public class Boss : MonoBehaviour
         if (healthBarSliderComponent.value == 1.0f)
         {
             this.gameObject.SetActive(false);
+        }
+    }
+    void Deal()
+    {
+        spriteRenderer.color=new Color(1,0,0,1);
+        Invoke("restoration",0.3f);
+    }
+    void restoration()
+    {
+        spriteRenderer.color=new Color(1,1,1,1);
+    }
+    
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Note noteScript = collision.GetComponent<Note>();
+        if(noteScript!=null && collision.gameObject.tag=="Note")
+        {
+            if(noteScript.isHit)
+                Deal();
         }
     }
 }
