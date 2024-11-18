@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 418a85ccabd39604fbd84f6bc3639a8f
+guid: 36367ddf34a8f9b4ab66072b0775c49b
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,169 +110,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_AttackUp-Red_0
+      name: Clouds V2_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
+        x: 8
+        y: 80
+        width: 60
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2437f7ce1ce1ab64096ec57309ca0bab
-      internalID: -806718829
+      spriteID: cbec39845b1e0f947a57cb4b97fae2fe
+      internalID: 225657507
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_AttackUp-Red_1
+      name: Clouds V2_1
       rect:
         serializedVersion: 2
-        x: 100
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
+        x: 81
+        y: 84
+        width: 30
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b097a1722b2563742a597e585cd713ba
-      internalID: 480387130
+      spriteID: 983ea92287a3fc34c93abfb3d06bce50
+      internalID: -1668684612
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_AttackUp-Red_2
+      name: Clouds V2_2
       rect:
         serializedVersion: 2
-        x: 200
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
+        x: 8
+        y: 50
+        width: 34
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5d47cd3184050de48adcb644e7036c3c
-      internalID: -2142091657
+      spriteID: d7cfc2fb0fa44364f9467c07b364768a
+      internalID: -136711239
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_AttackUp-Red_3
+      name: Clouds V2_3
       rect:
         serializedVersion: 2
-        x: 300
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
+        x: 67
+        y: 44
+        width: 50
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fa59ab6dd5f82a4a8f182579dd16857
-      internalID: 4723838
+      spriteID: 280c070bad7404a4ea0628b7263c8f69
+      internalID: 2129630580
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_AttackUp-Red_4
+      name: Clouds V2_4
       rect:
         serializedVersion: 2
-        x: 400
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
+        x: 16
+        y: 14
+        width: 41
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8d94c77ee219db542b2035ceea1419f2
-      internalID: 1460777938
+      spriteID: 17b988e39b3a91e4dab8667b8a8c7086
+      internalID: 203678829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_AttackUp-Red_5
+      name: Clouds V2_5
       rect:
         serializedVersion: 2
-        x: 500
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
+        x: 72
+        y: 11
+        width: 31
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03b3bef25be28c94ba398b616867ef25
-      internalID: -1626422620
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_AttackUp-Red_6
-      rect:
-        serializedVersion: 2
-        x: 600
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7277d29122ca53d44bd0ae6dc9e7b4cf
-      internalID: 1965000929
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_AttackUp-Red_7
-      rect:
-        serializedVersion: 2
-        x: 700
-        y: 0
-        width: 100
-        height: 70
-      alignment: 9
-      pivot: {x: 0.4, y: 0.35}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1b201787164eb6f44848905a9bb0f18b
-      internalID: -101394063
+      spriteID: 0ac9c76056d661f4393c29c60a797e57
+      internalID: 382385866
       vertices: []
       indices: 
       edges: []
@@ -288,14 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Player_AttackUp-Red_0: -806718829
-      Player_AttackUp-Red_1: 480387130
-      Player_AttackUp-Red_2: -2142091657
-      Player_AttackUp-Red_3: 4723838
-      Player_AttackUp-Red_4: 1460777938
-      Player_AttackUp-Red_5: -1626422620
-      Player_AttackUp-Red_6: 1965000929
-      Player_AttackUp-Red_7: -101394063
+      Clouds V2_0: 225657507
+      Clouds V2_1: -1668684612
+      Clouds V2_2: -136711239
+      Clouds V2_3: 2129630580
+      Clouds V2_4: 203678829
+      Clouds V2_5: 382385866
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
