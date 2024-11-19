@@ -59,6 +59,8 @@ public class Note : MonoBehaviour
     private Vector2 playerPosition;
     private bool isMovingToPlayer = false;
 
+
+
     // 체력 변화 처리 클래스 연결
     public HealthBarController healthBarController;
 
@@ -160,13 +162,39 @@ public class Note : MonoBehaviour
 
     void Start()
     {
-        bossPosition = FindObjectOfType<Boss>().transform.position;
-        playerPosition = FindObjectOfType<Player>().transform.position;
+        var bossObj = FindObjectOfType<Boss>();
+        var playerObj = FindObjectOfType<Player>();
+
+        if (bossObj != null && bossObj.gameObject.activeInHierarchy)
+        {
+            bossPosition = bossObj.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("Boss is not active or missing.");
+        }
+
+        if (playerObj != null && playerObj.gameObject.activeInHierarchy)
+        {
+            playerPosition = playerObj.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("Player is not active or missing.");
+        }
     }
     public void updatePlayerPosition()
     {
-        playerPosition = FindObjectOfType<Player>().transform.position;
+        var playerObj = FindObjectOfType<Player>();
 
+        if (playerObj != null && playerObj.gameObject.activeInHierarchy)
+        {
+            playerPosition = playerObj.transform.position;
+        }
+        else
+        {
+            Debug.LogWarning("Player is not active or missing.");
+        }
     }
     void Update()
     {
@@ -378,8 +406,15 @@ public class Note : MonoBehaviour
 
     void MoveToBoss()
     {
-        Vector2 bossPosition = FindObjectOfType<Boss>().transform.position;
+        var bossObj = FindObjectOfType<Boss>();
 
+        if (bossObj == null || !bossObj.gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("Boss is not active or missing.");
+            isMovingToBoss = false; // 이동 중지
+            return;
+        }
+        bossPosition = bossObj.transform.position;
         transform.position = Vector2.MoveTowards(transform.position, bossPosition, 4 * speed * Time.deltaTime);
 
         // 보스에 도달한 경우
@@ -395,13 +430,22 @@ public class Note : MonoBehaviour
         isMovingToPlayer = true;
     }
     void MoveToPlayer()
-    {
-        transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4 * speed * Time.deltaTime);
+{
+    var playerObj = FindObjectOfType<Player>();
 
-        // 플레이어에 도달하면 처리
-        if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
-        {
-            Destroy(gameObject); // 노트 삭제
-        }
+    if (playerObj == null || !playerObj.gameObject.activeInHierarchy)
+    {
+        Debug.LogWarning("Player is not active or missing.");
+        isMovingToPlayer = false; // 이동 중지
+        return;
     }
+
+    playerPosition = playerObj.transform.position;
+    transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4 * speed * Time.deltaTime);
+
+    if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
+    {
+        Destroy(gameObject); // 노트 삭제
+    }
+}
 }
