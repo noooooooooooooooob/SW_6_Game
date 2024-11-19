@@ -30,9 +30,12 @@ public class Note : MonoBehaviour
     int coloridx;
 
 
+
+    public ColorEnum noteColor;
     public bool isRed;
     public bool isGreen;
     public bool isBlue;
+    public ArrowDirectionEnum noteArrowDirection;
     public bool isLeft;
     public bool isRight;
     public bool isUp;
@@ -85,12 +88,15 @@ public class Note : MonoBehaviour
         switch (coloridx)
         {
             case 0:
+                noteColor = ColorEnum.red;
                 isRed = true;
                 break;
             case 1:
+                noteColor = ColorEnum.green;
                 isGreen = true;
                 break;
             case 2:
+                noteColor = ColorEnum.blue;
                 isBlue = true;
                 break;
         }
@@ -104,15 +110,19 @@ public class Note : MonoBehaviour
         switch (arrowidx)
         {
             case 0:
+                noteArrowDirection = ArrowDirectionEnum.left;
                 isLeft = true;
                 break;
             case 1:
+                noteArrowDirection = ArrowDirectionEnum.right;
                 isRight = true;
                 break;
             case 2:
+                noteArrowDirection = ArrowDirectionEnum.up;
                 isUp = true;
                 break;
             case 3:
+                noteArrowDirection = ArrowDirectionEnum.down;
                 isDown = true;
                 break;
         }

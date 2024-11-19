@@ -5,13 +5,15 @@ using UnityEngine;
 public class FloorChecker : MonoBehaviour
 {
     public bool hasPlayer = false;
+    public int FloorLevel;
 
     private AttackNodeInRange parent;
 
-    void Start(){
-
+    void Start()
+    {
         AttackNodeInRange parent = GetComponentInParent<AttackNodeInRange>();
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
