@@ -393,7 +393,8 @@ public class Note : MonoBehaviour
         if (Vector2.Distance(transform.position, bossPosition) < 0.1f)
         {
             HealthBarController.Instance.Heal(); // 플레이어 체력 회복
-            Destroy(gameObject); // 노트 삭제
+            gameObject.SetActive(false);
+            // Destroy(gameObject); // 노트 삭제
         }
     }
 
@@ -402,22 +403,23 @@ public class Note : MonoBehaviour
         isMovingToPlayer = true;
     }
     void MoveToPlayer()
-{
-    var playerObj = FindObjectOfType<Player>();
-
-    if (playerObj == null || !playerObj.gameObject.activeInHierarchy)
     {
-        Debug.LogWarning("Player is not active or missing.");
-        isMovingToPlayer = false; // 이동 중지
-        return;
-    }
+        var playerObj = FindObjectOfType<Player>();
 
-    playerPosition = playerObj.transform.position;
-    transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4 * speed * Time.deltaTime);
+        if (playerObj == null || !playerObj.gameObject.activeInHierarchy)
+        {
+            Debug.LogWarning("Player is not active or missing.");
+            isMovingToPlayer = false; // 이동 중지
+            return;
+        }
 
-    if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
-    {
-        Destroy(gameObject); // 노트 삭제
+        playerPosition = playerObj.transform.position;
+        transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4 * speed * Time.deltaTime);
+
+        if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
+        {
+            gameObject.SetActive(false);
+            // Destroy(gameObject); // 노트 삭제
+        }
     }
-}
 }
