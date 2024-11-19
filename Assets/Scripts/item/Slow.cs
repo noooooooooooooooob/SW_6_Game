@@ -47,7 +47,7 @@ public class Slow : MonoBehaviour
         {
             Debug.LogWarning("스크립트가 할당되지 않았습니다.");
         }
-
+        /*
         GameObject[] notes = GameObject.FindGameObjectsWithTag("Note");
 
         foreach (GameObject note in notes)
@@ -75,7 +75,8 @@ public class Slow : MonoBehaviour
             
                
         }
-        Debug.Log("slow finsh");
+        
+        */
        
        
             

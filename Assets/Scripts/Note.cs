@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
@@ -284,31 +285,41 @@ public class Note : MonoBehaviour
 
     void sameColor()
     {
-        coloridx = playerColor;
-        if (coloridx == 0 && arrowidx == 0)
-            spriteRenderer.sprite = sprites[0];
-        else if (coloridx == 0 && arrowidx == 1)
-            spriteRenderer.sprite = sprites[1];
-        else if (coloridx == 0 && arrowidx == 2)
-            spriteRenderer.sprite = sprites[2];
-        else if (coloridx == 0 && arrowidx == 3)
-            spriteRenderer.sprite = sprites[3];
-        else if (coloridx == 1 && arrowidx == 0)
-            spriteRenderer.sprite = sprites[4];
-        else if (coloridx == 1 && arrowidx == 1)
-            spriteRenderer.sprite = sprites[5];
-        else if (coloridx == 1 && arrowidx == 2)
-            spriteRenderer.sprite = sprites[6];
-        else if (coloridx == 1 && arrowidx == 3)
-            spriteRenderer.sprite = sprites[7];
-        else if (coloridx == 2 && arrowidx == 0)
-            spriteRenderer.sprite = sprites[8];
-        else if (coloridx == 2 && arrowidx == 1)
-            spriteRenderer.sprite = sprites[9];
-        else if (coloridx == 2 && arrowidx == 2)
-            spriteRenderer.sprite = sprites[10];
-        else if (coloridx == 2 && arrowidx == 3)
-            spriteRenderer.sprite = sprites[11];
+        PlayerElement PE = FindObjectOfType<PlayerElement>();
+       
+        if ( PE!= null)
+        {
+            playerColor=PE.color;
+        }
+        else
+        {
+            Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
+        }
+        coloridx=playerColor;
+        if(coloridx==0&&arrowidx==0)
+            spriteRenderer.sprite=sprites[0];
+        else if(coloridx==0&&arrowidx==1)
+            spriteRenderer.sprite=sprites[1];
+        else if(coloridx==0&&arrowidx==2)
+            spriteRenderer.sprite=sprites[2];
+        else if(coloridx==0&&arrowidx==3)
+            spriteRenderer.sprite=sprites[3];
+        else if(coloridx==1&&arrowidx==0)
+            spriteRenderer.sprite=sprites[4];
+        else if(coloridx==1&&arrowidx==1)
+            spriteRenderer.sprite=sprites[5];
+        else if(coloridx==1&&arrowidx==2)
+            spriteRenderer.sprite=sprites[6];
+        else if(coloridx==1&&arrowidx==3)
+            spriteRenderer.sprite=sprites[7];
+        else if(coloridx==2&&arrowidx==0)
+            spriteRenderer.sprite=sprites[8];
+        else if(coloridx==2&&arrowidx==1)
+            spriteRenderer.sprite=sprites[9];
+        else if(coloridx==2&&arrowidx==2)
+            spriteRenderer.sprite=sprites[10];
+        else if(coloridx==2&&arrowidx==3)
+            spriteRenderer.sprite=sprites[11];
     }
 
     void OnTriggerEnter2D(Collider2D collision)
