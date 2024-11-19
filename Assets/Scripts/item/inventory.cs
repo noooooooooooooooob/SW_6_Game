@@ -13,6 +13,7 @@ public class inventory : MonoBehaviour
     
     public StopSlow ST;
     public DamageDown DD;
+    public DifColor DC;
 
     void Start()
     {
@@ -112,7 +113,16 @@ public class inventory : MonoBehaviour
             }
              if (inventorys[slotIndex] == "3")
             {
-               
+               AnyColor AC = FindAnyObjectByType<AnyColor>();
+                if (AC != null)
+                {
+                    AC.sameColor(); 
+                    Invoke("difColor",10f);
+                }
+                else
+                {
+                    Debug.LogWarning("AC 객체를 찾을 수 없습니다.");
+                }
             }
              if (inventorys[slotIndex] == "4")
             {
@@ -146,10 +156,15 @@ public class inventory : MonoBehaviour
         
     }
 
+    //item 3 정상화
+    void difColor(){
+       DC.Normalization();
+        
+    }
+
     //item 4 정상화
     void damagedown(){
-       DD.Normalization();
-        
+       DD.Normalization();    
     }
 
 }

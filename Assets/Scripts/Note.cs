@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
@@ -150,7 +151,7 @@ public class Note : MonoBehaviour
         }
         if(isSame)
         {
-            isSame=false;
+            //isSame=false;
             sameColor();
         }
         transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
@@ -181,6 +182,16 @@ public class Note : MonoBehaviour
 
     void sameColor()
     {
+        PlayerElement PE = FindObjectOfType<PlayerElement>();
+       
+        if ( PE!= null)
+        {
+            playerColor=PE.color;
+        }
+        else
+        {
+            Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
+        }
         coloridx=playerColor;
         if(coloridx==0&&arrowidx==0)
             spriteRenderer.sprite=sprites[0];
