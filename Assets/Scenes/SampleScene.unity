@@ -2575,6 +2575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673ce2ae73373d145b14495865a288f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boss: {fileID: 0}
   notePrefab: {fileID: 8012933125453678080, guid: 4460797cf03493a47b6e689adc7f43a5, type: 3}
   noteSpawnTime: 1
   noteSpawnTimeMin: 0.5
@@ -2585,6 +2586,7 @@ MonoBehaviour:
   notActedNote: 0
   fadeNote: 0
   unifyNote: 0
+  isEnd: 0
 --- !u!4 &218951623
 Transform:
   m_ObjectHideFlags: 0
@@ -4193,6 +4195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 890592374}
+  objectManager: {fileID: 218951622}
   healthBarController: {fileID: 0}
 --- !u!61 &1507458612
 BoxCollider2D:

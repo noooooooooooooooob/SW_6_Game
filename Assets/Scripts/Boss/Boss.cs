@@ -9,13 +9,15 @@ public class Boss : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
-
+    public ObjectManager objectManager;
     public HealthBarController healthBarController;
     void Start()
     {
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        objectManager=GetComponent<ObjectManager>();
     }
+
 
     // Update is called once per frame
     void Update()
