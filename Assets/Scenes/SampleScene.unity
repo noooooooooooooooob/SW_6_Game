@@ -4183,6 +4183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarSlider: {fileID: 890592374}
+  healthBarController: {fileID: 0}
 --- !u!61 &1507458612
 BoxCollider2D:
   m_ObjectHideFlags: 0

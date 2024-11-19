@@ -49,19 +49,23 @@ public class Note : MonoBehaviour
     public int playerColor;
     float s;
     float plus;
-
+    // 플레이어 보스 위치 변수
+    private Vector2 bossPosition;
+    private bool isMovingToBoss = false;
+    private Vector2 playerPosition;
+    private bool isMovingToPlayer = false;
 
     // 체력 변화 처리 클래스 연결
     public HealthBarController healthBarController;
 
     void Awake()
     {
-        op=1.0f;
-        rigid=GetComponent<Rigidbody2D>();
-        spriteRenderer=GetComponent<SpriteRenderer>();
-        spawnPointYidx=Random.Range(0,3);
-        spawnPointY=spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
-        transform.position=new Vector2(spawnPointX,spawnPointY);
+        op = 1.0f;
+        rigid = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spawnPointYidx = Random.Range(0, 3);
+        spawnPointY = spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
+        transform.position = new Vector2(spawnPointX, spawnPointY);
 
         isChange=false;
         isOpposite=false;
@@ -72,94 +76,100 @@ public class Note : MonoBehaviour
         coloridx=Random.Range(0,3);
         arrowidx=Random.Range(0,4);
 
-        isRed=false;
-        isGreen=false;
-        isBlue=false;
-        switch(coloridx)
+        coloridx = Random.Range(0, 3);
+        arrowidx = Random.Range(0, 4);
+
+        isRed = false;
+        isGreen = false;
+        isBlue = false;
+        switch (coloridx)
         {
             case 0:
-                isRed=true;
+                isRed = true;
                 break;
             case 1:
-                isGreen=true;
+                isGreen = true;
                 break;
             case 2:
-                isBlue=true;
+                isBlue = true;
                 break;
         }
 
-        isLeft=false;
-        isRight=false;
-        isUp=false;
-        isDown=false;
-        playerColor=1;
-        s=0;
-        switch(arrowidx)
+        isLeft = false;
+        isRight = false;
+        isUp = false;
+        isDown = false;
+        playerColor = 1;
+        s = 0;
+        switch (arrowidx)
         {
             case 0:
-                isLeft=true;
+                isLeft = true;
                 break;
             case 1:
-                isRight=true;
+                isRight = true;
                 break;
             case 2:
-                isUp=true;
+                isUp = true;
                 break;
             case 3:
-                isDown=true;
+                isDown = true;
                 break;
         }
-        
+
         //coloridx [ Red, Green, Blue ]
         //arrowidx [ Left, Right, Up, Down]
-        if(coloridx==0&&arrowidx==0)
-            spriteRenderer.sprite=sprites[0];
-        else if(coloridx==0&&arrowidx==1)
-            spriteRenderer.sprite=sprites[1];
-        else if(coloridx==0&&arrowidx==2)
-            spriteRenderer.sprite=sprites[2];
-        else if(coloridx==0&&arrowidx==3)
-            spriteRenderer.sprite=sprites[3];
-        else if(coloridx==1&&arrowidx==0)
-            spriteRenderer.sprite=sprites[4];
-        else if(coloridx==1&&arrowidx==1)
-            spriteRenderer.sprite=sprites[5];
-        else if(coloridx==1&&arrowidx==2)
-            spriteRenderer.sprite=sprites[6];
-        else if(coloridx==1&&arrowidx==3)
-            spriteRenderer.sprite=sprites[7];
-        else if(coloridx==2&&arrowidx==0)
-            spriteRenderer.sprite=sprites[8];
-        else if(coloridx==2&&arrowidx==1)
-            spriteRenderer.sprite=sprites[9];
-        else if(coloridx==2&&arrowidx==2)
-            spriteRenderer.sprite=sprites[10];
-        else if(coloridx==2&&arrowidx==3)
-            spriteRenderer.sprite=sprites[11];
-        
-        isHit=false;
+        if (coloridx == 0 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[0];
+        else if (coloridx == 0 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[1];
+        else if (coloridx == 0 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[2];
+        else if (coloridx == 0 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[3];
+        else if (coloridx == 1 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[4];
+        else if (coloridx == 1 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[5];
+        else if (coloridx == 1 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[6];
+        else if (coloridx == 1 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[7];
+        else if (coloridx == 2 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[8];
+        else if (coloridx == 2 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[9];
+        else if (coloridx == 2 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[10];
+        else if (coloridx == 2 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[11];
+
+        isHit = false;
     }
 
+    void Start()
+    {
+        bossPosition = FindObjectOfType<Boss>().transform.position;
+        playerPosition = FindObjectOfType<Player>().transform.position;
+    }
+    public void updatePlayerPosition(){
+        playerPosition = FindObjectOfType<Player>().transform.position;
+
+    }
     void Update()
     {
-        if(isHit)
+        updatePlayerPosition();
+        if (isMovingToBoss) //현재 플레이어와 충돌하면
         {
-            transform.Translate(3.0f * speed*Time.deltaTime,0,0);
-            if(chkgoboss)
-            {
-                isChange=false;
-                isOpposite=false;
-                isNotacted=false;
-                isFaded=false;
-                isSame=false;
-                s=0;
-                gotoboss();
-                chkgoboss=false;
-            }
+            MoveToBoss();
+        }
+        else if(isMovingToPlayer)
+        {
+            MoveToPlayer();
         }
         else
         {
-            if(isChange)
+            if (isChange)
             {
                 Y=spawnPointschangelocate[Random.Range(0,1)];
                 transform.position=new Vector2(transform.position.x,Y);
@@ -167,52 +177,52 @@ public class Note : MonoBehaviour
                 Invoke("locateChange",Random.Range(0.2f,0.6f));
                 isChange=false;
             }
-            if(isFaded && transform.position.x<=8.0f)
+            if (isFaded && transform.position.x <= 8.0f)
             {
-                isFaded=false;
+                isFaded = false;
                 fadeNodes();
             }
-            if(isOpposite)
+            if (isOpposite)
             {
                 spriteRenderer.sprite=oppositeNodes[coloridx*4+arrowidx];
                 switch(arrowidx)
                 {
                     case 0:
-                        isLeft=false;
-                        isRight=true;
+                        isLeft = false;
+                        isRight = true;
                         break;
                     case 1:
-                        isRight=false;
-                        isLeft=true;
+                        isRight = false;
+                        isLeft = true;
                         break;
                     case 2:
-                        isUp=false;
-                        isDown=true;
+                        isUp = false;
+                        isDown = true;
                         break;
                     case 3:
-                        isDown=false;
-                        isUp=true;
+                        isDown = false;
+                        isUp = true;
                         break;
                 }
-                isOpposite=false;
+                isOpposite = false;
             }
-            if(isSame)
+            if (isSame)
             {
-                isSame=false;
+                isSame = false;
                 sameColor();
             }
-            if(isNotacted)
+            if (isNotacted)
             {
-                if(arrowidx==0)
-                    spriteRenderer.sprite=notActedNodes[0];
-                else if(arrowidx==1)
-                    spriteRenderer.sprite=notActedNodes[1];
-                else if(arrowidx==2)
-                    spriteRenderer.sprite=notActedNodes[2];
-                else if(arrowidx==3)
-                    spriteRenderer.sprite=notActedNodes[3];
+                if (arrowidx == 0)
+                    spriteRenderer.sprite = notActedNodes[0];
+                else if (arrowidx == 1)
+                    spriteRenderer.sprite = notActedNodes[1];
+                else if (arrowidx == 2)
+                    spriteRenderer.sprite = notActedNodes[2];
+                else if (arrowidx == 3)
+                    spriteRenderer.sprite = notActedNodes[3];
             }
-            transform.Translate(-1.0f * speed*Time.deltaTime,0,0); // 등속으로 왼쪽으로 이동
+            transform.Translate(-1.0f * speed * Time.deltaTime, 0, 0); // 등속으로 왼쪽으로 이동
         }
 
     }
@@ -220,13 +230,6 @@ public class Note : MonoBehaviour
     void SetActiveFalseNote()
     {
         gameObject.SetActive(false);
-    }
-
-    void gotoboss()
-    {
-        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s)+spawnPointY);
-        s+=Mathf.PI/128;
-        Invoke("gotoboss",0.015625f);
     }
 
     void locateChange()
@@ -246,84 +249,137 @@ public class Note : MonoBehaviour
 
     void fadeNodes()
     {
-        spriteRenderer.color=new Color(1,1,1,1.0f*op);
-        if(op<=0.0f)
+        spriteRenderer.color = new Color(1, 1, 1, 1.0f * op);
+        if (op <= 0.0f)
         {
             inFadeNodes();
             return;
         }
-        op-=0.1f;
-        Invoke("fadeNodes",0.08f);
+        op -= 0.1f;
+        Invoke("fadeNodes", 0.08f);
     }
 
     void inFadeNodes()
     {
-        if(op>=1.0f)
+        if (op >= 1.0f)
             return;
-        if(transform.position.x<=-0.5f && op<=1.0f)
+        if (transform.position.x <= -0.5f && op <= 1.0f)
         {
-            op+=0.1f;
-            spriteRenderer.color=new Color(1,1,1,1.0f*op);
+            op += 0.1f;
+            spriteRenderer.color = new Color(1, 1, 1, 1.0f * op);
         }
 
-        Invoke("inFadeNodes",0.08f);
+        Invoke("inFadeNodes", 0.08f);
     }
 
     void sameColor()
     {
-        coloridx=playerColor;
-        if(coloridx==0&&arrowidx==0)
-            spriteRenderer.sprite=sprites[0];
-        else if(coloridx==0&&arrowidx==1)
-            spriteRenderer.sprite=sprites[1];
-        else if(coloridx==0&&arrowidx==2)
-            spriteRenderer.sprite=sprites[2];
-        else if(coloridx==0&&arrowidx==3)
-            spriteRenderer.sprite=sprites[3];
-        else if(coloridx==1&&arrowidx==0)
-            spriteRenderer.sprite=sprites[4];
-        else if(coloridx==1&&arrowidx==1)
-            spriteRenderer.sprite=sprites[5];
-        else if(coloridx==1&&arrowidx==2)
-            spriteRenderer.sprite=sprites[6];
-        else if(coloridx==1&&arrowidx==3)
-            spriteRenderer.sprite=sprites[7];
-        else if(coloridx==2&&arrowidx==0)
-            spriteRenderer.sprite=sprites[8];
-        else if(coloridx==2&&arrowidx==1)
-            spriteRenderer.sprite=sprites[9];
-        else if(coloridx==2&&arrowidx==2)
-            spriteRenderer.sprite=sprites[10];
-        else if(coloridx==2&&arrowidx==3)
-            spriteRenderer.sprite=sprites[11];
+        coloridx = playerColor;
+        if (coloridx == 0 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[0];
+        else if (coloridx == 0 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[1];
+        else if (coloridx == 0 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[2];
+        else if (coloridx == 0 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[3];
+        else if (coloridx == 1 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[4];
+        else if (coloridx == 1 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[5];
+        else if (coloridx == 1 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[6];
+        else if (coloridx == 1 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[7];
+        else if (coloridx == 2 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[8];
+        else if (coloridx == 2 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[9];
+        else if (coloridx == 2 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[10];
+        else if (coloridx == 2 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[11];
     }
 
-    void OnTriggerEnter2D(Collider2D collision) {
-        if(collision.gameObject.tag=="Ground" || collision.gameObject.tag=="Player")
-        {
-            HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-            if(healthBarController!=null && !isNotacted)
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {   // 노트가 플레이어와 충돌 시 데미지를 입음
+            isHit = true;
+            chkgoboss = true;
+            if (!isNotacted)
             {
-                HealthBarController.Instance.TakeDamage();
+                damagePlayer();
             }
-            else if(healthBarController!=null && isNotacted)
+            else if (isNotacted) // 때리면 안되는 노트와 닿으면 회복
             {
-                HealthBarController.Instance.Heal();
+                healPlayer();
             }
-            else
-            {
-                Debug.LogError("HealthBarController not found on Player object.");
-            }
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+            Destroy(gameObject);
         }
-        else if(collision.gameObject.tag=="Boss" && isHit)
+        else if (collision.gameObject.tag == "Boss" && isHit)
         {
-            HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-            if(healthBarController!=null)
-            {
-                HealthBarController.Instance.Heal();
-            }
+            healPlayer();
             gameObject.SetActive(false);
         }
     }
+
+    void damagePlayer()
+    {
+        HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+        if (healthBarController != null)
+        {
+            HealthBarController.Instance.TakeDamage();
+        }
+        else
+        {
+            Debug.LogError("HealthBarController not found on Player object.");
+        }
+    }
+    void healPlayer()
+    {
+        HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+        if (healthBarController != null)
+        {
+            HealthBarController.Instance.Heal();
+        }
+        else
+        {
+            Debug.LogError("HealthBarController not found on Player object.");
+        }
+    }
+    public void StartMovingToBoss()
+    {
+        isMovingToBoss = true; // 보스 방향 이동 시작
+    }
+
+    void MoveToBoss()
+    {
+        Vector2 bossPosition = FindObjectOfType<Boss>().transform.position;
+
+        transform.position = Vector2.MoveTowards(transform.position, bossPosition, 4*speed * Time.deltaTime);
+
+        // 보스에 도달한 경우
+        if (Vector2.Distance(transform.position, bossPosition) < 0.1f)
+        {
+            HealthBarController.Instance.Heal(); // 플레이어 체력 회복
+            Destroy(gameObject); // 노트 삭제
+        }
+    }
+
+    public void StartMovingToPlayer()
+    {
+        isMovingToPlayer = true;
+    }
+    void MoveToPlayer()
+{
+    transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4*speed * Time.deltaTime);
+
+    // 플레이어에 도달하면 처리
+    if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
+    {
+        Destroy(gameObject); // 노트 삭제
+    }
+}
 }

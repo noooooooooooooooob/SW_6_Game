@@ -19,21 +19,21 @@ public class PlayerElement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             red = true;
             blue = false;
             green = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             red = false;
             blue = true;
             green = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             red = false;
             blue = false;
