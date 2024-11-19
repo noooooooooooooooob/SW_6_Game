@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AnyColor : MonoBehaviour
 {
-    Sprite[] sprites;
+    
     public float minX = -13f;
     public float maxX = 13f;
     public float minY = -5f;
     public float maxY = 5f;
-    int playerColor;
+    ColorEnum playerColor;
     public void sameColor()
     {
         ObjectManager OM = FindObjectOfType<ObjectManager>();
@@ -23,17 +23,18 @@ public class AnyColor : MonoBehaviour
         {
             Debug.LogWarning("OM스크립트가 할당되지 않았습니다.");
         }
-
+        
         PlayerElement PE = FindObjectOfType<PlayerElement>();
 
         if (PE != null)
         {
-            // playerColor=PE.color;
+            playerColor=PE.playerCurrentElement;
         }
         else
         {
             Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
         }
+        
         GameObject[] notes = GameObject.FindGameObjectsWithTag("Note");
 
         foreach (GameObject note in notes)
@@ -48,7 +49,7 @@ public class AnyColor : MonoBehaviour
 
                 if (noteComponent != null)
                 {
-                    sprites = noteComponent.sprites;
+                   noteComponent.noteColor=playerColor;
 
                 }
                 else
@@ -62,6 +63,7 @@ public class AnyColor : MonoBehaviour
 
 
         }
+        
 
     }
 }
