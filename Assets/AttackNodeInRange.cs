@@ -87,47 +87,16 @@ public class AttackNodeInRange : MonoBehaviour
             {
                 if (note.noteArrowDirection == arrowDirection && playerElement.playerCurrentElement == note.noteColor)
                 {
-                    deleteNote = true;
-                }
-                if (note.isRight && right)
-                {
-                    deleteNote = true;
-                }
-                if (note.isUp && up)
-                {
-                    deleteNote = true;
-                }
-                if (note.isDown && down)
-                {
-                    deleteNote = true;
-                }
-            }
-            if (deleteNote)
-            {
-                note.StartMovingToBoss();
-                attack = false;
-                hasNote = false;
-                deleteNote = false;
+                    note.StartMovingToBoss();
+                    attack = false;
+                    hasNote = false;
 
-                left = false;
-                right = false;
-                up = false;
-                down = false;
-                /*
-                HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
-                if(healthBarController!=null)
-                {
-                    if(!note.isNotacted)
-                        HealthBarController.Instance.Heal();
-                    else
-                    {
-                        Debug.LogError("HealthBarController not found on Player object.");
-                    }
+                    arrowDirection = ArrowDirectionEnum.none;
                 }
                 else
                 {
                     ShakeAttackBar();
-                    Destroy(other.gameObject);
+                    other.gameObject.SetActive(false);
                     attack = false;
                     hasNote = false;
                     arrowDirection = ArrowDirectionEnum.none;
@@ -142,7 +111,6 @@ public class AttackNodeInRange : MonoBehaviour
                         Debug.LogError("HealthBarController not found on Player object.");
                     }
                 }
-                */
             }
         }
     }
@@ -153,7 +121,7 @@ public class AttackNodeInRange : MonoBehaviour
         {
             hasNote = false;
             Note note = other.gameObject.GetComponent<Note>();
-            if(note!=null)
+            if (note != null)
             {
                 note.StartMovingToPlayer();
             }

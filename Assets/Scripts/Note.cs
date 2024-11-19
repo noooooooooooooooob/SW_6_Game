@@ -71,14 +71,14 @@ public class Note : MonoBehaviour
         spawnPointY = spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
         transform.position = new Vector2(spawnPointX, spawnPointY);
 
-        isChange=false;
-        isOpposite=false;
-        isNotacted=false;
-        isFaded=false;
-        isSame=false;
-        
-        coloridx=Random.Range(0,3);
-        arrowidx=Random.Range(0,4);
+        isChange = false;
+        isOpposite = false;
+        isNotacted = false;
+        isFaded = false;
+        isSame = false;
+
+        coloridx = Random.Range(0, 3);
+        arrowidx = Random.Range(0, 4);
 
         coloridx = Random.Range(0, 3);
         arrowidx = Random.Range(0, 4);
@@ -163,7 +163,8 @@ public class Note : MonoBehaviour
         bossPosition = FindObjectOfType<Boss>().transform.position;
         playerPosition = FindObjectOfType<Player>().transform.position;
     }
-    public void updatePlayerPosition(){
+    public void updatePlayerPosition()
+    {
         playerPosition = FindObjectOfType<Player>().transform.position;
 
     }
@@ -174,7 +175,7 @@ public class Note : MonoBehaviour
         {
             MoveToBoss();
         }
-        else if(isMovingToPlayer)
+        else if (isMovingToPlayer)
         {
             MoveToPlayer();
         }
@@ -182,11 +183,11 @@ public class Note : MonoBehaviour
         {
             if (isChange)
             {
-                Y=spawnPointschangelocate[Random.Range(0,1)];
-                transform.position=new Vector2(transform.position.x,Y);
-                s=Mathf.Asin(Y/4);
-                Invoke("locateChange",Random.Range(0.2f,0.6f));
-                isChange=false;
+                Y = spawnPointschangelocate[Random.Range(0, 1)];
+                transform.position = new Vector2(transform.position.x, Y);
+                s = Mathf.Asin(Y / 4);
+                Invoke("locateChange", Random.Range(0.2f, 0.6f));
+                isChange = false;
             }
             if (isFaded && transform.position.x <= 8.0f)
             {
@@ -195,8 +196,8 @@ public class Note : MonoBehaviour
             }
             if (isOpposite)
             {
-                spriteRenderer.sprite=oppositeNodes[coloridx*4+arrowidx];
-                switch(arrowidx)
+                spriteRenderer.sprite = oppositeNodes[coloridx * 4 + arrowidx];
+                switch (arrowidx)
                 {
                     case 0:
                         isLeft = false;
@@ -245,17 +246,17 @@ public class Note : MonoBehaviour
 
     void locateChange()
     {
-        if((transform.position.x<=-3.0f) && 
+        if ((transform.position.x <= -3.0f) &&
             (
-            (transform.position.y>=spawnPoints[0]-0.2f && transform.position.y<=spawnPoints[0]+0.2f) ||
-            (transform.position.y>=spawnPoints[1]-0.2f && transform.position.y<=spawnPoints[1]+0.2f) ||
-            (transform.position.y>=spawnPoints[2]-0.2f && transform.position.y<=spawnPoints[2]+0.2f)
+            (transform.position.y >= spawnPoints[0] - 0.2f && transform.position.y <= spawnPoints[0] + 0.2f) ||
+            (transform.position.y >= spawnPoints[1] - 0.2f && transform.position.y <= spawnPoints[1] + 0.2f) ||
+            (transform.position.y >= spawnPoints[2] - 0.2f && transform.position.y <= spawnPoints[2] + 0.2f)
             ) ||
             isHit)
             return;
-        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s)+Y);
-        s+=Mathf.PI/64;
-        Invoke("locateChange",0.015625f);
+        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s) + Y);
+        s += Mathf.PI / 64;
+        Invoke("locateChange", 0.015625f);
     }
 
     void fadeNodes()
@@ -286,40 +287,40 @@ public class Note : MonoBehaviour
     void sameColor()
     {
         PlayerElement PE = FindObjectOfType<PlayerElement>();
-       
-        if ( PE!= null)
+
+        if (PE != null)
         {
-            playerColor=PE.color;
+            // playerColor=PE.color;
         }
         else
         {
             Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
         }
-        coloridx=playerColor;
-        if(coloridx==0&&arrowidx==0)
-            spriteRenderer.sprite=sprites[0];
-        else if(coloridx==0&&arrowidx==1)
-            spriteRenderer.sprite=sprites[1];
-        else if(coloridx==0&&arrowidx==2)
-            spriteRenderer.sprite=sprites[2];
-        else if(coloridx==0&&arrowidx==3)
-            spriteRenderer.sprite=sprites[3];
-        else if(coloridx==1&&arrowidx==0)
-            spriteRenderer.sprite=sprites[4];
-        else if(coloridx==1&&arrowidx==1)
-            spriteRenderer.sprite=sprites[5];
-        else if(coloridx==1&&arrowidx==2)
-            spriteRenderer.sprite=sprites[6];
-        else if(coloridx==1&&arrowidx==3)
-            spriteRenderer.sprite=sprites[7];
-        else if(coloridx==2&&arrowidx==0)
-            spriteRenderer.sprite=sprites[8];
-        else if(coloridx==2&&arrowidx==1)
-            spriteRenderer.sprite=sprites[9];
-        else if(coloridx==2&&arrowidx==2)
-            spriteRenderer.sprite=sprites[10];
-        else if(coloridx==2&&arrowidx==3)
-            spriteRenderer.sprite=sprites[11];
+        coloridx = playerColor;
+        if (coloridx == 0 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[0];
+        else if (coloridx == 0 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[1];
+        else if (coloridx == 0 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[2];
+        else if (coloridx == 0 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[3];
+        else if (coloridx == 1 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[4];
+        else if (coloridx == 1 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[5];
+        else if (coloridx == 1 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[6];
+        else if (coloridx == 1 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[7];
+        else if (coloridx == 2 && arrowidx == 0)
+            spriteRenderer.sprite = sprites[8];
+        else if (coloridx == 2 && arrowidx == 1)
+            spriteRenderer.sprite = sprites[9];
+        else if (coloridx == 2 && arrowidx == 2)
+            spriteRenderer.sprite = sprites[10];
+        else if (coloridx == 2 && arrowidx == 3)
+            spriteRenderer.sprite = sprites[11];
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -379,7 +380,7 @@ public class Note : MonoBehaviour
     {
         Vector2 bossPosition = FindObjectOfType<Boss>().transform.position;
 
-        transform.position = Vector2.MoveTowards(transform.position, bossPosition, 4*speed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, bossPosition, 4 * speed * Time.deltaTime);
 
         // 보스에 도달한 경우
         if (Vector2.Distance(transform.position, bossPosition) < 0.1f)
@@ -394,13 +395,13 @@ public class Note : MonoBehaviour
         isMovingToPlayer = true;
     }
     void MoveToPlayer()
-{
-    transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4*speed * Time.deltaTime);
-
-    // 플레이어에 도달하면 처리
-    if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
     {
-        Destroy(gameObject); // 노트 삭제
+        transform.position = Vector2.MoveTowards(transform.position, playerPosition, 4 * speed * Time.deltaTime);
+
+        // 플레이어에 도달하면 처리
+        if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
+        {
+            Destroy(gameObject); // 노트 삭제
+        }
     }
-}
 }

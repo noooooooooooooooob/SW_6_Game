@@ -26,7 +26,7 @@ public class Boss : MonoBehaviour
         }
     }
     void Deal()
-    { 
+    {
         spriteRenderer.color = new Color(1, 0, 0, 1);
         Invoke("restoration", 0.3f);
     }
@@ -40,8 +40,8 @@ public class Boss : MonoBehaviour
         Note noteScript = collision.GetComponent<Note>();
         if (noteScript != null && collision.gameObject.tag == "Note")
         {
-            if(noteScript.isHit)
-            { 
+            if (noteScript.isHit)
+            {
                 Deal();
             }
         }

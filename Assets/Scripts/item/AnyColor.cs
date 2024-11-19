@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class AnyColor : MonoBehaviour
 {
-     Sprite[] sprites;
-     public float minX = -13f;
+    Sprite[] sprites;
+    public float minX = -13f;
     public float maxX = 13f;
     public float minY = -5f;
     public float maxY = 5f;
     int playerColor;
-    public void sameColor(){
+    public void sameColor()
+    {
         ObjectManager OM = FindObjectOfType<ObjectManager>();
-       
-        if ( OM!= null)
+
+        if (OM != null)
         {
             Debug.Log("OM실행");
-            OM.unifyNote=true;
+            OM.unifyNote = true;
         }
         else
         {
@@ -24,10 +25,10 @@ public class AnyColor : MonoBehaviour
         }
 
         PlayerElement PE = FindObjectOfType<PlayerElement>();
-       
-        if ( PE!= null)
+
+        if (PE != null)
         {
-            playerColor=PE.color;
+            // playerColor=PE.color;
         }
         else
         {
@@ -42,25 +43,25 @@ public class AnyColor : MonoBehaviour
             // x와 y 범위 안에 있는 오브젝트만 느리게 만들기
             if (pos.x >= minX && pos.x <= maxX && pos.y >= minY && pos.y <= maxY)
             {
-                  // Note 컴포넌트를 가져옴
+                // Note 컴포넌트를 가져옴
                 Note noteComponent = note.GetComponent<Note>();
 
                 if (noteComponent != null)
                 {
-                    sprites=noteComponent.sprites;
-                    
+                    sprites = noteComponent.sprites;
+
                 }
                 else
                 {
                     Debug.LogWarning("Note 컴포넌트가 없는 오브젝트 ");
                 }
-                
-                
+
+
             }
-             
-            
-               
+
+
+
         }
-        
+
     }
 }
