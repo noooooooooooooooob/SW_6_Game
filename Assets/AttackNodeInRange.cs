@@ -94,7 +94,9 @@ public class AttackNodeInRange : MonoBehaviour
             }
             if (deleteNote)
             {
-                Destroy(other.gameObject);
+                note.isHit=true;
+                note.chkgoboss=true;
+                
                 attack = false;
                 hasNote = false;
                 deleteNote = false;
@@ -103,6 +105,7 @@ public class AttackNodeInRange : MonoBehaviour
                 right = false;
                 up = false;
                 down = false;
+                /*
                 HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
                 if(healthBarController!=null)
                 {
@@ -114,6 +117,7 @@ public class AttackNodeInRange : MonoBehaviour
                 else{
                     Debug.LogError("HealthBarController not found on Player object.");
                 }
+                */
             }
         }
     }

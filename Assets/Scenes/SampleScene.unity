@@ -2578,7 +2578,7 @@ MonoBehaviour:
   noteSpawnTimeMin: 0.5
   noteSpawnTimeMax: 2
   isSlow: 0
-  changingNoteLocation: 0
+  changingNoteLocation: 1
   oppositeNoteArrow: 0
   notActedNote: 0
   fadeNote: 0

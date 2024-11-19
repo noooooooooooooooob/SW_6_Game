@@ -134,10 +134,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ca34198e797f048b344b004baa039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chkgoboss: 0
+  player: {fileID: 0}
+  Boss: {fileID: 0}
   spawnPoints:
   - 2.1
   - -1
   - -3.5
+  spawnPointschangelocate:
+  - 1.05
+  - -2
   sprites:
   - {fileID: -960669045, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: 1847957774, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
@@ -156,6 +162,19 @@ MonoBehaviour:
   - {fileID: 1332314163, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
   - {fileID: 1969790148, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
   - {fileID: 713219347, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
+  oppositeNodes:
+  - {fileID: 1773667905, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 1882633593, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 1987836295, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 314597704, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 1348109955, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 59059384, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: -522160701, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 339878500, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: -831066902, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: -641732223, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: 500547930, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  - {fileID: -1434134500, guid: f83decfedb6ec9149923695f4d366721, type: 3}
   spawnPointX: 10
   speed: 5
   isHit: 0
