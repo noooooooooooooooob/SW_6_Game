@@ -10,8 +10,6 @@ using UnityEngine.UIElements;
 
 public class Note : MonoBehaviour
 {
-    float Y;
-    public bool chkgoboss;
     public GameObject player;
     public GameObject Boss;
     Rigidbody2D rigid;
@@ -43,7 +41,6 @@ public class Note : MonoBehaviour
     public bool isDown;
 
     //기믹들 추가
-    public bool isChange;
     public float changeSpeed;
     public bool isOpposite;
     public bool isNotacted;
@@ -73,7 +70,6 @@ public class Note : MonoBehaviour
         spawnPointY = spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
         transform.position = new Vector2(spawnPointX, spawnPointY);
 
-        isChange = false;
         isOpposite = false;
         isNotacted = false;
         isFaded = false;
@@ -183,6 +179,7 @@ public class Note : MonoBehaviour
             Debug.LogWarning("Player is not active or missing.");
         }
     }
+
     public void updatePlayerPosition()
     {
         var playerObj = FindObjectOfType<Player>();
@@ -196,6 +193,7 @@ public class Note : MonoBehaviour
             Debug.LogWarning("Player is not active or missing.");
         }
     }
+
     void Update()
     {
         updatePlayerPosition();
@@ -209,14 +207,6 @@ public class Note : MonoBehaviour
         }
         else
         {
-            if (isChange)
-            {
-                Y = spawnPointschangelocate[Random.Range(0, 1)];
-                transform.position = new Vector2(transform.position.x, Y);
-                s = Mathf.Asin(Y / 4);
-                Invoke("locateChange", Random.Range(0.2f, 0.6f));
-                isChange = false;
-            }
             if (isFaded && transform.position.x <= 8.0f)
             {
                 isFaded = false;
@@ -270,21 +260,6 @@ public class Note : MonoBehaviour
     void SetActiveFalseNote()
     {
         gameObject.SetActive(false);
-    }
-
-    void locateChange()
-    {
-        if ((transform.position.x <= -3.0f) &&
-            (
-            (transform.position.y >= spawnPoints[0] - 0.2f && transform.position.y <= spawnPoints[0] + 0.2f) ||
-            (transform.position.y >= spawnPoints[1] - 0.2f && transform.position.y <= spawnPoints[1] + 0.2f) ||
-            (transform.position.y >= spawnPoints[2] - 0.2f && transform.position.y <= spawnPoints[2] + 0.2f)
-            ) ||
-            isHit)
-            return;
-        transform.position = new Vector2(transform.position.x, 1.8f * Mathf.Sin(s) + Y);
-        s += Mathf.PI / 64;
-        Invoke("locateChange", 0.015625f);
     }
 
     void fadeNodes()
@@ -355,8 +330,6 @@ public class Note : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
-            isHit = true;
-            chkgoboss = true;
             if (!isNotacted)
             {
                 damagePlayer();
@@ -365,8 +338,7 @@ public class Note : MonoBehaviour
             {
                 healPlayer();
             }
-            //gameObject.SetActive(false);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
         else if (collision.gameObject.tag == "Boss" && isHit)
         {
