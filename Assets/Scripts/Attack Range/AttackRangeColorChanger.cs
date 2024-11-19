@@ -9,6 +9,7 @@ public class AttackRangeColorChanger : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.color = new Color(1, 0, 0, 0.4f);// Default color is red
     }
 
     // Update is called once per frame

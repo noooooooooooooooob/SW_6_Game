@@ -4433,7 +4433,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.4009434, g: 0.4009434, b: 0.4009434, a: 0.21960784}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.4}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -4820,6 +4820,7 @@ GameObject:
   - component: {fileID: 1953957287}
   - component: {fileID: 1953957286}
   - component: {fileID: 1953957284}
+  - component: {fileID: 1953957288}
   m_Layer: 0
   m_Name: 2nd floor
   m_TagString: platform
@@ -4939,6 +4940,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1953957288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953957283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59278e939fabdc546902084c7c81e97f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 137012452}
+  playerMovement: {fileID: 0}
 --- !u!1 &1988357221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,6 +4965,7 @@ GameObject:
   - component: {fileID: 1988357225}
   - component: {fileID: 1988357224}
   - component: {fileID: 1988357222}
+  - component: {fileID: 1988357226}
   m_Layer: 0
   m_Name: 3rd floor
   m_TagString: platform
@@ -5069,6 +5085,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1988357226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988357221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59278e939fabdc546902084c7c81e97f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 137012452}
+  playerMovement: {fileID: 0}
 --- !u!1 &1994471147
 GameObject:
   m_ObjectHideFlags: 0

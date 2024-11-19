@@ -7,6 +7,11 @@ public class PlayerElement : MonoBehaviour
 
     public ColorEnum playerCurrentElement;
 
+    void Start()
+    {
+        playerCurrentElement = ColorEnum.red;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -23,7 +28,7 @@ public class PlayerElement : MonoBehaviour
         {
             playerCurrentElement = ColorEnum.blue;
         }
-        
+
 
 
     }
