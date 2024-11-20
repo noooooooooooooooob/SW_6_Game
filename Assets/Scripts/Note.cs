@@ -130,6 +130,7 @@ public class Note : MonoBehaviour
 
         //coloridx [ Red, Green, Blue ]
         //arrowidx [ Left, Right, Up, Down]
+       
         if (coloridx == 0 && arrowidx == 0)
             spriteRenderer.sprite = sprites[0];
         else if (coloridx == 0 && arrowidx == 1)
@@ -154,7 +155,7 @@ public class Note : MonoBehaviour
             spriteRenderer.sprite = sprites[10];
         else if (coloridx == 2 && arrowidx == 3)
             spriteRenderer.sprite = sprites[11];
-
+        
         isHit = false;
     }
 
@@ -238,11 +239,14 @@ public class Note : MonoBehaviour
                 }
                 isOpposite = false;
             }
+            
             if (isSame)
             {
                 //isSame = false;
                 sameColor();
             }
+          
+
             if (isNotacted)
             {
                 if (arrowidx == 0)
@@ -296,6 +300,7 @@ public class Note : MonoBehaviour
         if (PE != null)
         {
             playerColor=PE.playerCurrentElement;
+           
         }
         else
         {
@@ -326,6 +331,10 @@ public class Note : MonoBehaviour
             spriteRenderer.sprite = sprites[10];
         else if (playerColor==ColorEnum.blue && arrowidx == 3)
             spriteRenderer.sprite = sprites[11];
+    }
+    void difcolor(){
+
+
     }
 
     void OnTriggerEnter2D(Collider2D collision)
