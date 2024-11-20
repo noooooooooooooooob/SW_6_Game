@@ -31,7 +31,11 @@ public class FloorChecker : MonoBehaviour
         {
             AttackNodeInRange parent = GetComponentInParent<AttackNodeInRange>();
             hasPlayer = false;
-            parent.OnChildTrigger();
+            if (parent != null)
+            {
+                parent.OnChildTrigger();
+            }
+
         }
     }
 

@@ -13,6 +13,7 @@ public class GameTransition : MonoBehaviour
         BossDefeated = false;
         PlayerDefeated = false;
         sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        sceneManager.PreLoadNextScene();
     }
 
     void Update()
@@ -23,7 +24,7 @@ public class GameTransition : MonoBehaviour
     public void SetBossDefeated()
     {
         BossDefeated = true;
-        sceneManager.LoadScene(1);
+        sceneManager.NextScene();
     }
 
     public void SetPlayerDefeated()
