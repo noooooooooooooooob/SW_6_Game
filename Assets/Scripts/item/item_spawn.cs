@@ -10,7 +10,7 @@ public class item_spawn : MonoBehaviour
 
     [SerializeField]
     private float spawnTime;
-    private float[] arrPosY = {-4f,-1f,2.5f};
+    private float[] arrPosY = {-4f,-1f,2f};
     void Start()
     {
         StartItemRotine();

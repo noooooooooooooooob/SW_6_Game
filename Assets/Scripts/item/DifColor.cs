@@ -5,7 +5,14 @@ using UnityEngine;
 public class DifColor : MonoBehaviour
 {
     public void Normalization(){
-        Debug.Log("10초 후 실행되었습니다!");
+       ObjectManager OM = FindObjectOfType<ObjectManager>();
+
+       
+        
+        Debug.Log("OM실행");
+        OM.unifyNote = false;
+        
+        
         
     }
 }

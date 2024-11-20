@@ -11,7 +11,8 @@ using UnityEngine.UIElements;
 public class Note : MonoBehaviour
 {
     public GameObject player;
-    public GameObject Boss;
+    GameObject Boss;
+    GameObject gameManager;
     Rigidbody2D rigid;
     public float[] spawnPoints;
     public float[] spawnPointschangelocate;
@@ -47,7 +48,9 @@ public class Note : MonoBehaviour
     public bool isFaded;
     public float op;
     public bool isSame;
-    public int playerColor;
+    //public int playerColor;
+    ColorEnum playerColor;
+
     float s;
     float plus;
     // 플레이어 보스 위치 변수
@@ -64,6 +67,8 @@ public class Note : MonoBehaviour
     void Awake()
     {
         op = 1.0f;
+        Boss=GameObject.Find("Boss");
+        gameManager=GameObject.Find("Game manager");
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPointYidx = Random.Range(0, 3);
@@ -104,7 +109,7 @@ public class Note : MonoBehaviour
         isRight = false;
         isUp = false;
         isDown = false;
-        playerColor = 1;
+        //playerColor = 1;
         s = 0;
         switch (arrowidx)
         {
@@ -238,7 +243,7 @@ public class Note : MonoBehaviour
             }
             if (isSame)
             {
-                isSame = false;
+                //isSame = false;
                 sameColor();
             }
             if (isNotacted)
@@ -293,41 +298,42 @@ public class Note : MonoBehaviour
 
         if (PE != null)
         {
-            // playerColor=PE.color;
+            playerColor=PE.playerCurrentElement;
         }
         else
         {
             Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
         }
-        coloridx = playerColor;
-        if (coloridx == 0 && arrowidx == 0)
+        //coloridx = playerColor;
+        if (playerColor==ColorEnum.red && arrowidx == 0)
             spriteRenderer.sprite = sprites[0];
-        else if (coloridx == 0 && arrowidx == 1)
+        else if (playerColor==ColorEnum.red && arrowidx == 1)
             spriteRenderer.sprite = sprites[1];
-        else if (coloridx == 0 && arrowidx == 2)
+        else if (playerColor==ColorEnum.red && arrowidx == 2)
             spriteRenderer.sprite = sprites[2];
-        else if (coloridx == 0 && arrowidx == 3)
+        else if (playerColor==ColorEnum.red && arrowidx == 3)
             spriteRenderer.sprite = sprites[3];
-        else if (coloridx == 1 && arrowidx == 0)
+        else if (playerColor==ColorEnum.green && arrowidx == 0)
             spriteRenderer.sprite = sprites[4];
-        else if (coloridx == 1 && arrowidx == 1)
+        else if (playerColor==ColorEnum.green&& arrowidx == 1)
             spriteRenderer.sprite = sprites[5];
-        else if (coloridx == 1 && arrowidx == 2)
+        else if (playerColor==ColorEnum.green && arrowidx == 2)
             spriteRenderer.sprite = sprites[6];
-        else if (coloridx == 1 && arrowidx == 3)
+        else if (playerColor==ColorEnum.green && arrowidx == 3)
             spriteRenderer.sprite = sprites[7];
-        else if (coloridx == 2 && arrowidx == 0)
+        else if (playerColor==ColorEnum.blue && arrowidx == 0)
             spriteRenderer.sprite = sprites[8];
-        else if (coloridx == 2 && arrowidx == 1)
+        else if (playerColor==ColorEnum.blue && arrowidx == 1)
             spriteRenderer.sprite = sprites[9];
-        else if (coloridx == 2 && arrowidx == 2)
+        else if (playerColor==ColorEnum.blue && arrowidx == 2)
             spriteRenderer.sprite = sprites[10];
-        else if (coloridx == 2 && arrowidx == 3)
+        else if (playerColor==ColorEnum.blue && arrowidx == 3)
             spriteRenderer.sprite = sprites[11];
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "Player")
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
@@ -342,8 +348,7 @@ public class Note : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Boss" && isHit)
         {
-            healPlayer();
-            gameObject.SetActive(false);
+            Debug.Log("노트 부딪힘");
         }
     }
 
@@ -352,6 +357,7 @@ public class Note : MonoBehaviour
         HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
+            gameManager.GetComponent<GameManager>().decreaseCombo();
             HealthBarController.Instance.TakeDamage();
         }
         else
@@ -393,8 +399,8 @@ public class Note : MonoBehaviour
         if (Vector2.Distance(transform.position, bossPosition) < 0.1f)
         {
             HealthBarController.Instance.Heal(); // 플레이어 체력 회복
+            Boss.GetComponent<Boss>().isHit=true;
             gameObject.SetActive(false);
-            // Destroy(gameObject); // 노트 삭제
         }
     }
 
@@ -418,8 +424,8 @@ public class Note : MonoBehaviour
 
         if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
         {
+            
             gameObject.SetActive(false);
-            // Destroy(gameObject); // 노트 삭제
         }
     }
 }
