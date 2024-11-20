@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,11 +12,15 @@ public class Boss : MonoBehaviour
     private Slider healthBarSliderComponent;
     public ObjectManager objectManager;
     public HealthBarController healthBarController;
+    GameObject gameManager;
+    public bool isHit;
     void Start()
     {
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectManager=GetComponent<ObjectManager>();
+        gameManager=GameObject.Find("Game manager");
+        isHit=false;
     }
 
 
@@ -26,8 +31,14 @@ public class Boss : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+        if(isHit)
+        {
+            isHit=false;
+            gameManager.GetComponent<GameManager>().increaseScore();
+            Deal();
+        }
     }
-    void Deal()
+    public void Deal()
     {
         spriteRenderer.color = new Color(1, 0, 0, 1);
         Invoke("restoration", 0.3f);
@@ -37,15 +48,4 @@ public class Boss : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
-    void OnTriggerEnter2D(Collider2D collision)
-    { // 노트랑 부딪히면 딜 함수 호출
-        Note noteScript = collision.GetComponent<Note>();
-        if (noteScript != null && collision.gameObject.tag == "Note")
-        {
-            if (noteScript.isHit)
-            {
-                Deal();
-            }
-        }
-    }
 }

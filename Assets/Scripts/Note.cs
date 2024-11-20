@@ -11,7 +11,8 @@ using UnityEngine.UIElements;
 public class Note : MonoBehaviour
 {
     public GameObject player;
-    public GameObject Boss;
+    GameObject Boss;
+    GameObject gameManager;
     Rigidbody2D rigid;
     public float[] spawnPoints;
     public float[] spawnPointschangelocate;
@@ -64,6 +65,8 @@ public class Note : MonoBehaviour
     void Awake()
     {
         op = 1.0f;
+        Boss=GameObject.Find("Boss");
+        gameManager=GameObject.Find("Game manager");
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPointYidx = Random.Range(0, 3);
@@ -328,6 +331,7 @@ public class Note : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.gameObject.tag == "Player")
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
@@ -342,8 +346,7 @@ public class Note : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Boss" && isHit)
         {
-            healPlayer();
-            gameObject.SetActive(false);
+            Debug.Log("노트 부딪힘");
         }
     }
 
@@ -352,6 +355,7 @@ public class Note : MonoBehaviour
         HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
+            gameManager.GetComponent<GameManager>().decreaseCombo();
             HealthBarController.Instance.TakeDamage();
         }
         else
@@ -393,8 +397,8 @@ public class Note : MonoBehaviour
         if (Vector2.Distance(transform.position, bossPosition) < 0.1f)
         {
             HealthBarController.Instance.Heal(); // 플레이어 체력 회복
+            Boss.GetComponent<Boss>().isHit=true;
             gameObject.SetActive(false);
-            // Destroy(gameObject); // 노트 삭제
         }
     }
 
@@ -418,8 +422,8 @@ public class Note : MonoBehaviour
 
         if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
         {
+            
             gameObject.SetActive(false);
-            // Destroy(gameObject); // 노트 삭제
         }
     }
 }
