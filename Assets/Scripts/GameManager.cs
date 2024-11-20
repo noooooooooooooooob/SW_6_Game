@@ -7,19 +7,23 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int score; //점수
-    public int Combo;
-    public Sprite[] numbers;
+    int maxscore;
+    public int Combo; //콤보
+    int maxcombo;
+    public Sprite[] numbers; //숫자 스프라이트
     public GameObject[] Scores;
 
     public GameObject[] Combos;
     public GameObject[] Timer;
     
     private float startTime;  // 게임 시작 시간
-    public float timeLimit = 300f;  // 제한시간
+    public float timeLimit;  // 제한시간
     void Start()
     {
         score=0; // 출력되는 점수
         Combo=0;
+        maxscore=999999;
+        maxcombo=999;
 
         startTime = Time.time;  // 게임 시작 시간을 현재 시간으로 설정
 
@@ -44,7 +48,7 @@ public class GameManager : MonoBehaviour
     void updateScore()
     {
         int n=score;
-        for (int i = 9; i >= 0; i--)
+        for (int i = 5; i >= 0; i--)
         {
             int input=n%10;
             n/=10;
@@ -72,6 +76,10 @@ public class GameManager : MonoBehaviour
     {
         score+=10+Combo;
         Combo+=1;
+        if(score>=maxscore)
+            score=maxscore;
+        if(Combo>=maxcombo)
+            Combo=maxcombo;
         updateScore();
         updateCombo();
     }

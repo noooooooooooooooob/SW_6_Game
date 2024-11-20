@@ -70,8 +70,17 @@ public class ObjectManager : MonoBehaviour
             note[cnt].GetComponent<Note>().isNotacted=true;
         if(fadeNote)
             note[cnt].GetComponent<Note>().isFaded=true;
-        if(unifyNote)
-            note[cnt].GetComponent<Note>().isSame=true;
+        if(unifyNote){
+            for(int i=10;i>=0;i--){
+                if((cnt-i)>0){
+                    if(note[cnt-i]!=null){
+                        note[(cnt-i)].GetComponent<Note>().isSame=true;
+                    }
+                }
+                
+            }
+        }
+           
 
         note[cnt++].SetActive(true);
            
