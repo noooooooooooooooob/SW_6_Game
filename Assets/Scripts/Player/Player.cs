@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Player: MonoBehaviour
+public class Player : MonoBehaviour
 {
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
@@ -16,9 +16,14 @@ public class Player: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (healthBarSliderComponent.value == 0.0f)
-        {
-            this.gameObject.SetActive(false);
-        }
+        // if (healthBarSliderComponent.value == 0.0f)
+        // {
+        //     this.gameObject.SetActive(false);
+        // }
+    }
+
+    public void PlayerDeath()
+    {
+        gameObject.SetActive(false);
     }
 }

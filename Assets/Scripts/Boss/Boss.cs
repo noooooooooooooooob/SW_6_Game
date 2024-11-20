@@ -18,25 +18,30 @@ public class Boss : MonoBehaviour
     {
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        objectManager=GetComponent<ObjectManager>();
-        gameManager=GameObject.Find("Game manager");
-        isHit=false;
+        objectManager = GetComponent<ObjectManager>();
+        gameManager = GameObject.Find("Game manager");
+        isHit = false;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        if (healthBarSliderComponent.value == 1.0f)
+        // if (healthBarSliderComponent.value == 1.0f)
+        // {
+        //     this.gameObject.SetActive(false);
+        // }
+        if (isHit)
         {
-            this.gameObject.SetActive(false);
-        }
-        if(isHit)
-        {
-            isHit=false;
+            isHit = false;
             gameManager.GetComponent<GameManager>().increaseScore();
             Deal();
         }
+    }
+
+    public void BossDeath()
+    {
+        gameObject.SetActive(false);
     }
     public void Deal()
     {
