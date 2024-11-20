@@ -253,6 +253,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
   m_PrefabInstance: {fileID: 3263717000660771384}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &137012460 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+  m_PrefabInstance: {fileID: 3263717000660771384}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137012452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43dfe8955531fd04e9511a2612a5e942, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &176659551
 GameObject:
   m_ObjectHideFlags: 0
@@ -2493,7 +2504,6 @@ MonoBehaviour:
   hasNote: 0
   attack: 0
   playerInRange: 0
-  healthBarController: {fileID: 0}
   arrowDirection: 0
 --- !u!61 &261668475
 BoxCollider2D:
@@ -3820,7 +3830,6 @@ MonoBehaviour:
   hasNote: 0
   attack: 0
   playerInRange: 0
-  healthBarController: {fileID: 0}
   arrowDirection: 0
 --- !u!61 &1222351180
 BoxCollider2D:
@@ -4466,8 +4475,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1599274087}
   - component: {fileID: 1599274088}
+  - component: {fileID: 1599274089}
   m_Layer: 0
-  m_Name: Game manager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4529,6 +4539,20 @@ MonoBehaviour:
   - {fileID: 1551355008}
   - {fileID: 1928213756}
   timeLimit: 300
+--- !u!114 &1599274089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599274086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2ce06b7f41825d43a28484ad55711c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BossDefeated: 0
+  PlayerDefeated: 0
 --- !u!1 &1625956962
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,7 +5198,6 @@ MonoBehaviour:
   hasNote: 0
   attack: 0
   playerInRange: 0
-  healthBarController: {fileID: 0}
   arrowDirection: 0
 --- !u!61 &1945669839
 BoxCollider2D:
@@ -5887,9 +5910,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4631060310210678041, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5857761560757518689, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: m_Name
       value: BarSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 1507458611}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 137012460}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: currentHealth
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 9176630542367076143, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: Player
