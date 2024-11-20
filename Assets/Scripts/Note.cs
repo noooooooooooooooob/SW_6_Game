@@ -12,7 +12,7 @@ public class Note : MonoBehaviour
 {
     public GameObject player;
     GameObject Boss;
-    GameObject gameManager;
+    GameManager gameManager;
     Rigidbody2D rigid;
     public float[] spawnPoints;
     public float[] spawnPointschangelocate;
@@ -66,9 +66,10 @@ public class Note : MonoBehaviour
 
     void Awake()
     {
+        healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
         op = 1.0f;
-        Boss=GameObject.Find("Boss");
-        gameManager=GameObject.Find("Game manager");
+        Boss = GameObject.Find("Boss");
+        gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         spawnPointYidx = Random.Range(0, 3);
@@ -133,7 +134,7 @@ public class Note : MonoBehaviour
 
         //coloridx [ Red, Green, Blue ]
         //arrowidx [ Left, Right, Up, Down]
-       
+
         if (coloridx == 0 && arrowidx == 0)
             spriteRenderer.sprite = sprites[0];
         else if (coloridx == 0 && arrowidx == 1)
@@ -158,7 +159,7 @@ public class Note : MonoBehaviour
             spriteRenderer.sprite = sprites[10];
         else if (coloridx == 2 && arrowidx == 3)
             spriteRenderer.sprite = sprites[11];
-        
+
         isHit = false;
     }
 
@@ -242,13 +243,13 @@ public class Note : MonoBehaviour
                 }
                 isOpposite = false;
             }
-            
+
             if (isSame)
             {
                 //isSame = false;
                 sameColor();
             }
-          
+
 
             if (isNotacted)
             {
@@ -302,47 +303,48 @@ public class Note : MonoBehaviour
 
         if (PE != null)
         {
-            playerColor=PE.playerCurrentElement;
-           
+            playerColor = PE.playerCurrentElement;
+
         }
         else
         {
             Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
         }
         //coloridx = playerColor;
-        if (playerColor==ColorEnum.red && arrowidx == 0)
+        if (playerColor == ColorEnum.red && arrowidx == 0)
             spriteRenderer.sprite = sprites[0];
-        else if (playerColor==ColorEnum.red && arrowidx == 1)
+        else if (playerColor == ColorEnum.red && arrowidx == 1)
             spriteRenderer.sprite = sprites[1];
-        else if (playerColor==ColorEnum.red && arrowidx == 2)
+        else if (playerColor == ColorEnum.red && arrowidx == 2)
             spriteRenderer.sprite = sprites[2];
-        else if (playerColor==ColorEnum.red && arrowidx == 3)
+        else if (playerColor == ColorEnum.red && arrowidx == 3)
             spriteRenderer.sprite = sprites[3];
-        else if (playerColor==ColorEnum.green && arrowidx == 0)
+        else if (playerColor == ColorEnum.green && arrowidx == 0)
             spriteRenderer.sprite = sprites[4];
-        else if (playerColor==ColorEnum.green&& arrowidx == 1)
+        else if (playerColor == ColorEnum.green && arrowidx == 1)
             spriteRenderer.sprite = sprites[5];
-        else if (playerColor==ColorEnum.green && arrowidx == 2)
+        else if (playerColor == ColorEnum.green && arrowidx == 2)
             spriteRenderer.sprite = sprites[6];
-        else if (playerColor==ColorEnum.green && arrowidx == 3)
+        else if (playerColor == ColorEnum.green && arrowidx == 3)
             spriteRenderer.sprite = sprites[7];
-        else if (playerColor==ColorEnum.blue && arrowidx == 0)
+        else if (playerColor == ColorEnum.blue && arrowidx == 0)
             spriteRenderer.sprite = sprites[8];
-        else if (playerColor==ColorEnum.blue && arrowidx == 1)
+        else if (playerColor == ColorEnum.blue && arrowidx == 1)
             spriteRenderer.sprite = sprites[9];
-        else if (playerColor==ColorEnum.blue && arrowidx == 2)
+        else if (playerColor == ColorEnum.blue && arrowidx == 2)
             spriteRenderer.sprite = sprites[10];
-        else if (playerColor==ColorEnum.blue && arrowidx == 3)
+        else if (playerColor == ColorEnum.blue && arrowidx == 3)
             spriteRenderer.sprite = sprites[11];
     }
-    void difcolor(){
+    void difcolor()
+    {
 
 
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        
+
         if (collision.gameObject.tag == "Player")
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
@@ -363,11 +365,11 @@ public class Note : MonoBehaviour
 
     void damagePlayer()
     {
-        HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+        // HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
-            gameManager.GetComponent<GameManager>().decreaseCombo();
-            HealthBarController.Instance.TakeDamage();
+            gameManager.decreaseCombo();
+            healthBarController.TakeDamage();
         }
         else
         {
@@ -376,10 +378,10 @@ public class Note : MonoBehaviour
     }
     void healPlayer()
     {
-        HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
+        // HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
-            HealthBarController.Instance.Heal();
+            healthBarController.Heal();
         }
         else
         {
@@ -407,8 +409,8 @@ public class Note : MonoBehaviour
         // 보스에 도달한 경우
         if (Vector2.Distance(transform.position, bossPosition) < 0.1f)
         {
-            HealthBarController.Instance.Heal(); // 플레이어 체력 회복
-            Boss.GetComponent<Boss>().isHit=true;
+            healthBarController.Heal(); // 플레이어 체력 회복
+            Boss.GetComponent<Boss>().isHit = true;
             gameObject.SetActive(false);
         }
     }
@@ -433,7 +435,7 @@ public class Note : MonoBehaviour
 
         if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
         {
-            
+
             gameObject.SetActive(false);
         }
     }

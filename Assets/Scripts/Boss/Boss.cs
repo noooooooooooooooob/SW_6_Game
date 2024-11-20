@@ -12,14 +12,14 @@ public class Boss : MonoBehaviour
     private Slider healthBarSliderComponent;
     public ObjectManager objectManager;
     public HealthBarController healthBarController;
-    GameObject gameManager;
+    GameManager gameManager;
     public bool isHit;
     void Start()
     {
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectManager = GetComponent<ObjectManager>();
-        gameManager = GameObject.Find("Game manager");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isHit = false;
     }
 
@@ -34,7 +34,7 @@ public class Boss : MonoBehaviour
         if (isHit)
         {
             isHit = false;
-            gameManager.GetComponent<GameManager>().increaseScore();
+            gameManager.increaseScore();
             Deal();
         }
     }

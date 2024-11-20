@@ -4,14 +4,15 @@ using UnityEngine.UI;
 public class HealthBarController : MonoBehaviour
 {
     public static HealthBarController Instance { get; private set; }
-    [SerializeField] private Slider healthBarSlider;  // Slider로 변경
+    Slider healthBarSlider;  // Slider로 변경
     [SerializeField] private float maxHealth = 1000f;
     [SerializeField] private float changeRate = 70f;  // 고정 회복량 및 데미지량
     [SerializeField] private float mininumDamage = 5f;
 
-    public Player player;
-    public Boss boss;
-    private float currentHealth;
+    Player player;
+    Boss boss;
+    GameTransition gameTransition;
+    public float currentHealth;
 
     // 체력 비율에 따른 보너스 기준
     private const float HIGH_THRESHOLD = 0.3f;  // 30%
@@ -20,25 +21,15 @@ public class HealthBarController : MonoBehaviour
     //공격력 상승
     public bool isDamageUp;
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            Debug.LogError("Multiple instances of HealthBarController detected. Destroying duplicate");
-        }
-        isDamageUp = false;
-    }
-
     private void Start()
     {
+        healthBarSlider = GetComponent<Slider>();
         player = GameObject.Find("Player").GetComponent<Player>();
         boss = GameObject.Find("Boss").GetComponent<Boss>();
+        gameTransition = GameObject.Find("GameManager").GetComponent<GameTransition>();
+        isDamageUp = false;
         SetHealth(maxHealth * 0.5f); // 체력을 절반으로 시작
+        Debug.Log("Current health :" + currentHealth);
     }
 
     private void Update()
@@ -58,15 +49,19 @@ public class HealthBarController : MonoBehaviour
         }
     }
 
-    public void CallPlayerDeath()
+    private void CallPlayerDeath()
     {
+        Debug.Log("Player is dead");
         player.PlayerDeath();
     }
 
-    public void CallBossDeath()
+    private void CallBossDeath()
     {
         boss.BossDeath();
+        gameTransition.SetBossDefeated();
+
     }
+
     public void Heal()
     {
         float amount = changeRate;
@@ -116,15 +111,7 @@ public class HealthBarController : MonoBehaviour
     private void SetHealth(float value)
     {
         currentHealth = value;
-        if (healthBarSlider != null)
-        {
-            // slider.value는 0 ~ 1 범위로 설정
-            healthBarSlider.value = currentHealth / maxHealth;
-        }
-        else
-        {
-            Debug.LogError("healthBarSlider is not assigned in the Inspector.");
-        }
+        healthBarSlider.value = currentHealth / maxHealth;
     }
 
     // 현재 체력 비율을 반환하는 메서드

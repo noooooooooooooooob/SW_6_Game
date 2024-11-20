@@ -16,7 +16,6 @@ public class Ground : MonoBehaviour
 
         BoundsInt bounds = tilemap.cellBounds;
         int widthInCells = bounds.xMax - bounds.xMin;
-        Debug.Log("Tilemap x : " + tilemap.size.x);
 
 
         moveDistance = (widthInCells) / 4;

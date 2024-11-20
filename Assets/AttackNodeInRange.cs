@@ -11,7 +11,7 @@ public class AttackNodeInRange : MonoBehaviour
     private FloorChecker floorChecker;
     public bool playerInRange = false;
 
-    public HealthBarController healthBarController;
+    private HealthBarController healthBarController;
     private GameObject player;
     private PlayerElement playerElement;
     public ArrowDirectionEnum arrowDirection;
@@ -21,6 +21,7 @@ public class AttackNodeInRange : MonoBehaviour
         floorChecker = GetComponentInChildren<FloorChecker>();
         player = GameObject.Find("Player");
         playerElement = player.GetComponent<PlayerElement>();
+        healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
     }
 
     public void OnChildTrigger()
@@ -101,10 +102,9 @@ public class AttackNodeInRange : MonoBehaviour
                     hasNote = false;
                     arrowDirection = ArrowDirectionEnum.none;
 
-                    HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
                     if (healthBarController != null)
                     {
-                        HealthBarController.Instance.TakeDamage();
+                        healthBarController.TakeDamage();
                     }
                     else
                     {

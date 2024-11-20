@@ -7,11 +7,10 @@ public class ReducePlatformSize : MonoBehaviour
     public GameObject player;
     public PlayerMovement playerMovement;
 
-    private Transform transform;
+    // private Transform transform;
     void Start()
     {
         playerMovement = player.GetComponent<PlayerMovement>();
-        transform = GetComponent<Transform>();
     }
 
     // Update is called once per frame
