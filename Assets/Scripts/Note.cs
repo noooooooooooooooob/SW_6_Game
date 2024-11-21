@@ -72,9 +72,21 @@ public class Note : MonoBehaviour
         gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        // 스폰 위치 설정
         spawnPointYidx = Random.Range(0, 3);
         spawnPointY = spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
-        transform.position = new Vector2(spawnPointX, spawnPointY);
+
+        // 보스가 활성화되어 있으면 보스 위치에서 시작
+        if (Boss != null && Boss.activeInHierarchy)
+        {
+            transform.position = Boss.transform.position; // 보스 위치에서 시작
+        }
+        else
+        {
+            Debug.LogWarning("Boss is not active or missing. Default spawn point will be used.");
+            transform.position = new Vector2(-10f, spawnPointY); // 기본 위치 설정
+        }
 
         isOpposite = false;
         isNotacted = false;
@@ -163,14 +175,37 @@ public class Note : MonoBehaviour
         isHit = false;
     }
 
+    IEnumerator MoveToSpawnPointY()
+{
+    float duration = 0.5f; // 이동 시간
+    float elapsed = 0.0f;
+
+    Vector2 startPosition = transform.position;
+    Vector2 targetPosition = new Vector2(startPosition.x, spawnPointY);
+
+    while (elapsed < duration)
+    {
+        // 부드럽게 Y축 위치로 이동
+        transform.position = new Vector2(transform.position.x, Mathf.Lerp(startPosition.y, targetPosition.y, elapsed / duration));
+        elapsed += Time.deltaTime;
+        yield return null;
+    }
+
+    // Y축 최종 위치 보정
+    transform.position = new Vector2(transform.position.x, spawnPointY);
+}
+
     void Start()
     {
+        StartCoroutine(MoveToSpawnPointY());
+
         var bossObj = FindObjectOfType<Boss>();
         var playerObj = FindObjectOfType<Player>();
 
         if (bossObj != null && bossObj.gameObject.activeInHierarchy)
         {
             bossPosition = bossObj.transform.position;
+            transform.position = new Vector2(bossObj.transform.position.x, bossObj.transform.position.y);
         }
         else
         {
@@ -200,6 +235,8 @@ public class Note : MonoBehaviour
             Debug.LogWarning("Player is not active or missing.");
         }
     }
+
+    
 
     void Update()
     {
