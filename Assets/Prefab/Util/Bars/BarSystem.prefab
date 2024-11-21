@@ -102,10 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22f02382ef66bb54f9f46ce212acaf76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarSlider: {fileID: 4631060310210678041}
   maxHealth: 1000
   changeRate: 40
   mininumDamage: 5
+  currentHealth: 0
   isDamageUp: 0
 --- !u!1 &4722945927391689025
 GameObject:
