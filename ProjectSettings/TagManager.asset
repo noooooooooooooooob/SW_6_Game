@@ -10,6 +10,7 @@ TagManager:
   - Note
   - Bomb
   - Boss
+  - clone
   layers:
   - Default
   - TransparentFX

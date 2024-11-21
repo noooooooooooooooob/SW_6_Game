@@ -13,6 +13,8 @@ public class ObjectManager : MonoBehaviour
     GameObject[] note;
     int cnt;
     public bool isSlow;
+    public bool spawnSlow;
+    float spawnSlowTime;
 
     //boss logic
     public bool changingNoteLocation;
@@ -87,6 +89,12 @@ public class ObjectManager : MonoBehaviour
         if(cnt>=1000)
             cnt=0;
         noteSpawnTime=Random.Range(noteSpawnTimeMin,noteSpawnTimeMax);
+        spawnSlowTime=1;
+        if(spawnSlow){
+            spawnSlowTime*=2;
+        }
+        
+        noteSpawnTime*=spawnSlowTime;
         Invoke("makeObj",noteSpawnTime);
     }
 

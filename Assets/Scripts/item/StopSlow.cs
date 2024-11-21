@@ -14,8 +14,8 @@ public class StopSlow : MonoBehaviour
        
         if ( OM!= null)
         {
-            OM.noteSpawnTime*=0.5f;
-           //OM.noteSpawnTime =originNoteSpawn;  // speed 값을 반으로 줄임
+            OM.spawnSlow=false;
+           
             OM.isSlow=false;
         }
         else
