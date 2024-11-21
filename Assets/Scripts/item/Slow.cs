@@ -20,19 +20,20 @@ public class Slow : MonoBehaviour
     public void SlowNotes()
     {
         ObjectManager OM = FindObjectOfType<ObjectManager>();
-        
-        if(OM!=null/*&&NOTE==null*/){
+        /*
+        if(OM!=null){
             originNoteSpawn=OM.noteSpawnTime;
             newNoteSpawn=OM.noteSpawnTime*2;
             //originNoteSpeed=NOTE.speed;
             //newNoteSpeed=NOTE.speed/2; 
         }
-        
+        */
        
         if ( OM!= null)
         {
             Debug.Log("OM실행");
-            OM.noteSpawnTime =newNoteSpawn;  // speed 값을 반으로 줄임
+            //OM.noteSpawnTime =newNoteSpawn;  // speed 값을 반으로 줄임
+            OM.spawnSlow=true;
             OM.isSlow=true;
         }
         else

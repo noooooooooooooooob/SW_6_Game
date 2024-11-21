@@ -20,6 +20,8 @@ public class HealthBarController : MonoBehaviour
 
     //공격력 상승
     public bool isDamageUp;
+    
+    
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class HealthBarController : MonoBehaviour
         boss = GameObject.Find("Boss").GetComponent<Boss>();
         gameTransition = GameObject.Find("GameManager").GetComponent<GameTransition>();
         isDamageUp = false;
+        
         SetHealth(maxHealth * 0.5f); // 체력을 절반으로 시작
         Debug.Log("Current health :" + currentHealth);
     }
@@ -106,6 +109,14 @@ public class HealthBarController : MonoBehaviour
 
         // 체력을 감소시키고 0으로 제한
         SetHealth(Mathf.Clamp(currentHealth - amount, 0f, maxHealth));
+    }
+
+    //체력반전
+    public void Healthchange(){
+        float amount = changeRate;
+        float healthPercentage = GetHealthPercentage();
+
+        SetHealth(Mathf.Clamp(maxHealth-currentHealth, 0f, maxHealth));
     }
 
     private void SetHealth(float value)
