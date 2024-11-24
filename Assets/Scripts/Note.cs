@@ -232,7 +232,7 @@ public class Note : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Player is not active or missing.");
+            //Debug.LogWarning("Player is not active or missing.");
         }
     }
 
@@ -348,30 +348,40 @@ public class Note : MonoBehaviour
             Debug.LogWarning("PE스크립트가 할당되지 않았습니다.");
         }
         //coloridx = playerColor;
-        if (playerColor == ColorEnum.red && arrowidx == 0)
-            spriteRenderer.sprite = sprites[0];
-        else if (playerColor == ColorEnum.red && arrowidx == 1)
-            spriteRenderer.sprite = sprites[1];
-        else if (playerColor == ColorEnum.red && arrowidx == 2)
-            spriteRenderer.sprite = sprites[2];
-        else if (playerColor == ColorEnum.red && arrowidx == 3)
-            spriteRenderer.sprite = sprites[3];
-        else if (playerColor == ColorEnum.green && arrowidx == 0)
-            spriteRenderer.sprite = sprites[4];
-        else if (playerColor == ColorEnum.green && arrowidx == 1)
-            spriteRenderer.sprite = sprites[5];
-        else if (playerColor == ColorEnum.green && arrowidx == 2)
-            spriteRenderer.sprite = sprites[6];
-        else if (playerColor == ColorEnum.green && arrowidx == 3)
-            spriteRenderer.sprite = sprites[7];
-        else if (playerColor == ColorEnum.blue && arrowidx == 0)
-            spriteRenderer.sprite = sprites[8];
-        else if (playerColor == ColorEnum.blue && arrowidx == 1)
-            spriteRenderer.sprite = sprites[9];
-        else if (playerColor == ColorEnum.blue && arrowidx == 2)
-            spriteRenderer.sprite = sprites[10];
-        else if (playerColor == ColorEnum.blue && arrowidx == 3)
-            spriteRenderer.sprite = sprites[11];
+
+        if(playerColor==ColorEnum.red){
+            noteColor=ColorEnum.red;
+            if(arrowidx==0)
+                spriteRenderer.sprite = sprites[0];
+             else if(arrowidx==1)
+                spriteRenderer.sprite = sprites[1];
+            else if(arrowidx==2)
+                spriteRenderer.sprite = sprites[2];
+            else if(arrowidx==3)
+                spriteRenderer.sprite = sprites[3]; 
+        }
+        if(playerColor==ColorEnum.green){
+            noteColor=ColorEnum.green;
+            if(arrowidx==0)
+                spriteRenderer.sprite = sprites[4];
+             else if(arrowidx==1)
+                spriteRenderer.sprite = sprites[5];
+            else if(arrowidx==2)
+                spriteRenderer.sprite = sprites[6];
+            else if(arrowidx==3)
+                spriteRenderer.sprite = sprites[7]; 
+        }
+        if(playerColor==ColorEnum.blue){
+            noteColor=ColorEnum.blue;
+            if(arrowidx==0)
+                spriteRenderer.sprite = sprites[8];
+             else if(arrowidx==1)
+                spriteRenderer.sprite = sprites[9];
+            else if(arrowidx==2)
+                spriteRenderer.sprite = sprites[10];
+            else if(arrowidx==3)
+                spriteRenderer.sprite = sprites[11]; 
+        }
     }
     void difcolor()
     {

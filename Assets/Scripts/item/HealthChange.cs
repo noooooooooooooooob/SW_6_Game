@@ -27,6 +27,7 @@ public class HealthChange : MonoBehaviour
         {
             HealthBarController HC=FindAnyObjectByType<HealthBarController>();
             HC.Healthchange();
+            Destroy(gameObject);
             
         }
     }

@@ -14,6 +14,14 @@ public class inventory : MonoBehaviour
     public StopSlow ST;
     public DamageDown DD;
     public DifColor DC;
+    private PlayerDisappear playerDisappear;
+    public GameObject playerDisappearObject;
+    public GameObject cloneObject;
+    private Clone clone;
+    
+   void Awake(){
+        
+   }
 
     void Start()
     {
@@ -23,10 +31,16 @@ public class inventory : MonoBehaviour
             inventorys.Add(null);
             spawnedItems.Add(null); // Initialize spawnedItems with null for each slot
         }
+        clone=cloneObject.GetComponent<Clone>();
+        Clone CL = FindObjectOfType<Clone>();
+        CL.isDeleted=true;
+        
+       
     }
 
     void Update()
     {
+        
 
 
         // 각 숫자 키로 아이템 사용
@@ -137,6 +151,23 @@ public class inventory : MonoBehaviour
                     Debug.LogWarning("DU 객체를 찾을 수 없습니다.");
                 }
             }
+            //5는 체력반전 즉시실행
+
+            if (inventorys[slotIndex] == "6")
+            {   
+                //clone=cloneObject.GetComponent<Clone>();
+
+                playerDisappear=playerDisappearObject.GetComponent<PlayerDisappear>();
+                PlayerDisappear PL = FindObjectOfType<PlayerDisappear>();
+                PL.isDeleted=true;
+
+                
+                clone.isDeleted=false;
+                cloneObject.SetActive(true); 
+                
+
+                Invoke("clonefin",5f);
+            }
 
 
         
@@ -165,6 +196,21 @@ public class inventory : MonoBehaviour
     //item 4 정상화
     void damagedown(){
        DD.Normalization();    
+    }
+
+    //item 6 정상화
+    void clonefin(){
+        
+        // if (playerDisappear != null)
+        //{
+        //    playerDisappear.isDeleted = !playerDisappear.isDeleted;
+        //}
+    
+        Clone CL = FindObjectOfType<Clone>();
+        CL.isDeleted=true;
+        
+        playerDisappear.isDeleted=false;
+        playerDisappearObject.SetActive(true); 
     }
 
 }
