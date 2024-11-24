@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 public class Bomb : MonoBehaviour
 {
+    
      public float minX = -10f;
     public float maxX = 10f;
     public float minY = -5f;
@@ -36,4 +37,5 @@ public class Bomb : MonoBehaviour
         Debug.Log("Deleted Notes Count: " + deleteCount);
     }
 
+    
 }

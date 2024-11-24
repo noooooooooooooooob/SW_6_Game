@@ -4,6 +4,10 @@ using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
 {
+    // 맞았을 때 효과음
+    public AudioClip byHitSound;
+    private AudioSource audioSource;
+
     public static HealthBarController Instance { get; private set; }
     [SerializeField] private Image healthBarFill;     // 체력바의 Fill 이미지
     Slider healthBarSlider;  // Slider로 변경
@@ -34,6 +38,7 @@ public class HealthBarController : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         healthBarSlider = GetComponent<Slider>();
         healthBarFill = healthBarSlider.fillRect.GetComponent<Image>();
         defaultColor = healthBarFill.color;
@@ -121,6 +126,10 @@ public class HealthBarController : MonoBehaviour
         // 목표 체력을 감소시키고 0으로 제한
         SetTargetHealth(Mathf.Clamp(targetHealth - amount, 0f, maxHealth));
         StartCoroutine(FlashHealthBar(damageColor));
+
+        // 맞았을 때 효과음
+        isHitSound();
+        player.hitByNote();
     }
 
     //체력반전
@@ -157,5 +166,12 @@ public class HealthBarController : MonoBehaviour
         healthBarFill.color = flashColor; // 변경된 색상 적용
         yield return new WaitForSeconds(0.2f); // 깜빡임 지속 시간
         healthBarFill.color = defaultColor; // 기본 색상으로 복구
+    }
+
+    // 맞았을 때 사운드 함수
+    public void isHitSound()
+    {
+        audioSource.PlayOneShot(byHitSound);
+        Debug.Log("HitAudio");
     }
 }
