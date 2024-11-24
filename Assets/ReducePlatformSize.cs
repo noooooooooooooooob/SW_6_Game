@@ -7,18 +7,19 @@ public class ReducePlatformSize : MonoBehaviour
     public GameObject player;
     public PlayerMovement playerMovement;
 
+    ReduceGaugebar staminaBar;
     // private Transform transform;
     void Start()
     {
-        playerMovement = player.GetComponent<PlayerMovement>();
+        staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement.platformTime > 0)
+        if (staminaBar.platformTime > 0)
         {
-            float newScaleX = Mathf.Max(0, playerMovement.platformTime / 5);
+            float newScaleX = Mathf.Max(0, staminaBar.platformTime / 5);
             transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
         }
     }

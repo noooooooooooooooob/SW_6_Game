@@ -105,6 +105,10 @@ MonoBehaviour:
   Player: {fileID: 0}
   maxShakeAmount: 0.1
   shakeIntensityMultiplier: 1
+  MaxPlatformTime: 5
+  platformTime: 5
+  replinishmentAmount: 0.2
+  replenishmentSpeed: 1.1
 --- !u!1 &770124756217186791
 GameObject:
   m_ObjectHideFlags: 0

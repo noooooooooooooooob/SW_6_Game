@@ -5488,6 +5488,7 @@ GameObject:
   - component: {fileID: 1953957286}
   - component: {fileID: 1953957284}
   - component: {fileID: 1953957288}
+  - component: {fileID: 1953957289}
   m_Layer: 0
   m_Name: 2nd floor
   m_TagString: platform
@@ -5621,6 +5622,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 137012452}
   playerMovement: {fileID: 0}
+--- !u!114 &1953957289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1953957283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e83bbb4e028de4dad80f6629416032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1986255834
 GameObject:
   m_ObjectHideFlags: 0
@@ -5636,7 +5649,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1986255835
 Transform:
   m_ObjectHideFlags: 0
@@ -5667,6 +5680,7 @@ GameObject:
   - component: {fileID: 1988357224}
   - component: {fileID: 1988357222}
   - component: {fileID: 1988357226}
+  - component: {fileID: 1988357227}
   m_Layer: 0
   m_Name: 3rd floor
   m_TagString: platform
@@ -5800,6 +5814,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 137012452}
   playerMovement: {fileID: 0}
+--- !u!114 &1988357227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988357221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98e83bbb4e028de4dad80f6629416032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1994471147
 GameObject:
   m_ObjectHideFlags: 0
@@ -6195,6 +6221,18 @@ PrefabInstance:
     - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: currentHealth
       value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: damageColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: damageColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: damageColor.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9176630542367076143, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: Player

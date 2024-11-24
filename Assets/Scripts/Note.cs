@@ -63,10 +63,12 @@ public class Note : MonoBehaviour
 
     // 체력 변화 처리 클래스 연결
     public HealthBarController healthBarController;
+    private ReduceGaugebar staminaBar;
 
     void Awake()
     {
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
+        staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
         op = 1.0f;
         Boss = GameObject.Find("Boss");
         gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
@@ -176,24 +178,24 @@ public class Note : MonoBehaviour
     }
 
     IEnumerator MoveToSpawnPointY()
-{
-    float duration = 0.5f; // 이동 시간
-    float elapsed = 0.0f;
-
-    Vector2 startPosition = transform.position;
-    Vector2 targetPosition = new Vector2(startPosition.x, spawnPointY);
-
-    while (elapsed < duration)
     {
-        // 부드럽게 Y축 위치로 이동
-        transform.position = new Vector2(transform.position.x, Mathf.Lerp(startPosition.y, targetPosition.y, elapsed / duration));
-        elapsed += Time.deltaTime;
-        yield return null;
-    }
+        float duration = 0.5f; // 이동 시간
+        float elapsed = 0.0f;
 
-    // Y축 최종 위치 보정
-    transform.position = new Vector2(transform.position.x, spawnPointY);
-}
+        Vector2 startPosition = transform.position;
+        Vector2 targetPosition = new Vector2(startPosition.x, spawnPointY);
+
+        while (elapsed < duration)
+        {
+            // 부드럽게 Y축 위치로 이동
+            transform.position = new Vector2(transform.position.x, Mathf.Lerp(startPosition.y, targetPosition.y, elapsed / duration));
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Y축 최종 위치 보정
+        transform.position = new Vector2(transform.position.x, spawnPointY);
+    }
 
     void Start()
     {
@@ -236,7 +238,7 @@ public class Note : MonoBehaviour
         }
     }
 
-    
+
 
     void Update()
     {
@@ -448,6 +450,7 @@ public class Note : MonoBehaviour
         {
             healthBarController.Heal(); // 플레이어 체력 회복
             Boss.GetComponent<Boss>().isHit = true;
+            staminaBar.IncreaseGaugeBySmallAmount();
             gameObject.SetActive(false);
         }
     }

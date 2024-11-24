@@ -29,8 +29,8 @@ public class HealthBarController : MonoBehaviour
 
     //공격력 상승
     public bool isDamageUp;
-    
-    
+
+
 
     private void Start()
     {
@@ -101,6 +101,7 @@ public class HealthBarController : MonoBehaviour
 
         // 목표 체력을 증가시키고 최대 체력으로 제한
         SetTargetHealth(Mathf.Clamp(targetHealth + amount, 0f, maxHealth));
+        StartCoroutine(FlashHealthBar(healColor));
     }
 
     public void TakeDamage()
@@ -123,11 +124,12 @@ public class HealthBarController : MonoBehaviour
     }
 
     //체력반전
-    public void Healthchange(){
+    public void Healthchange()
+    {
         float amount = changeRate;
         float healthPercentage = GetHealthPercentage();
 
-        SetHealth(Mathf.Clamp(maxHealth-currentHealth, 0f, maxHealth));
+        SetHealth(Mathf.Clamp(maxHealth - currentHealth, 0f, maxHealth));
     }
 
     private void SetHealth(float value)
