@@ -38,8 +38,8 @@ public class inventory : MonoBehaviour
             spawnedItems.Add(null); // Initialize spawnedItems with null for each slot
         }
         clone=cloneObject.GetComponent<Clone>();
-        Clone CL = FindObjectOfType<Clone>();
-        CL.isDeleted=true;
+        //Clone CL = FindObjectOfType<Clone>();
+        //CL.isDeleted=true;
         
        
     }
@@ -81,6 +81,7 @@ public class inventory : MonoBehaviour
         }
         Debug.Log("인벤토리가 가득 찼습니다.");
     }
+    
     void spawnitem(int index, float posX, int slotIndex)
     {
         Vector3 spawnPos = new Vector3(posX, transform.position.y, transform.position.z - 1f);
@@ -164,16 +165,31 @@ public class inventory : MonoBehaviour
             if (inventorys[slotIndex] == "6")
             {   
                 //clone=cloneObject.GetComponent<Clone>();
+                ReduceGaugebar RG = FindObjectOfType<ReduceGaugebar>();
+                RG.isClone=true;
+                AttackNodeInRange ANIR=FindObjectOfType<AttackNodeInRange>();
+                ANIR.isClone=true;
+                CloneAttack CA=FindObjectOfType<CloneAttack>();
+                CA.isClone=true;
 
                 playerDisappear=playerDisappearObject.GetComponent<PlayerDisappear>();
                 PlayerDisappear PL = FindObjectOfType<PlayerDisappear>();
-                PL.isDeleted=true;
+                if(PL!=null){
+                    
+                    PL.isDeleted=true;
+                }
+                else{
+                    Debug.LogWarning("Slow 객체를 찾을 수 없습니다.");
+                }
+                
+                
 
                 
                 clone.isDeleted=false;
                 cloneObject.SetActive(true); 
                 
-
+                //PlayerElement PE= FindObjectOfType<PlayerElement>();
+                //PE.isClone=true;
                 Invoke("clonefin",5f);
             }
 
@@ -214,12 +230,21 @@ public class inventory : MonoBehaviour
         //{
         //    playerDisappear.isDeleted = !playerDisappear.isDeleted;
         //}
-    
+        ReduceGaugebar RG = FindObjectOfType<ReduceGaugebar>();
+        RG.isClone=false;
+        AttackNodeInRange ANIR=FindObjectOfType<AttackNodeInRange>();
+        ANIR.isClone=false;
+        CloneAttack CA=FindObjectOfType<CloneAttack>();
+        CA.isClone=false;
+
         Clone CL = FindObjectOfType<Clone>();
         CL.isDeleted=true;
         
+        //PlayerElement PE= FindObjectOfType<PlayerElement>();
+        //PE.isClone=false;
         playerDisappear.isDeleted=false;
         playerDisappearObject.SetActive(true); 
+        
     }
 
 

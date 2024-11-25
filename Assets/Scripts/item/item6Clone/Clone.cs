@@ -12,11 +12,11 @@ public class Clone : MonoBehaviour
    
     void Update()
     {
-        AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
+      
         
         if (isDeleted)
         {
-            ANIR.isClone=false;
+           
             if (targetObject != null && targetObject.activeSelf)
             {
                 targetObject.SetActive(false); // 비활성화
@@ -24,7 +24,7 @@ public class Clone : MonoBehaviour
         }
         else
         {
-            ANIR.isClone=true;
+           
             if (targetObject != null && !targetObject.activeSelf)
             {
                 targetObject.SetActive(true);// 활성화

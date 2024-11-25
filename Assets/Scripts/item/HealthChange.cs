@@ -23,7 +23,7 @@ public class HealthChange : MonoBehaviour
         {
             Destroy(gameObject); // 바닥에 닿으면 삭제
         }
-        else if (collision.gameObject.CompareTag("Player"))
+        else if (collision.gameObject.CompareTag("Player")||collision.gameObject.CompareTag("clone"))
         {
             HealthBarController HC=FindAnyObjectByType<HealthBarController>();
             HC.Healthchange();
