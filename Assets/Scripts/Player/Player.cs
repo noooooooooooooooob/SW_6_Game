@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
     private Color originalColor; // 플레이어 색을 다시 되돌리는 용도
+    private ColorEnum playerColor;
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
 
@@ -24,6 +25,7 @@ public class Player : MonoBehaviour
         // {
         //     this.gameObject.SetActive(false);
         // }
+        
     }
 
     public void PlayerDeath()

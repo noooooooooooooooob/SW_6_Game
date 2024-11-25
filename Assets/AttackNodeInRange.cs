@@ -16,6 +16,8 @@ public class AttackNodeInRange : MonoBehaviour
     private PlayerElement playerElement;
     public ArrowDirectionEnum arrowDirection;
 
+    public bool isClone;
+
     void Start()
     {
         floorChecker = GetComponentInChildren<FloorChecker>();
@@ -26,7 +28,11 @@ public class AttackNodeInRange : MonoBehaviour
 
     public void OnChildTrigger()
     {
-        if (floorChecker != null)
+
+        if(isClone){
+            playerInRange=true;
+        }
+        else if (floorChecker != null)
         {
             playerInRange = floorChecker.hasPlayer;
         }

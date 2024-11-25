@@ -206,14 +206,7 @@ public class inventory : MonoBehaviour
        DD.Normalization();    
     }
 
-    public void PlayBombSound()
-    {
-        AudioSource.PlayOneShot(bombSound); // 클릭 효과음 재생
-    }
-    public void PlayPowerupSound()
-    {
-        AudioSource.PlayOneShot(powerUpSound); // 클릭 효과음 재생
-    }
+   
     //item 6 정상화
     void clonefin(){
         
@@ -227,6 +220,16 @@ public class inventory : MonoBehaviour
         
         playerDisappear.isDeleted=false;
         playerDisappearObject.SetActive(true); 
+    }
+
+
+     public void PlayBombSound()
+    {
+        AudioSource.PlayOneShot(bombSound); // 클릭 효과음 재생
+    }
+    public void PlayPowerupSound()
+    {
+        AudioSource.PlayOneShot(powerUpSound); // 클릭 효과음 재생
     }
 
 }

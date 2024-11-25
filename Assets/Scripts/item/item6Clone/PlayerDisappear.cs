@@ -13,8 +13,10 @@ public class PlayerDisappear : MonoBehaviour
    
     void Update()
     {
+        AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
         if (isDeleted)
         {
+            ANIR.isClone=true;
             if (targetObject != null && targetObject.activeSelf)
             {
                 targetObject.SetActive(false); // 비활성화
@@ -22,6 +24,7 @@ public class PlayerDisappear : MonoBehaviour
         }
         else
         {
+            ANIR.isClone=false;
             if (targetObject != null && !targetObject.activeSelf)
             {
                 targetObject.SetActive(true);// 활성화
