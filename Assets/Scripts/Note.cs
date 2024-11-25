@@ -67,6 +67,7 @@ public class Note : MonoBehaviour
 
     void Awake()
     {
+        
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
         staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
         op = 1.0f;
@@ -475,8 +476,9 @@ public class Note : MonoBehaviour
 
         if (Vector2.Distance(transform.position, playerPosition) < 0.1f)
         {
-
             gameObject.SetActive(false);
         }
     }
+
+    
 }

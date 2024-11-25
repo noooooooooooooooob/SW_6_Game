@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class inventory : MonoBehaviour
 {
+    public AudioClip bombSound;       // 클릭 효과음 파일
+    private AudioSource AudioSource;   // AudioSource 컴포넌트
+    public AudioClip powerUpSound;       // 클릭 효과음 파일
+
+
     [SerializeField]
     private GameObject[] itemsMini;
     private List<string> inventorys = new List<string>();
@@ -17,6 +22,7 @@ public class inventory : MonoBehaviour
 
     void Start()
     {
+        AudioSource = GetComponent<AudioSource>();
         // 초기화: 인벤토리 크기만큼 null 값을 추가
         for (int i = 0; i < inventorySize; i++)
         {
@@ -92,6 +98,7 @@ public class inventory : MonoBehaviour
                 if (bomb != null)
                 {
                     bomb.InvokeDeleteNotes(); // Bomb 인스턴스가 있을 때만 호출
+                    PlayBombSound();
                 }
                 else
                 {
@@ -130,6 +137,7 @@ public class inventory : MonoBehaviour
                 if (DU != null)
                 {
                     DU.Start(); 
+                    PlayPowerupSound();
                     Invoke("damagedown",4f);
                 }
                 else
@@ -167,4 +175,12 @@ public class inventory : MonoBehaviour
        DD.Normalization();    
     }
 
+    public void PlayBombSound()
+    {
+        AudioSource.PlayOneShot(bombSound); // 클릭 효과음 재생
+    }
+    public void PlayPowerupSound()
+    {
+        AudioSource.PlayOneShot(powerUpSound); // 클릭 효과음 재생
+    }
 }
