@@ -145,6 +145,7 @@ public class AttackNodeInRange : MonoBehaviour
                     if (note.noteArrowDirection == arrowDirection && playerElement.playerCurrentElement == note.noteColor)
                     {
                         note.StartMovingToBoss();
+                        note.playNoteHitSound();
                         attack = false;
                         hasNote = false;
 
