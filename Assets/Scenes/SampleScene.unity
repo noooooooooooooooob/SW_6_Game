@@ -223,6 +223,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1986255835}
     m_Modifications:
     - target: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: healthBarSlider
       value: 
       objectReference: {fileID: 890592374}
@@ -280,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3225,6 +3229,7 @@ GameObject:
   - component: {fileID: 606159656}
   - component: {fileID: 606159659}
   - component: {fileID: 606159658}
+  - component: {fileID: 606159660}
   m_Layer: 0
   m_Name: Note Boarder
   m_TagString: Ground
@@ -3371,6 +3376,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &606159660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606159655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 711c5511b0224e941a96167e47bd3a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -3638,12 +3656,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3e37ef3b2a9844ebddc39f1b99e1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformTime: 5
   isAttacking: 0
-  smokeJumpUpPrefab: {fileID: 0}
-  smokeJumpDownPrefab: {fileID: 0}
-  fallMultiplier: 0
-  currentFloor: 0
+  spriteRenderer: {fileID: 0}
+  healthBarSlider: {fileID: 890592374}
 --- !u!1 &772099678
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,6 +3882,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1986255835}
     m_Modifications:
     - target: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: healthBarSlider
       value: 
       objectReference: {fileID: 890592374}
@@ -3924,7 +3943,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4432,12 +4451,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3e37ef3b2a9844ebddc39f1b99e1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformTime: 5
   isAttacking: 0
-  smokeJumpUpPrefab: {fileID: 0}
-  smokeJumpDownPrefab: {fileID: 0}
-  fallMultiplier: 0
-  currentFloor: 0
+  spriteRenderer: {fileID: 0}
+  healthBarSlider: {fileID: 890592374}
 --- !u!1 &1503794443
 GameObject:
   m_ObjectHideFlags: 0
@@ -4957,6 +4973,7 @@ GameObject:
   - component: {fileID: 1625956964}
   - component: {fileID: 1625956967}
   - component: {fileID: 1625956968}
+  - component: {fileID: 1625956969}
   m_Layer: 0
   m_Name: AttackRange
   m_TagString: Untagged
@@ -5106,6 +5123,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeDuration: 0.3
   shakeMagnitude: 0.2
+--- !u!114 &1625956969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1625956962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a050d6bd54f0ab84a95cd1e1b04ba879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasNote: 0
+  attack: 0
+  playerInRange: 0
+  arrowDirection: 0
+  isClone: 0
 --- !u!1 &1703804263
 GameObject:
   m_ObjectHideFlags: 0
@@ -5207,12 +5241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e3e37ef3b2a9844ebddc39f1b99e1d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformTime: 5
   isAttacking: 0
-  smokeJumpUpPrefab: {fileID: 0}
-  smokeJumpDownPrefab: {fileID: 0}
-  fallMultiplier: 0
-  currentFloor: 0
+  spriteRenderer: {fileID: 0}
+  healthBarSlider: {fileID: 890592374}
 --- !u!1 &1846185148
 GameObject:
   m_ObjectHideFlags: 0
@@ -5423,6 +5454,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1986255835}
     m_Modifications:
     - target: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: healthBarSlider
       value: 
       objectReference: {fileID: 890592374}
@@ -5480,7 +5515,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: fallMultiplier

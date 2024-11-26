@@ -20,6 +20,8 @@ public class ReduceGaugebar : MonoBehaviour
     public float replinishmentAmount = 0.2f;
     public float replenishmentSpeed = 1.5f;
 
+    public bool isClone;
+
     Platform plat1;
     Platform plat2;
 
@@ -31,15 +33,19 @@ public class ReduceGaugebar : MonoBehaviour
         slider = GetComponent<Slider>();
 
         initialPosition = GaugeBar.anchoredPosition;
+
+        isClone=false;
     }
 
     void Update()
     {
-        Debug.Log("shouldReduceGague: " + shouldReduceGague);
-        Debug.Log("PlatformTime: " + platformTime);
+        //Debug.Log("shouldReduceGague: " + shouldReduceGague);
+        //Debug.Log("PlatformTime: " + platformTime);
         slider.value = platformTime / MaxPlatformTime;
-
-        if (shouldReduceGague)
+        if(isClone){
+            platformTime=MaxPlatformTime;
+        }
+        else if (shouldReduceGague)
         {
             platformTime -= Time.deltaTime;
         }
