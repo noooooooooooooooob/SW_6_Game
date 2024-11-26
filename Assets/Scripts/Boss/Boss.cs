@@ -44,6 +44,11 @@ public class Boss : MonoBehaviour
 
     public void BossDeath()
     {
+        animator.Play("SlimeDie");
+        Invoke("bossActiveFalse",0.2f);
+    }
+    void bossActiveFalse()
+    {
         gameObject.SetActive(false);
     }
     void isHitAnimation()
