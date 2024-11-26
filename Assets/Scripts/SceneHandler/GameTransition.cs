@@ -34,7 +34,7 @@ public class GameTransition : MonoBehaviour
 
         playerMovement.VictoryRun();
         StartCoroutine(fade.FadeOut());
-        sceneManager.NextScene();
+        // sceneManager.NextScene();
     }
 
     public void SetPlayerDefeated()
