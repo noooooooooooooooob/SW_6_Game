@@ -69,7 +69,7 @@ public class HealthBarController : MonoBehaviour
         {
             CallPlayerDeath();
         }
-        else if (currentHealth >= maxHealth-1)
+        else if (currentHealth >= maxHealth - 1)
         {
             CallBossDeath();
         }
