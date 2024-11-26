@@ -10,6 +10,8 @@ using UnityEngine.UIElements;
 
 public class Note : MonoBehaviour
 {
+    private AudioSource AudioSource;   // AudioSource 컴포넌트
+    public AudioClip noteHitSound;       // 노트 치는 효과음 파일
     public GameObject player;
     GameObject Boss;
     GameManager gameManager;
@@ -67,7 +69,7 @@ public class Note : MonoBehaviour
 
     void Awake()
     {
-        
+        AudioSource = GetComponent<AudioSource>();
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
         staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
         op = 1.0f;
@@ -490,5 +492,9 @@ public class Note : MonoBehaviour
         }
     }
 
-    
+    public void playNoteHitSound()
+    {
+        AudioSource.PlayOneShot(noteHitSound);
+        Debug.Log("노트 맞음");
+    }
 }
