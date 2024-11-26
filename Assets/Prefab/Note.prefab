@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ca34198e797f048b344b004baa039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  byHitSound: {fileID: 8300000, guid: 96f92c6919b80e7459b0598a36e8204c, type: 3}
+  noteHitSound: {fileID: 8300000, guid: 568d9ee3c5082094e92a0116c58392c4, type: 3}
   player: {fileID: 0}
   spawnPoints:
   - 2.1

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
+    Animator animator;
     SpriteRenderer spriteRenderer;
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
@@ -14,8 +15,10 @@ public class Boss : MonoBehaviour
     public HealthBarController healthBarController;
     GameManager gameManager;
     public bool isHit;
+    
     void Start()
     {
+        animator=GetComponent<Animator>();
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectManager = GetComponent<ObjectManager>();
@@ -35,22 +38,26 @@ public class Boss : MonoBehaviour
         {
             isHit = false;
             gameManager.increaseScore();
-            Deal();
+            isHitAnimation();
         }
     }
 
     public void BossDeath()
     {
+        animator.Play("SlimeDie");
+        Invoke("bossActiveFalse",0.2f);
+    }
+    void bossActiveFalse()
+    {
         gameObject.SetActive(false);
     }
-    public void Deal()
+    void isHitAnimation()
     {
-        spriteRenderer.color = new Color(1, 0, 0, 1);
-        Invoke("restoration", 0.3f);
+        animator.Play("SlimeHit");
+        Invoke("GoBack",0.2f);
     }
-    void restoration()
+    void GoBack()
     {
-        spriteRenderer.color = new Color(1, 1, 1, 1);
+        animator.Play("SlimeAnimation");
     }
-
 }
