@@ -9,6 +9,7 @@ public class GameTransition : MonoBehaviour
     public bool inTransition;
     SceneManager sceneManager;
     Fade fade;
+    PlayerMovement playerMovement;
     void Start()
     {
         BossDefeated = false;
@@ -18,6 +19,7 @@ public class GameTransition : MonoBehaviour
         sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
         sceneManager.PreLoadNextScene();
         fade = GameObject.Find("FadePanel").GetComponent<Fade>();
+        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
     }
 
@@ -29,8 +31,10 @@ public class GameTransition : MonoBehaviour
     public void SetBossDefeated()
     {
         BossDefeated = true;
-        sceneManager.NextScene();
+
+        playerMovement.VictoryRun();
         StartCoroutine(fade.FadeOut());
+        sceneManager.NextScene();
     }
 
     public void SetPlayerDefeated()

@@ -137,7 +137,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         if (currentState == newState) return;
 
-        Debug.Log("Changing state to: " + newState.ToString());
+        // Debug.Log("Changing state to: " + newState.ToString());
         animator.Play(newState.ToString());
 
         currentState = newState;
