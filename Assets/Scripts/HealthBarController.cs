@@ -65,11 +65,11 @@ public class HealthBarController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.P))
             Heal();
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 1)
         {
             CallPlayerDeath();
         }
-        else if (currentHealth >= maxHealth)
+        else if (currentHealth >= maxHealth-1)
         {
             CallBossDeath();
         }
