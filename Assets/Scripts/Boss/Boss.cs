@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour
     public HealthBarController healthBarController;
     GameManager gameManager;
     public bool isHit;
+    public bool isDead;
 
 
     public AnimationCurve EntranceCurve;
@@ -28,6 +29,7 @@ public class Boss : MonoBehaviour
         objectManager = GetComponent<ObjectManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isHit = false;
+        isDead = false;
 
         bossAnimations = GetComponent<BossAnimations>();
 
@@ -53,8 +55,8 @@ public class Boss : MonoBehaviour
 
     public void BossDeath()
     {
-
-        Invoke("bossActiveFalse", 0.2f);
+        isDead = true;
+        Invoke("bossActiveFalse", 1f);
 
     }
     void bossActiveFalse()

@@ -27,8 +27,11 @@ public class BossAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (boss.isHit)
+        if (boss.isDead)
+        {
+            ChangeAnimationState(animations.SlimeDie);
+        }
+        else if (boss.isHit)
         {
             inAnimation = true;
             ChangeAnimationState(animations.IsHit);
@@ -38,6 +41,8 @@ public class BossAnimations : MonoBehaviour
         {
             ChangeAnimationState(animations.MoveBack);
         }
+
+
     }
 
 
