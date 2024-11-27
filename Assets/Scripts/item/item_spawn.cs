@@ -11,6 +11,8 @@ public class item_spawn : MonoBehaviour
     [SerializeField]
     private float spawnTime;
     private float[] arrPosY = {-4f,-1f,2f};
+    public bool test;
+
     void Start()
     {
         StartItemRotine();
@@ -20,7 +22,17 @@ public class item_spawn : MonoBehaviour
     }
     IEnumerator itemRoutine(){
         yield return new WaitForSeconds(3f);
+        int k=0;
         while(true){
+            if(test){
+                
+                spawnitem(k,arrPosY[0]);
+                k++;
+                if(k==6)
+                    k=0;
+                yield return new WaitForSeconds(spawnTime);
+                continue;
+            }
             int i=Random.Range(0,3);
             int j=Random.Range(0,2);
             int index = Random.Range(0,items.Length);
@@ -34,6 +46,7 @@ public class item_spawn : MonoBehaviour
             }
             
         }
+        
         
     }
 
