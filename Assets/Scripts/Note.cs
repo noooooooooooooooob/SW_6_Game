@@ -53,7 +53,6 @@ public class Note : MonoBehaviour
     //public int playerColor;
     ColorEnum playerColor;
 
-    float s;
     float plus;
     // 플레이어 보스 위치 변수
     private Vector2 bossPosition;
@@ -127,8 +126,6 @@ public class Note : MonoBehaviour
         isRight = false;
         isUp = false;
         isDown = false;
-        //playerColor = 1;
-        s = 0;
         switch (arrowidx)
         {
             case 0:

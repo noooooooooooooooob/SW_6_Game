@@ -15,10 +15,10 @@ public class Boss : MonoBehaviour
     public HealthBarController healthBarController;
     GameManager gameManager;
     public bool isHit;
-    
+
     void Start()
     {
-        animator=GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectManager = GetComponent<ObjectManager>();
@@ -44,8 +44,11 @@ public class Boss : MonoBehaviour
 
     public void BossDeath()
     {
-        animator.Play("SlimeDie");
-        Invoke("bossActiveFalse",0.2f);
+        if (animator != null)
+        {
+            animator.Play("SlimeDie");
+            Invoke("bossActiveFalse", 0.2f);
+        }
     }
     void bossActiveFalse()
     {
@@ -53,9 +56,17 @@ public class Boss : MonoBehaviour
     }
     void isHitAnimation()
     {
-        animator.Play("SlimeHit");
-        Invoke("GoBack",0.2f);
+        if (animator != null)
+        {
+            animator.Play("SlimeHit");
+            Invoke("GoBack", 0.2f);
+        }
+        else
+        {
+            Debug.LogWarning("애니메이션 상태 'SlimeHit'이 존재하지 않습니다.");
+        }
     }
+
     void GoBack()
     {
         animator.Play("SlimeAnimation");
