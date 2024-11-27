@@ -148,10 +148,10 @@ public class inventory : MonoBehaviour
             }
              if (inventorys[slotIndex] == "4")
             {
-                DamageUp DU = FindAnyObjectByType<DamageUp>();
+                DamageUp DU = FindObjectOfType<DamageUp>();
                 if (DU != null)
                 {
-                    DU.Start(); 
+                    DU.damageUp(); 
                     PlayPowerupSound();
                     Invoke("damagedown",4f);
                 }
