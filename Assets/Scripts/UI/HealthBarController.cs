@@ -12,7 +12,8 @@ public class HealthBarController : MonoBehaviour
     [SerializeField] private Image healthBarFill;     // 체력바의 Fill 이미지
     Slider healthBarSlider;  // Slider로 변경
     [SerializeField] private float maxHealth = 1000f;
-    [SerializeField] private float changeRate = 70f;  // 고정 회복량 및 데미지량
+    [SerializeField] private float changeRate = 30f;  // 고정 회복량 및 데미지량
+    [SerializeField] private float bonusRate = 40f;
     [SerializeField] private float mininumDamage = 5f;
 
     //부드러운 체력 변화를 위해
@@ -42,6 +43,7 @@ public class HealthBarController : MonoBehaviour
         healthBarSlider = GetComponent<Slider>();
         healthBarFill = healthBarSlider.fillRect.GetComponent<Image>();
         defaultColor = healthBarFill.color;
+        bonusRate = changeRate*4/7;
 
         player = GameObject.Find("Player").GetComponent<Player>();
         boss = GameObject.Find("Boss").GetComponent<Boss>();
@@ -60,19 +62,25 @@ public class HealthBarController : MonoBehaviour
             currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
             UpdateSlider();
         }
+        
+
+        if (currentHealth <= 0)
+        { 
+            targetHealth=0;
+            currentHealth = 0;
+            CallPlayerDeath();
+        }
+        else if (currentHealth >= maxHealth)
+        {
+            targetHealth = maxHealth;
+            currentHealth = maxHealth;
+            CallBossDeath();
+        }
+        // 수동 체력 조정
         if (Input.GetKeyDown(KeyCode.O))
             TakeDamage();
         else if (Input.GetKeyDown(KeyCode.P))
             Heal();
-
-        if (currentHealth <= 1)
-        {
-            CallPlayerDeath();
-        }
-        else if (currentHealth >= maxHealth - 1)
-        {
-            CallBossDeath();
-        }
     }
 
     private void CallPlayerDeath()
@@ -96,7 +104,7 @@ public class HealthBarController : MonoBehaviour
         // 체력이 낮을 때 회복량 보너스
         if (healthPercentage <= THRESHOLD)
         {
-            amount += 40f * (1 - healthPercentage);
+            amount += bonusRate * (1 - healthPercentage);
         }
 
         if (isDamageUp)
@@ -105,7 +113,7 @@ public class HealthBarController : MonoBehaviour
         }
 
         // 목표 체력을 증가시키고 최대 체력으로 제한
-        SetTargetHealth(Mathf.Clamp(targetHealth + amount, 0f, maxHealth));
+        SetTargetHealth(Mathf.Clamp(targetHealth + amount, -1f, maxHealth+1f));
         StartCoroutine(FlashHealthBar(healColor));
     }
 
@@ -117,14 +125,14 @@ public class HealthBarController : MonoBehaviour
         // 체력이 낮을 때 데미지 감소
         if (healthPercentage <= THRESHOLD)
         {
-            amount -= 30f * (1 - healthPercentage);
+            amount -= bonusRate * (1 - healthPercentage);
         }
 
         // 최소 1의 데미지는 들어가도록 보장
         amount = Mathf.Max(amount, mininumDamage);
 
         // 목표 체력을 감소시키고 0으로 제한
-        SetTargetHealth(Mathf.Clamp(targetHealth - amount, 0f, maxHealth));
+        SetTargetHealth(Mathf.Clamp(targetHealth - amount, -1f, maxHealth+1f));
         StartCoroutine(FlashHealthBar(damageColor));
 
         // 맞았을 때 효과음
@@ -138,7 +146,7 @@ public class HealthBarController : MonoBehaviour
         float amount = changeRate;
         float healthPercentage = GetHealthPercentage();
 
-        SetHealth(Mathf.Clamp(maxHealth - currentHealth, 0f, maxHealth));
+        SetHealth(Mathf.Clamp(maxHealth - currentHealth, -1f, maxHealth+1f));
     }
 
     private void SetHealth(float value)
@@ -147,7 +155,6 @@ public class HealthBarController : MonoBehaviour
         targetHealth = value;
         UpdateSlider();
     }
-
     private void SetTargetHealth(float value)
     {
         targetHealth = value;

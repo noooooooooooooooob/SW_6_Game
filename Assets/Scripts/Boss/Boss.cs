@@ -16,11 +16,13 @@ public class Boss : MonoBehaviour
     GameManager gameManager;
     public bool isHit;
 
+
     public AnimationCurve EntranceCurve;
     private MoveToLocation moveToLocation;
     private Transform bossStartLocation;
     void Start()
     {
+
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectManager = GetComponent<ObjectManager>();
@@ -51,10 +53,14 @@ public class Boss : MonoBehaviour
 
     public void BossDeath()
     {
+
         Invoke("bossActiveFalse", 0.2f);
+
     }
     void bossActiveFalse()
     {
         gameObject.SetActive(false);
     }
+
+
 }
