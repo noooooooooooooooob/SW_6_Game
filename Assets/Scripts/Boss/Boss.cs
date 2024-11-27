@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
-    Animator animator;
+    BossAnimations bossAnimations;
     SpriteRenderer spriteRenderer;
     public GameObject healthBarSlider;
     private Slider healthBarSliderComponent;
@@ -15,15 +15,23 @@ public class Boss : MonoBehaviour
     public HealthBarController healthBarController;
     GameManager gameManager;
     public bool isHit;
-    
+
+    public AnimationCurve EntranceCurve;
+    private MoveToLocation moveToLocation;
+    private Transform bossStartLocation;
     void Start()
     {
-        animator=GetComponent<Animator>();
         healthBarSliderComponent = healthBarSlider.GetComponent<Slider>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         objectManager = GetComponent<ObjectManager>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isHit = false;
+
+        bossAnimations = GetComponent<BossAnimations>();
+
+        bossStartLocation = GameObject.Find("BossStartLocation").GetComponent<Transform>();
+        moveToLocation = GetComponent<MoveToLocation>();
+        StartCoroutine(moveToLocation.StartMoving(bossStartLocation.position, 1f, EntranceCurve));
     }
 
 
@@ -38,26 +46,15 @@ public class Boss : MonoBehaviour
         {
             isHit = false;
             gameManager.increaseScore();
-            isHitAnimation();
         }
     }
 
     public void BossDeath()
     {
-        animator.Play("SlimeDie");
-        Invoke("bossActiveFalse",0.2f);
+        Invoke("bossActiveFalse", 0.2f);
     }
     void bossActiveFalse()
     {
         gameObject.SetActive(false);
-    }
-    void isHitAnimation()
-    {
-        animator.Play("SlimeHit");
-        Invoke("GoBack",0.2f);
-    }
-    void GoBack()
-    {
-        animator.Play("SlimeAnimation");
     }
 }

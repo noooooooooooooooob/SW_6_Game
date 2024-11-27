@@ -46,20 +46,23 @@ public class PlayerAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (playerMovement.CanMove)
         {
-            pressedAttack = true;
-            ChangeAnimationState(GetAttackAnimation("up"));
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            pressedAttack = true;
-            ChangeAnimationState(GetAttackAnimation("down"));
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            pressedAttack = true;
-            ChangeAnimationState(GetAttackAnimation("side"));
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                pressedAttack = true;
+                ChangeAnimationState(GetAttackAnimation("up"));
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                pressedAttack = true;
+                ChangeAnimationState(GetAttackAnimation("down"));
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                pressedAttack = true;
+                ChangeAnimationState(GetAttackAnimation("side"));
+            }
         }
 
         if (playerMovement.currentFloor > 1 && !pressedAttack)

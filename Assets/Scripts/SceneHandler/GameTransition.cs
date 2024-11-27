@@ -31,16 +31,26 @@ public class GameTransition : MonoBehaviour
     public void SetBossDefeated()
     {
         BossDefeated = true;
-
         playerMovement.VictoryRun();
+    }
+
+    public void PrepNextScene()
+    {
+        Debug.Log("StartFade");
         StartCoroutine(fade.FadeOut());
-        // sceneManager.NextScene();
+        Invoke("StartNextScene", fade.fadeDuration + 0.3f);
+    }
+
+    public void StartNextScene()
+    {
+        sceneManager.NextScene();
     }
 
     public void SetPlayerDefeated()
     {
         PlayerDefeated = true;
         sceneManager.LoadScene(0);
-        StartCoroutine(fade.FadeOut());
+        // StartCoroutine(fade.FadeOut());
     }
+
 }

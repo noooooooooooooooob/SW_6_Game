@@ -12,9 +12,15 @@ public class PlayerMovement : MonoBehaviour
     public GameObject smokeJumpDownPrefab;
     public float runSpeed;
     public bool CanMove = false;
-    public AnimationCurve bounceCurve;
+    public AnimationCurve EntranceCurve;
+    public AnimationCurve ExitCurve;
 
-    public Transform playerStartLocation;
+    private Transform playerStartLocation;
+    private Transform playerEndLocation;
+    private MoveToLocation moveToLocation;
+    public float entraceTime;
+    public float sceneExitTime;
+
     [SerializeField] float fallMultiplier;
 
     private Collider2D playerCollider;
@@ -22,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform playerTransform;
     private ReduceGaugebar staminaBar;
     private Vector2 vecGravity;
+    private bool inVicotryRun;
 
 
     public int currentFloor;
@@ -33,9 +40,16 @@ public class PlayerMovement : MonoBehaviour
         staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
         fallMultiplier = 1.2f;
         currentFloor = 1;
-        CanMove = false;
 
-        StartCoroutine(MoveToStartLocation(playerStartLocation.position, 1f, bounceCurve));
+        CanMove = false;
+        inVicotryRun = false;
+
+        playerStartLocation = GameObject.Find("PlayerStartLocation").GetComponent<Transform>();
+        playerEndLocation = GameObject.Find("PlayerEndLocation").GetComponent<Transform>();
+        moveToLocation = GetComponent<MoveToLocation>();
+
+        StartCoroutine(moveToLocation.StartMoving(playerStartLocation.position, entraceTime, EntranceCurve));
+        Invoke("AllowMovement", entraceTime);
 
     }
 
@@ -70,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator MoveToStartLocation(Vector3 target, float duration, AnimationCurve curve)
+    IEnumerator MoveToLocation(Vector3 target, float duration, AnimationCurve curve)
     {
         Vector3 startPosition = transform.position;
         float elapsedTime = 0f;
@@ -95,11 +109,26 @@ public class PlayerMovement : MonoBehaviour
             staminaBar.StopStaminaDecrease();
         }
     }
-
+    private void AllowMovement()
+    {
+        CanMove = true;
+    }
     public void VictoryRun()
     {
         CanMove = false;
-        rb.velocity = new Vector2(runSpeed, 0);
+
+        if (currentFloor > 1)
+        {
+            staminaBar.DisablePlatforms();
+        }
+        else
+        {
+            if (inVicotryRun == false)
+            {
+                inVicotryRun = true;
+                StartCoroutine(moveToLocation.StartMoving(playerEndLocation.position, sceneExitTime, ExitCurve));
+            }
+        }
     }
 
 

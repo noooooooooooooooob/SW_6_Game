@@ -34,7 +34,7 @@ public class ReduceGaugebar : MonoBehaviour
 
         initialPosition = GaugeBar.anchoredPosition;
 
-        isClone=false;
+        isClone = false;
     }
 
     void Update()
@@ -42,8 +42,9 @@ public class ReduceGaugebar : MonoBehaviour
         //Debug.Log("shouldReduceGague: " + shouldReduceGague);
         //Debug.Log("PlatformTime: " + platformTime);
         slider.value = platformTime / MaxPlatformTime;
-        if(isClone){
-            platformTime=MaxPlatformTime;
+        if (isClone)
+        {
+            platformTime = MaxPlatformTime;
         }
         else if (shouldReduceGague)
         {
@@ -70,15 +71,25 @@ public class ReduceGaugebar : MonoBehaviour
 
         if (platformTime <= 0)
         {
-            plat1.DisablePlatform();
-            plat2.DisablePlatform();
+            DisablePlatforms();
         }
         else
         {
-            plat1.EnablePlatform();
-            plat2.EnablePlatform();
+            EnablePlatforms();
         }
 
+    }
+
+    public void DisablePlatforms()
+    {
+        plat1.DisablePlatform();
+        plat2.DisablePlatform();
+    }
+
+    public void EnablePlatforms()
+    {
+        plat1.EnablePlatform();
+        plat2.EnablePlatform();
     }
 
     public void StartStaminaDecrease()
