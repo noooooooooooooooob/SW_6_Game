@@ -52,7 +52,7 @@ public class HealthBarController : MonoBehaviour
         isDamageUp = false;
 
         SetHealth(maxHealth * 0.5f); // 체력을 절반으로 시작
-        Debug.Log("Current health :" + currentHealth);
+        // Debug.Log("Current health :" + currentHealth);
     }
 
     private void Update()
@@ -179,6 +179,6 @@ public class HealthBarController : MonoBehaviour
     public void isHitSound()
     {
         audioSource.PlayOneShot(byHitSound);
-        Debug.Log("HitAudio");
+        // Debug.Log("HitAudio");
     }
 }

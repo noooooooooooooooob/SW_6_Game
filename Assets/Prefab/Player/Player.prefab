@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 8675058269953547438}
   - component: {fileID: 8891108038469270893}
   - component: {fileID: 282761165132279095}
+  - component: {fileID: 4244330872831236948}
+  - component: {fileID: 8141847676390191328}
   - component: {fileID: 8396264795857953392}
   - component: {fileID: 5962352278216740155}
   - component: {fileID: 8662225551281552874}
@@ -51,6 +53,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43dfe8955531fd04e9511a2612a5e942, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 0}
   healthBarSlider: {fileID: 0}
 --- !u!114 &8675058269953547438
 MonoBehaviour:
@@ -69,6 +72,58 @@ MonoBehaviour:
   isAttacking: 0
   smokeJumpUpPrefab: {fileID: 1562950342534401149, guid: 49b8c8a78dff2be4482ced2e380ba0c5, type: 3}
   smokeJumpDownPrefab: {fileID: 1562950342534401149, guid: 2e5fe9b3467928a40ae9c5375d08ea33, type: 3}
+  runSpeed: 8
+  CanMove: 0
+  EntranceCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  ExitCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  entraceTime: 1
+  sceneExitTime: 3
   fallMultiplier: 2
   currentFloor: 0
 --- !u!114 &8891108038469270893
@@ -99,6 +154,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCurrentElement: 0
+  isClone: 0
+--- !u!114 &4244330872831236948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204233138080463030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19724ec9a0843aa4c8999766bda16a65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 4204233138080463030}
+  isDeleted: 0
+--- !u!114 &8141847676390191328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204233138080463030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a0022a2c3106442856f79faab046c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &8396264795857953392
 Rigidbody2D:
   serializedVersion: 4
