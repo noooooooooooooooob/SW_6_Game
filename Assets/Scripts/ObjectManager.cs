@@ -49,7 +49,7 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-    void bossEnd()
+    public void GameEnd()
     {
         for (int i = 0; i < note.Length; i++)
         {
@@ -110,10 +110,6 @@ public class ObjectManager : MonoBehaviour
         {
             cnt = 0;
         }
-        if (boss.activeSelf == false)
-        {
-            isEnd = true;
-            bossEnd();
-        }
     }
+
 }

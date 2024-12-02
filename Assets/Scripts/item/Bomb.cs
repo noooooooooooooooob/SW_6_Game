@@ -4,8 +4,8 @@ using UnityEngine;
 using System;
 public class Bomb : MonoBehaviour
 {
-    
-     public float minX = -10f;
+
+    public float minX = -10f;
     public float maxX = 10f;
     public float minY = -5f;
     public float maxY = 5f;
@@ -18,7 +18,7 @@ public class Bomb : MonoBehaviour
     {
         deleteCount = 0;  // 삭제된 Note 개수 초기화
 
-         // 'Note' 태그가 붙은 모든 오브젝트 찾기
+        // 'Note' 태그가 붙은 모든 오브젝트 찾기
         GameObject[] notes = GameObject.FindGameObjectsWithTag("Note");
 
         foreach (GameObject note in notes)
@@ -28,7 +28,7 @@ public class Bomb : MonoBehaviour
             // x와 y 범위 안에 있는 오브젝트만 삭제
             if (pos.x >= minX && pos.x <= maxX && pos.y >= minY && pos.y <= maxY)
             {
-                Destroy(note);
+                note.SetActive(false);
                 deleteCount++;
             }
         }
@@ -37,5 +37,5 @@ public class Bomb : MonoBehaviour
         Debug.Log("Deleted Notes Count: " + deleteCount);
     }
 
-    
+
 }

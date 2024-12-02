@@ -2444,7 +2444,7 @@ MonoBehaviour:
   notePrefab: {fileID: 8012933125453678080, guid: 4460797cf03493a47b6e689adc7f43a5, type: 3}
   noteSpawnTime: 1
   noteSpawnTimeMin: 0.5
-  noteSpawnTimeMax: 2
+  noteSpawnTimeMax: 1
   isSlow: 0
   spawnSlow: 0
   changingNoteLocation: 0
@@ -4434,7 +4434,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9ad2aa64fac163845816d5a9c566e18e, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4652,9 +4652,8 @@ MonoBehaviour:
   - {fileID: 5948926716114525798, guid: 587373b90cb545f4187aac2ff739e8a1, type: 3}
   - {fileID: 6332972770984799521, guid: fc8b37554e1fc074e855cd14e6e098a3, type: 3}
   - {fileID: 1360450819304249517, guid: 13ced09c83945bd42b26b71b588988e1, type: 3}
-  - {fileID: 6875706458395463036, guid: 55af55b1a7839ae4a9304c5aecc1dfc5, type: 3}
   spawnTime: 5
-  test: 0
+  test: 1
 --- !u!4 &1342375225
 Transform:
   m_ObjectHideFlags: 0
@@ -7061,6 +7060,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 137012460}
     - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: changeRate
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: currentHealth
       value: 500
       objectReference: {fileID: 0}
@@ -7075,6 +7078,10 @@ PrefabInstance:
     - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: damageColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6788840689240537591, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 9176630542367076143, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: Player

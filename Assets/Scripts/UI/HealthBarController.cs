@@ -7,7 +7,7 @@ public class HealthBarController : MonoBehaviour
     // 맞았을 때 효과음
     public AudioClip byHitSound;
     private AudioSource audioSource;
-
+    private ObjectManager objectManager;
     public static HealthBarController Instance { get; private set; }
     [SerializeField] private Image healthBarFill;     // 체력바의 Fill 이미지
     Slider healthBarSlider;  // Slider로 변경
@@ -41,6 +41,7 @@ public class HealthBarController : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         healthBarSlider = GetComponent<Slider>();
+        objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
         healthBarFill = healthBarSlider.fillRect.GetComponent<Image>();
         defaultColor = healthBarFill.color;
         bonusRate = changeRate*4/7;
@@ -87,11 +88,14 @@ public class HealthBarController : MonoBehaviour
     {
         Debug.Log("Player is dead");
         player.PlayerDeath();
+        objectManager.GameEnd();
     }
 
     private void CallBossDeath()
     {
+
         boss.BossDeath();
+        objectManager.GameEnd();
         gameTransition.SetBossDefeated();
 
     }
