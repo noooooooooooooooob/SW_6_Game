@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
-using Microsoft.Unity.VisualStudio.Editor;
 using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -354,38 +353,41 @@ public class Note : MonoBehaviour
         }
         //coloridx = playerColor;
 
-        if(playerColor==ColorEnum.red){
-            noteColor=ColorEnum.red;
-            if(arrowidx==0)
+        if (playerColor == ColorEnum.red)
+        {
+            noteColor = ColorEnum.red;
+            if (arrowidx == 0)
                 spriteRenderer.sprite = sprites[0];
-             else if(arrowidx==1)
+            else if (arrowidx == 1)
                 spriteRenderer.sprite = sprites[1];
-            else if(arrowidx==2)
+            else if (arrowidx == 2)
                 spriteRenderer.sprite = sprites[2];
-            else if(arrowidx==3)
-                spriteRenderer.sprite = sprites[3]; 
+            else if (arrowidx == 3)
+                spriteRenderer.sprite = sprites[3];
         }
-        if(playerColor==ColorEnum.green){
-            noteColor=ColorEnum.green;
-            if(arrowidx==0)
+        if (playerColor == ColorEnum.green)
+        {
+            noteColor = ColorEnum.green;
+            if (arrowidx == 0)
                 spriteRenderer.sprite = sprites[4];
-             else if(arrowidx==1)
+            else if (arrowidx == 1)
                 spriteRenderer.sprite = sprites[5];
-            else if(arrowidx==2)
+            else if (arrowidx == 2)
                 spriteRenderer.sprite = sprites[6];
-            else if(arrowidx==3)
-                spriteRenderer.sprite = sprites[7]; 
+            else if (arrowidx == 3)
+                spriteRenderer.sprite = sprites[7];
         }
-        if(playerColor==ColorEnum.blue){
-            noteColor=ColorEnum.blue;
-            if(arrowidx==0)
+        if (playerColor == ColorEnum.blue)
+        {
+            noteColor = ColorEnum.blue;
+            if (arrowidx == 0)
                 spriteRenderer.sprite = sprites[8];
-             else if(arrowidx==1)
+            else if (arrowidx == 1)
                 spriteRenderer.sprite = sprites[9];
-            else if(arrowidx==2)
+            else if (arrowidx == 2)
                 spriteRenderer.sprite = sprites[10];
-            else if(arrowidx==3)
-                spriteRenderer.sprite = sprites[11]; 
+            else if (arrowidx == 3)
+                spriteRenderer.sprite = sprites[11];
         }
     }
     void difcolor()
@@ -397,7 +399,7 @@ public class Note : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.gameObject.tag == "Player"||collision.gameObject.tag=="clone")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "clone")
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
             {
