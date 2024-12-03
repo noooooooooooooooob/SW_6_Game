@@ -249,6 +249,7 @@ public class inventory : MonoBehaviour
 
         //PlayerElement PE= FindObjectOfType<PlayerElement>();
         //PE.isClone=false;
+        
         playerDisappear.isDeleted = false;
         playerDisappearObject.SetActive(true);
 
