@@ -16,22 +16,33 @@ public class GameTransition : MonoBehaviour
         PlayerDefeated = false;
         inTransition = false;
 
-        sceneManager = GameObject.Find("SceneManager").GetComponent<SceneManager>();
+        sceneManager = GameObject.Find("GameManager").GetComponent<SceneManager>();
         sceneManager.PreLoadNextScene();
         fade = GameObject.Find("FadePanel").GetComponent<Fade>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
+
+        if (playerMovement != null)
+        {
+            Debug.Log("PlayerMovement EXISTS");
+        }
+        else
+        {
+            Debug.Log("PlayerMovement is null");
+        }
     }
-
-    void Update()
-    {
-
-    }
-
     public void SetBossDefeated()
     {
         BossDefeated = true;
-        playerMovement.VictoryRun();
+        if (playerMovement != null)
+        {
+            playerMovement.VictoryRun();
+        }
+        else
+        {
+            Debug.Log("PlayerMovement is null");
+        }
+
     }
 
     public void PrepNextScene()

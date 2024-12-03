@@ -124,8 +124,8 @@ MonoBehaviour:
     m_RotationOrder: 4
   entraceTime: 1
   sceneExitTime: 3
-  fallMultiplier: 2
-  currentFloor: 0
+  fallMultiplier: 1.2
+  currentFloor: 1
 --- !u!114 &8891108038469270893
 MonoBehaviour:
   m_ObjectHideFlags: 0

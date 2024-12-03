@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 991fb5304ef4c8a439942ee896386366
+guid: 87457eef0bbdf184f8f6b3c8b979d4f5
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 8
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,253 +110,358 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_0
+      name: Training Dummy Sprite Sheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 8
-        width: 7
-        height: 7
+        x: 0
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ce3f56198046d94d9f71fd41b692c2e
-      internalID: -29876545
+      spriteID: 113d03fae1eccbc41be7fbd407cd31a4
+      internalID: 606922030
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_1
+      name: Training Dummy Sprite Sheet_1
       rect:
         serializedVersion: 2
-        x: 17
-        y: 8
-        width: 7
-        height: 7
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90b896a8ff03ef54ab347b8356b10551
-      internalID: -693492291
+      spriteID: a48371c958a31d745aef25a54775fcf5
+      internalID: 988336594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_2
+      name: Training Dummy Sprite Sheet_2
       rect:
         serializedVersion: 2
-        x: 25
-        y: 8
-        width: 7
-        height: 7
+        x: 64
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bfa9e5b4ad9f6444abe783cab88679c8
-      internalID: 836592596
+      spriteID: 4fdd9feb8a48ab3418a125f9529cc39a
+      internalID: 2049738396
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_3
+      name: Training Dummy Sprite Sheet_3
       rect:
         serializedVersion: 2
-        x: 33
-        y: 8
-        width: 7
-        height: 7
+        x: 96
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb90a62e217a88b48b10044e7949b0b7
-      internalID: -2047164549
+      spriteID: d1cd62209565272468b66d807714519b
+      internalID: 329696025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_4
+      name: Training Dummy Sprite Sheet_4
       rect:
         serializedVersion: 2
-        x: 41
-        y: 8
-        width: 7
-        height: 7
+        x: 0
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8f39d121d4963d849b2389442e61ca74
-      internalID: 900986666
+      spriteID: 6af15f3735e18034293afa5357cc4359
+      internalID: -598133638
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_5
+      name: Training Dummy Sprite Sheet_5
       rect:
         serializedVersion: 2
-        x: 49
-        y: 8
-        width: 7
-        height: 7
+        x: 32
+        y: 32
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4b89fb1faa2b03a449d517c1046a0a14
-      internalID: 1317823866
+      spriteID: 5af3ff9b762949447b2fa66252e4e0c3
+      internalID: 34306688
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_6
+      name: Training Dummy Sprite Sheet_6
       rect:
         serializedVersion: 2
-        x: 1
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d4ff6e93eac0424d972bdf30e10d00d
+      internalID: 1411828814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Sprite Sheet_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 515fd1b12f2a35840bd758aced765344
+      internalID: -1749952107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Sprite Sheet_8
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96bd305550c273f49bee45ba2464d98e
+      internalID: -38312233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Sprite Sheet_9
+      rect:
+        serializedVersion: 2
+        x: 0
         y: 0
-        width: 7
-        height: 7
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 90d65e8cd24d3bf47bedd9eee8a70ac7
-      internalID: 1020494349
+      spriteID: ccce0e3f0e2a0fe438f738c56d8fccd5
+      internalID: -1294999147
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_7
+      name: Training Dummy Sprite Sheet_10
       rect:
         serializedVersion: 2
-        x: 17
+        x: 32
         y: 0
-        width: 7
-        height: 7
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: eb2848fdfa36999458d06cd19e55fbb4
-      internalID: 1873897305
+      spriteID: 4c3672f1951c47f40b51f34d7ca0ac88
+      internalID: 89790178
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_8
+      name: Training Dummy Sprite Sheet_11
       rect:
         serializedVersion: 2
-        x: 25
+        x: 64
         y: 0
-        width: 7
-        height: 7
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6c780db32da123418a081e896e5bae5
-      internalID: -1810051666
+      spriteID: 1fb290e682d05ab4d87974c281b9b3b1
+      internalID: -1754792972
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_9
+      name: Training Dummy Sprite Sheet_12
       rect:
         serializedVersion: 2
-        x: 33
+        x: 96
         y: 0
-        width: 7
-        height: 7
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 25c895ba71adbe84eb0bcd31ef2f35bc
-      internalID: 350316933
+      spriteID: 676529ddf90a83c46865f501adbe0bb3
+      internalID: -1677753419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_10
+      name: Training Dummy Sprite Sheet_13
       rect:
         serializedVersion: 2
-        x: 41
+        x: 128
         y: 0
-        width: 7
-        height: 7
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dbd0008aaa7a5242bd6e83559790d7a
-      internalID: 962269485
+      spriteID: 0b54220594423394a96f363cd5b3517e
+      internalID: 577737390
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Timer_Coin_Numbers_Drop-shadowed (8 x 8)_11
+      name: Training Dummy Sprite Sheet_14
       rect:
         serializedVersion: 2
-        x: 49
+        x: 160
         y: 0
-        width: 7
-        height: 7
+        width: 32
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 30467a0ee2d984d4ca23f9b91622e541
-      internalID: 1851910628
+      spriteID: 8b114cd2fbb46ad43830a90883e38d96
+      internalID: 1257620320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Sprite Sheet_15
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e418937450ac97d4a959e26aca6f8fe9
+      internalID: 812710853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Training Dummy Sprite Sheet_16
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8469bdd5711105b478128e13ddc77af9
+      internalID: 651343097
       vertices: []
       indices: 
       edges: []
@@ -372,18 +477,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_0: -29876545
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_1: -693492291
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_10: 962269485
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_11: 1851910628
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_2: 836592596
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_3: -2047164549
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_4: 900986666
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_5: 1317823866
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_6: 1020494349
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_7: 1873897305
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_8: -1810051666
-      Timer_Coin_Numbers_Drop-shadowed (8 x 8)_9: 350316933
+      Training Dummy Sprite Sheet_0: 606922030
+      Training Dummy Sprite Sheet_1: 988336594
+      Training Dummy Sprite Sheet_10: 89790178
+      Training Dummy Sprite Sheet_11: -1754792972
+      Training Dummy Sprite Sheet_12: -1677753419
+      Training Dummy Sprite Sheet_13: 577737390
+      Training Dummy Sprite Sheet_14: 1257620320
+      Training Dummy Sprite Sheet_15: 812710853
+      Training Dummy Sprite Sheet_16: 651343097
+      Training Dummy Sprite Sheet_2: 2049738396
+      Training Dummy Sprite Sheet_3: 329696025
+      Training Dummy Sprite Sheet_4: -598133638
+      Training Dummy Sprite Sheet_5: 34306688
+      Training Dummy Sprite Sheet_6: 1411828814
+      Training Dummy Sprite Sheet_7: -1749952107
+      Training Dummy Sprite Sheet_8: -38312233
+      Training Dummy Sprite Sheet_9: -1294999147
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

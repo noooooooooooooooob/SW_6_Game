@@ -243,6 +243,7 @@ MonoBehaviour:
   - {fileID: 1360450819304249517, guid: 13ced09c83945bd42b26b71b588988e1, type: 3}
   - {fileID: 6875706458395463036, guid: 55af55b1a7839ae4a9304c5aecc1dfc5, type: 3}
   spawnTime: 1
+  test: 0
 --- !u!4 &43074162
 Transform:
   m_ObjectHideFlags: 0
@@ -1518,6 +1519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1227349150}
   playerMovement: {fileID: 0}
+  sizeMultiplier: 0
 --- !u!61 &876951065
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2267,6 +2269,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilemap: {fileID: 1142698213}
   speed: 5
+  doMovement: 0
 --- !u!483693784 &1142698212
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -4864,67 +4867,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1436796189
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2966410980054568975, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_Name
-      value: SceneManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.7725177
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -2.1924243
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.024917763
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7918854449648050802, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8999924118816667702, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
-      propertyPath: SceneToLoad
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: fddde05d51c2e094590569d9a9056e95, type: 3}
 --- !u!1 &1441588363
 GameObject:
   m_ObjectHideFlags: 0
@@ -5312,10 +5254,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2322bafebf9b4ea5ef020da56ebfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarSlider: {fileID: 1336191183}
-  objectManager: {fileID: 1966149024}
-  healthBarController: {fileID: 0}
   isHit: 0
+  isDead: 0
+  doEntrance: 0
   EntranceCurve:
     serializedVersion: 2
     m_Curve: []
@@ -6721,6 +6662,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1227349150}
   playerMovement: {fileID: 0}
+  sizeMultiplier: 0
 --- !u!61 &1895022728
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7173,7 +7115,6 @@ SceneRoots:
   - {fileID: 1646592841}
   - {fileID: 1966149025}
   - {fileID: 274739554}
-  - {fileID: 1436796189}
   - {fileID: 1336191182}
   - {fileID: 1227349149}
   - {fileID: 1562760308}

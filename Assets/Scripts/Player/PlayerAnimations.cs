@@ -4,25 +4,6 @@ using UnityEngine;
 
 public class PlayerAnimations : MonoBehaviour
 {
-    public enum animations
-    {
-        blue_run,
-        blue_attack_side,
-        blue_attack_up,
-        blue_attack_down,
-        blue_idle,
-        red_run,
-        red_attack_side,
-        red_attack_up,
-        red_attack_down,
-        red_idle,
-        green_run,
-        green_attack_side,
-        green_attack_up,
-        green_attack_down,
-        green_idle
-
-    }
 
     public float attackDelay = 0.3f;
 
@@ -30,7 +11,7 @@ public class PlayerAnimations : MonoBehaviour
     PlayerElement playerElement;
 
     Animator animator;
-    animations currentState;
+    PlayerAnimationEnum currentState;
 
     public bool isAttacking = false;
     public bool pressedAttack = false;
@@ -46,7 +27,7 @@ public class PlayerAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement.CanMove)
+        if (playerMovement.CanMove) //Disable attack animation when player going through entrance or exit transition
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -65,20 +46,9 @@ public class PlayerAnimations : MonoBehaviour
             }
         }
 
-        if (playerMovement.currentFloor > 1 && !pressedAttack)
+        if (playerMovement.currentFloor > 1 && !pressedAttack)//|| !playerMovement.doRunning) //Change to idle when above floor 1
         {
-            switch (playerElement.playerCurrentElement)
-            {
-                case ColorEnum.blue:
-                    ChangeAnimationState(animations.blue_idle);
-                    break;
-                case ColorEnum.green:
-                    ChangeAnimationState(animations.green_idle);
-                    break;
-                default:
-                    ChangeAnimationState(animations.red_idle);
-                    break;
-            }
+            ChangeAnimationState(GetIdleAnimation());
         }
         else if (pressedAttack)
         {
@@ -90,44 +60,60 @@ public class PlayerAnimations : MonoBehaviour
         }
         else
         {
-            ChangeAnimationState(GetRunAnimation());
+            if (playerMovement.doRunning)
+            {
+                ChangeAnimationState(GetRunAnimation());
+            }
+            else
+            {
+                ChangeAnimationState(GetIdleAnimation());
+            }
+
         }
     }
 
-    animations GetAttackAnimation(string direction)
+    PlayerAnimationEnum GetAttackAnimation(string direction)
     {
         switch (playerElement.playerCurrentElement)
         {
             case ColorEnum.blue:
-                if (direction == "up") return animations.blue_attack_up;
-                if (direction == "down") return animations.blue_attack_down;
-                return animations.blue_attack_side;
+                if (direction == "up") return PlayerAnimationEnum.blue_attack_up;
+                if (direction == "down") return PlayerAnimationEnum.blue_attack_down;
+                return PlayerAnimationEnum.blue_attack_side;
             case ColorEnum.green:
-                if (direction == "up") return animations.green_attack_up;
-                if (direction == "down") return animations.green_attack_down;
-                return animations.green_attack_side;
+                if (direction == "up") return PlayerAnimationEnum.green_attack_up;
+                if (direction == "down") return PlayerAnimationEnum.green_attack_down;
+                return PlayerAnimationEnum.green_attack_side;
             default:
-                if (direction == "up") return animations.red_attack_up;
-                if (direction == "down") return animations.red_attack_down;
-                return animations.red_attack_side;
+                if (direction == "up") return PlayerAnimationEnum.red_attack_up;
+                if (direction == "down") return PlayerAnimationEnum.red_attack_down;
+                return PlayerAnimationEnum.red_attack_side;
         }
     }
 
-    animations GetRunAnimation()
+    PlayerAnimationEnum GetIdleAnimation()
     {
         switch (playerElement.playerCurrentElement)
         {
             case ColorEnum.blue:
-                return animations.blue_run;
+                return PlayerAnimationEnum.blue_idle;
             case ColorEnum.green:
-                return animations.green_run;
+                return PlayerAnimationEnum.green_idle;
             default:
-                return animations.red_run;
+                return PlayerAnimationEnum.red_idle;
         }
     }
-
-    void HandleAnimationState()
+    PlayerAnimationEnum GetRunAnimation()
     {
+        switch (playerElement.playerCurrentElement)
+        {
+            case ColorEnum.blue:
+                return PlayerAnimationEnum.blue_run;
+            case ColorEnum.green:
+                return PlayerAnimationEnum.green_run;
+            default:
+                return PlayerAnimationEnum.red_run;
+        }
     }
 
     void AttackComplete()
@@ -136,7 +122,7 @@ public class PlayerAnimations : MonoBehaviour
         pressedAttack = false;
     }
 
-    void ChangeAnimationState(animations newState)
+    void ChangeAnimationState(PlayerAnimationEnum newState)
     {
         if (currentState == newState) return;
 

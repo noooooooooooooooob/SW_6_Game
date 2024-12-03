@@ -6,6 +6,7 @@ public class ReducePlatformSize : MonoBehaviour
 {
     public GameObject player;
     public PlayerMovement playerMovement;
+    public float sizeMultiplier;
 
     ReduceGaugebar staminaBar;
     // private Transform transform;
@@ -19,7 +20,7 @@ public class ReducePlatformSize : MonoBehaviour
     {
         if (staminaBar.platformTime > 0)
         {
-            float newScaleX = Mathf.Max(0, staminaBar.platformTime / 5);
+            float newScaleX = Mathf.Max(0, staminaBar.platformTime / 5) * sizeMultiplier;
             transform.localScale = new Vector3(newScaleX, transform.localScale.y, transform.localScale.z);
         }
     }

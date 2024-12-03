@@ -6,6 +6,7 @@ public class SceneManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private int TotalSceneCount;
+    public bool ManualSceneSelection;
     public int SceneToLoad;
     public int CurrentScene;
 
@@ -52,5 +53,10 @@ public class SceneManager : MonoBehaviour
     public void LoadScene(int scene)
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
+    }
+
+    public void ManualSelectedScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(SceneToLoad);
     }
 }

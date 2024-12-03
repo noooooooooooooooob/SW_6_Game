@@ -6,9 +6,10 @@ using UnityEngine.Tilemaps;
 public class Ground : MonoBehaviour
 {
     public Tilemap tilemap;
-    public float speed = 2f;
     private Vector3 originalPosition;
     private float moveDistance;
+    public float speed = 2f;
+    public bool doMovement;
 
     void Start()
     {
@@ -25,15 +26,16 @@ public class Ground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (tilemap.transform.position.x > originalPosition.x - moveDistance)
+        if (doMovement)
         {
-            tilemap.transform.position += Vector3.left * speed * Time.deltaTime;
+            if (tilemap.transform.position.x > originalPosition.x - moveDistance)
+            {
+                tilemap.transform.position += Vector3.left * speed * Time.deltaTime;
+            }
+            else
+            {
+                tilemap.transform.position = originalPosition;
+            }
         }
-        else
-        {
-            tilemap.transform.position = originalPosition;
-        }
-
-        // Reset position back to original
     }
 }

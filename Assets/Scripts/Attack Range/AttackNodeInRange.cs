@@ -14,10 +14,11 @@ public class AttackNodeInRange : MonoBehaviour
     private HealthBarController healthBarController;
     private GameObject player;
     private PlayerElement playerElement;
+    private PlayerMovement playerMovement;
     public ArrowDirectionEnum arrowDirection;
 
     private GameObject clone;
-    
+
 
     public bool isClone;
 
@@ -26,9 +27,10 @@ public class AttackNodeInRange : MonoBehaviour
         floorChecker = GetComponentInChildren<FloorChecker>();
         player = GameObject.Find("Player");
         playerElement = player.GetComponent<PlayerElement>();
-        
+        playerMovement = player.GetComponent<PlayerMovement>();
+
         clone = GameObject.Find("clone");
-        
+
 
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
     }
@@ -36,8 +38,9 @@ public class AttackNodeInRange : MonoBehaviour
     public void OnChildTrigger()
     {
 
-        if(isClone){
-            playerInRange=false;
+        if (isClone)
+        {
+            playerInRange = false;
             Debug.LogWarning("isClone");
         }
         else if (floorChecker != null)
@@ -48,9 +51,8 @@ public class AttackNodeInRange : MonoBehaviour
 
     void Update()
     {
-        
 
-        if (hasNote && playerInRange)
+        if (hasNote && playerInRange && playerMovement.CanMove)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -107,9 +109,9 @@ public class AttackNodeInRange : MonoBehaviour
         if (other.gameObject.tag == "Note")
         {
             Note note = other.gameObject.GetComponent<Note>();
-            
-           // CurrentColor CC=FindObjectOfType<CurrentColor>();
-            
+
+            // CurrentColor CC=FindObjectOfType<CurrentColor>();
+
             if (attack && playerInRange)
             {
                 /*
@@ -142,36 +144,36 @@ public class AttackNodeInRange : MonoBehaviour
                 }
                 */
                 //else{
-                    if (note.noteArrowDirection == arrowDirection && playerElement.playerCurrentElement == note.noteColor)
-                    {
-                        note.StartMovingToBoss();
-                        note.playNoteHitSound();
-                        attack = false;
-                        hasNote = false;
+                if (note.noteArrowDirection == arrowDirection && playerElement.playerCurrentElement == note.noteColor)
+                {
+                    note.StartMovingToBoss();
+                    note.playNoteHitSound();
+                    attack = false;
+                    hasNote = false;
 
-                        arrowDirection = ArrowDirectionEnum.none;
+                    arrowDirection = ArrowDirectionEnum.none;
+                }
+
+                else
+                {
+                    ShakeAttackBar();
+                    other.gameObject.SetActive(false);
+                    attack = false;
+                    hasNote = false;
+                    arrowDirection = ArrowDirectionEnum.none;
+
+                    if (healthBarController != null)
+                    {
+                        healthBarController.TakeDamage();
                     }
-                    
                     else
                     {
-                        ShakeAttackBar();
-                        other.gameObject.SetActive(false);
-                        attack = false;
-                        hasNote = false;
-                        arrowDirection = ArrowDirectionEnum.none;
-
-                        if (healthBarController != null)
-                        {
-                            healthBarController.TakeDamage();
-                        }
-                        else
-                        {
-                            Debug.LogError("HealthBarController not found on Player object.");
-                        }
+                        Debug.LogError("HealthBarController not found on Player object.");
                     }
-                
+                }
+
                 //}
-                
+
             }
         }
     }

@@ -5,52 +5,50 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float platformTime = 5f;
-    public float disableTime = 0.2f;
-    public bool isAttacking = false;
     public GameObject smokeJumpUpPrefab;
     public GameObject smokeJumpDownPrefab;
-    public float runSpeed;
-    public bool CanMove = false;
-    public AnimationCurve EntranceCurve;
-    public AnimationCurve ExitCurve;
-
-    private Transform playerStartLocation;
-    private Transform playerEndLocation;
-    private MoveToLocation moveToLocation;
-    public float entraceTime;
-    public float sceneExitTime;
-
-    [SerializeField] float fallMultiplier;
-
-    private Collider2D playerCollider;
     private Rigidbody2D rb;
     private Transform playerTransform;
     private ReduceGaugebar staminaBar;
-    private Vector2 vecGravity;
-    private bool inVicotryRun;
+    private Transform playerStartLocation;
+    private Transform playerEndLocation;
+    public AnimationCurve EntranceCurve;
+    public AnimationCurve ExitCurve;
+    public float entraceTime;
+    public float sceneExitTime;
+    private MoveToLocation moveToLocation;
 
-
+    public float platformTime = 5f;
+    public float disableTime = 0.2f;
+    public bool isAttacking = false;
+    public bool inVicotryRun;
+    public bool doEntrance;
+    public bool doRunning;
+    public bool CanMove = false;
     public int currentFloor;
+
+    [SerializeField] float fallMultiplier;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         playerTransform = GetComponent<Transform>();
-        playerCollider = GetComponent<Collider2D>();
         staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
-        fallMultiplier = 1.2f;
-        currentFloor = 1;
-
-        CanMove = false;
-        inVicotryRun = false;
+        moveToLocation = GetComponent<MoveToLocation>();
 
         playerStartLocation = GameObject.Find("PlayerStartLocation").GetComponent<Transform>();
         playerEndLocation = GameObject.Find("PlayerEndLocation").GetComponent<Transform>();
-        moveToLocation = GetComponent<MoveToLocation>();
 
-        StartCoroutine(moveToLocation.StartMoving(playerStartLocation.position, entraceTime, EntranceCurve));
-        Invoke("AllowMovement", entraceTime);
 
+        if (doEntrance)
+        {
+            StartCoroutine(moveToLocation.StartMoving(playerStartLocation.position, entraceTime, EntranceCurve));
+            Invoke("AllowMovement", entraceTime);
+        }
+        else
+        {
+            CanMove = true;
+        }
     }
 
     void Update()
@@ -84,23 +82,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    IEnumerator MoveToLocation(Vector3 target, float duration, AnimationCurve curve)
-    {
-        Vector3 startPosition = transform.position;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-            float curveValue = curve.Evaluate(elapsedTime / duration); // Evaluate the curve at the current time
-            transform.position = Vector3.Lerp(startPosition, target, curveValue);
-            yield return null;
-        }
-
-        transform.position = target; // Ensure final position is exact
-        CanMove = true;
-    }
-
     void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Ground")
@@ -109,14 +90,21 @@ public class PlayerMovement : MonoBehaviour
             staminaBar.StopStaminaDecrease();
         }
     }
-    private void AllowMovement()
+
+    public void AllowMovement()
     {
         CanMove = true;
     }
+    public void DisableMovement()
+    {
+        CanMove = true;
+    }
+
+
     public void VictoryRun()
     {
-        CanMove = false;
-
+        DisableMovement();
+        doRunning = true;
         if (currentFloor > 1)
         {
             staminaBar.DisablePlatforms();
@@ -130,6 +118,4 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
-
 }
