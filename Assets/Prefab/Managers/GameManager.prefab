@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 942375192143773817}
-  - component: {fileID: 170731304429656420}
   - component: {fileID: 1331234003589446011}
   - component: {fileID: 2166148270506202236}
   m_Layer: 0
@@ -34,47 +33,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &170731304429656420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6758346704394076995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24011d01be88dbf4eb47e56ba6c89695, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score: 0
-  Combo: 0
-  numbers:
-  - {fileID: -693492291, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 836592596, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: -2047164549, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 900986666, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 1317823866, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 1873897305, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: -1810051666, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 350316933, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 962269485, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  - {fileID: 1851910628, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
-  Scores:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Combos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  Timer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  timeLimit: 300
 --- !u!114 &1331234003589446011
 MonoBehaviour:
   m_ObjectHideFlags: 0

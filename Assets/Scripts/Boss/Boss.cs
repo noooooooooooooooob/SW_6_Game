@@ -36,7 +36,6 @@ public class Boss : MonoBehaviour
         if (isHit)
         {
             isHit = false;
-            gameManager.increaseScore();
         }
     }
 

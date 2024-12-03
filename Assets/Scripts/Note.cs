@@ -419,7 +419,6 @@ public class Note : MonoBehaviour
         // HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
-            gameManager.decreaseCombo();
             healthBarController.TakeDamage();
         }
         else
