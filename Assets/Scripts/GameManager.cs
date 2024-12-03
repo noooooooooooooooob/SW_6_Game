@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public int score; //점수
-    int maxscore;
-    public int Combo; //콤보
-    int maxcombo;
     public Sprite[] numbers; //숫자 스프라이트
     public GameObject[] Timer;
 

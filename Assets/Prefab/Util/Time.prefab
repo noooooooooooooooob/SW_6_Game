@@ -217,7 +217,7 @@ GameObject:
   - component: {fileID: 3178232432489401598}
   - component: {fileID: 522205733792746076}
   m_Layer: 5
-  m_Name: ScoreComboTime
+  m_Name: Time
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
