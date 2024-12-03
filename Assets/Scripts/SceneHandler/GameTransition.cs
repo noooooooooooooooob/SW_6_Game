@@ -20,6 +20,16 @@ public class GameTransition : MonoBehaviour
         sceneManager.PreLoadNextScene();
         fade = GameObject.Find("FadePanel").GetComponent<Fade>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
+
+
+        if (playerMovement != null)
+        {
+            Debug.Log("PlayerMovement EXISTS");
+        }
+        else
+        {
+            Debug.Log("PlayerMovement is null");
+        }
     }
     public void SetBossDefeated()
     {
