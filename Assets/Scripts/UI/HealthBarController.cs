@@ -64,7 +64,10 @@ public class HealthBarController : MonoBehaviour
             UpdateSlider();
         }
         
-
+        if(currentHealth<=0||currentHealth>=maxHealth){
+            inventory IVT=FindObjectOfType<inventory>();
+            IVT.clonefin();
+        }
         if (currentHealth <= 0)
         { 
             targetHealth=0;

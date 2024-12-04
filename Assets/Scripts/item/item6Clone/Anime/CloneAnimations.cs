@@ -8,10 +8,12 @@ public class CloneAnimations : MonoBehaviour
     public float attackDelay = 0.3f;
 
     PlayerMovement playerMovement;
+    
     PlayerElement playerElement;
 
     Animator animator;
     PlayerAnimationEnum currentState;
+   
 
     public GameObject targetObject;
 
@@ -27,7 +29,7 @@ public class CloneAnimations : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -82,29 +84,40 @@ public class CloneAnimations : MonoBehaviour
                 if (direction == "down") return PlayerAnimationEnum.red_attack_down;
                 return PlayerAnimationEnum.red_attack_side;
         }
+        //inventory INV = FindObjectOfType<inventory>();
+        //INV.state=PlayerAnimationEnum;
     }
 
     PlayerAnimationEnum GetIdleAnimation()
     {
+        inventory IVT=FindObjectOfType<inventory>();
+        
         switch (playerElement.playerCurrentElement)
         {
             case ColorEnum.blue:
+                IVT.state=PlayerAnimationEnum.blue_idle;
                 return PlayerAnimationEnum.blue_idle;
             case ColorEnum.green:
+                IVT.state=PlayerAnimationEnum.green_idle;
                 return PlayerAnimationEnum.green_idle;
             default:
+                IVT.state=PlayerAnimationEnum.red_idle;
                 return PlayerAnimationEnum.red_idle;
         }
     }
     PlayerAnimationEnum GetRunAnimation()
     {
+        inventory IVT=FindObjectOfType<inventory>();
         switch (playerElement.playerCurrentElement)
         {
             case ColorEnum.blue:
+                IVT.state=PlayerAnimationEnum.blue_run;
                 return PlayerAnimationEnum.blue_run;
             case ColorEnum.green:
+                IVT.state=PlayerAnimationEnum.green_run;
                 return PlayerAnimationEnum.green_run;
             default:
+                IVT.state=PlayerAnimationEnum.red_run;
                 return PlayerAnimationEnum.red_run;
         }
     }
@@ -125,4 +138,5 @@ public class CloneAnimations : MonoBehaviour
         currentState = newState;
 
     }
+    
 }

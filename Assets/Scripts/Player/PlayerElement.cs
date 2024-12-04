@@ -50,4 +50,9 @@ public class PlayerElement : MonoBehaviour
 
     }
 
+    public void fuck(){
+        CurrentColor CC =FindObjectOfType<CurrentColor>();
+        playerCurrentElement=CC.color;
+    }
+
 }
