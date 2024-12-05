@@ -20,12 +20,14 @@ public class AudioMixController : MonoBehaviour
         BGMSlider.onValueChanged.AddListener(SetBGMVolume);
         // 슬라이더의 값이 변경될 때 AddListener를 통해 이벤트 구독
         EffectSlider.onValueChanged.AddListener(SetEffectVolume);
+        
+        SetVolumeBeforeStart();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-    	SetVolumeBeforeStart();
+    	
 
 		// audioMixer.SetFloat("audioMixer에 설정해놓은 Parameter", float 값)
         // audioMixer에 미리 설정해놓은 parameter 값을 변경하는 코드.
@@ -46,11 +48,11 @@ public class AudioMixController : MonoBehaviour
         }
         if (PlayerPrefs.HasKey("BGMVolume"))
         {
-            MasterSlider.value = PlayerPrefs.GetFloat("BGMVolume");
+            BGMSlider.value = PlayerPrefs.GetFloat("BGMVolume");
         }
         if (PlayerPrefs.HasKey("EffectVolume"))
         {
-            MasterSlider.value = PlayerPrefs.GetFloat("EffectVolume");
+            EffectSlider.value = PlayerPrefs.GetFloat("EffectVolume");
         }
 
     }

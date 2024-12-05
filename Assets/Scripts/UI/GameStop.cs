@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameStop : MonoBehaviour
 {
     private bool isPaused = false; // 게임이 일시정지 상태인지 여부를 저장
-    public GameObject panel;
+    public GameObject panel;       // UI 패널
+    public AudioSource bgmAudio;   // 배경음악 AudioSource
 
     void Update()
     {
@@ -28,8 +29,16 @@ public class GameStop : MonoBehaviour
     {
         Time.timeScale = 0f; // 게임 시간을 멈춤
         isPaused = true;
-        // 추가적으로 UI 표시 등 작업을 여기에 작성
+
+        // UI Panel 활성화
         panel.SetActive(true);
+
+        // 배경음악 일시정지
+        if (bgmAudio != null && bgmAudio.isPlaying)
+        {
+            bgmAudio.Pause();
+        }
+
         Debug.Log("Game Paused");
     }
 
@@ -38,8 +47,16 @@ public class GameStop : MonoBehaviour
     {
         Time.timeScale = 1f; // 게임 시간을 다시 정상 속도로
         isPaused = false;
+
+        // UI Panel 비활성화
         panel.SetActive(false);
-        // 추가적으로 UI 숨김 등 작업을 여기에 작성
+
+        // 배경음악 재개
+        if (bgmAudio != null && !bgmAudio.isPlaying)
+        {
+            bgmAudio.UnPause();
+        }
+
         Debug.Log("Game Resumed");
     }
 }
