@@ -4,6 +4,8 @@ using UnityEngine.UI;
 
 public class HealthBarController : MonoBehaviour
 {
+    // 체력 바 활성화
+    public bool HealthBarActive = true;
     // 맞았을 때 효과음
     public AudioClip byHitSound;
     private AudioSource audioSource;
@@ -35,8 +37,6 @@ public class HealthBarController : MonoBehaviour
     //공격력 상승
     public bool isDamageUp;
 
-
-
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -44,7 +44,7 @@ public class HealthBarController : MonoBehaviour
         objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
         healthBarFill = healthBarSlider.fillRect.GetComponent<Image>();
         defaultColor = healthBarFill.color;
-        bonusRate = changeRate*4/7;
+        bonusRate = changeRate * 4 / 7; // 보너스 rate (체력이 일정 수준 떨어졌을 시 체력 증감 값에 추가 되는 값) 을 기본 체력 증감의 4/7로 설정
 
         player = GameObject.Find("Player").GetComponent<Player>();
         boss = GameObject.Find("Boss").GetComponent<Boss>();
@@ -58,30 +58,35 @@ public class HealthBarController : MonoBehaviour
 
     private void Update()
     {
-        if (Mathf.Abs(currentHealth - targetHealth) > 0.01f)
-        {
-            currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
-            UpdateSlider();
-        }
-        
+            if (Mathf.Abs(currentHealth - targetHealth) > 0.01f)
+            {
+                currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
+                UpdateSlider();
+            }
 
-        if (currentHealth <= 0)
-        { 
-            targetHealth=0;
-            currentHealth = 0;
-            CallPlayerDeath();
-        }
-        else if (currentHealth >= maxHealth)
-        {
-            targetHealth = maxHealth;
-            currentHealth = maxHealth;
-            CallBossDeath();
-        }
-        // 수동 체력 조정
-        if (Input.GetKeyDown(KeyCode.O))
-            TakeDamage();
-        else if (Input.GetKeyDown(KeyCode.P))
-            Heal();
+
+            if (currentHealth <= 0)
+            {
+                targetHealth = 0;
+                currentHealth = 0;
+                CallPlayerDeath();
+                HealthBarActive = false; //이거 하면 다음 레벨로 넘어가질 않음. 왜지??
+                Debug.Log("Player Health depleted");
+            }
+            else if (currentHealth >= maxHealth)
+            {
+                targetHealth = maxHealth;
+                currentHealth = maxHealth;
+                CallBossDeath();
+                HealthBarActive = false;
+                Debug.Log("Boss Health depleted");
+
+            }
+            // 수동 체력 조정
+            if (Input.GetKeyDown(KeyCode.O))
+                TakeDamage();
+            else if (Input.GetKeyDown(KeyCode.P))
+                Heal();
     }
 
     private void CallPlayerDeath()
@@ -102,46 +107,52 @@ public class HealthBarController : MonoBehaviour
 
     public void Heal()
     {
-        float amount = changeRate;
-        float healthPercentage = GetHealthPercentage();
-
-        // 체력이 낮을 때 회복량 보너스
-        if (healthPercentage <= THRESHOLD)
+        if (HealthBarActive)
         {
-            amount += bonusRate * (1 - healthPercentage);
-        }
+            float amount = changeRate;
+            float healthPercentage = GetHealthPercentage();
 
-        if (isDamageUp)
-        {
-            amount *= 2f;
-        }
+            // 체력이 낮을 때 회복량 보너스
+            if (healthPercentage <= THRESHOLD)
+            {
+                amount += bonusRate * (1 - healthPercentage);
+            }
 
-        // 목표 체력을 증가시키고 최대 체력으로 제한
-        SetTargetHealth(Mathf.Clamp(targetHealth + amount, -1f, maxHealth+1f));
-        StartCoroutine(FlashHealthBar(healColor));
+            if (isDamageUp)
+            {
+                amount *= 2f;
+            }
+
+            // 목표 체력을 증가시키고 최대 체력으로 제한
+            SetTargetHealth(Mathf.Clamp(targetHealth + amount, -1f, maxHealth + 1f));
+            StartCoroutine(FlashHealthBar(healColor));
+        }
     }
 
     public void TakeDamage()
     {
-        float amount = changeRate;
-        float healthPercentage = GetHealthPercentage();
-
-        // 체력이 낮을 때 데미지 감소
-        if (healthPercentage <= THRESHOLD)
+        if (HealthBarActive)
         {
-            amount -= bonusRate * (1 - healthPercentage);
+            float amount = changeRate;
+            float healthPercentage = GetHealthPercentage();
+
+            // 체력이 낮을 때 데미지 감소
+            if (healthPercentage <= THRESHOLD)
+            {
+                amount -= bonusRate * (1 - healthPercentage);
+            }
+
+            // 최소 1의 데미지는 들어가도록 보장
+            amount = Mathf.Max(amount, mininumDamage);
+
+            // 목표 체력을 감소시키고 0으로 제한
+            SetTargetHealth(Mathf.Clamp(targetHealth - amount, -1f, maxHealth + 1f));
+            StartCoroutine(FlashHealthBar(damageColor));
+
+            // 맞았을 때 효과음
+            isHitSound();
+            player.hitByNote();
         }
-
-        // 최소 1의 데미지는 들어가도록 보장
-        amount = Mathf.Max(amount, mininumDamage);
-
-        // 목표 체력을 감소시키고 0으로 제한
-        SetTargetHealth(Mathf.Clamp(targetHealth - amount, -1f, maxHealth+1f));
-        StartCoroutine(FlashHealthBar(damageColor));
-
-        // 맞았을 때 효과음
-        isHitSound();
-        player.hitByNote();
     }
 
     //체력반전
@@ -150,7 +161,7 @@ public class HealthBarController : MonoBehaviour
         float amount = changeRate;
         float healthPercentage = GetHealthPercentage();
 
-        SetHealth(Mathf.Clamp(maxHealth - currentHealth, -1f, maxHealth+1f));
+        SetHealth(Mathf.Clamp(maxHealth - currentHealth, -1f, maxHealth + 1f));
     }
 
     private void SetHealth(float value)
