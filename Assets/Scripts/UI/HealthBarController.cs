@@ -58,8 +58,6 @@ public class HealthBarController : MonoBehaviour
 
     private void Update()
     {
-        if (HealthBarActive)
-        {
             if (Mathf.Abs(currentHealth - targetHealth) > 0.01f)
             {
                 currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
@@ -72,7 +70,7 @@ public class HealthBarController : MonoBehaviour
                 targetHealth = 0;
                 currentHealth = 0;
                 CallPlayerDeath();
-                HealthBarActive = false;
+                HealthBarActive = false; //이거 하면 다음 레벨로 넘어가질 않음. 왜지??
                 Debug.Log("Player Health depleted");
             }
             else if (currentHealth >= maxHealth)
@@ -89,7 +87,6 @@ public class HealthBarController : MonoBehaviour
                 TakeDamage();
             else if (Input.GetKeyDown(KeyCode.P))
                 Heal();
-        }
     }
 
     private void CallPlayerDeath()
