@@ -9,7 +9,7 @@ public class Clone : MonoBehaviour
 
   
    
-   
+   /*
     void Update()
     {
       
@@ -33,4 +33,5 @@ public class Clone : MonoBehaviour
 
         
     }
+    */
 }

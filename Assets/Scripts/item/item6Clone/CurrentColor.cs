@@ -6,4 +6,5 @@ public class CurrentColor : MonoBehaviour
 {
     public ColorEnum color;
     
+    
 }

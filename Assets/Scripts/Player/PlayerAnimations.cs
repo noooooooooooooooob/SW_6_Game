@@ -25,7 +25,7 @@ public class PlayerAnimations : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (playerMovement.CanMove) //Disable attack animation when player going through entrance or exit transition
         {
@@ -91,6 +91,7 @@ public class PlayerAnimations : MonoBehaviour
         }
     }
 
+/*
     PlayerAnimationEnum GetIdleAnimation()
     {
         switch (playerElement.playerCurrentElement)
@@ -115,7 +116,41 @@ public class PlayerAnimations : MonoBehaviour
                 return PlayerAnimationEnum.red_run;
         }
     }
+*/
 
+     PlayerAnimationEnum GetIdleAnimation()
+    {
+        inventory IVT=FindObjectOfType<inventory>();
+        
+        switch (playerElement.playerCurrentElement)
+        {
+            case ColorEnum.blue:
+                IVT.state=PlayerAnimationEnum.blue_idle;
+                return PlayerAnimationEnum.blue_idle;
+            case ColorEnum.green:
+                IVT.state=PlayerAnimationEnum.green_idle;
+                return PlayerAnimationEnum.green_idle;
+            default:
+                IVT.state=PlayerAnimationEnum.red_idle;
+                return PlayerAnimationEnum.red_idle;
+        }
+    }
+    PlayerAnimationEnum GetRunAnimation()
+    {
+        inventory IVT=FindObjectOfType<inventory>();
+        switch (playerElement.playerCurrentElement)
+        {
+            case ColorEnum.blue:
+                IVT.state=PlayerAnimationEnum.blue_run;
+                return PlayerAnimationEnum.blue_run;
+            case ColorEnum.green:
+                IVT.state=PlayerAnimationEnum.green_run;
+                return PlayerAnimationEnum.green_run;
+            default:
+                IVT.state=PlayerAnimationEnum.red_run;
+                return PlayerAnimationEnum.red_run;
+        }
+    }
     void AttackComplete()
     {
         isAttacking = false;
@@ -132,4 +167,38 @@ public class PlayerAnimations : MonoBehaviour
         currentState = newState;
 
     }
+    public void ChangeOriginColor(PlayerAnimationEnum state){
+        playerMovement = GetComponent<PlayerMovement>();
+
+         if(state==PlayerAnimationEnum.blue_run||state==PlayerAnimationEnum.blue_idle){
+            
+            if(playerMovement.currentFloor>1) {
+                state=PlayerAnimationEnum.blue_idle;
+            }
+            else{
+                state=PlayerAnimationEnum.blue_run;
+            }
+        }
+        if(state==PlayerAnimationEnum.green_run||state==PlayerAnimationEnum.green_idle){
+            
+            if(playerMovement.currentFloor>1) {
+                state=PlayerAnimationEnum.green_idle;
+            }
+            else{
+                state=PlayerAnimationEnum.green_run;
+            }
+        }
+        if(state==PlayerAnimationEnum.red_run||state==PlayerAnimationEnum.red_idle){
+            
+            if(playerMovement.currentFloor>1) {
+                state=PlayerAnimationEnum.red_idle;
+            }
+            else{
+                state=PlayerAnimationEnum.red_run;
+            }
+        }
+        animator = GetComponent<Animator>();
+        animator.Play(state.ToString());
+    }
+
 }

@@ -58,6 +58,11 @@ public class HealthBarController : MonoBehaviour
 
     private void Update()
     {
+    if (currentHealth <= 0 || currentHealth >= maxHealth)
+{
+  inventory IVT = FindObjectOfType<inventory>();
+  IVT.clonefin();
+}
             if (Mathf.Abs(currentHealth - targetHealth) > 0.01f)
             {
                 currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
