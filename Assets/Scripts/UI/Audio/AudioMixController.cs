@@ -52,6 +52,7 @@ public class AudioMixController : MonoBehaviour
         {
             MasterSlider.value = PlayerPrefs.GetFloat("EffectVolume");
         }
+
     }
 
 	// Slider를 통해 걸어놓은 이벤트
