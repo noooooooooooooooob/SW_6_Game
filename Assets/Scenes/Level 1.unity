@@ -474,7 +474,7 @@ MonoBehaviour:
   unifyNote: 0
   patnum: 0
   patIdx: 0
-  floors: 0
+  floors: 2
   isEnd: 0
 --- !u!4 &295438783
 Transform:
