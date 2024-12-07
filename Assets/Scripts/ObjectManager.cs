@@ -27,14 +27,19 @@ public class ObjectManager : MonoBehaviour
     public int[,] bossPattern;
     public int patnum;
     public int patIdx;
+
+    [Range(0, 2)]
+    public int floors;
     int onlyOne = 0;
+
+    private int noteLine; // Floor of the note (0~2) 
 
     //boss appear
     public bool isEnd;
     void Awake()
     {
         cnt = 0;
-        note = new GameObject[1000];
+        note = new GameObject[100];
         isSlow = false;
         isEnd = false;
         noteSpawnTime = 1.0f;
@@ -42,6 +47,7 @@ public class ObjectManager : MonoBehaviour
         boss = GameObject.Find("Boss");
 
         Generate();
+
         Invoke("makeObj", 1f);
         // makeObj();
         // Boss pattern
@@ -74,6 +80,8 @@ public class ObjectManager : MonoBehaviour
             Debug.Log("생성 금지");
             return;
         }
+
+        SetNoteLinetoRandom();
 
         if (isSlow)
             note[cnt].GetComponent<Note>().speed *= 0.5f;
@@ -112,25 +120,39 @@ public class ObjectManager : MonoBehaviour
 
         note[cnt++].SetActive(true);
 
-        if (cnt >= 1000)
+        if (cnt >= note.Length)
             cnt = 0;
+
         noteSpawnTime = Random.Range(noteSpawnTimeMin, noteSpawnTimeMax);
         spawnSlowTime = 1;
+
         if (spawnSlow)
         {
             spawnSlowTime *= 2;
         }
 
         noteSpawnTime *= spawnSlowTime;
+
         Invoke("makeObj", noteSpawnTime);
     }
 
+
     void Update()
     {
-        if (cnt >= 1000)
+        if (cnt >= note.Length)
         {
             cnt = 0;
         }
+    }
+
+    void SetNoteLinetoRandom()
+    {
+        noteLine = Random.Range(0, floors);
+    }
+
+    void SetNoteLine(int line)
+    {
+        noteLine = line;
     }
 
     void changePos()
@@ -181,35 +203,7 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 0; j < 3; j++)
         {
-            if (isEnd)
-            {
-                Debug.Log("생성 금지");
-                return;
-            }
-
-            if (isSlow)
-                note[cnt].GetComponent<Note>().speed *= 0.5f;
-            if (oppositeNoteArrow)
-                note[cnt].GetComponent<Note>().isOpposite = true;
-            if (notActedNote)
-                note[cnt].GetComponent<Note>().isNotacted = true;
-            if (fadeNote)
-                note[cnt].GetComponent<Note>().isFaded = true;
-            if (unifyNote)
-            {
-                for (int i = 10; i >= 0; i--)
-                {
-                    if ((cnt - i) > 0)
-                    {
-                        if (note[cnt - i] != null)
-                        {
-                            note[(cnt - i)].GetComponent<Note>().isSame = true;
-                        }
-                    }
-
-                }
-            }
-            note[cnt].GetComponent<Note>().posChange = j;
+            // note[cnt].GetComponent<Note>().spawnLine = j;
             if (j < 2)
             {
                 note[cnt++].SetActive(true);
@@ -221,35 +215,7 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 0; j < 2; j++)
         {
-            if (isEnd)
-            {
-                Debug.Log("생성 금지");
-                return;
-            }
-
-            if (isSlow)
-                note[cnt].GetComponent<Note>().speed *= 0.5f;
-            if (oppositeNoteArrow)
-                note[cnt].GetComponent<Note>().isOpposite = true;
-            if (notActedNote)
-                note[cnt].GetComponent<Note>().isNotacted = true;
-            if (fadeNote)
-                note[cnt].GetComponent<Note>().isFaded = true;
-            if (unifyNote)
-            {
-                for (int i = 10; i >= 0; i--)
-                {
-                    if ((cnt - i) > 0)
-                    {
-                        if (note[cnt - i] != null)
-                        {
-                            note[(cnt - i)].GetComponent<Note>().isSame = true;
-                        }
-                    }
-
-                }
-            }
-            note[cnt].GetComponent<Note>().posChange = j;
+            // note[cnt].GetComponent<Note>().spawnLine = j;
             if (j < 1)
             {
                 note[cnt++].SetActive(true);
@@ -260,35 +226,7 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 2; j > 0; j--)
         {
-            if (isEnd)
-            {
-                Debug.Log("생성 금지");
-                return;
-            }
-
-            if (isSlow)
-                note[cnt].GetComponent<Note>().speed *= 0.5f;
-            if (oppositeNoteArrow)
-                note[cnt].GetComponent<Note>().isOpposite = true;
-            if (notActedNote)
-                note[cnt].GetComponent<Note>().isNotacted = true;
-            if (fadeNote)
-                note[cnt].GetComponent<Note>().isFaded = true;
-            if (unifyNote)
-            {
-                for (int i = 10; i >= 0; i--)
-                {
-                    if ((cnt - i) > 0)
-                    {
-                        if (note[cnt - i] != null)
-                        {
-                            note[(cnt - i)].GetComponent<Note>().isSame = true;
-                        }
-                    }
-
-                }
-            }
-            note[cnt].GetComponent<Note>().posChange = j;
+            // note[cnt].GetComponent<Note>().spawnLine = j;
             if (j > 1)
             {
                 note[cnt++].SetActive(true);

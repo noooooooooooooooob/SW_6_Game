@@ -487,6 +487,9 @@ MonoBehaviour:
   notActedNote: 0
   fadeNote: 0
   unifyNote: 0
+  patnum: 0
+  patIdx: 0
+  floors: 0
   isEnd: 0
 --- !u!4 &295438783
 Transform:

@@ -30,24 +30,15 @@ public class Note : MonoBehaviour
     int arrowidx;
     int coloridx;
 
-
-
     public ColorEnum noteColor;
-    public bool isRed;
-    public bool isGreen;
-    public bool isBlue;
     public ArrowDirectionEnum noteArrowDirection;
-    public bool isLeft;
-    public bool isRight;
-    public bool isUp;
-    public bool isDown;
 
     //기믹들 추가
     public float changeSpeed;
     public bool isOpposite;
     public bool isNotacted;
     public bool isFaded;
-    public float op;
+    public float opacity;
     public bool isSame;
     public int posChange;
     //public int playerColor;
@@ -68,15 +59,18 @@ public class Note : MonoBehaviour
 
     void Awake()
     {
-        AudioSource = GetComponent<AudioSource>();
+        //External components
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
         staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
-        op = 1.0f;
         Boss = GameObject.Find("Boss");
         gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
+
+        //Local components
+        AudioSource = GetComponent<AudioSource>();
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
+        opacity = 1.0f;
         // 스폰 위치 설정
         spawnPointYidx = Random.Range(0, 3);
         spawnPointY = spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
@@ -101,79 +95,36 @@ public class Note : MonoBehaviour
         coloridx = Random.Range(0, 3);
         arrowidx = Random.Range(0, 4);
 
-        coloridx = Random.Range(0, 3);
-        arrowidx = Random.Range(0, 4);
-
-        isRed = false;
-        isGreen = false;
-        isBlue = false;
         switch (coloridx)
         {
             case 0:
                 noteColor = ColorEnum.red;
-                isRed = true;
                 break;
             case 1:
                 noteColor = ColorEnum.green;
-                isGreen = true;
                 break;
             case 2:
                 noteColor = ColorEnum.blue;
-                isBlue = true;
                 break;
         }
 
-        isLeft = false;
-        isRight = false;
-        isUp = false;
-        isDown = false;
         switch (arrowidx)
         {
             case 0:
                 noteArrowDirection = ArrowDirectionEnum.left;
-                isLeft = true;
                 break;
             case 1:
                 noteArrowDirection = ArrowDirectionEnum.right;
-                isRight = true;
                 break;
             case 2:
                 noteArrowDirection = ArrowDirectionEnum.up;
-                isUp = true;
                 break;
             case 3:
                 noteArrowDirection = ArrowDirectionEnum.down;
-                isDown = true;
                 break;
         }
 
-        //coloridx [ Red, Green, Blue ]
-        //arrowidx [ Left, Right, Up, Down]
-
-        if (coloridx == 0 && arrowidx == 0)
-            spriteRenderer.sprite = sprites[0];
-        else if (coloridx == 0 && arrowidx == 1)
-            spriteRenderer.sprite = sprites[1];
-        else if (coloridx == 0 && arrowidx == 2)
-            spriteRenderer.sprite = sprites[2];
-        else if (coloridx == 0 && arrowidx == 3)
-            spriteRenderer.sprite = sprites[3];
-        else if (coloridx == 1 && arrowidx == 0)
-            spriteRenderer.sprite = sprites[4];
-        else if (coloridx == 1 && arrowidx == 1)
-            spriteRenderer.sprite = sprites[5];
-        else if (coloridx == 1 && arrowidx == 2)
-            spriteRenderer.sprite = sprites[6];
-        else if (coloridx == 1 && arrowidx == 3)
-            spriteRenderer.sprite = sprites[7];
-        else if (coloridx == 2 && arrowidx == 0)
-            spriteRenderer.sprite = sprites[8];
-        else if (coloridx == 2 && arrowidx == 1)
-            spriteRenderer.sprite = sprites[9];
-        else if (coloridx == 2 && arrowidx == 2)
-            spriteRenderer.sprite = sprites[10];
-        else if (coloridx == 2 && arrowidx == 3)
-            spriteRenderer.sprite = sprites[11];
+        spriteRenderer.sprite = sprites[coloridx * 4 + arrowidx];
 
         isHit = false;
     }
@@ -201,7 +152,8 @@ public class Note : MonoBehaviour
     void Start()
     {
         // 위치 설정
-        if(posChange>=0){
+        if (posChange >= 0)
+        {
             updateStartingPos();
         }
         StartCoroutine(MoveToSpawnPointY());
@@ -243,14 +195,16 @@ public class Note : MonoBehaviour
         }
     }
 
-    void updateStartingPos(){
+    void updateStartingPos()
+    {
         spawnPointY = spawnPoints[posChange];
     }
 
     void Update()
     {
-        
+
         updatePlayerPosition();
+
         if (isMovingToBoss) //현재 플레이어와 충돌하면
         {
             MoveToBoss();
@@ -272,20 +226,16 @@ public class Note : MonoBehaviour
                 switch (arrowidx)
                 {
                     case 0:
-                        isLeft = false;
-                        isRight = true;
+                        noteArrowDirection = ArrowDirectionEnum.right;
                         break;
                     case 1:
-                        isRight = false;
-                        isLeft = true;
+                        noteArrowDirection = ArrowDirectionEnum.left;
                         break;
                     case 2:
-                        isUp = false;
-                        isDown = true;
+                        noteArrowDirection = ArrowDirectionEnum.down;
                         break;
                     case 3:
-                        isDown = false;
-                        isUp = true;
+                        noteArrowDirection = ArrowDirectionEnum.up;
                         break;
                 }
                 isOpposite = false;
@@ -293,21 +243,13 @@ public class Note : MonoBehaviour
 
             if (isSame)
             {
-                //isSame = false;
                 sameColor();
             }
 
 
             if (isNotacted)
             {
-                if (arrowidx == 0)
-                    spriteRenderer.sprite = notActedNodes[0];
-                else if (arrowidx == 1)
-                    spriteRenderer.sprite = notActedNodes[1];
-                else if (arrowidx == 2)
-                    spriteRenderer.sprite = notActedNodes[2];
-                else if (arrowidx == 3)
-                    spriteRenderer.sprite = notActedNodes[3];
+                spriteRenderer.sprite = notActedNodes[arrowidx];
             }
             transform.Translate(-1.0f * speed * Time.deltaTime, 0, 0); // 등속으로 왼쪽으로 이동
         }
@@ -321,24 +263,24 @@ public class Note : MonoBehaviour
 
     void fadeNodes()
     {
-        spriteRenderer.color = new Color(1, 1, 1, 1.0f * op);
-        if (op <= 0.0f)
+        spriteRenderer.color = new Color(1, 1, 1, 1.0f * opacity);
+        if (opacity <= 0.0f)
         {
             inFadeNodes();
             return;
         }
-        op -= 0.1f;
+        opacity -= 0.1f;
         Invoke("fadeNodes", 0.08f);
     }
 
     void inFadeNodes()
     {
-        if (op >= 1.0f)
+        if (opacity >= 1.0f)
             return;
-        if (transform.position.x <= -0.5f && op <= 1.0f)
+        if (transform.position.x <= -0.5f && opacity <= 1.0f)
         {
-            op += 0.1f;
-            spriteRenderer.color = new Color(1, 1, 1, 1.0f * op);
+            opacity += 0.1f;
+            spriteRenderer.color = new Color(1, 1, 1, 1.0f * opacity);
         }
 
         Invoke("inFadeNodes", 0.08f);
@@ -362,38 +304,20 @@ public class Note : MonoBehaviour
         if (playerColor == ColorEnum.red)
         {
             noteColor = ColorEnum.red;
-            if (arrowidx == 0)
-                spriteRenderer.sprite = sprites[0];
-            else if (arrowidx == 1)
-                spriteRenderer.sprite = sprites[1];
-            else if (arrowidx == 2)
-                spriteRenderer.sprite = sprites[2];
-            else if (arrowidx == 3)
-                spriteRenderer.sprite = sprites[3];
+            coloridx = 0;
+            spriteRenderer.sprite = sprites[coloridx * 4 + arrowidx];
         }
         if (playerColor == ColorEnum.green)
         {
             noteColor = ColorEnum.green;
-            if (arrowidx == 0)
-                spriteRenderer.sprite = sprites[4];
-            else if (arrowidx == 1)
-                spriteRenderer.sprite = sprites[5];
-            else if (arrowidx == 2)
-                spriteRenderer.sprite = sprites[6];
-            else if (arrowidx == 3)
-                spriteRenderer.sprite = sprites[7];
+            coloridx = 1;
+            spriteRenderer.sprite = sprites[coloridx * 4 + arrowidx];
         }
         if (playerColor == ColorEnum.blue)
         {
             noteColor = ColorEnum.blue;
-            if (arrowidx == 0)
-                spriteRenderer.sprite = sprites[8];
-            else if (arrowidx == 1)
-                spriteRenderer.sprite = sprites[9];
-            else if (arrowidx == 2)
-                spriteRenderer.sprite = sprites[10];
-            else if (arrowidx == 3)
-                spriteRenderer.sprite = sprites[11];
+            coloridx = 2;
+            spriteRenderer.sprite = sprites[coloridx * 4 + arrowidx];
         }
     }
     void difcolor()

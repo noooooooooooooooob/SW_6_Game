@@ -22,14 +22,6 @@ public class GameTransition : MonoBehaviour
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
 
 
-        if (playerMovement != null)
-        {
-            Debug.Log("PlayerMovement EXISTS");
-        }
-        else
-        {
-            Debug.Log("PlayerMovement is null");
-        }
     }
     public void SetBossDefeated()
     {
