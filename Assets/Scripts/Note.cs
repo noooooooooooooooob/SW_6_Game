@@ -49,6 +49,7 @@ public class Note : MonoBehaviour
     public bool isFaded;
     public float op;
     public bool isSame;
+    public int posChange;
     //public int playerColor;
     ColorEnum playerColor;
 
@@ -95,6 +96,7 @@ public class Note : MonoBehaviour
         isNotacted = false;
         isFaded = false;
         isSame = false;
+        posChange = -1;
 
         coloridx = Random.Range(0, 3);
         arrowidx = Random.Range(0, 4);
@@ -198,6 +200,10 @@ public class Note : MonoBehaviour
 
     void Start()
     {
+        // 위치 설정
+        if(posChange>=0){
+            updateStartingPos();
+        }
         StartCoroutine(MoveToSpawnPointY());
 
         var bossObj = FindObjectOfType<Boss>();
@@ -237,10 +243,13 @@ public class Note : MonoBehaviour
         }
     }
 
-
+    void updateStartingPos(){
+        spawnPointY = spawnPoints[posChange];
+    }
 
     void Update()
     {
+        
         updatePlayerPosition();
         if (isMovingToBoss) //현재 플레이어와 충돌하면
         {
