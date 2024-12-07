@@ -49,7 +49,6 @@ public class ObjectManager : MonoBehaviour
         Generate();
 
         Invoke("makeObj", 1f);
-        // makeObj();
         // Boss pattern
         patnum = -1;
         patIdx = 0;
@@ -81,7 +80,59 @@ public class ObjectManager : MonoBehaviour
             return;
         }
 
-        SetNoteLinetoRandom();
+        // 패턴 테스트
+        if (cnt > 2 && onlyOne == 0)
+        {
+            onlyOne = 1;
+            patnum = 2;
+            patIdx = 0;
+        }
+
+        if (patnum >= 0) // Boss Pattern
+        {
+            activatePattern();
+        }
+        else // Normal Pattern
+        {
+
+            SetNoteLinetoRandom();
+            setNoteAttribute();
+
+            note[cnt++].SetActive(true);
+
+            if (cnt >= note.Length)
+                cnt = 0;
+
+            noteSpawnTime = Random.Range(noteSpawnTimeMin, noteSpawnTimeMax);
+
+            if (spawnSlow)
+            {
+                spawnSlowTime *= 2;
+            }
+            else
+            {
+                spawnSlowTime = 1;
+            }
+
+            noteSpawnTime *= spawnSlowTime;
+        }
+
+        Invoke("makeObj", noteSpawnTime);
+    }
+
+    void SetNoteLinetoRandom()
+    {
+        noteLine = Random.Range(0, floors + 1);//+1 Because its exclusive
+    }
+
+    void SetNoteLine(int line)
+    {
+        noteLine = line;
+    }
+
+    void setNoteAttribute()
+    {
+        note[cnt].GetComponent<Note>().spawnLine = noteLine;
 
         if (isSlow)
             note[cnt].GetComponent<Note>().speed *= 0.5f;
@@ -105,54 +156,6 @@ public class ObjectManager : MonoBehaviour
 
             }
         }
-        // 패턴 테스트
-        if (cnt > 2 && onlyOne == 0)
-        {
-            onlyOne = 1;
-            patnum = 3;
-            patIdx = 0;
-        }
-
-        if (patnum >= 0)
-        {
-            activatePattern();
-        }
-
-        note[cnt++].SetActive(true);
-
-        if (cnt >= note.Length)
-            cnt = 0;
-
-        noteSpawnTime = Random.Range(noteSpawnTimeMin, noteSpawnTimeMax);
-        spawnSlowTime = 1;
-
-        if (spawnSlow)
-        {
-            spawnSlowTime *= 2;
-        }
-
-        noteSpawnTime *= spawnSlowTime;
-
-        Invoke("makeObj", noteSpawnTime);
-    }
-
-
-    void Update()
-    {
-        if (cnt >= note.Length)
-        {
-            cnt = 0;
-        }
-    }
-
-    void SetNoteLinetoRandom()
-    {
-        noteLine = Random.Range(0, floors);
-    }
-
-    void SetNoteLine(int line)
-    {
-        noteLine = line;
     }
 
     void changePos()
@@ -171,7 +174,7 @@ public class ObjectManager : MonoBehaviour
                 spawnTwoDown();
                 break;
             default:
-                note[cnt].GetComponent<Note>().posChange = pos;
+                SetNoteLine(pos);
                 break;
         }
     }
@@ -187,7 +190,12 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-
+    /*
+        0~2는 3~1층
+        3은 모든 칸
+        4는 위, 중간
+        5는 중간, 아래
+    */
     void setBossPattern()
     {
         bossPattern = new int[,]
@@ -203,11 +211,9 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 0; j < 3; j++)
         {
-            // note[cnt].GetComponent<Note>().spawnLine = j;
-            if (j < 2)
-            {
-                note[cnt++].SetActive(true);
-            }
+            SetNoteLine(j);
+            setNoteAttribute();
+            note[cnt++].SetActive(true);
         }
     }
 
@@ -215,22 +221,18 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 0; j < 2; j++)
         {
-            // note[cnt].GetComponent<Note>().spawnLine = j;
-            if (j < 1)
-            {
-                note[cnt++].SetActive(true);
-            }
+            SetNoteLine(j);
+            setNoteAttribute();
+            note[cnt++].SetActive(true);
         }
     }
     void spawnTwoDown()
     {
         for (int j = 2; j > 0; j--)
         {
-            // note[cnt].GetComponent<Note>().spawnLine = j;
-            if (j > 1)
-            {
-                note[cnt++].SetActive(true);
-            }
+            SetNoteLine(j);
+            setNoteAttribute();
+            note[cnt++].SetActive(true);
         }
     }
 }

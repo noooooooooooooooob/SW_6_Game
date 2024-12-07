@@ -13,19 +13,16 @@ public class Note : MonoBehaviour
     public AudioClip noteHitSound;       // 노트 치는 효과음 파일
     public GameObject player;
     GameObject Boss;
-    GameManager gameManager;
-    Rigidbody2D rigid;
     public float[] spawnPoints;
     public float[] spawnPointschangelocate;
     public Sprite[] sprites;
     public Sprite[] notActedNodes;
     public Sprite[] oppositeNodes;
     SpriteRenderer spriteRenderer;
-    int spawnPointYidx;
-    float spawnPointY;
+    public int spawnLine;
+    float spawnPointYInWorld;
     public float spawnPointX;
     public float speed;
-    bool isBoardered;
     public bool isHit;
     int arrowidx;
     int coloridx;
@@ -44,14 +41,13 @@ public class Note : MonoBehaviour
     //public int playerColor;
     ColorEnum playerColor;
 
-    float plus;
     // 플레이어 보스 위치 변수
+    private Player playerObj;
+    private Boss bossObj;
     private Vector2 bossPosition;
     private bool isMovingToBoss = false;
     private Vector2 playerPosition;
     private bool isMovingToPlayer = false;
-
-
 
     // 체력 변화 처리 클래스 연결
     public HealthBarController healthBarController;
@@ -63,17 +59,12 @@ public class Note : MonoBehaviour
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
         staminaBar = GameObject.Find("StaminaBar").GetComponent<ReduceGaugebar>();
         Boss = GameObject.Find("Boss");
-        gameManager = GameObject.Find("GameManager").gameObject.GetComponent<GameManager>();
 
         //Local components
         AudioSource = GetComponent<AudioSource>();
-        rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         opacity = 1.0f;
-        // 스폰 위치 설정
-        spawnPointYidx = Random.Range(0, 3);
-        spawnPointY = spawnPoints[spawnPointYidx]; // 스폰포인트 랜덤
 
         // 보스가 활성화되어 있으면 보스 위치에서 시작
         if (Boss != null && Boss.activeInHierarchy)
@@ -83,18 +74,24 @@ public class Note : MonoBehaviour
         else
         {
             Debug.LogWarning("Boss is not active or missing. Default spawn point will be used.");
-            transform.position = new Vector2(-10f, spawnPointY); // 기본 위치 설정
+            transform.position = new Vector2(-10f, spawnPointYInWorld); // 기본 위치 설정
         }
 
         isOpposite = false;
         isNotacted = false;
         isFaded = false;
         isSame = false;
-        posChange = -1;
 
         coloridx = Random.Range(0, 3);
         arrowidx = Random.Range(0, 4);
 
+        SetNoteColorDirection();
+
+        isHit = false;
+    }
+
+    void SetNoteColorDirection()
+    {
         switch (coloridx)
         {
             case 0:
@@ -108,7 +105,7 @@ public class Note : MonoBehaviour
                 break;
         }
 
-        switch (arrowidx)
+        switch (arrowidx) // 0 : left, 1 : right ,2 : up, 3 : down
         {
             case 0:
                 noteArrowDirection = ArrowDirectionEnum.left;
@@ -125,8 +122,6 @@ public class Note : MonoBehaviour
         }
 
         spriteRenderer.sprite = sprites[coloridx * 4 + arrowidx];
-
-        isHit = false;
     }
 
     IEnumerator MoveToSpawnPointY()
@@ -135,7 +130,7 @@ public class Note : MonoBehaviour
         float elapsed = 0.0f;
 
         Vector2 startPosition = transform.position;
-        Vector2 targetPosition = new Vector2(startPosition.x, spawnPointY);
+        Vector2 targetPosition = new Vector2(startPosition.x, spawnPointYInWorld);
 
         while (elapsed < duration)
         {
@@ -146,44 +141,24 @@ public class Note : MonoBehaviour
         }
 
         // Y축 최종 위치 보정
-        transform.position = new Vector2(transform.position.x, spawnPointY);
+        transform.position = new Vector2(transform.position.x, spawnPointYInWorld);
     }
 
     void Start()
     {
-        // 위치 설정
-        if (posChange >= 0)
-        {
-            updateStartingPos();
-        }
+        // 스폰 위치 설정
+        Debug.Log("SpawnLine : " + spawnLine);
+        spawnPointYInWorld = spawnPoints[spawnLine]; // 스폰포인트 랜덤
+
         StartCoroutine(MoveToSpawnPointY());
 
-        var bossObj = FindObjectOfType<Boss>();
-        var playerObj = FindObjectOfType<Player>();
-
-        if (bossObj != null && bossObj.gameObject.activeInHierarchy)
-        {
-            bossPosition = bossObj.transform.position;
-            transform.position = new Vector2(bossObj.transform.position.x, bossObj.transform.position.y);
-        }
-        else
-        {
-            Debug.LogWarning("Boss is not active or missing.");
-        }
-
-        if (playerObj != null && playerObj.gameObject.activeInHierarchy)
-        {
-            playerPosition = playerObj.transform.position;
-        }
-        else
-        {
-            Debug.LogWarning("Player is not active or missing.");
-        }
+        bossObj = FindObjectOfType<Boss>();
+        playerObj = FindObjectOfType<Player>();
     }
 
     public void updatePlayerPosition()
     {
-        var playerObj = FindObjectOfType<Player>();
+        // var playerObj = FindObjectOfType<Player>();
 
         if (playerObj != null && playerObj.gameObject.activeInHierarchy)
         {
@@ -193,11 +168,6 @@ public class Note : MonoBehaviour
         {
             //Debug.LogWarning("Player is not active or missing.");
         }
-    }
-
-    void updateStartingPos()
-    {
-        spawnPointY = spawnPoints[posChange];
     }
 
     void Update()
@@ -222,22 +192,15 @@ public class Note : MonoBehaviour
             }
             if (isOpposite)
             {
-                spriteRenderer.sprite = oppositeNodes[coloridx * 4 + arrowidx];
-                switch (arrowidx)
+                if (arrowidx % 2 == 0)
                 {
-                    case 0:
-                        noteArrowDirection = ArrowDirectionEnum.right;
-                        break;
-                    case 1:
-                        noteArrowDirection = ArrowDirectionEnum.left;
-                        break;
-                    case 2:
-                        noteArrowDirection = ArrowDirectionEnum.down;
-                        break;
-                    case 3:
-                        noteArrowDirection = ArrowDirectionEnum.up;
-                        break;
+                    arrowidx += 1;
                 }
+                else
+                {
+                    arrowidx -= 1;
+                }
+                SetNoteColorDirection();
                 isOpposite = false;
             }
 
@@ -245,7 +208,6 @@ public class Note : MonoBehaviour
             {
                 sameColor();
             }
-
 
             if (isNotacted)
             {
@@ -320,15 +282,9 @@ public class Note : MonoBehaviour
             spriteRenderer.sprite = sprites[coloridx * 4 + arrowidx];
         }
     }
-    void difcolor()
-    {
-
-
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "clone")
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
@@ -349,7 +305,6 @@ public class Note : MonoBehaviour
 
     void damagePlayer()
     {
-        // HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
             healthBarController.TakeDamage();
@@ -361,7 +316,6 @@ public class Note : MonoBehaviour
     }
     void healPlayer()
     {
-        // HealthBarController healthBarController = FindObjectOfType<HealthBarController>();
         if (healthBarController != null)
         {
             healthBarController.Heal();
@@ -378,8 +332,6 @@ public class Note : MonoBehaviour
 
     void MoveToBoss()
     {
-        var bossObj = FindObjectOfType<Boss>();
-
         if (bossObj == null || !bossObj.gameObject.activeInHierarchy)
         {
             Debug.LogWarning("Boss is not active or missing.");
@@ -405,8 +357,6 @@ public class Note : MonoBehaviour
     }
     void MoveToPlayer()
     {
-        var playerObj = FindObjectOfType<Player>();
-
         if (playerObj == null || !playerObj.gameObject.activeInHierarchy)
         {
             Debug.LogWarning("Player is not active or missing.");
