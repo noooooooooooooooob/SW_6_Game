@@ -11,6 +11,7 @@ TagManager:
   - Bomb
   - Boss
   - clone
+  - ItemMini
   layers:
   - Default
   - TransparentFX

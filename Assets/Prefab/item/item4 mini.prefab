@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7920839724148838530}
   - component: {fileID: 4532477307195573264}
   - component: {fileID: -7840905042962665546}
+  - component: {fileID: -8165846633380154277}
   m_Layer: 0
   m_Name: item4 mini
-  m_TagString: Untagged
+  m_TagString: ItemMini
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,3 +98,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a6c7bd920a68240b334350a002c0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBarController: {fileID: 0}
+--- !u!114 &-8165846633380154277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7539801368238617961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85062a496952d4b41aa355baf3e207eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 5
+  isDis: 0

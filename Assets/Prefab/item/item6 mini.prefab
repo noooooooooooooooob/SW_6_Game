@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 2639910212203753177}
   - component: {fileID: 7079740519537218321}
+  - component: {fileID: 7138764132743003879}
   m_Layer: 0
   m_Name: item6 mini
-  m_TagString: Untagged
+  m_TagString: ItemMini
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,3 +85,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &7138764132743003879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7047249298611479460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85062a496952d4b41aa355baf3e207eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 5
+  isDis: 0
