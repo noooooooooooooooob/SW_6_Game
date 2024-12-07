@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 576593402226831689}
   - component: {fileID: 6021381533969641440}
   - component: {fileID: 8405084802247415583}
+  - component: {fileID: -2497877757175789707}
   m_Layer: 0
   m_Name: item3 mini
-  m_TagString: Untagged
+  m_TagString: ItemMini
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -101,3 +102,17 @@ MonoBehaviour:
   maxX: 13
   minY: -5
   maxY: 5
+--- !u!114 &-2497877757175789707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5948926716114525798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85062a496952d4b41aa355baf3e207eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeDuration: 5
+  isDis: 0

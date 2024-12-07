@@ -24,7 +24,7 @@ public class item_spawn : MonoBehaviour
     IEnumerator itemRoutine()
     {
         yield return new WaitForSeconds(3f);
-        int k = 5;
+        int k = 0;
         while (true)
         {
             if (test)
@@ -33,7 +33,7 @@ public class item_spawn : MonoBehaviour
                 spawnitem(k, arrPosY[0]);
                 k++;
                 if (k == items.Length)
-                    k = 5;
+                    k = 0;
                 yield return new WaitForSeconds(spawnTime);
                 continue;
             }

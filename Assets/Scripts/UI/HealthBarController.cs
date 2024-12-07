@@ -58,18 +58,10 @@ public class HealthBarController : MonoBehaviour
 
     private void Update()
     {
-    if (currentHealth <= 0 || currentHealth >= maxHealth)
-{
-  inventory IVT = FindObjectOfType<inventory>();
-  IVT.clonefin();
-}
-            if (Mathf.Abs(currentHealth - targetHealth) > 0.01f)
-            {
-                currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
-                UpdateSlider();
-            }
-
-
+        if (currentHealth <= 0 || currentHealth >= maxHealth)
+        {
+            inventory IVT = FindObjectOfType<inventory>();
+            IVT.clonefin();
             if (currentHealth <= 0)
             {
                 targetHealth = 0;
@@ -87,11 +79,21 @@ public class HealthBarController : MonoBehaviour
                 Debug.Log("Boss Health depleted");
 
             }
-            // 수동 체력 조정
-            if (Input.GetKeyDown(KeyCode.O))
-                TakeDamage();
-            else if (Input.GetKeyDown(KeyCode.P))
-                Heal();
+
+        }
+
+        if (Mathf.Abs(currentHealth - targetHealth) > 0.01f)
+        {
+            currentHealth = Mathf.Lerp(currentHealth, targetHealth, Time.deltaTime * smoothSpeed);
+            UpdateSlider();
+        }
+
+
+        // 수동 체력 조정
+        if (Input.GetKeyDown(KeyCode.O))
+            TakeDamage();
+        else if (Input.GetKeyDown(KeyCode.P))
+            Heal();
     }
 
     private void CallPlayerDeath()
@@ -163,10 +165,12 @@ public class HealthBarController : MonoBehaviour
     //체력반전
     public void Healthchange()
     {
-        float amount = changeRate;
-        float healthPercentage = GetHealthPercentage();
+         if(HealthBarActive){
+             float amount = changeRate;
+            float healthPercentage = GetHealthPercentage();
 
-        SetHealth(Mathf.Clamp(maxHealth - currentHealth, -1f, maxHealth + 1f));
+            SetHealth(Mathf.Clamp(maxHealth - currentHealth, -1f, maxHealth + 1f));
+        }
     }
 
     private void SetHealth(float value)
