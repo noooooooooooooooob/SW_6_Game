@@ -264,7 +264,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -1202,7 +1202,7 @@ AudioSource:
   m_GameObject: {fileID: 257775929}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 7559014237877176232, guid: 5cebd0276bb94bc44947ab4c53fb9b10, type: 2}
   m_audioClip: {fileID: 8300000, guid: 334bcb72b639f824ea902fe6acdc5cc8, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1542,7 +1542,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -2671,7 +2671,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -3287,9 +3287,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744898171}
-        m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
-        m_MethodName: PlayClickSound
+      - m_Target: {fileID: 131389973}
+        m_TargetAssemblyTypeName: activeFalse, Assembly-CSharp
+        m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3299,9 +3299,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 131389973}
-        m_TargetAssemblyTypeName: activeFalse, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 1744898174}
+        m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4489,9 +4489,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744898171}
-        m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
-        m_MethodName: PlayClickSound
+      - m_Target: {fileID: 835098548}
+        m_TargetAssemblyTypeName: activeFalse, Assembly-CSharp
+        m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4501,9 +4501,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 835098548}
-        m_TargetAssemblyTypeName: activeFalse, Assembly-CSharp
-        m_MethodName: onClick
+      - m_Target: {fileID: 1744898174}
+        m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4808,7 +4808,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -5833,7 +5833,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -5845,9 +5845,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1350246123}
-        m_TargetAssemblyTypeName: GameExit, Assembly-CSharp
-        m_MethodName: ExitGame
+      - m_Target: {fileID: 1744898174}
+        m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
+        m_MethodName: PlayClickSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6762,7 +6762,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -6929,8 +6929,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1744898172}
-  - component: {fileID: 1744898171}
   - component: {fileID: 1744898173}
+  - component: {fileID: 1744898174}
   m_Layer: 0
   m_Name: ClickSounds
   m_TagString: Untagged
@@ -6938,19 +6938,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1744898171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1744898170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17d0d2e3e15e29a4f8a977e95e2414ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clickSound: {fileID: 8300000, guid: cee91e3434d9aeb468018b392d5073c7, type: 3}
 --- !u!4 &1744898172
 Transform:
   m_ObjectHideFlags: 0
@@ -6975,7 +6962,7 @@ AudioSource:
   m_GameObject: {fileID: 1744898170}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 4018524132510066835, guid: 5cebd0276bb94bc44947ab4c53fb9b10, type: 2}
   m_audioClip: {fileID: 8300000, guid: cee91e3434d9aeb468018b392d5073c7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -7062,6 +7049,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1744898174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744898170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f3a66a77ca9d90419837f4be79dcc73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickSound: {fileID: 8300000, guid: cee91e3434d9aeb468018b392d5073c7, type: 3}
 --- !u!1 &1745803395
 GameObject:
   m_ObjectHideFlags: 0
@@ -7850,7 +7850,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -8093,7 +8093,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -8622,7 +8622,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1744898171}
+      - m_Target: {fileID: 1744898174}
         m_TargetAssemblyTypeName: ClickSound, Assembly-CSharp
         m_MethodName: PlayClickSound
         m_Mode: 1
@@ -9123,6 +9123,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7605893395411620002, guid: 5d0957f51fba8ad4f9cefbd76af61046, type: 3}
       propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7768309634067942962, guid: 5d0957f51fba8ad4f9cefbd76af61046, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8790551170424216270, guid: 5d0957f51fba8ad4f9cefbd76af61046, type: 3}
