@@ -184,7 +184,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 62991250}
-  - component: {fileID: 62991249}
   m_Layer: 0
   m_Name: Clone
   m_TagString: Untagged
@@ -192,20 +191,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &62991249
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 62991248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f6c3ba744c30f246abef7cfc81679a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetObject: {fileID: 62991248}
-  isDeleted: 0
 --- !u!4 &62991250
 Transform:
   m_ObjectHideFlags: 0
@@ -487,6 +472,8 @@ MonoBehaviour:
   notActedNote: 0
   fadeNote: 0
   unifyNote: 0
+  patnum: 0
+  patIdx: 0
   isEnd: 0
 --- !u!4 &295438783
 Transform:
@@ -1080,7 +1067,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5962352278216740155, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7593790132474505426, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2843,6 +2830,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     - {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+    - {fileID: 8891108038469270893, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -3287,6 +3275,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4244330872831236948, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7593790132474505426, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_LocalPosition.x
       value: -10.93
@@ -3471,7 +3463,8 @@ PrefabInstance:
       propertyPath: EntranceCurve.m_Curve.Array.data[1].tangentMode
       value: 34
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4244330872831236948, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -5807,7 +5800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5962352278216740155, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7593790132474505426, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_LocalPosition.x

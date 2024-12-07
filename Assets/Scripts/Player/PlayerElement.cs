@@ -7,10 +7,11 @@ public class PlayerElement : MonoBehaviour
 
     public ColorEnum playerCurrentElement;
     public bool isClone;
+    private CurrentColor CC;
     
     void Start()
     {
-        CurrentColor CC =FindObjectOfType<CurrentColor>();
+        CC = FindObjectOfType<CurrentColor>();
         if(CC!=null){
             playerCurrentElement=CC.color;
         }
@@ -23,7 +24,6 @@ public class PlayerElement : MonoBehaviour
 
     void Update()
     {
-        CurrentColor CC =FindObjectOfType<CurrentColor>();
        if(CC!=null){
            
             playerCurrentElement=CC.color;
