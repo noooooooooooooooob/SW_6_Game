@@ -27,14 +27,19 @@ public class ObjectManager : MonoBehaviour
     public int[,] bossPattern;
     public int patnum;
     public int patIdx;
+
+    [Range(0, 2)]
+    public int floors;
     int onlyOne = 0;
+
+    private int noteLine; // Floor of the note (0~2) 
 
     //boss appear
     public bool isEnd;
     void Awake()
     {
         cnt = 0;
-        note = new GameObject[1000];
+        note = new GameObject[100];
         isSlow = false;
         isEnd = false;
         noteSpawnTime = 1.0f;
@@ -42,8 +47,8 @@ public class ObjectManager : MonoBehaviour
         boss = GameObject.Find("Boss");
 
         Generate();
+
         Invoke("makeObj", 1f);
-        // makeObj();
         // Boss pattern
         patnum = -1;
         patIdx = 0;
@@ -75,6 +80,60 @@ public class ObjectManager : MonoBehaviour
             return;
         }
 
+        // 패턴 테스트
+        if (cnt > 2 && onlyOne == 0)
+        {
+            onlyOne = 1;
+            patnum = 2;
+            patIdx = 0;
+        }
+
+        if (patnum >= 0) // Boss Pattern
+        {
+            activatePattern();
+        }
+        else // Normal Pattern
+        {
+
+            SetNoteLinetoRandom();
+            setNoteAttribute();
+
+            note[cnt++].SetActive(true);
+
+            if (cnt >= note.Length)
+                cnt = 0;
+
+            noteSpawnTime = Random.Range(noteSpawnTimeMin, noteSpawnTimeMax);
+
+            if (spawnSlow)
+            {
+                spawnSlowTime *= 2;
+            }
+            else
+            {
+                spawnSlowTime = 1;
+            }
+
+            noteSpawnTime *= spawnSlowTime;
+        }
+
+        Invoke("makeObj", noteSpawnTime);
+    }
+
+    void SetNoteLinetoRandom()
+    {
+        noteLine = Random.Range(0, floors + 1);//+1 Because its exclusive
+    }
+
+    void SetNoteLine(int line)
+    {
+        noteLine = line;
+    }
+
+    void setNoteAttribute()
+    {
+        note[cnt].GetComponent<Note>().spawnLine = noteLine;
+
         if (isSlow)
             note[cnt].GetComponent<Note>().speed *= 0.5f;
         if (oppositeNoteArrow)
@@ -97,40 +156,6 @@ public class ObjectManager : MonoBehaviour
 
             }
         }
-        // 패턴 테스트
-        if (cnt > 2 && onlyOne == 0)
-        {
-            onlyOne = 1;
-            patnum = 3;
-            patIdx = 0;
-        }
-
-        if (patnum >= 0)
-        {
-            activatePattern();
-        }
-
-        note[cnt++].SetActive(true);
-
-        if (cnt >= 1000)
-            cnt = 0;
-        noteSpawnTime = Random.Range(noteSpawnTimeMin, noteSpawnTimeMax);
-        spawnSlowTime = 1;
-        if (spawnSlow)
-        {
-            spawnSlowTime *= 2;
-        }
-
-        noteSpawnTime *= spawnSlowTime;
-        Invoke("makeObj", noteSpawnTime);
-    }
-
-    void Update()
-    {
-        if (cnt >= 1000)
-        {
-            cnt = 0;
-        }
     }
 
     void changePos()
@@ -149,7 +174,7 @@ public class ObjectManager : MonoBehaviour
                 spawnTwoDown();
                 break;
             default:
-                note[cnt].GetComponent<Note>().posChange = pos;
+                SetNoteLine(pos);
                 break;
         }
     }
@@ -165,7 +190,12 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-
+    /*
+        0~2는 3~1층
+        3은 모든 칸
+        4는 위, 중간
+        5는 중간, 아래
+    */
     void setBossPattern()
     {
         bossPattern = new int[,]
@@ -181,39 +211,9 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 0; j < 3; j++)
         {
-            if (isEnd)
-            {
-                Debug.Log("생성 금지");
-                return;
-            }
-
-            if (isSlow)
-                note[cnt].GetComponent<Note>().speed *= 0.5f;
-            if (oppositeNoteArrow)
-                note[cnt].GetComponent<Note>().isOpposite = true;
-            if (notActedNote)
-                note[cnt].GetComponent<Note>().isNotacted = true;
-            if (fadeNote)
-                note[cnt].GetComponent<Note>().isFaded = true;
-            if (unifyNote)
-            {
-                for (int i = 10; i >= 0; i--)
-                {
-                    if ((cnt - i) > 0)
-                    {
-                        if (note[cnt - i] != null)
-                        {
-                            note[(cnt - i)].GetComponent<Note>().isSame = true;
-                        }
-                    }
-
-                }
-            }
-            note[cnt].GetComponent<Note>().posChange = j;
-            if (j < 2)
-            {
-                note[cnt++].SetActive(true);
-            }
+            SetNoteLine(j);
+            setNoteAttribute();
+            note[cnt++].SetActive(true);
         }
     }
 
@@ -221,78 +221,18 @@ public class ObjectManager : MonoBehaviour
     {
         for (int j = 0; j < 2; j++)
         {
-            if (isEnd)
-            {
-                Debug.Log("생성 금지");
-                return;
-            }
-
-            if (isSlow)
-                note[cnt].GetComponent<Note>().speed *= 0.5f;
-            if (oppositeNoteArrow)
-                note[cnt].GetComponent<Note>().isOpposite = true;
-            if (notActedNote)
-                note[cnt].GetComponent<Note>().isNotacted = true;
-            if (fadeNote)
-                note[cnt].GetComponent<Note>().isFaded = true;
-            if (unifyNote)
-            {
-                for (int i = 10; i >= 0; i--)
-                {
-                    if ((cnt - i) > 0)
-                    {
-                        if (note[cnt - i] != null)
-                        {
-                            note[(cnt - i)].GetComponent<Note>().isSame = true;
-                        }
-                    }
-
-                }
-            }
-            note[cnt].GetComponent<Note>().posChange = j;
-            if (j < 1)
-            {
-                note[cnt++].SetActive(true);
-            }
+            SetNoteLine(j);
+            setNoteAttribute();
+            note[cnt++].SetActive(true);
         }
     }
     void spawnTwoDown()
     {
         for (int j = 2; j > 0; j--)
         {
-            if (isEnd)
-            {
-                Debug.Log("생성 금지");
-                return;
-            }
-
-            if (isSlow)
-                note[cnt].GetComponent<Note>().speed *= 0.5f;
-            if (oppositeNoteArrow)
-                note[cnt].GetComponent<Note>().isOpposite = true;
-            if (notActedNote)
-                note[cnt].GetComponent<Note>().isNotacted = true;
-            if (fadeNote)
-                note[cnt].GetComponent<Note>().isFaded = true;
-            if (unifyNote)
-            {
-                for (int i = 10; i >= 0; i--)
-                {
-                    if ((cnt - i) > 0)
-                    {
-                        if (note[cnt - i] != null)
-                        {
-                            note[(cnt - i)].GetComponent<Note>().isSame = true;
-                        }
-                    }
-
-                }
-            }
-            note[cnt].GetComponent<Note>().posChange = j;
-            if (j > 1)
-            {
-                note[cnt++].SetActive(true);
-            }
+            SetNoteLine(j);
+            setNoteAttribute();
+            note[cnt++].SetActive(true);
         }
     }
 }

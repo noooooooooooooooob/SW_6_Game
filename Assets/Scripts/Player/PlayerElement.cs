@@ -15,11 +15,12 @@ public class PlayerElement : MonoBehaviour
         if(CC!=null){
             playerCurrentElement=CC.color;
         }
-        else{
+        else
+        {
             playerCurrentElement = ColorEnum.red;
-            CC.color=playerCurrentElement;
+            CC.color = playerCurrentElement;
         }
-        
+
     }
 
     void Update()
@@ -32,25 +33,25 @@ public class PlayerElement : MonoBehaviour
         {
           
             playerCurrentElement = ColorEnum.red;
-            CC.color=playerCurrentElement;
-            
+            CC.color = playerCurrentElement;
+
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
            
             playerCurrentElement = ColorEnum.green;
-            CC.color=playerCurrentElement;
+            CC.color = playerCurrentElement;
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
             
             playerCurrentElement = ColorEnum.blue;
-            CC.color=playerCurrentElement;
+            CC.color = playerCurrentElement;
         }
-        
-        
+
+
 
 
     }
