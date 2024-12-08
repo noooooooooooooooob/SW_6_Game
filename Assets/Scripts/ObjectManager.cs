@@ -7,52 +7,39 @@ using UnityEngine.Rendering;
 
 public class ObjectManager : MonoBehaviour
 {
-    public GameObject boss;
     public GameObject notePrefab;
+    private NotePatterns notePatterns;
     public float noteSpawnTime;
+    private float originalNoteSpawnTime;
     public float noteSpawnTimeMin;
     public float noteSpawnTimeMax;
     GameObject[] note;
-    int cnt;
+    public int cnt;
     public bool isSlow;
-    public bool spawnSlow;
-    float spawnSlowTime;
-
     //boss logic
     public bool changingNoteLocation;
     public bool oppositeNoteArrow;
     public bool notActedNote;
     public bool fadeNote;
     public bool unifyNote;
-    public int[,] bossPattern;
-    public int patnum;
-    public int patIdx;
+
 
     [Range(0, 2)]
     public int floors;
-    int onlyOne = 0;
-
     private int noteLine; // Floor of the note (0~2) 
 
     //boss appear
     public bool isEnd;
     void Awake()
     {
-        cnt = 0;
-        note = new GameObject[100];
-        isSlow = false;
-        isEnd = false;
-        noteSpawnTime = 1.0f;
+        notePatterns = GetComponent<NotePatterns>();
+        originalNoteSpawnTime = noteSpawnTime;
 
-        boss = GameObject.Find("Boss");
-
+        note = new GameObject[500];
         Generate();
 
         Invoke("makeObj", 1f);
         // Boss pattern
-        patnum = -1;
-        patIdx = 0;
-        setBossPattern();
     }
 
     void Generate()
@@ -80,57 +67,75 @@ public class ObjectManager : MonoBehaviour
             return;
         }
 
-        // 패턴 테스트
-        if (cnt > 2 && onlyOne == 0)
+        if (notePatterns.patnum >= 0) // Boss Pattern
         {
-            onlyOne = 1;
-            patnum = 2;
-            patIdx = 0;
-        }
-
-        if (patnum >= 0) // Boss Pattern
-        {
-            activatePattern();
+            notePatterns.activatePattern();
         }
         else // Normal Pattern
         {
 
-            SetNoteLinetoRandom();
+            SetNoteLine(true, 0);
+            SetNoteColor(true, 0);
+            SetNoteDirection(true, 0);
+
             setNoteAttribute();
+            SetNotetoActive();
 
-            note[cnt++].SetActive(true);
+        }
 
-            if (cnt >= note.Length)
-                cnt = 0;
-
-            noteSpawnTime = Random.Range(noteSpawnTimeMin, noteSpawnTimeMax);
-
-            if (spawnSlow)
-            {
-                spawnSlowTime *= 2;
-            }
-            else
-            {
-                spawnSlowTime = 1;
-            }
-
-            noteSpawnTime *= spawnSlowTime;
+        if (isSlow)
+        {
+            noteSpawnTime = originalNoteSpawnTime * 2;
+        }
+        else
+        {
+            noteSpawnTime = originalNoteSpawnTime;
         }
 
         Invoke("makeObj", noteSpawnTime);
     }
 
-    void SetNoteLinetoRandom()
+    public void SetNoteLine(bool isRandom, int line)
     {
-        noteLine = Random.Range(0, floors + 1);//+1 Because its exclusive
+        if (isRandom)
+        {
+            noteLine = Random.Range(0, floors + 1);//+1 Because its exclusive
+        }
+        else
+        {
+            noteLine = line;
+        }
     }
 
-    void SetNoteLine(int line)
+    public void SetNoteColor(bool isRandom, int setColor)
     {
-        noteLine = line;
+        if (isRandom)
+        {
+            note[cnt].GetComponent<Note>().coloridx = Random.Range(0, 3);
+        }
+        else
+        {
+            note[cnt].GetComponent<Note>().coloridx = setColor;
+        }
+
+        notePatterns.patternNoteColoridx = note[cnt].GetComponent<Note>().coloridx;
     }
 
-    void setNoteAttribute()
+    public void SetNoteDirection(bool isRandom, int setDirection)
+    {
+        if (isRandom)
+        {
+            note[cnt].GetComponent<Note>().arrowidx = Random.Range(0, 4);
+        }
+        else
+        {
+            note[cnt].GetComponent<Note>().arrowidx = setDirection;
+        }
+
+        notePatterns.patternNoteArrowidx = note[cnt].GetComponent<Note>().arrowidx;
+    }
+
+    public void setNoteAttribute()
     {
         note[cnt].GetComponent<Note>().spawnLine = noteLine;
 
@@ -144,96 +149,18 @@ public class ObjectManager : MonoBehaviour
             note[cnt].GetComponent<Note>().isFaded = true;
         if (unifyNote)
         {
-            for (int i = 10; i >= 0; i--)
-            {
-                if ((cnt - i) > 0)
-                {
-                    if (note[cnt - i] != null)
-                    {
-                        note[(cnt - i)].GetComponent<Note>().isSame = true;
-                    }
-                }
+            GameObject[] activeNote = GameObject.FindGameObjectsWithTag("Note");
 
+            foreach (GameObject n in activeNote)
+            {
+                n.GetComponent<Note>().isSame = true;
             }
         }
     }
 
-    void changePos()
+    public void SetNotetoActive()
     {
-        Debug.Log("pos = " + bossPattern[patnum, patIdx]);
-        int pos = bossPattern[patnum, patIdx++];
-        switch (pos)
-        {
-            case 3:
-                spawnNotesInAllRows();
-                break;
-            case 4:
-                spawnTwoUp();
-                break;
-            case 5:
-                spawnTwoDown();
-                break;
-            default:
-                SetNoteLine(pos);
-                break;
-        }
-    }
-
-    void activatePattern()
-    {
-        changePos();
-        if (patIdx >= bossPattern.GetLength(1))
-        {
-            Debug.Log("Boss Pattern Ended");
-            patnum = -1;
-            patIdx = 0;
-        }
-    }
-
-    /*
-        0~2는 3~1층
-        3은 모든 칸
-        4는 위, 중간
-        5는 중간, 아래
-    */
-    void setBossPattern()
-    {
-        bossPattern = new int[,]
-        {
-        {2, 2, 2, 2, 2}, // 0번 패턴
-        {0, 2, 0, 0, 2}, // 1번 패턴
-        {3, 3, 3, 3, 3}, // 2번 패턴
-        {4, 5, 4, 5, 4}  // 3번 패턴
-        };
-    }
-
-    void spawnNotesInAllRows()
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            SetNoteLine(j);
-            setNoteAttribute();
-            note[cnt++].SetActive(true);
-        }
-    }
-
-    void spawnTwoUp()
-    {
-        for (int j = 0; j < 2; j++)
-        {
-            SetNoteLine(j);
-            setNoteAttribute();
-            note[cnt++].SetActive(true);
-        }
-    }
-    void spawnTwoDown()
-    {
-        for (int j = 2; j > 0; j--)
-        {
-            SetNoteLine(j);
-            setNoteAttribute();
-            note[cnt++].SetActive(true);
-        }
+        note[cnt++].SetActive(true);
     }
 }
 

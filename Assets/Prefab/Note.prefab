@@ -138,9 +138,9 @@ MonoBehaviour:
   noteHitSound: {fileID: 8300000, guid: 568d9ee3c5082094e92a0116c58392c4, type: 3}
   player: {fileID: 0}
   spawnPoints:
-  - 2.1
-  - -1
   - -3.5
+  - -1
+  - 2.1
   spawnPointschangelocate:
   - 1.05
   - -2
@@ -175,24 +175,21 @@ MonoBehaviour:
   - {fileID: -641732223, guid: f83decfedb6ec9149923695f4d366721, type: 3}
   - {fileID: 500547930, guid: f83decfedb6ec9149923695f4d366721, type: 3}
   - {fileID: -1434134500, guid: f83decfedb6ec9149923695f4d366721, type: 3}
+  spawnLine: 0
   spawnPointX: 10
   speed: 5
   isHit: 0
+  arrowidx: 0
+  coloridx: 0
   noteColor: 0
-  isRed: 0
-  isGreen: 0
-  isBlue: 0
   noteArrowDirection: 0
-  isLeft: 0
-  isRight: 0
-  isUp: 0
-  isDown: 0
   changeSpeed: 1
   isOpposite: 0
   isNotacted: 0
   isFaded: 0
-  op: 0
+  opacity: 0
   isSame: 0
+  posChange: 0
   healthBarController: {fileID: 0}
 --- !u!50 &6437169392336306601
 Rigidbody2D:

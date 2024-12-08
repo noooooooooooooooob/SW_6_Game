@@ -441,6 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 295438783}
   - component: {fileID: 295438782}
+  - component: {fileID: 295438784}
   m_Layer: 0
   m_Name: Object manager
   m_TagString: Untagged
@@ -460,20 +461,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673ce2ae73373d145b14495865a288f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 0}
   notePrefab: {fileID: 8012933125453678080, guid: 4460797cf03493a47b6e689adc7f43a5, type: 3}
-  noteSpawnTime: 1
+  noteSpawnTime: 0.8
   noteSpawnTimeMin: 0.5
   noteSpawnTimeMax: 1
+  cnt: 0
   isSlow: 0
-  spawnSlow: 0
   changingNoteLocation: 0
   oppositeNoteArrow: 0
   notActedNote: 0
   fadeNote: 0
   unifyNote: 0
-  patnum: 0
-  patIdx: 0
   floors: 2
   isEnd: 0
 --- !u!4 &295438783
@@ -491,6 +489,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295438784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295438781}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e78c189e9c69adc49b1c18281cd4f039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patternNoteColoridx: 0
+  patternNoteArrowidx: 0
+  patnum: 0
+  patIdx: 0
+  colorOrder: 
+  colorOrderIdx: 0
 --- !u!1 &296152907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1274,6 +1290,7 @@ MonoBehaviour:
   attack: 0
   playerInRange: 0
   arrowDirection: 0
+  notesInTrigger: []
   isClone: 0
 --- !u!61 &590204139
 BoxCollider2D:
@@ -2458,6 +2475,7 @@ MonoBehaviour:
   attack: 0
   playerInRange: 0
   arrowDirection: 0
+  notesInTrigger: []
   isClone: 0
 --- !u!61 &1208678198
 BoxCollider2D:
@@ -3228,6 +3246,7 @@ MonoBehaviour:
   attack: 0
   playerInRange: 0
   arrowDirection: 0
+  notesInTrigger: []
   isClone: 0
 --- !u!61 &1605672822
 BoxCollider2D:

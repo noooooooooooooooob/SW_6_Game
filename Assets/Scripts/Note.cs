@@ -24,8 +24,8 @@ public class Note : MonoBehaviour
     public float spawnPointX;
     public float speed;
     public bool isHit;
-    int arrowidx;
-    int coloridx;
+    public int arrowidx;
+    public int coloridx;
 
     public ColorEnum noteColor;
     public ArrowDirectionEnum noteArrowDirection;
@@ -82,10 +82,9 @@ public class Note : MonoBehaviour
         isFaded = false;
         isSame = false;
 
-        coloridx = Random.Range(0, 3);
-        arrowidx = Random.Range(0, 4);
+        // coloridx = Random.Range(0, 3);
+        // arrowidx = Random.Range(0, 4);
 
-        SetNoteColorDirection();
 
         isHit = false;
     }
@@ -147,9 +146,9 @@ public class Note : MonoBehaviour
     void Start()
     {
         // 스폰 위치 설정
-        Debug.Log("SpawnLine : " + spawnLine);
         spawnPointYInWorld = spawnPoints[spawnLine]; // 스폰포인트 랜덤
 
+        SetNoteColorDirection();
         StartCoroutine(MoveToSpawnPointY());
 
         bossObj = FindObjectOfType<Boss>();
@@ -376,6 +375,6 @@ public class Note : MonoBehaviour
     public void playNoteHitSound()
     {
         AudioSource.PlayOneShot(noteHitSound);
-        Debug.Log("노트 맞음");
+        // Debug.Log("노트 맞음");
     }
 }
