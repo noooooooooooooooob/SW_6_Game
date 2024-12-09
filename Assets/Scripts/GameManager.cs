@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     private float startTime;  // 게임 시작 시간
     public float timeLimit;  // 제한시간
-    float timeRemaining; // 남은 시간
+    public float timeRemaining; // 남은 시간
     public bool isGameOver;
     public bool isGameClear;
     bool hasTriggered; // 시간 업데이트 한 번만 하기
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     {
         // 현재 주석처리 코드 실행 시 메인메뉴부터 시작해야 오류 안 남
         // 스코어 저장하는 용도
-        //scoreManager=GameObject.Find("ScoreManager").GetComponent<ScoreManager>(); 
+        scoreManager=GameObject.Find("ScoreManager").GetComponent<ScoreManager>(); 
         isGameOver=false;
         hasTriggered=false;
         isGameClear=false;
@@ -42,11 +42,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(!isGameOver || !isGameClear)
+        if(!isGameOver && !isGameClear)
         {
             UpdateTimer();
         }
-        else if(!hasTriggered && isGameClear)
+        if(!hasTriggered && isGameClear)
         {
             UpdateCurScore();
         }
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     void UpdateCurScore()
     {
-        scoreManager.currentScore+=(int)timeRemaining;
+        scoreManager.addScore((int)timeRemaining);
         hasTriggered=true;
     }
 }
