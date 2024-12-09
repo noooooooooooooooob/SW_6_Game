@@ -62,7 +62,7 @@ public class Slow : MonoBehaviour
 
                 if (noteComponent != null)
                 {
-                    noteComponent.speed = 2.5f;  // speed 값을 반으로 줄임
+                    noteComponent.speed /= 2;  // speed 값을 반으로 줄임
                 }
                 else
                 {
