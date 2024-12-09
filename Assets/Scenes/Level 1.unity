@@ -190,7 +190,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &62991250
 Transform:
   m_ObjectHideFlags: 0
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   patternNoteColoridx: 0
   patternNoteArrowidx: 0
-  patnum: 0
+  patnum: 2
   patIdx: 0
   colorOrder: 
   colorOrderIdx: 0
@@ -1108,6 +1108,10 @@ PrefabInstance:
       value: Clone (3)
       objectReference: {fileID: 0}
     - target: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_TagString
       value: clone
       objectReference: {fileID: 0}
@@ -1174,6 +1178,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     - {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+    - {fileID: 4244330872831236948, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -2095,13 +2100,41 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 62991248}
     - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: cloneObject1
+      value: 
+      objectReference: {fileID: 1283685040}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: cloneObject2
+      value: 
+      objectReference: {fileID: 1987170739}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: cloneObject3
+      value: 
+      objectReference: {fileID: 543187678}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
       propertyPath: playerDisappearObject
       value: 
       objectReference: {fileID: 1724346540}
     - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: singleAttack.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
       propertyPath: inventoryMini.Array.size
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: singleAttack.Array.data[0]
+      value: 
+      objectReference: {fileID: 590204136}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: singleAttack.Array.data[1]
+      value: 
+      objectReference: {fileID: 1605672819}
+    - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
+      propertyPath: singleAttack.Array.data[2]
+      value: 
+      objectReference: {fileID: 1208678195}
     - target: {fileID: 2265298775619511307, guid: e7ee36be833845249b604f76218e389d, type: 3}
       propertyPath: inventoryMini.Array.data[0]
       value: 
@@ -2812,6 +2845,10 @@ PrefabInstance:
       value: Clone (1)
       objectReference: {fileID: 0}
     - target: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_TagString
       value: clone
       objectReference: {fileID: 0}
@@ -2883,6 +2920,7 @@ PrefabInstance:
     - {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     - {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     - {fileID: 8891108038469270893, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+    - {fileID: 4244330872831236948, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -6012,6 +6050,10 @@ PrefabInstance:
       value: Clone (2)
       objectReference: {fileID: 0}
     - target: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204233138080463030, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
       propertyPath: m_TagString
       value: clone
       objectReference: {fileID: 0}
@@ -6078,6 +6120,7 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2908537310184426867, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     - {fileID: 8675058269953547438, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
+    - {fileID: 4244330872831236948, guid: 1cb8fb72051455f49bc6f9eef1fc2540, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -19,23 +19,14 @@ public class CloneAttack : MonoBehaviour
 
     public bool isClone;
 
+     private HashSet<GameObject> notesInRange = new HashSet<GameObject>();
+
     void Start()
     {
-        
-        //player = GameObject.Find("Player");
-        //playerElement = player.GetComponent<PlayerElement>();
-        
-        //clone = GameObject.Find("clone");
-        
 
         healthBarController = GameObject.Find("HealthBar").GetComponent<HealthBarController>();
     }
 
-    //public void OnChildTrigger()
-   // {
-
-        
-    //}
 
     void Update()
     {
@@ -47,34 +38,85 @@ public class CloneAttack : MonoBehaviour
         {
             playerInRange = false;
         }
-        if (hasNote && playerInRange)
+        if(notesInRange.Count > 0 && playerInRange)//if (hasNote && playerInRange)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-                attack = true;
-                arrowDirection = ArrowDirectionEnum.left;
+                //attack = true;
+                //arrowDirection = ArrowDirectionEnum.left;
+                ProcessNotes(ArrowDirectionEnum.left);
             }
             if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                attack = true;
-                arrowDirection = ArrowDirectionEnum.right;
+                //attack = true;
+                //arrowDirection = ArrowDirectionEnum.right;
+                 ProcessNotes(ArrowDirectionEnum.right);
             }
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                attack = true;
-                arrowDirection = ArrowDirectionEnum.up;
+                //attack = true;
+                //arrowDirection = ArrowDirectionEnum.up;
+                 ProcessNotes(ArrowDirectionEnum.up);
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                attack = true;
-                arrowDirection = ArrowDirectionEnum.down;
+                //attack = true;
+                //arrowDirection = ArrowDirectionEnum.down;
+                 ProcessNotes(ArrowDirectionEnum.down);
             }
         }
-        else if (!playerInRange)
-        {
-            attack = false;
-        }
+        //else if (!playerInRange)
+        //{
+        //    attack = false;
+        //}
     }
+     void ProcessNotes(ArrowDirectionEnum direction)
+    {
+        attack = true;
+        arrowDirection = direction;
+
+        List<GameObject> notesToRemove = new List<GameObject>();
+        CurrentColor CC = FindObjectOfType<CurrentColor>();
+
+        foreach (var noteObject in new List<GameObject>(notesInRange))
+        {
+            Note note = noteObject.GetComponent<Note>();
+            if (note != null)
+            {
+                if (note.noteArrowDirection == arrowDirection && CC.color == note.noteColor)
+                {
+                    note.StartMovingToBoss();
+                }
+                else
+                {
+                    ShakeAttackBar();
+                    noteObject.SetActive(false);
+                    note.StartMovingToPlayer();
+
+                    if (healthBarController != null)
+                    {
+                        healthBarController.TakeDamage();
+                    }
+                    else
+                    {
+                        Debug.LogError("HealthBarController not found on Player object.");
+                    }
+                }
+
+                notesToRemove.Add(noteObject);
+            }
+        }
+
+        // Remove processed notes
+        foreach (var noteObject in notesToRemove)
+        {
+            notesInRange.Remove(noteObject);
+        }
+
+        attack = false;
+        arrowDirection = ArrowDirectionEnum.none;
+    }
+
 
     void ShakeAttackBar()
     {
@@ -87,25 +129,20 @@ public class CloneAttack : MonoBehaviour
     {
         if (other.gameObject.tag == "Note")
         {
-            hasNote = true;
+            notesInRange.Add(other.gameObject);//hasNote = true;
         }
     }
-
+    /*
     void OnTriggerStay2D(Collider2D other)
     {
-        /*
-        if(isClone){
-            playerElement=clone.GetComponent<PlayerElement>();
-        }
-        else{
-            playerElement = player.GetComponent<PlayerElement>();
-        }
-        */
+
         if (other.gameObject.tag == "Note")
         {
+            
+            
             Note note = other.gameObject.GetComponent<Note>();
             CurrentColor CC=FindObjectOfType<CurrentColor>();
-            
+                 
             if (attack && playerInRange)
             {
                
@@ -113,7 +150,7 @@ public class CloneAttack : MonoBehaviour
                     {
                         note.StartMovingToBoss();
                         attack = false;
-                        hasNote = false;
+                         notesInRange.Remove(other.gameObject);//hasNote = false;
 
                         arrowDirection = ArrowDirectionEnum.none;
                     }
@@ -121,8 +158,9 @@ public class CloneAttack : MonoBehaviour
                     {
                         ShakeAttackBar();
                         other.gameObject.SetActive(false);
+                        note.StartMovingToPlayer();
                         attack = false;
-                        hasNote = false;
+                        notesInRange.Remove(other.gameObject);//hasNote = false;
                         arrowDirection = ArrowDirectionEnum.none;
 
                         if (healthBarController != null)
@@ -138,14 +176,16 @@ public class CloneAttack : MonoBehaviour
                 
                 
             }
+            
+
         }
     }
-
+    */
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.tag == "Note")
         {
-            hasNote = false;
+           notesInRange.Remove(other.gameObject);// hasNote = false;
             Note note = other.gameObject.GetComponent<Note>();
             if (note != null)
             {

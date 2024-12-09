@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
     public bool CanMove = false;
     public int currentFloor;
 
+    public bool isClone;
+
     [SerializeField] float fallMultiplier;
 
     void Start()
@@ -49,11 +51,12 @@ public class PlayerMovement : MonoBehaviour
         {
             CanMove = true;
         }
+        isClone=false;
     }
 
     void Update()
     {
-        if (CanMove)
+        if (CanMove&& !isClone)
         {
             if (Input.GetButtonDown("Jump") && staminaBar.platformTime > 0 && currentFloor < 3)
             {

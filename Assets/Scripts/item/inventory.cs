@@ -25,12 +25,16 @@ public class inventory : MonoBehaviour
     public DamageDown DD;
     public DifColor DC;
     //private PlayerDisappear playerDisappear;
-    public GameObject playerDisappearObject;
-    public GameObject cloneObject;
+    public GameObject[] singleAttack;
+    
+    public GameObject cloneObject1;
+    public GameObject cloneObject2;
+    public GameObject cloneObject3;
 
     public PlayerAnimationEnum state;
     private bool currentClone;
     //private Clone clone;
+    private int playerFloor;
     private bool wait;
     List<bool> bools = new List<bool>() { false, false, false }; //clone 확인용
     //public Action<int> onInvoke;
@@ -187,10 +191,14 @@ public class inventory : MonoBehaviour
                 //clone=cloneObject.GetComponent<Clone>();
                 ReduceGaugebar RG = FindObjectOfType<ReduceGaugebar>();
                 RG.isClone = true;
-                AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
-                ANIR.isClone = true;
+                //AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
+                //ANIR.isClone = true;
                 CloneAttack CA = FindObjectOfType<CloneAttack>();
                 CA.isClone = true;
+
+                PlayerMovement PM=FindObjectOfType<PlayerMovement>();
+                PM.isClone=true;
+                playerFloor=PM.currentFloor;
                 /*
                 playerDisappear = playerDisappearObject.GetComponent<PlayerDisappear>();
                 PlayerDisappear PL = FindObjectOfType<PlayerDisappear>();
@@ -206,21 +214,44 @@ public class inventory : MonoBehaviour
                 */
 
 
-
-
                 //clone.isDeleted = false;
 
                 //Clone clone=FindObjectOfType<Clone>();
                 //clone.isDeleted=false;
-                playerDisappearObject.SetActive(false);
-                cloneObject.SetActive(true);
+                //playerDisappearObject.SetActive(false);
+                
 
-                CloneAnime1 CA1 = FindObjectOfType<CloneAnime1>();
-                CA1.ChangeOriginColor(state);
-                CloneAnime2 CA2 = FindObjectOfType<CloneAnime2>();
-                CA2.ChangeOriginColor(state);
-                CloneAnime3 CA3 = FindObjectOfType<CloneAnime3>();
-                CA3.ChangeOriginColor(state);
+                for(int i=0;i<3;i++){
+                    AttackNodeInRange ANIR= singleAttack[i].GetComponent<AttackNodeInRange>();
+                     ANIR.enabled = false;
+                }
+                               
+                
+                if(playerFloor==1){
+                    cloneObject2.SetActive(true);
+                    cloneObject3.SetActive(true);
+                    CloneAnime2 CA2 = FindObjectOfType<CloneAnime2>();
+                    CloneAnime3 CA3 = FindObjectOfType<CloneAnime3>();
+                    CA2.ChangeOriginColor(state);
+                    CA3.ChangeOriginColor(state);
+                }
+                else if(playerFloor==2){
+                    cloneObject1.SetActive(true);
+                    cloneObject3.SetActive(true);
+                    CloneAnime1 CA1 = FindObjectOfType<CloneAnime1>();
+                    CloneAnime3 CA3 = FindObjectOfType<CloneAnime3>();
+                    CA1.ChangeOriginColor(state);
+                    CA3.ChangeOriginColor(state);
+                }
+                else if(playerFloor==3){
+                    cloneObject1.SetActive(true);
+                    cloneObject2.SetActive(true);
+                    CloneAnime1 CA1 = FindObjectOfType<CloneAnime1>();
+                    CloneAnime2 CA2 = FindObjectOfType<CloneAnime2>();
+                    CA1.ChangeOriginColor(state);
+                    CA2.ChangeOriginColor(state);
+                }
+               
 
                 wait = true;
 
@@ -295,10 +326,13 @@ public class inventory : MonoBehaviour
             currentClone = false;
             ReduceGaugebar RG = FindObjectOfType<ReduceGaugebar>();
             RG.isClone = false;
-            AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
-            ANIR.isClone = false;
+            //AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
+            //ANIR.isClone = false;
             CloneAttack CA = FindObjectOfType<CloneAttack>();
             CA.isClone = false;
+            PlayerMovement PM=FindObjectOfType<PlayerMovement>();
+            PM.isClone=false;
+            playerFloor=PM.currentFloor;
             //PlayerElement PE= FindObjectOfType<PlayerElement>();
             //PE.fuck();
 
@@ -309,16 +343,22 @@ public class inventory : MonoBehaviour
             playerDisappear.isDeleted = false;
             playerDisappearObject.SetActive(true);
             */
-
-            cloneObject.SetActive(false);
-            playerDisappearObject.SetActive(true);
+             for(int i=0;i<3;i++){
+                    AttackNodeInRange ANIR= singleAttack[i].GetComponent<AttackNodeInRange>();
+                     ANIR.enabled = true;
+             }
+            cloneObject1.SetActive(false);
+            cloneObject2.SetActive(false);
+            cloneObject3.SetActive(false);
+            //cloneObject.SetActive(false);
+            //playerDisappearObject.SetActive(true);
 
             //PlayerMovement PM= FindObjectOfType<PlayerMovement>();
             //PM.doEntrance=false;
             //PM.AllowMovement();
 
-            PlayerAnimations PANI = FindObjectOfType<PlayerAnimations>();
-            PANI.ChangeOriginColor(state);
+            //PlayerAnimations PANI = FindObjectOfType<PlayerAnimations>();
+            //PANI.ChangeOriginColor(state);
         }
 
 

@@ -284,7 +284,7 @@ public class Note : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "clone")
+        if (collision.gameObject.tag == "Player" )//|| collision.gameObject.tag == "clone"
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
             {
