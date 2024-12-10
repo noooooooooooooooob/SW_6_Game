@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 
 public class Slow : MonoBehaviour
 {
+    /*
     public float minX = -13f;
     public float maxX = 13f;
     public float minY = -5f;
@@ -20,14 +21,6 @@ public class Slow : MonoBehaviour
     public void SlowNotes()
     {
         ObjectManager OM = FindObjectOfType<ObjectManager>();
-        /*
-        if(OM!=null){
-            originNoteSpawn=OM.noteSpawnTime;
-            newNoteSpawn=OM.noteSpawnTime*2;
-            //originNoteSpeed=NOTE.speed;
-            //newNoteSpeed=NOTE.speed/2; 
-        }
-        */
 
         if (OM != null)
         {
@@ -69,20 +62,22 @@ public class Slow : MonoBehaviour
                     Debug.LogWarning("Note 컴포넌트가 없는 오브젝트 ");
                 }
 
-
             }
-
-
 
         }
 
+    }
+    */
+   
 
-
+    public void SlowNotes()
+    {
+        float speed=0.5f;
+        Time.timeScale = speed; // 게임 전체 시간의 속도를 변경
+        Time.fixedDeltaTime = 0.02f * Time.timeScale; // 물리 업데이트 속도도 조정
 
 
     }
-
-
 
 
 

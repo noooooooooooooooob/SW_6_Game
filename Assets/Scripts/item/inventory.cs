@@ -31,6 +31,10 @@ public class inventory : MonoBehaviour
     public GameObject cloneObject2;
     public GameObject cloneObject3;
 
+    public GameObject smokeJumpUpPrefab;
+    public GameObject smokeJumpDownPrefab;
+  
+
     public PlayerAnimationEnum state;
     private bool currentClone;
     //private Clone clone;
@@ -127,10 +131,12 @@ public class inventory : MonoBehaviour
             if (inventorys[slotIndex] == "1")
             {
                 Bomb bomb = FindObjectOfType<Bomb>();
+                Flash flash = FindObjectOfType<Flash>();
                 if (bomb != null)
                 {
                     bomb.InvokeDeleteNotes(); // Bomb 인스턴스가 있을 때만 호출
                     PlayBombSound();
+                    flash.FlashScreen();
                 }
                 else
                 {
@@ -234,6 +240,10 @@ public class inventory : MonoBehaviour
                     CloneAnime3 CA3 = FindObjectOfType<CloneAnime3>();
                     CA2.ChangeOriginColor(state);
                     CA3.ChangeOriginColor(state);
+                    Vector3 smokePosition = cloneObject2.transform.position;
+                    Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
+                    smokePosition = cloneObject3.transform.position;
+                    Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
                 }
                 else if(playerFloor==2){
                     cloneObject1.SetActive(true);
@@ -242,6 +252,10 @@ public class inventory : MonoBehaviour
                     CloneAnime3 CA3 = FindObjectOfType<CloneAnime3>();
                     CA1.ChangeOriginColor(state);
                     CA3.ChangeOriginColor(state);
+                    Vector3 smokePosition = cloneObject1.transform.position;
+                    Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
+                    smokePosition = cloneObject3.transform.position;
+                    Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
                 }
                 else if(playerFloor==3){
                     cloneObject1.SetActive(true);
@@ -250,6 +264,10 @@ public class inventory : MonoBehaviour
                     CloneAnime2 CA2 = FindObjectOfType<CloneAnime2>();
                     CA1.ChangeOriginColor(state);
                     CA2.ChangeOriginColor(state);
+                    Vector3 smokePosition = cloneObject1.transform.position;
+                    Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
+                    smokePosition = cloneObject2.transform.position;
+                    Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
                 }
                
 
@@ -347,6 +365,24 @@ public class inventory : MonoBehaviour
                     AttackNodeInRange ANIR= singleAttack[i].GetComponent<AttackNodeInRange>();
                      ANIR.enabled = true;
              }
+             if(playerFloor==1){
+                    Vector3 smokePosition = cloneObject2.transform.position;
+                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                    smokePosition = cloneObject3.transform.position;
+                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                }
+                else if(playerFloor==2){
+                    Vector3 smokePosition = cloneObject1.transform.position;
+                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                    smokePosition = cloneObject3.transform.position;
+                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                }
+                else if(playerFloor==3){
+                    Vector3 smokePosition = cloneObject1.transform.position;
+                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                    smokePosition = cloneObject2.transform.position;
+                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                }
             cloneObject1.SetActive(false);
             cloneObject2.SetActive(false);
             cloneObject3.SetActive(false);
