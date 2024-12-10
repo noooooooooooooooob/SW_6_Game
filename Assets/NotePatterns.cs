@@ -18,7 +18,8 @@ public class NotePatterns : MonoBehaviour
         new int[]{3, 3, 3, 3, 3}, // 2번 패턴
         new int[]{4, 5, 4, 5, 4}, // 3번 패턴
         new int[]{0,0,0,0,0,1,1,1,1,1,2,2,2,2,2}, // 4번 패턴
-        new int[]{0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2} // 5번 패턴
+        new int[]{0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2}, // 5번 패턴
+        new int[]{0,0, 1,1,2,2,1,1,2,2,0,0}
 
     };
 
@@ -97,6 +98,7 @@ public class NotePatterns : MonoBehaviour
         objectManager.SetNoteColor(false, patternNoteColoridx);
         objectManager.SetNoteDirection(false, patternNoteArrowidx);
         objectManager.SetNoteLine(false, noteLine);
+        objectManager.setNoteSpeed(false, 0);
         objectManager.setNoteAttribute();
         objectManager.SetNotetoActive();
     }
@@ -109,6 +111,7 @@ public class NotePatterns : MonoBehaviour
             objectManager.SetNoteColor(false, patternNoteColoridx);
             objectManager.SetNoteDirection(false, patternNoteArrowidx);
             objectManager.SetNoteLine(false, j);
+            objectManager.setNoteSpeed(false, 0);
             objectManager.setNoteAttribute();
             objectManager.SetNotetoActive();
         }
@@ -121,6 +124,7 @@ public class NotePatterns : MonoBehaviour
             objectManager.SetNoteColor(false, patternNoteColoridx);
             objectManager.SetNoteDirection(false, patternNoteArrowidx);
             objectManager.SetNoteLine(false, j);
+            objectManager.setNoteSpeed(false, 0);
             objectManager.setNoteAttribute();
             objectManager.SetNotetoActive();
         }
@@ -132,6 +136,7 @@ public class NotePatterns : MonoBehaviour
             objectManager.SetNoteColor(false, patternNoteColoridx);
             objectManager.SetNoteDirection(false, patternNoteArrowidx);
             objectManager.SetNoteLine(false, j);
+            objectManager.setNoteSpeed(false, 0);
             objectManager.setNoteAttribute();
             objectManager.SetNotetoActive();
         }
@@ -147,6 +152,7 @@ public class NotePatterns : MonoBehaviour
         objectManager.SetNoteColor(false, colorOrder[colorOrderIdx]);
         objectManager.SetNoteDirection(true, 0);
         objectManager.SetNoteLine(false, pos);
+        objectManager.setNoteSpeed(true, objectManager.levelNoteSpeed * 2);
         objectManager.setNoteAttribute();
         objectManager.SetNotetoActive();
         prevPos = pos;

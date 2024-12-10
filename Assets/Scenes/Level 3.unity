@@ -536,6 +536,7 @@ MonoBehaviour:
   noteSpawnTimeMin: 0.5
   noteSpawnTimeMax: 1
   cnt: 0
+  levelNoteSpeed: 0
   isSlow: 0
   changingNoteLocation: 0
   oppositeNoteArrow: 0
@@ -2929,7 +2930,7 @@ PrefabInstance:
       objectReference: {fileID: 1724346541}
     - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: changeRate
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6190794046595842679, guid: 8f67f27a7e3615049b8f5ebc9fc46dde, type: 3}
       propertyPath: currentHealth
