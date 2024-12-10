@@ -16,6 +16,7 @@ public class AttackNodeInRange : MonoBehaviour
     private PlayerElement playerElement;
     private PlayerMovement playerMovement;
     public ArrowDirectionEnum arrowDirection;
+    public ParticlePlayer particlePlayer;
 
     private GameObject clone;
     public List<Note> notesInTrigger = new List<Note>();
@@ -24,6 +25,7 @@ public class AttackNodeInRange : MonoBehaviour
 
     void Start()
     {
+        particlePlayer = GameObject.Find("ParticlePlayer").GetComponent<ParticlePlayer>();
         floorChecker = GetComponentInChildren<FloorChecker>();
         player = GameObject.Find("Player");
         playerElement = player.GetComponent<PlayerElement>();
@@ -112,6 +114,7 @@ public class AttackNodeInRange : MonoBehaviour
                 {
                     note.StartMovingToBoss();
                     note.playNoteHitSound();
+                    particlePlayer.isPlay=true;
 
                     notesInTrigger.Remove(note);
                     attack = false;
