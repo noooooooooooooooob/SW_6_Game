@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,9 +11,8 @@ public class HealthBarController : MonoBehaviour
     public AudioClip byHitSound;
     private AudioSource audioSource;
     private ObjectManager objectManager;
-    private GameManager gameManager;
-    private GameEnd gameEnd;
     private ScoreManager scoreManager;
+    private bool scoreManagerActive = false;
     public static HealthBarController Instance { get; private set; }
     [SerializeField] private Image healthBarFill;     // 체력바의 Fill 이미지
     Slider healthBarSlider;  // Slider로 변경
@@ -42,9 +42,6 @@ public class HealthBarController : MonoBehaviour
 
     private void Start()
     {
-        scoreManager=GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        gameEnd=GameObject.Find("GameManager").GetComponent<GameEnd>();
-        gameManager = GameObject.Find("ScoreComboTime").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         healthBarSlider = GetComponent<Slider>();
         objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
@@ -58,6 +55,11 @@ public class HealthBarController : MonoBehaviour
 
         isDamageUp = false;
 
+        if (GameObject.Find("ScoreManager") != null)
+        {
+            scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+            scoreManagerActive = true;
+        }
         SetHealth(maxHealth * 0.5f); // 체력을 절반으로 시작
         // Debug.Log("Current health :" + currentHealth);
     }
@@ -74,7 +76,7 @@ public class HealthBarController : MonoBehaviour
                 currentHealth = 0;
                 CallPlayerDeath();
                 HealthBarActive = false; //이거 하면 다음 레벨로 넘어가질 않음. 왜지??
-                Debug.Log("Player Health depleted");
+                // Debug.Log("Player Health depleted");
             }
             else if (currentHealth >= maxHealth)
             {
@@ -82,7 +84,7 @@ public class HealthBarController : MonoBehaviour
                 currentHealth = maxHealth;
                 CallBossDeath();
                 HealthBarActive = false;
-                Debug.Log("Boss Health depleted");
+                // Debug.Log("Boss Health depleted");
 
             }
 
@@ -104,21 +106,17 @@ public class HealthBarController : MonoBehaviour
 
     private void CallPlayerDeath()
     {
-        Debug.Log("Player is dead");
+        // Debug.Log("Player is dead");
         player.PlayerDeath();
         objectManager.GameEnd();
-        gameManager.isGameOver=true;
-        gameEnd.gameOver();
+        gameTransition.SetPlayerDefeated();
     }
 
     private void CallBossDeath()
     {
-
         boss.BossDeath();
         objectManager.GameEnd();
         gameTransition.SetBossDefeated();
-        gameManager.isGameClear=true;
-
     }
 
     public void Heal()
@@ -144,7 +142,10 @@ public class HealthBarController : MonoBehaviour
             StartCoroutine(FlashHealthBar(healColor));
 
             //Hit 증가
-            scoreManager.currentHit++;
+            if (scoreManagerActive)
+            {
+                scoreManager.currentHit++;
+            }
         }
     }
 
@@ -173,15 +174,19 @@ public class HealthBarController : MonoBehaviour
             player.hitByNote();
 
             // Miss 증가
-            scoreManager.currentMiss++;
+            if (scoreManagerActive)
+            {
+                scoreManager.currentMiss++;
+            }
         }
     }
 
     //체력반전
     public void Healthchange()
     {
-         if(HealthBarActive){
-             float amount = changeRate;
+        if (HealthBarActive)
+        {
+            float amount = changeRate;
             float healthPercentage = GetHealthPercentage();
 
             SetHealth(Mathf.Clamp(maxHealth - currentHealth, -1f, maxHealth + 1f));

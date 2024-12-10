@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Boss : MonoBehaviour
 {
-    GameManager gameManager;
     public bool isHit;
     public bool isDead;
     public bool doEntrance;
@@ -16,7 +15,6 @@ public class Boss : MonoBehaviour
     private Transform bossStartLocation;
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         isHit = false;
         isDead = false;
 

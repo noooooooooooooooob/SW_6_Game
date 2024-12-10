@@ -149,10 +149,10 @@ MonoBehaviour:
   - {fileID: 1847957774, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: 1688068630, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: 2069095008, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 924254300, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: -1802006256, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 1032437980, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 1896625020, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
+  - {fileID: 1413910001, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
+  - {fileID: -1668276189, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
+  - {fileID: 1291851251, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
+  - {fileID: 1641887689, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
   - {fileID: 2017005488, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: -133921453, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
   - {fileID: 1166440532, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
@@ -176,7 +176,6 @@ MonoBehaviour:
   - {fileID: 500547930, guid: f83decfedb6ec9149923695f4d366721, type: 3}
   - {fileID: -1434134500, guid: f83decfedb6ec9149923695f4d366721, type: 3}
   spawnLine: 0
-  spawnPointX: 10
   speed: 5
   isHit: 0
   arrowidx: 0

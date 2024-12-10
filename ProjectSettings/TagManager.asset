@@ -12,6 +12,7 @@ TagManager:
   - Boss
   - clone
   - ItemMini
+  - pauseUI
   layers:
   - Default
   - TransparentFX

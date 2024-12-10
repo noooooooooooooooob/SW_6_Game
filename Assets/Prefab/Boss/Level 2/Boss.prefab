@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4715597266004129339}
   - component: {fileID: 3301631717020090390}
   m_Layer: 0
-  m_Name: Red Slime
+  m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

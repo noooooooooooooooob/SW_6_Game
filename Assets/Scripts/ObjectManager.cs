@@ -51,6 +51,7 @@ public class ObjectManager : MonoBehaviour
 
     public void GameEnd()
     {
+        isEnd = true;
         for (int i = 0; i < note.Length; i++)
         {
             note[i].SetActive(false);
