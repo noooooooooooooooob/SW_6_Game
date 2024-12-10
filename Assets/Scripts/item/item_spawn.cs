@@ -24,7 +24,7 @@ public class item_spawn : MonoBehaviour
     IEnumerator itemRoutine()
     {
         yield return new WaitForSeconds(3f);
-        int k = 0;
+        int k = 5;
         while (true)
         {
             if (test)

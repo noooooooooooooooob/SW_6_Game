@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class StopSlow : MonoBehaviour
 {
+    /*
     public float minX = -13f;
     public float maxX = 13f;
     public float minY = -5f;
@@ -56,5 +57,11 @@ public class StopSlow : MonoBehaviour
         }
 
 
+    }
+    */
+    public void Normalization(){
+        float speed=1f;
+        Time.timeScale = speed; // 게임 전체 시간의 속도를 변경
+        Time.fixedDeltaTime = 0.02f * Time.timeScale; // 물리 업데이트 속도도 조정
     }
 }

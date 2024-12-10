@@ -98,7 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f331e5f2d8e79dc4fbcc29fa760003a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombSound: {fileID: 8300000, guid: 3f93b804efe9c824dbe8b16c6cc1d6b1, type: 3}
   minX: -10
   maxX: 10
   minY: -5
