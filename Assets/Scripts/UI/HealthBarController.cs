@@ -11,6 +11,8 @@ public class HealthBarController : MonoBehaviour
     private AudioSource audioSource;
     private ObjectManager objectManager;
     private GameManager gameManager;
+    private GameEnd gameEnd;
+    private ScoreManager scoreManager;
     public static HealthBarController Instance { get; private set; }
     [SerializeField] private Image healthBarFill;     // 체력바의 Fill 이미지
     Slider healthBarSlider;  // Slider로 변경
@@ -40,6 +42,8 @@ public class HealthBarController : MonoBehaviour
 
     private void Start()
     {
+        scoreManager=GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        gameEnd=GameObject.Find("GameManager").GetComponent<GameEnd>();
         gameManager = GameObject.Find("ScoreComboTime").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         healthBarSlider = GetComponent<Slider>();
@@ -104,6 +108,7 @@ public class HealthBarController : MonoBehaviour
         player.PlayerDeath();
         objectManager.GameEnd();
         gameManager.isGameOver=true;
+        gameEnd.gameOver();
     }
 
     private void CallBossDeath()
@@ -137,6 +142,9 @@ public class HealthBarController : MonoBehaviour
             // 목표 체력을 증가시키고 최대 체력으로 제한
             SetTargetHealth(Mathf.Clamp(targetHealth + amount, -1f, maxHealth + 1f));
             StartCoroutine(FlashHealthBar(healColor));
+
+            //Hit 증가
+            scoreManager.currentHit++;
         }
     }
 
@@ -163,6 +171,9 @@ public class HealthBarController : MonoBehaviour
             // 맞았을 때 효과음
             isHitSound();
             player.hitByNote();
+
+            // Miss 증가
+            scoreManager.currentMiss++;
         }
     }
 

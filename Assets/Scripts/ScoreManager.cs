@@ -7,6 +7,8 @@ public class ScoreManager : MonoBehaviour
     public static ScoreManager Instance; // 싱글톤 패턴을 위한 인스턴스
     public int[] Scores = new int[9];
     public int currentScore = 0;
+    public int currentHit=0;
+    public int currentMiss=0;
     void Awake()
     {
          if (Instance != null && Instance != this)
