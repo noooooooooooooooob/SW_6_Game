@@ -24,7 +24,7 @@ public class item_spawn : MonoBehaviour
     IEnumerator itemRoutine()
     {
         yield return new WaitForSeconds(3f);
-        int k = 5;
+        int k = items.Length - 1;
         while (true)
         {
             if (test)
@@ -58,6 +58,7 @@ public class item_spawn : MonoBehaviour
 
     void spawnitem(int index, float posY)
     {
+        Debug.Log("Item Index : " + index);
         Vector3 spawnPos = new Vector3(transform.position.x, posY, transform.position.z + 1);
         Instantiate(items[index], spawnPos, Quaternion.identity);
     }

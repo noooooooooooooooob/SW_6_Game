@@ -19,6 +19,7 @@ public class NotePatterns : MonoBehaviour
         new int[]{4, 5, 4, 5, 4}, // 3번 패턴
         new int[]{0,0,0,0,0,1,1,1,1,1,2,2,2,2,2}, // 4번 패턴
         new int[]{0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2} // 5번 패턴
+
     };
 
     public int patternNoteColoridx;
