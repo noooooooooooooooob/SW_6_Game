@@ -13,6 +13,8 @@ public class DamageDown : MonoBehaviour
     {
         Debug.Log("4초 후 실행되었습니다!");
         healthBarController.isDamageUp = false;
+        //DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
+        //DUE.isPower=false;
     }
 
 }

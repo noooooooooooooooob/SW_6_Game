@@ -15,6 +15,10 @@ public class CloneAttack : MonoBehaviour
     public ArrowDirectionEnum arrowDirection;
 
     private GameObject clone;
+
+     public ParticleSystem particleSystem1; // 연결할 파티클 시스템
+    public ParticleSystem particleSystem2; // 연결할 파티클 시스템
+    public ParticleSystem particleSystem3; // 연결할 파티클 시스템
     
 
     public bool isClone;
@@ -86,6 +90,19 @@ public class CloneAttack : MonoBehaviour
                 if (note.noteArrowDirection == arrowDirection && CC.color == note.noteColor)
                 {
                     note.StartMovingToBoss();
+                    Vector3 pos = noteObject.transform.position;
+                    if(pos.y>1){
+                        particleSystem3.Stop(); // 파티클 중복 실행 방지
+                        particleSystem3.Play();
+                    }
+                    else if(pos.y>-2){
+                        particleSystem2.Stop(); // 파티클 중복 실행 방지
+                        particleSystem2.Play();
+                    }
+                    else{
+                        particleSystem1.Stop(); // 파티클 중복 실행 방지
+                        particleSystem1.Play();
+                    }
                 }
                 else
                 {

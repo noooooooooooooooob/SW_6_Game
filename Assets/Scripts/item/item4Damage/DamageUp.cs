@@ -27,7 +27,8 @@ public class DamageUp : MonoBehaviour
         {
             healthBarController.isDamageUp = true;
         }
-   
+       // DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
+       // DUE.isPower=true;
     
         
        

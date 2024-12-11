@@ -36,7 +36,7 @@ public class inventory : MonoBehaviour
 
 
     public PlayerAnimationEnum state;
-    private bool currentClone;
+    public bool currentClone;
     //private Clone clone;
     private int playerFloor;
     private bool wait;
@@ -194,6 +194,10 @@ public class inventory : MonoBehaviour
             {
                 currentClone = true;
                 //clone=cloneObject.GetComponent<Clone>();
+                 //DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
+                //DUE.isClone=true;
+                //DUE.Effect();
+
                 ReduceGaugebar RG = FindObjectOfType<ReduceGaugebar>();
                 RG.isClone = true;
                 //AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();
@@ -346,6 +350,10 @@ public class inventory : MonoBehaviour
         if (currentClone)
         {
             currentClone = false;
+            //DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
+            //DUE.isClone=false;
+            //DUE.Effect();
+
             ReduceGaugebar RG = FindObjectOfType<ReduceGaugebar>();
             RG.isClone = false;
             //AttackNodeInRange ANIR = FindObjectOfType<AttackNodeInRange>();

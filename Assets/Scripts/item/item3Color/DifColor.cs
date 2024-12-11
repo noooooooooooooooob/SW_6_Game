@@ -10,5 +10,6 @@ public class DifColor : MonoBehaviour
         Debug.Log("OM실행");
         OM.unifyNote = false;
        
+       
     }
 }

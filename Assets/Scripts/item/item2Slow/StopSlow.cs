@@ -63,5 +63,9 @@ public class StopSlow : MonoBehaviour
         float speed=1f;
         Time.timeScale = speed; // 게임 전체 시간의 속도를 변경
         Time.fixedDeltaTime = 0.02f * Time.timeScale; // 물리 업데이트 속도도 조정
+        GameObject backgroundMusicOB = GameObject.Find("BackGroundMusic");
+        
+         AudioSource backgroundMusic=backgroundMusicOB.GetComponent<AudioSource>();
+        backgroundMusic.pitch = speed;
     }
 }
