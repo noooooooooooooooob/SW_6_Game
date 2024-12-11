@@ -40,7 +40,7 @@ public class inventory : MonoBehaviour
     //private Clone clone;
     private int playerFloor;
     private bool wait;
-    List<bool> bools = new List<bool>() { false, false, false }; //clone 확인용
+    List<bool> bools = new List<bool>() { false, false, false,false,false,false };
     //public Action<int> onInvoke;
 
     void Awake()
@@ -97,10 +97,7 @@ public class inventory : MonoBehaviour
                 int number;
                 int.TryParse(itemtype, out number);
                 spawnitem(number - 1, arrPosX[i], i);
-                if (itemtype == "6")
-                {
-                    bools[i] = true;
-                }
+                
                 return;
             }
         }
@@ -118,7 +115,7 @@ public class inventory : MonoBehaviour
     private void UseItem(int slotIndex)
     {
         wait = false;
-        if (slotIndex < 0 || slotIndex >= inventorySize || (currentClone && bools[slotIndex]))
+        if (slotIndex < 0 || slotIndex >= inventorySize || bools[slotIndex]==true)
         {
             Debug.Log("잘못된 슬롯입니다.");
             return;
@@ -126,6 +123,7 @@ public class inventory : MonoBehaviour
 
         if (inventorys[slotIndex] != null)
         {
+            bools[slotIndex]=true;
 
             // itemtype이 "1"일 때 Note를 삭제하는 이벤트 호출
             if (inventorys[slotIndex] == "1")
@@ -137,6 +135,7 @@ public class inventory : MonoBehaviour
                     bomb.InvokeDeleteNotes(); // Bomb 인스턴스가 있을 때만 호출
                     PlayBombSound();
                     flash.FlashScreen();
+                    bools[slotIndex]=false;
                 }
                 else
                 {
@@ -318,20 +317,21 @@ public class inventory : MonoBehaviour
     void stopslow()
     {
         ST.Normalization();
-
+        bools[1]=false;
     }
 
     //item 3 정상화
     void difColor()
     {
         DC.Normalization();
-
+        bools[2]=false;
     }
 
     //item 4 정상화
     void damagedown()
     {
         DD.Normalization();
+        bools[3]=false;
     }
 
 
@@ -403,6 +403,7 @@ public class inventory : MonoBehaviour
 
             //PlayerAnimations PANI = FindObjectOfType<PlayerAnimations>();
             //PANI.ChangeOriginColor(state);
+            bools[5]=false;
         }
 
 
