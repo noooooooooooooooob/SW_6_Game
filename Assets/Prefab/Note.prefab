@@ -145,18 +145,18 @@ MonoBehaviour:
   - 1.05
   - -2
   sprites:
-  - {fileID: -960669045, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 1847957774, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 1688068630, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 2069095008, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
+  - {fileID: 908631082, guid: 7d5152cecd09d12498a9e9104d1b54a9, type: 3}
+  - {fileID: 1452690974, guid: 7d5152cecd09d12498a9e9104d1b54a9, type: 3}
+  - {fileID: -1195162925, guid: 7d5152cecd09d12498a9e9104d1b54a9, type: 3}
+  - {fileID: -1161547517, guid: 7d5152cecd09d12498a9e9104d1b54a9, type: 3}
   - {fileID: 1413910001, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
   - {fileID: -1668276189, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
   - {fileID: 1291851251, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
   - {fileID: 1641887689, guid: 5699c44a5eb1bd44f8ce02cafbad1be6, type: 3}
-  - {fileID: 2017005488, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: -133921453, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: 1166440532, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
-  - {fileID: -1872376632, guid: 837da22f7f106df42975b12b747ae72d, type: 3}
+  - {fileID: -201359848, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
+  - {fileID: 1461643631, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
+  - {fileID: -1747395240, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
+  - {fileID: 1076949370, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
   notActedNodes:
   - {fileID: -1146959148, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
   - {fileID: 1332314163, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}

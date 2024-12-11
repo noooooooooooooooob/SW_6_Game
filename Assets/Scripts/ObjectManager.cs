@@ -11,10 +11,13 @@ public class ObjectManager : MonoBehaviour
     private NotePatterns notePatterns;
     public float noteSpawnTime;
     private float originalNoteSpawnTime;
-    public float noteSpawnTimeMin;
-    public float noteSpawnTimeMax;
     GameObject[] note;
     public int cnt;
+    public float travelTime;
+    public float bpm;
+    public int skipBeats;
+
+    // Gimmicks
     public float levelNoteSpeed;
     public bool isSlow;
     public bool changingNoteLocation;
@@ -28,6 +31,7 @@ public class ObjectManager : MonoBehaviour
     public int floors;
     //boss appear
     public bool isEnd;
+    private float beatInterval;
     void Awake()
     {
         notePatterns = GetComponent<NotePatterns>();
@@ -36,10 +40,15 @@ public class ObjectManager : MonoBehaviour
         note = new GameObject[500];
         Generate();
 
-        Invoke("makeObj", 1f);
-        // Boss pattern
-    }
+        beatInterval = 60 / bpm;
 
+        // StartCoroutine(makeObjwithbpm(beatInterval, skipBeats));
+        Invoke("startNotes", 1f);
+    }
+    void startNotes()
+    {
+        StartCoroutine(makeObjwithbpm(beatInterval, skipBeats));
+    }
     void Generate()
     {
         for (int i = 0; i < note.Length; i++)
@@ -58,42 +67,41 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-    void makeObj()
+    IEnumerator makeObjwithbpm(float interval, int skip)
     {
-        if (isEnd)
+        while (true)
         {
-            Debug.Log("생성 금지");
-            return;
-        }
+            if (isEnd)
+            {
+                break;
+            }
 
-        if (notePatterns.patnum >= 0) // Boss Pattern
-        {
-            notePatterns.activatePattern();
-        }
-        else // Normal Pattern
-        {
+            if (notePatterns.patnum >= 0) // Boss Pattern
+            {
+                notePatterns.activatePattern();
+            }
+            else // Normal Pattern
+            {
+                SetNoteLine(true, 0);
+                SetNoteColor(true, 0);
+                SetNoteDirection(true, 0);
+                setNoteSpeed(false, 0);
+                setNoteAttribute();
+                SetNotetoActive();
+            }
 
-            SetNoteLine(true, 0);
-            SetNoteColor(true, 0);
-            SetNoteDirection(true, 0);
-            setNoteSpeed(false, 0);
-            setNoteAttribute();
-            SetNotetoActive();
+            if (isSlow)
+            {
+                noteSpawnTime = originalNoteSpawnTime * 2;
+            }
+            else
+            {
+                noteSpawnTime = originalNoteSpawnTime;
+            }
 
+            yield return new WaitForSeconds(interval * skip);
         }
-
-        if (isSlow)
-        {
-            noteSpawnTime = originalNoteSpawnTime * 2;
-        }
-        else
-        {
-            noteSpawnTime = originalNoteSpawnTime;
-        }
-
-        Invoke("makeObj", noteSpawnTime);
     }
-
     public void SetNoteLine(bool isRandom, int line)
     {
         if (isRandom)

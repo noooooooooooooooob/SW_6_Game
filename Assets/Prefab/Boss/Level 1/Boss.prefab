@@ -102,10 +102,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53b2322bafebf9b4ea5ef020da56ebfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarSlider: {fileID: 0}
-  objectManager: {fileID: 0}
-  healthBarController: {fileID: 0}
   isHit: 0
+  isDead: 0
+  doEntrance: 0
   EntranceCurve:
     serializedVersion: 2
     m_Curve:
@@ -246,4 +245,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

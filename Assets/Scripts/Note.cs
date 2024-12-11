@@ -52,6 +52,7 @@ public class Note : MonoBehaviour
     public HealthBarController healthBarController;
     private ReduceGaugebar staminaBar;
 
+    float timeer = 0.0f;
     void Awake()
     {
         //External components
@@ -172,7 +173,7 @@ public class Note : MonoBehaviour
 
     void Update()
     {
-
+        timeer += Time.deltaTime;
         updatePlayerPosition();
 
         if (isMovingToBoss) //현재 플레이어와 충돌하면
@@ -285,6 +286,10 @@ public class Note : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name == "AttackRange")
+        {
+            Debug.Log("Time : " + timeer);
+        }
         if (collision.gameObject.tag == "Player")//|| collision.gameObject.tag == "clone"
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)

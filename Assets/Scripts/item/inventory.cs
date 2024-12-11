@@ -26,14 +26,14 @@ public class inventory : MonoBehaviour
     public DifColor DC;
     //private PlayerDisappear playerDisappear;
     public GameObject[] singleAttack;
-    
+
     public GameObject cloneObject1;
     public GameObject cloneObject2;
     public GameObject cloneObject3;
 
     public GameObject smokeJumpUpPrefab;
     public GameObject smokeJumpDownPrefab;
-  
+
 
     public PlayerAnimationEnum state;
     private bool currentClone;
@@ -202,9 +202,9 @@ public class inventory : MonoBehaviour
                 CloneAttack CA = FindObjectOfType<CloneAttack>();
                 CA.isClone = true;
 
-                PlayerMovement PM=FindObjectOfType<PlayerMovement>();
-                PM.isClone=true;
-                playerFloor=PM.currentFloor;
+                PlayerMovement PM = FindObjectOfType<PlayerMovement>();
+                PM.isClone = true;
+                playerFloor = PM.currentFloor;
                 /*
                 playerDisappear = playerDisappearObject.GetComponent<PlayerDisappear>();
                 PlayerDisappear PL = FindObjectOfType<PlayerDisappear>();
@@ -225,15 +225,17 @@ public class inventory : MonoBehaviour
                 //Clone clone=FindObjectOfType<Clone>();
                 //clone.isDeleted=false;
                 //playerDisappearObject.SetActive(false);
-                
 
-                for(int i=0;i<3;i++){
-                    AttackNodeInRange ANIR= singleAttack[i].GetComponent<AttackNodeInRange>();
-                     ANIR.enabled = false;
+
+                for (int i = 0; i < 3; i++)
+                {
+                    AttackNodeInRange ANIR = singleAttack[i].GetComponent<AttackNodeInRange>();
+                    ANIR.enabled = false;
                 }
-                               
-                
-                if(playerFloor==1){
+
+
+                if (playerFloor == 1)
+                {
                     cloneObject2.SetActive(true);
                     cloneObject3.SetActive(true);
                     CloneAnime2 CA2 = FindObjectOfType<CloneAnime2>();
@@ -245,7 +247,8 @@ public class inventory : MonoBehaviour
                     smokePosition = cloneObject3.transform.position;
                     Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
                 }
-                else if(playerFloor==2){
+                else if (playerFloor == 2)
+                {
                     cloneObject1.SetActive(true);
                     cloneObject3.SetActive(true);
                     CloneAnime1 CA1 = FindObjectOfType<CloneAnime1>();
@@ -257,7 +260,8 @@ public class inventory : MonoBehaviour
                     smokePosition = cloneObject3.transform.position;
                     Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
                 }
-                else if(playerFloor==3){
+                else if (playerFloor == 3)
+                {
                     cloneObject1.SetActive(true);
                     cloneObject2.SetActive(true);
                     CloneAnime1 CA1 = FindObjectOfType<CloneAnime1>();
@@ -269,7 +273,7 @@ public class inventory : MonoBehaviour
                     smokePosition = cloneObject2.transform.position;
                     Instantiate(smokeJumpUpPrefab, smokePosition, Quaternion.identity);
                 }
-               
+
 
                 wait = true;
 
@@ -281,7 +285,7 @@ public class inventory : MonoBehaviour
 
 
 
-            Debug.Log($"Slot {slotIndex + 1}의 {inventorys[slotIndex]}을(를) 사용합니다.");
+            // Debug.Log($"Slot {slotIndex + 1}의 {inventorys[slotIndex]}을(를) 사용합니다.");
             if (spawnedItems[slotIndex] != null)
             {
                 if (wait)
@@ -348,9 +352,9 @@ public class inventory : MonoBehaviour
             //ANIR.isClone = false;
             CloneAttack CA = FindObjectOfType<CloneAttack>();
             CA.isClone = false;
-            PlayerMovement PM=FindObjectOfType<PlayerMovement>();
-            PM.isClone=false;
-            playerFloor=PM.currentFloor;
+            PlayerMovement PM = FindObjectOfType<PlayerMovement>();
+            PM.isClone = false;
+            playerFloor = PM.currentFloor;
             //PlayerElement PE= FindObjectOfType<PlayerElement>();
             //PE.fuck();
 
@@ -361,28 +365,32 @@ public class inventory : MonoBehaviour
             playerDisappear.isDeleted = false;
             playerDisappearObject.SetActive(true);
             */
-             for(int i=0;i<3;i++){
-                    AttackNodeInRange ANIR= singleAttack[i].GetComponent<AttackNodeInRange>();
-                     ANIR.enabled = true;
-             }
-             if(playerFloor==1){
-                    Vector3 smokePosition = cloneObject2.transform.position;
-                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
-                    smokePosition = cloneObject3.transform.position;
-                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
-                }
-                else if(playerFloor==2){
-                    Vector3 smokePosition = cloneObject1.transform.position;
-                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
-                    smokePosition = cloneObject3.transform.position;
-                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
-                }
-                else if(playerFloor==3){
-                    Vector3 smokePosition = cloneObject1.transform.position;
-                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
-                    smokePosition = cloneObject2.transform.position;
-                    Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
-                }
+            for (int i = 0; i < 3; i++)
+            {
+                AttackNodeInRange ANIR = singleAttack[i].GetComponent<AttackNodeInRange>();
+                ANIR.enabled = true;
+            }
+            if (playerFloor == 1)
+            {
+                Vector3 smokePosition = cloneObject2.transform.position;
+                Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                smokePosition = cloneObject3.transform.position;
+                Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+            }
+            else if (playerFloor == 2)
+            {
+                Vector3 smokePosition = cloneObject1.transform.position;
+                Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                smokePosition = cloneObject3.transform.position;
+                Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+            }
+            else if (playerFloor == 3)
+            {
+                Vector3 smokePosition = cloneObject1.transform.position;
+                Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                smokePosition = cloneObject2.transform.position;
+                Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+            }
             cloneObject1.SetActive(false);
             cloneObject2.SetActive(false);
             cloneObject3.SetActive(false);

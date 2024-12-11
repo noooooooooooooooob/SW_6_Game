@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour
     public GameObject GamePauseUI;
     public GameObject GameOverUI;
 
+    private ObjectManager objectManager;
     void Start()
     {
         bgmAudio = GameObject.Find("BackGroundMusic").GetComponent<AudioSource>();
+        objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
+        Invoke("startBGM", 1f + objectManager.travelTime);
     }
     void Update()
     {
@@ -29,6 +32,11 @@ public class GameManager : MonoBehaviour
                 PauseGame(); // 게임 일시정지
             }
         }
+    }
+
+    void startBGM()
+    {
+        bgmAudio.Play();
     }
     public void PauseGame()
     {
