@@ -173,6 +173,7 @@ public class ObjectManager : MonoBehaviour
             {
                 n.GetComponent<Note>().isSame = true;
             }
+            note[cnt].GetComponent<Note>().isSame=true;
         }
     }
 

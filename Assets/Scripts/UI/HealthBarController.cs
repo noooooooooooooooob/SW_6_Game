@@ -134,7 +134,7 @@ public class HealthBarController : MonoBehaviour
 
             if (isDamageUp)
             {
-                amount *= 2f;
+                amount *= 4f;
             }
 
             // 목표 체력을 증가시키고 최대 체력으로 제한

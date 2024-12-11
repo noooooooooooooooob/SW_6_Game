@@ -65,18 +65,27 @@ public class Slow : MonoBehaviour
             }
 
         }
-
-    }
     */
-   
+    public GameObject targetObject;
+
 
     public void SlowNotes()
     {
         float speed=0.5f;
         Time.timeScale = speed; // 게임 전체 시간의 속도를 변경
         Time.fixedDeltaTime = 0.02f * Time.timeScale; // 물리 업데이트 속도도 조정
-
-
+        //targetObject=GameObject.Find("SlowTime");
+        Vector3 Pos = new Vector3(0, 0,-0.1f);
+        GameObject instance = Instantiate(targetObject);
+        //Instantiate(instance, Pos, Quaternion.identity);
+         StartCoroutine(DestroyAfterDelay(instance, 1.0f));
+        
+    }
+     IEnumerator DestroyAfterDelay(GameObject obj, float delay)
+    {
+        Debug.Log("des");
+        yield return new WaitForSeconds(delay);
+        Destroy(obj);
     }
 
 
