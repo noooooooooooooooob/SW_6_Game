@@ -15,7 +15,7 @@ public class ObjectManager : MonoBehaviour
     public int cnt;
     public float travelTime;
     public float bpm;
-    public int skipBeats;
+    public float skipBeats;
 
     // Gimmicks
     public float levelNoteSpeed;
@@ -67,7 +67,7 @@ public class ObjectManager : MonoBehaviour
         }
     }
 
-    IEnumerator makeObjwithbpm(float interval, int skip)
+    IEnumerator makeObjwithbpm(float interval, float skip)
     {
         while (true)
         {
