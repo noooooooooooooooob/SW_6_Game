@@ -2977,6 +2977,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Scores: 000000000000000000000000000000000000000000000000000000000000000000000000
   currentScore: 0
+  currentHit: 0
+  currentMiss: 0
 --- !u!1 &738255040
 GameObject:
   m_ObjectHideFlags: 0
@@ -10432,6 +10434,10 @@ PrefabInstance:
     - target: {fileID: 4278978493048247348, guid: 5d0957f51fba8ad4f9cefbd76af61046, type: 3}
       propertyPath: m_AnchorMin.x
       value: 0.4589459
+      objectReference: {fileID: 0}
+    - target: {fileID: 7083856774162262285, guid: 5d0957f51fba8ad4f9cefbd76af61046, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7605893395411620002, guid: 5d0957f51fba8ad4f9cefbd76af61046, type: 3}
       propertyPath: m_AnchorMax.x
