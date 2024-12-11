@@ -18,6 +18,7 @@ public class HealthBarController : MonoBehaviour
     Slider healthBarSlider;  // Slider로 변경
     [SerializeField] private float maxHealth = 1000f;
     [SerializeField] private float changeRate = 30f;  // 고정 회복량 및 데미지량
+    [SerializeField] private float damageRate;
     [SerializeField] private float bonusRate = 40f;
     [SerializeField] private float mininumDamage = 5f;
 
@@ -153,7 +154,7 @@ public class HealthBarController : MonoBehaviour
     {
         if (HealthBarActive)
         {
-            float amount = changeRate;
+            float amount = damageRate;
             float healthPercentage = GetHealthPercentage();
 
             // 체력이 낮을 때 데미지 감소

@@ -152,7 +152,7 @@ public class NotePatterns : MonoBehaviour
         objectManager.SetNoteColor(false, colorOrder[colorOrderIdx]);
         objectManager.SetNoteDirection(true, 0);
         objectManager.SetNoteLine(false, pos);
-        objectManager.setNoteSpeed(true, objectManager.levelNoteSpeed * 2);
+        objectManager.setNoteSpeed(false, 0);
         objectManager.setNoteAttribute();
         objectManager.SetNotetoActive();
         prevPos = pos;
