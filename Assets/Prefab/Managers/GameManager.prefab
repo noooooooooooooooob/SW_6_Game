@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 942375192143773817}
   - component: {fileID: 1331234003589446011}
   - component: {fileID: 2166148270506202236}
-  - component: {fileID: 5320264572346763580}
-  - component: {fileID: 3362314230259933370}
+  - component: {fileID: 7744402346966258853}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -50,6 +49,7 @@ MonoBehaviour:
   BossDefeated: 0
   PlayerDefeated: 0
   inTransition: 0
+  GameOverUI: {fileID: 3939328905044956639, guid: e245b0383b5ff4a45b1343c8ca2d4e09, type: 3}
 --- !u!114 &2166148270506202236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
   ManualSceneSelection: 0
   SceneToLoad: 0
   CurrentScene: 0
---- !u!114 &5320264572346763580
+--- !u!114 &7744402346966258853
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,26 +74,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6758346704394076995}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cb8b00a4e9951145a848c5974f3fbce, type: 3}
+  m_Script: {fileID: 11500000, guid: 35cf8a05d2e6a9b46a00a995eaae46d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
-  bgmAudio: {fileID: 0}
---- !u!114 &3362314230259933370
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6758346704394076995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 734935ffc4f6808428448a3d39c9831d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  panel: {fileID: 0}
-  scoreManager: {fileID: 0}
-  sceneManager: {fileID: 0}
-  scoreText: {fileID: 0}
-  Hit: {fileID: 0}
-  Miss: {fileID: 0}
+  GamePauseUI: {fileID: 2035677514490657970, guid: 7f0371320c62ac94ab02a7fa12d6b1d7, type: 3}
+  GameOverUI: {fileID: 3939328905044956639, guid: e245b0383b5ff4a45b1343c8ca2d4e09, type: 3}

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6237335276689959318}
   m_Layer: 0
-  m_Name: Time
+  m_Name: Time_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,8 +255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24011d01be88dbf4eb47e56ba6c89695, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: 0
-  Combo: 0
   numbers:
   - {fileID: -693492291, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
   - {fileID: 836592596, guid: 991fb5304ef4c8a439942ee896386366, type: 3}
@@ -272,7 +270,10 @@ MonoBehaviour:
   - {fileID: 3003692338982425072}
   - {fileID: 7717565395948185922}
   - {fileID: 7929178533544931461}
-  timeLimit: 0
+  timeLimit: 300
+  timeRemaining: 0
+  isGameOver: 0
+  isGameClear: 0
 --- !u!223 &3047729062035677202
 Canvas:
   m_ObjectHideFlags: 0

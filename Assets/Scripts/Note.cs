@@ -21,7 +21,6 @@ public class Note : MonoBehaviour
     SpriteRenderer spriteRenderer;
     public int spawnLine;
     float spawnPointYInWorld;
-    public float spawnPointX;
     public float speed;
     public bool isHit;
     public int arrowidx;
@@ -147,12 +146,14 @@ public class Note : MonoBehaviour
     {
         // 스폰 위치 설정
         spawnPointYInWorld = spawnPoints[spawnLine]; // 스폰포인트 랜덤
+        bossObj = FindObjectOfType<Boss>();
+        playerObj = FindObjectOfType<Player>();
+
+        transform.position = bossObj.transform.position;
 
         SetNoteColorDirection();
         StartCoroutine(MoveToSpawnPointY());
 
-        bossObj = FindObjectOfType<Boss>();
-        playerObj = FindObjectOfType<Player>();
     }
 
     public void updatePlayerPosition()
@@ -284,7 +285,7 @@ public class Note : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player" )//|| collision.gameObject.tag == "clone"
+        if (collision.gameObject.tag == "Player")//|| collision.gameObject.tag == "clone"
         {   // 노트가 플레이어와 충돌 시 데미지를 입음
             if (!isNotacted)
             {

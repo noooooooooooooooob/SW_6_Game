@@ -7,37 +7,31 @@ using TMPro;
 public class GameEnd : MonoBehaviour
 {
     public GameObject panel;
-    public ScoreManager scoreManager;
-    public SceneManager sceneManager;
+    private ScoreManager scoreManager;
+    private SceneManager sceneManager;
     public TMP_Text scoreText;
     public TMP_Text Hit;
     public TMP_Text Miss;
-    bool isClear;
-    bool isOver;
-    bool hasTriggered;
-    
+
     void Start()
     {
-        hasTriggered=false;
-        isClear=false;
-        isOver=false;
-        scoreManager=GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
-        sceneManager=GameObject.Find("GameManager").GetComponent<SceneManager>();
+        scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        sceneManager = GameObject.Find("GameManager").GetComponent<SceneManager>();
+
+        GameOver();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && (isClear || isOver))
+        if (Input.GetMouseButtonDown(0))
         {
-            panel.SetActive(false);
             sceneManager.LoadScene(0);
+            panel.SetActive(false);
         }
     }
 
-    public void gameOver()
+    public void GameOver()
     {
-        if(hasTriggered)
-            return;
         // 게임 오버 스코어 출력
         string String = string.Join(" ", scoreManager.currentScore);
         scoreText.text = String;
@@ -48,17 +42,14 @@ public class GameEnd : MonoBehaviour
 
         // 게임 오버 시 초기화
         scoreManager.sortScores();
-        scoreManager.currentScore=0;
-        scoreManager.currentHit=0;
-        scoreManager.currentMiss=0;
+        scoreManager.currentScore = 0;
+        scoreManager.currentHit = 0;
+        scoreManager.currentMiss = 0;
 
         panel.SetActive(true);
-        isOver=true;
-
-        hasTriggered=true;
     }
 
-    public void gameClear()
+    public void GameClear()
     {
         panel.SetActive(true);
     }

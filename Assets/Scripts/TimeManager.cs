@@ -4,10 +4,10 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class TimeManager : MonoBehaviour
 {
     private ScoreManager scoreManager;
-
+    private bool scoreManagerActive = false;
     public Sprite[] numbers; //숫자 스프라이트
     public GameObject[] Timer;
 
@@ -19,16 +19,21 @@ public class GameManager : MonoBehaviour
     bool hasTriggered; // 시간 업데이트 한 번만 하기
     void Start()
     {
-        // 현재 주석처리 코드 실행 시 메인메뉴부터 시작해야 오류 안 남
         // 스코어 저장하는 용도
-        scoreManager=GameObject.Find("ScoreManager").GetComponent<ScoreManager>(); 
-        isGameOver=false;
-        hasTriggered=false;
-        isGameClear=false;
+        isGameOver = false;
+        hasTriggered = false;
+        isGameClear = false;
 
         startTime = Time.time;  // 게임 시작 시간을 현재 시간으로 설정
 
+        if (GameObject.Find("ScoreManager") != null)
+        {
+            scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+            scoreManagerActive = true;
+        }
+
         int n = (int)timeLimit;
+
         for (int i = 2; i >= 0; i--)
         {
             int input = n % 10;
@@ -42,14 +47,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if(!isGameOver && !isGameClear)
-        {
-            UpdateTimer();
-        }
-        if(!hasTriggered && isGameClear)
-        {
-            UpdateCurScore();
-        }
+        UpdateTimer();
     }
 
     void UpdateTimer()
@@ -69,9 +67,12 @@ public class GameManager : MonoBehaviour
         //if(timeRemaining <= 0) 일시 게임오버
     }
 
-    void UpdateCurScore()
+    public void UpdateCurScore()
     {
-        scoreManager.addScore((int)timeRemaining);
-        hasTriggered=true;
+        if (!hasTriggered && scoreManagerActive)
+        {
+            hasTriggered = true;
+            scoreManager.addScore((int)timeRemaining);
+        }
     }
 }

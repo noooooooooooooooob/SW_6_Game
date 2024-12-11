@@ -15,8 +15,8 @@ public class ObjectManager : MonoBehaviour
     public float noteSpawnTimeMax;
     GameObject[] note;
     public int cnt;
+    public float levelNoteSpeed;
     public bool isSlow;
-    //boss logic
     public bool changingNoteLocation;
     public bool oppositeNoteArrow;
     public bool notActedNote;
@@ -26,8 +26,6 @@ public class ObjectManager : MonoBehaviour
 
     [Range(0, 2)]
     public int floors;
-    private int noteLine; // Floor of the note (0~2) 
-
     //boss appear
     public bool isEnd;
     void Awake()
@@ -53,6 +51,7 @@ public class ObjectManager : MonoBehaviour
 
     public void GameEnd()
     {
+        isEnd = true;
         for (int i = 0; i < note.Length; i++)
         {
             note[i].SetActive(false);
@@ -77,7 +76,7 @@ public class ObjectManager : MonoBehaviour
             SetNoteLine(true, 0);
             SetNoteColor(true, 0);
             SetNoteDirection(true, 0);
-
+            setNoteSpeed(false, 0);
             setNoteAttribute();
             SetNotetoActive();
 
@@ -99,11 +98,11 @@ public class ObjectManager : MonoBehaviour
     {
         if (isRandom)
         {
-            noteLine = Random.Range(0, floors + 1);//+1 Because its exclusive
+            note[cnt].GetComponent<Note>().spawnLine = Random.Range(0, floors + 1);
         }
         else
         {
-            noteLine = line;
+            note[cnt].GetComponent<Note>().spawnLine = line;
         }
     }
 
@@ -119,6 +118,18 @@ public class ObjectManager : MonoBehaviour
         }
 
         notePatterns.patternNoteColoridx = note[cnt].GetComponent<Note>().coloridx;
+    }
+
+    public void setNoteSpeed(bool isCustom, float speed)
+    {
+        if (isCustom)
+        {
+            note[cnt].GetComponent<Note>().speed = speed;
+        }
+        else
+        {
+            note[cnt].GetComponent<Note>().speed = levelNoteSpeed;
+        }
     }
 
     public void SetNoteDirection(bool isRandom, int setDirection)
@@ -137,7 +148,6 @@ public class ObjectManager : MonoBehaviour
 
     public void setNoteAttribute()
     {
-        note[cnt].GetComponent<Note>().spawnLine = noteLine;
 
         if (isSlow)
             note[cnt].GetComponent<Note>().speed *= 0.5f;

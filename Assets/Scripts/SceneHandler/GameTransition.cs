@@ -10,22 +10,26 @@ public class GameTransition : MonoBehaviour
     SceneManager sceneManager;
     Fade fade;
     PlayerMovement playerMovement;
+    TimeManager timeManager;
+    GameManager gameManager;
+
     void Start()
     {
         BossDefeated = false;
         PlayerDefeated = false;
         inTransition = false;
 
-        sceneManager = GameObject.Find("GameManager").GetComponent<SceneManager>();
+        sceneManager = GetComponent<SceneManager>(); //Local Files
+        gameManager = GetComponent<GameManager>(); //Local Files
         sceneManager.PreLoadNextScene();
         fade = GameObject.Find("FadePanel").GetComponent<Fade>();
         playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
-
-
+        timeManager = GameObject.Find("Time").GetComponent<TimeManager>();
     }
     public void SetBossDefeated()
     {
         BossDefeated = true;
+        timeManager.UpdateCurScore();
         if (playerMovement != null)
         {
             playerMovement.VictoryRun();
@@ -34,7 +38,6 @@ public class GameTransition : MonoBehaviour
         {
             Debug.Log("PlayerMovement is null");
         }
-
     }
 
     public void PrepNextScene()
@@ -51,9 +54,10 @@ public class GameTransition : MonoBehaviour
 
     public void SetPlayerDefeated()
     {
-        PlayerDefeated = true;
-        sceneManager.LoadScene(0);
-        // StartCoroutine(fade.FadeOut());
+        if (!PlayerDefeated)
+        {
+            PlayerDefeated = true;
+            gameManager.ShowGameOverUI();
+        }
     }
-
 }
