@@ -81,6 +81,7 @@ public class CloneAttack : MonoBehaviour
 
         List<GameObject> notesToRemove = new List<GameObject>();
         CurrentColor CC = FindObjectOfType<CurrentColor>();
+         Note no= FindObjectOfType<Note>();
 
         foreach (var noteObject in new List<GameObject>(notesInRange))
         {
@@ -103,6 +104,8 @@ public class CloneAttack : MonoBehaviour
                         particleSystem1.Stop(); // 파티클 중복 실행 방지
                         particleSystem1.Play();
                     }
+                     no.playNoteHitSound();
+
                 }
                 else
                 {
