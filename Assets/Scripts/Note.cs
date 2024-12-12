@@ -34,6 +34,7 @@ public class Note : MonoBehaviour
     public bool isOpposite;
     public bool isNotacted;
     public bool isFaded;
+    float noteditance; // fade용 float 변수
     public float opacity;
     public bool isSame;
     public int posChange;
@@ -186,9 +187,8 @@ public class Note : MonoBehaviour
         }
         else
         {
-            if (isFaded && transform.position.x <= 8.0f)
+            if (isFaded)
             {
-                isFaded = false;
                 fadeNodes();
             }
             if (isOpposite)
@@ -224,29 +224,26 @@ public class Note : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //-5.5 attack range 7 start postition 0.75 middle
     void fadeNodes()
     {
+        /*
+        if(transform.position.x<=2.0f && transform.position.x >= -0.5f)
+            noteditance=0;
+        else
+        {
+            if(transform.position.x>2.0f)
+                noteditance=transform.position.x-2.0f;
+            else
+                noteditance=transform.position.x+0.5f;
+        }
+        opacity = Mathf.Abs(noteditance / 5.0f);
         spriteRenderer.color = new Color(1, 1, 1, 1.0f * opacity);
-        if (opacity <= 0.0f)
-        {
-            inFadeNodes();
-            return;
-        }
-        opacity -= 0.1f;
-        Invoke("fadeNodes", 0.08f);
-    }
+        */
 
-    void inFadeNodes()
-    {
-        if (opacity >= 1.0f)
-            return;
-        if (transform.position.x <= -0.5f && opacity <= 1.0f)
-        {
-            opacity += 0.1f;
-            spriteRenderer.color = new Color(1, 1, 1, 1.0f * opacity);
-        }
-
-        Invoke("inFadeNodes", 0.08f);
+        noteditance = Mathf.Clamp(transform.position.x, -0.5f, 2.0f) - transform.position.x;
+        opacity = Mathf.Abs(noteditance / 5.0f);
+        spriteRenderer.color = new Color(1, 1, 1, opacity);
     }
 
     void sameColor()
