@@ -22,7 +22,6 @@ public class ObjectManager : MonoBehaviour
     public bool isSlow;
     public bool changingNoteLocation;
     public bool oppositeNoteArrow;
-    public bool notActedNote;
     public bool fadeNote;
     public bool unifyNote;
 
@@ -161,8 +160,6 @@ public class ObjectManager : MonoBehaviour
             note[cnt].GetComponent<Note>().speed *= 0.5f;
         if (oppositeNoteArrow)
             note[cnt].GetComponent<Note>().isOpposite = true;
-        if (notActedNote)
-            note[cnt].GetComponent<Note>().isNotacted = true;
         if (fadeNote)
             note[cnt].GetComponent<Note>().isFaded = true;
         if (unifyNote)
