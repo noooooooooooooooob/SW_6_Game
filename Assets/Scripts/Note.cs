@@ -16,7 +16,6 @@ public class Note : MonoBehaviour
     public float[] spawnPoints;
     public float[] spawnPointschangelocate;
     public Sprite[] sprites;
-    public Sprite[] notActedNodes;
     public Sprite[] oppositeNodes;
     SpriteRenderer spriteRenderer;
     public int spawnLine;
@@ -30,14 +29,11 @@ public class Note : MonoBehaviour
     public ArrowDirectionEnum noteArrowDirection;
 
     //기믹들 추가
-    public float changeSpeed;
     public bool isOpposite;
-    public bool isNotacted;
     public bool isFaded;
     float noteditance; // fade용 float 변수
     public float opacity;
     public bool isSame;
-    public int posChange;
     //public int playerColor;
     ColorEnum playerColor;
 
@@ -53,7 +49,7 @@ public class Note : MonoBehaviour
     public HealthBarController healthBarController;
     private ReduceGaugebar staminaBar;
 
-    float timeer = 0.0f;
+    float timer = 0.0f;
     void Awake()
     {
         //External components
@@ -79,7 +75,6 @@ public class Note : MonoBehaviour
         }
 
         isOpposite = false;
-        isNotacted = false;
         isFaded = false;
         isSame = false;
 
@@ -174,7 +169,7 @@ public class Note : MonoBehaviour
 
     void Update()
     {
-        timeer += Time.deltaTime;
+        timer += Time.deltaTime;
         updatePlayerPosition();
 
         if (isMovingToBoss) //현재 플레이어와 충돌하면
@@ -208,11 +203,6 @@ public class Note : MonoBehaviour
             if (isSame)
             {
                 sameColor();
-            }
-
-            if (isNotacted)
-            {
-                spriteRenderer.sprite = notActedNodes[arrowidx];
             }
             transform.Translate(-1.0f * speed * Time.deltaTime, 0, 0); // 등속으로 왼쪽으로 이동
         }
@@ -285,18 +275,12 @@ public class Note : MonoBehaviour
     {
         if (collision.gameObject.name == "AttackRange")
         {
-            Debug.Log("Time : " + timeer);
+            Debug.Log("Time : " + timer);
         }
         if (collision.gameObject.tag == "Player")//|| collision.gameObject.tag == "clone"
-        {   // 노트가 플레이어와 충돌 시 데미지를 입음
-            if (!isNotacted)
-            {
-                damagePlayer();
-            }
-            else if (isNotacted) // 때리면 안되는 노트와 닿으면 회복
-            {
-                healPlayer();
-            }
+        {   
+            // 노트가 플레이어와 충돌 시 데미지를 입음
+            damagePlayer();
             gameObject.SetActive(false);
         }
         else if (collision.gameObject.tag == "Boss" && isHit)
