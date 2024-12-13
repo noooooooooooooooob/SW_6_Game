@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 public class Bomb : MonoBehaviour
 {
 
@@ -28,6 +29,8 @@ public class Bomb : MonoBehaviour
             // x와 y 범위 안에 있는 오브젝트만 삭제
             if (pos.x >= minX && pos.x <= maxX && pos.y >= minY && pos.y <= maxY)
             {
+                Note noteComponent = note.GetComponent<Note>();
+                noteComponent.isDestroyed = true;
                 note.SetActive(false);
                 deleteCount++;
             }

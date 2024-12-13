@@ -1,6 +1,9 @@
+using Melanchall.DryWetMidi.Interaction;
+using System;
 using System.CodeDom.Compiler;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using Unity.VisualScripting.Antlr3.Runtime.Tree;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -9,16 +12,8 @@ public class ObjectManager : MonoBehaviour
 {
     public GameObject notePrefab;
     private NotePatterns notePatterns;
-    public float noteSpawnTime;
-    private float originalNoteSpawnTime;
-    GameObject[] note;
-    public int cnt;
-    public float travelTime;
-    public float bpm;
-    public float skipBeats;
 
-    // Gimmicks
-    public float levelNoteSpeed;
+    //Gimmicks
     public bool isSlow;
     public bool changingNoteLocation;
     public bool oppositeNoteArrow;
@@ -28,88 +23,48 @@ public class ObjectManager : MonoBehaviour
 
     [Range(0, 2)]
     public int floors;
-    //boss appear
-    public bool isEnd;
-    private float beatInterval;
-    void Awake()
-    {
-        notePatterns = GetComponent<NotePatterns>();
-        originalNoteSpawnTime = noteSpawnTime;
+    //midi
+    public List<Note> notes = new List<Note>();
+    public List<double> timeStamps = new List<double>();
+    int spawnIndex = 0;
+    public int inputIndex = 0;
 
-        note = new GameObject[500];
-        Generate();
-
-        beatInterval = 60 / bpm;
-
-        // StartCoroutine(makeObjwithbpm(beatInterval, skipBeats));
-        Invoke("startNotes", 1f);
-    }
-    void startNotes()
+    public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
-        StartCoroutine(makeObjwithbpm(beatInterval, skipBeats));
-    }
-    void Generate()
-    {
-        for (int i = 0; i < note.Length; i++)
+        foreach (var note in array)
         {
-            note[i] = Instantiate(notePrefab);
-            note[i].SetActive(false);
+            var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
+            timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
         }
     }
 
-    public void GameEnd()
+    void Update()
     {
-        isEnd = true;
-        for (int i = 0; i < note.Length; i++)
+        if (spawnIndex < timeStamps.Count)
         {
-            note[i].SetActive(false);
-        }
-    }
-
-    IEnumerator makeObjwithbpm(float interval, float skip)
-    {
-        while (true)
-        {
-            if (isEnd)
+            if (SongManager.GetAudioSourceTime() >= timeStamps[spawnIndex] - SongManager.Instance.noteTime)
             {
-                break;
-            }
-
-            if (notePatterns.patnum >= 0) // Boss Pattern
-            {
-                notePatterns.activatePattern();
-            }
-            else // Normal Pattern
-            {
-                SetNoteLine(true, 0);
+                var note = Instantiate(notePrefab, transform);
+                notes.Add(note.GetComponent<Note>());
                 SetNoteColor(true, 0);
                 SetNoteDirection(true, 0);
-                setNoteSpeed(false, 0);
-                setNoteAttribute();
-                SetNotetoActive();
+                SetNoteLine(true, 0);
+                SetNoteAttribute();
+                note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex];
+                spawnIndex++;
             }
-
-            if (isSlow)
-            {
-                noteSpawnTime = originalNoteSpawnTime * 2;
-            }
-            else
-            {
-                noteSpawnTime = originalNoteSpawnTime;
-            }
-
-            yield return new WaitForSeconds(interval * skip);
         }
     }
+
     public void SetNoteLine(bool isRandom, int line)
     {
         if (isRandom)
         {
-            note[cnt].GetComponent<Note>().spawnLine = Random.Range(0, floors + 1);
+            notes[spawnIndex].GetComponent<Note>().spawnLine = UnityEngine.Random.Range(0, floors + 1);
         }
         else
         {
-            note[cnt].GetComponent<Note>().spawnLine = line;
+            notes[spawnIndex].GetComponent<Note>().spawnLine = line;
         }
     }
 
@@ -117,51 +72,41 @@ public class ObjectManager : MonoBehaviour
     {
         if (isRandom)
         {
-            note[cnt].GetComponent<Note>().coloridx = Random.Range(0, 3);
+            notes[spawnIndex].GetComponent<Note>().coloridx = UnityEngine.Random.Range(0, 3);
         }
         else
         {
-            note[cnt].GetComponent<Note>().coloridx = setColor;
+            notes[spawnIndex].GetComponent<Note>().coloridx = setColor;
         }
 
-        notePatterns.patternNoteColoridx = note[cnt].GetComponent<Note>().coloridx;
-    }
-
-    public void setNoteSpeed(bool isCustom, float speed)
-    {
-        if (isCustom)
-        {
-            note[cnt].GetComponent<Note>().speed = speed;
-        }
-        else
-        {
-            note[cnt].GetComponent<Note>().speed = levelNoteSpeed;
-        }
+        // notePatterns.patternNoteColoridx = note[cnt].GetComponent<Note>().coloridx;
+        // notePatterns.patternNoteColoridx = notes[spawnIndex].GetComponent<Note>().coloridx;
     }
 
     public void SetNoteDirection(bool isRandom, int setDirection)
     {
         if (isRandom)
         {
-            note[cnt].GetComponent<Note>().arrowidx = Random.Range(0, 4);
+            notes[spawnIndex].GetComponent<Note>().arrowidx = UnityEngine.Random.Range(0, 4);
         }
         else
         {
-            note[cnt].GetComponent<Note>().arrowidx = setDirection;
+            notes[spawnIndex].GetComponent<Note>().arrowidx = setDirection;
         }
 
-        notePatterns.patternNoteArrowidx = note[cnt].GetComponent<Note>().arrowidx;
+        // notePatterns.patternNoteArrowidx = note[cnt].GetComponent<Note>().arrowidx;
+        // notePatterns.patternNoteArrowidx = notes[spawnIndex].GetComponent<Note>().arrowidx;
     }
 
-    public void setNoteAttribute()
+    public void SetNoteAttribute()
     {
 
         if (isSlow)
-            note[cnt].GetComponent<Note>().speed *= 0.5f;
+            notes[spawnIndex].GetComponent<Note>().speed *= 0.5f;
         if (oppositeNoteArrow)
-            note[cnt].GetComponent<Note>().isOpposite = true;
+            notes[spawnIndex].GetComponent<Note>().isOpposite = true;
         if (fadeNote)
-            note[cnt].GetComponent<Note>().isFaded = true;
+            notes[spawnIndex].GetComponent<Note>().isFaded = true;
         if (unifyNote)
         {
             GameObject[] activeNote = GameObject.FindGameObjectsWithTag("Note");
@@ -170,13 +115,65 @@ public class ObjectManager : MonoBehaviour
             {
                 n.GetComponent<Note>().isSame = true;
             }
-            note[cnt].GetComponent<Note>().isSame=true;
+            notes[spawnIndex].GetComponent<Note>().isSame = true;
         }
     }
 
-    public void SetNotetoActive()
+    public ArrowDirectionEnum GetCurrentNoteArrowDirection(int currentNote)
     {
-        note[cnt++].SetActive(true);
+        if (notes.Count > 0)
+        {
+            return notes[currentNote].GetComponent<Note>().noteArrowDirection;
+        }
+        return 0;
+    }
+
+    public ColorEnum getCurrentNoteColor(int currentNote)
+    {
+        if (notes.Count > 0)
+        {
+            return notes[currentNote].GetComponent<Note>().noteColor;
+        }
+        return 0;
+    }
+
+    public int getCurrentNoteLine(int currentNote)
+    {
+        if (notes.Count > 0)
+        {
+            return notes[currentNote].GetComponent<Note>().spawnLine;
+        }
+        return 0;
+    }
+
+    public bool isDestroyed(int currentNote)
+    {
+        if (notes.Count > 0)
+        {
+            return notes[currentNote].GetComponent<Note>().isDestroyed;
+        }
+        return false;
+    }
+
+    public void PlayHitSound(int currentNote)
+    {
+        if (notes.Count > 0)
+        {
+            notes[currentNote].GetComponent<Note>().playNoteHitSound();
+        }
+    }
+
+    public void MoveToBoss(int currentNote)
+    {
+        if (notes.Count > 0)
+        {
+            notes[currentNote].GetComponent<Note>().StartMovingToBoss();
+        }
+    }
+
+    public void DestroyNote(int index)
+    {
+        Destroy(notes[index].gameObject);
     }
 }
 

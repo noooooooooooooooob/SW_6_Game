@@ -2048,6 +2048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1280669708}
   - component: {fileID: 1280669707}
+  - component: {fileID: 1280669709}
   m_Layer: 0
   m_Name: BackGroundMusic
   m_TagString: Untagged
@@ -2065,7 +2066,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7559014237877176232, guid: 5cebd0276bb94bc44947ab4c53fb9b10, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 9a44d9ea8f59e294884f8c30656a29ba, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5ce345e0ab96cd24f940fa101e5fe166, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
@@ -2160,12 +2161,32 @@ Transform:
   m_GameObject: {fileID: 1280669706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.234383, y: -1.3512156, z: -0.08353536}
+  m_LocalPosition: {x: 0, y: 0, z: -0.08353536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1280669709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280669706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa0a8eb2654165f4bb2a302e5c9fb321, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1280669707}
+  songDelayInSeconds: 0
+  marginOfError: 0.07
+  inputDelayInMilliseconds: 0
+  fileLocation: level 1_2.mid
+  noteTime: 2
+  noteSpawnY: 10
+  noteTapY: -5.5
 --- !u!1001 &1283685038
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5625,11 +5646,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 635651619208768247, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.128727
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 635651619208768247, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.60137016
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 635651619208768247, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5663,6 +5684,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 659906881953883792, guid: 4087d1d11259785449391312ed95a020, type: 3}
+      propertyPath: patnum
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 2657062718263052984, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: m_Name
       value: Object manager
@@ -5677,7 +5702,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8723994209699142163, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: floors
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8723994209699142163, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: isSlow

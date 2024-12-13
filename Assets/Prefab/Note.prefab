@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ca34198e797f048b344b004baa039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteHitSound: {fileID: 8300000, guid: 568d9ee3c5082094e92a0116c58392c4, type: 3}
+  noteHitSound: {fileID: 8300000, guid: b9b2e926d51e8cf41853fcdf91cf10ea, type: 3}
   player: {fileID: 0}
   spawnPoints:
   - -3.5
@@ -157,11 +157,6 @@ MonoBehaviour:
   - {fileID: 1461643631, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
   - {fileID: -1747395240, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
   - {fileID: 1076949370, guid: 3edf4de0a00ea764dadecd43478ecc3a, type: 3}
-  notActedNodes:
-  - {fileID: -1146959148, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
-  - {fileID: 1332314163, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
-  - {fileID: 1969790148, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
-  - {fileID: 713219347, guid: ee47c3c5261bb2141932e1b2a5e69d7a, type: 3}
   oppositeNodes:
   - {fileID: 1773667905, guid: f83decfedb6ec9149923695f4d366721, type: 3}
   - {fileID: 1882633593, guid: f83decfedb6ec9149923695f4d366721, type: 3}
@@ -182,13 +177,10 @@ MonoBehaviour:
   coloridx: 0
   noteColor: 0
   noteArrowDirection: 0
-  changeSpeed: 1
   isOpposite: 0
-  isNotacted: 0
   isFaded: 0
   opacity: 0
   isSame: 0
-  posChange: 0
   healthBarController: {fileID: 0}
 --- !u!50 &6437169392336306601
 Rigidbody2D:

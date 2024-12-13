@@ -17,9 +17,9 @@ public class NotePatterns : MonoBehaviour
         new int[]{0, 2, 0, 0, 2}, // 1번 패턴
         new int[]{3, 3, 3, 3, 3}, // 2번 패턴
         new int[]{4, 5, 4, 5, 4}, // 3번 패턴
-        new int[]{0,0,0,0,0,1,1,1,1,1,2,2,2,2,2}, // 4번 패턴
+        new int[]{0,0,0,0,0, 1,1,1,1,1, 2,2,2,2,2}, // 4번 패턴
         new int[]{0, 1, 2, 0, 1, 2, 0, 1, 2, 0, 1, 2}, // 5번 패턴
-        new int[]{0,0, 1,1,2,2,1,1,2,2,0,0}
+        new int[]{0,0, 1,1, 2,2, 1,1, 2,2, 0,0} //6번 패턴
 
     };
 
@@ -32,6 +32,7 @@ public class NotePatterns : MonoBehaviour
     public int[] colorOrder;
     public int colorOrderIdx;
     private int prevPos;
+
     void Awake()
     {
         objectManager = GetComponent<ObjectManager>();
@@ -70,6 +71,8 @@ public class NotePatterns : MonoBehaviour
         switch (patnum)
         {
             case 4:
+            case 5:
+            case 6:
                 RandomizeColorOrder();
                 ColorRows(pos);
                 break;
@@ -98,9 +101,7 @@ public class NotePatterns : MonoBehaviour
         objectManager.SetNoteColor(false, patternNoteColoridx);
         objectManager.SetNoteDirection(false, patternNoteArrowidx);
         objectManager.SetNoteLine(false, noteLine);
-        objectManager.setNoteSpeed(false, 0);
-        objectManager.setNoteAttribute();
-        objectManager.SetNotetoActive();
+        objectManager.SetNoteAttribute();
     }
 
     private void spawnNotesInAllRows()
@@ -111,9 +112,7 @@ public class NotePatterns : MonoBehaviour
             objectManager.SetNoteColor(false, patternNoteColoridx);
             objectManager.SetNoteDirection(false, patternNoteArrowidx);
             objectManager.SetNoteLine(false, j);
-            objectManager.setNoteSpeed(false, 0);
-            objectManager.setNoteAttribute();
-            objectManager.SetNotetoActive();
+            objectManager.SetNoteAttribute();
         }
     }
 
@@ -124,9 +123,7 @@ public class NotePatterns : MonoBehaviour
             objectManager.SetNoteColor(false, patternNoteColoridx);
             objectManager.SetNoteDirection(false, patternNoteArrowidx);
             objectManager.SetNoteLine(false, j);
-            objectManager.setNoteSpeed(false, 0);
-            objectManager.setNoteAttribute();
-            objectManager.SetNotetoActive();
+            objectManager.SetNoteAttribute();
         }
     }
     private void spawnTwoDown()
@@ -136,9 +133,7 @@ public class NotePatterns : MonoBehaviour
             objectManager.SetNoteColor(false, patternNoteColoridx);
             objectManager.SetNoteDirection(false, patternNoteArrowidx);
             objectManager.SetNoteLine(false, j);
-            objectManager.setNoteSpeed(false, 0);
-            objectManager.setNoteAttribute();
-            objectManager.SetNotetoActive();
+            objectManager.SetNoteAttribute();
         }
     }
 
@@ -147,14 +142,16 @@ public class NotePatterns : MonoBehaviour
         if (prevPos != pos) //if it is the same line, Keep the same color
         {
             colorOrderIdx++;
+            if (colorOrderIdx >= 3)
+            {
+                colorOrderIdx = 0;
+            }
         }
 
         objectManager.SetNoteColor(false, colorOrder[colorOrderIdx]);
         objectManager.SetNoteDirection(true, 0);
         objectManager.SetNoteLine(false, pos);
-        objectManager.setNoteSpeed(false, 0);
-        objectManager.setNoteAttribute();
-        objectManager.SetNotetoActive();
+        objectManager.SetNoteAttribute();
         prevPos = pos;
     }
 
