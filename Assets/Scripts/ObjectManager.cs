@@ -75,7 +75,7 @@ public class ObjectManager : MonoBehaviour
                 }
                 else //pattern notes
                 {
-                    if (noteKeys[spawnIndex] == noteKeys[spawnIndex - 1])
+                    if (spawnIndex > 0 && noteKeys[spawnIndex] == noteKeys[spawnIndex - 1])
                     { // same level
                         SetNoteColor(false, notes[spawnIndex - 1].coloridx);
                         SetNoteDirection(true, 0);
