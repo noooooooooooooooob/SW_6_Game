@@ -45,6 +45,10 @@ public class ObjectManager : MonoBehaviour
             {
                 noteKeys.Add(1);
             }
+            else if (note.NoteName == noteRestriction[2])
+            {
+                noteKeys.Add(2);
+            }
 
             var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
             timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
@@ -158,7 +162,7 @@ public class ObjectManager : MonoBehaviour
 
     public ArrowDirectionEnum GetCurrentNoteArrowDirection(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             return notes[currentNote].noteArrowDirection;
         }
@@ -167,7 +171,7 @@ public class ObjectManager : MonoBehaviour
 
     public ColorEnum getCurrentNoteColor(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             return notes[currentNote].noteColor;
         }
@@ -176,7 +180,7 @@ public class ObjectManager : MonoBehaviour
 
     public int getCurrentNoteLine(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             return notes[currentNote].spawnLine;
         }
@@ -185,7 +189,7 @@ public class ObjectManager : MonoBehaviour
 
     public bool isDestroyed(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             return notes[currentNote].isDestroyed;
         }
@@ -194,7 +198,7 @@ public class ObjectManager : MonoBehaviour
 
     public void PlayHitSound(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             notes[currentNote].playNoteHitSound();
         }
@@ -202,7 +206,7 @@ public class ObjectManager : MonoBehaviour
 
     public void MoveToBoss(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             notes[currentNote].StartMovingToBoss();
         }
@@ -215,7 +219,7 @@ public class ObjectManager : MonoBehaviour
 
     public string returnNoteName(int currentNote)
     {
-        if (notes.Count > 0)
+        if (spawnIndex > currentNote)
         {
             return noteKeys[currentNote].ToString();
         }
