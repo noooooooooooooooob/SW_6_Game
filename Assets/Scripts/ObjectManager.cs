@@ -162,7 +162,7 @@ public class ObjectManager : MonoBehaviour
 
     public ArrowDirectionEnum GetCurrentNoteArrowDirection(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             return notes[currentNote].noteArrowDirection;
         }
@@ -171,7 +171,7 @@ public class ObjectManager : MonoBehaviour
 
     public ColorEnum getCurrentNoteColor(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             return notes[currentNote].noteColor;
         }
@@ -180,7 +180,7 @@ public class ObjectManager : MonoBehaviour
 
     public int getCurrentNoteLine(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             return notes[currentNote].spawnLine;
         }
@@ -189,7 +189,7 @@ public class ObjectManager : MonoBehaviour
 
     public bool isDestroyed(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             return notes[currentNote].isDestroyed;
         }
@@ -198,7 +198,7 @@ public class ObjectManager : MonoBehaviour
 
     public void PlayHitSound(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             notes[currentNote].playNoteHitSound();
         }
@@ -206,7 +206,7 @@ public class ObjectManager : MonoBehaviour
 
     public void MoveToBoss(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             notes[currentNote].StartMovingToBoss();
         }
@@ -219,7 +219,7 @@ public class ObjectManager : MonoBehaviour
 
     public string returnNoteName(int currentNote)
     {
-        if (notes.Count > 0)
+        if (notes.Count > currentNote && currentNote > 0)
         {
             return noteKeys[currentNote].ToString();
         }

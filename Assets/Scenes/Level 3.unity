@@ -922,7 +922,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 635651619208768247, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.05671261
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 635651619208768247, guid: 4087d1d11259785449391312ed95a020, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1698,6 +1698,10 @@ PrefabInstance:
     - target: {fileID: 8563302920563536792, guid: e1839c0c5d01be041832e558aed168a2, type: 3}
       propertyPath: fileLocation
       value: Level 3_1.mid
+      objectReference: {fileID: 0}
+    - target: {fileID: 8563302920563536792, guid: e1839c0c5d01be041832e558aed168a2, type: 3}
+      propertyPath: songDelayInSeconds
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
