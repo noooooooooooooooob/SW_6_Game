@@ -98,6 +98,8 @@ public class AttackNodeInRange : MonoBehaviour
                     objectManager.inputIndex++;
                     Debug.Log(objectManager.returnNoteName(objectManager.inputIndex));
 
+                    particlePlayer.isPlay=true;
+
                 }
                 attack = false;
             }
