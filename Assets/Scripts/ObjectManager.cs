@@ -24,17 +24,32 @@ public class ObjectManager : MonoBehaviour
     [Range(0, 2)]
     public int floors;
     //midi
+    public Melanchall.DryWetMidi.MusicTheory.NoteName[] noteRestriction;
     public List<Note> notes = new List<Note>();
     public List<double> timeStamps = new List<double>();
     int spawnIndex = 0;
     public int inputIndex = 0;
+    public List<int> noteKeys = new List<int>();
 
     public void SetTimeStamps(Melanchall.DryWetMidi.Interaction.Note[] array)
     {
+        int i = 0;
         foreach (var note in array)
         {
+
+            if (note.NoteName == noteRestriction[0])
+            {
+                noteKeys.Add(0);
+            }
+            else if (note.NoteName == noteRestriction[1])
+            {
+                noteKeys.Add(1);
+            }
+
             var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
             timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
+
+            i++;
         }
     }
 
@@ -46,10 +61,32 @@ public class ObjectManager : MonoBehaviour
             {
                 var note = Instantiate(notePrefab, transform);
                 notes.Add(note.GetComponent<Note>());
-                SetNoteColor(true, 0);
-                SetNoteDirection(true, 0);
-                SetNoteLine(true, 0);
-                SetNoteAttribute();
+
+                if (noteKeys[spawnIndex] == 0) //Normal notes
+                {
+                    SetNoteDirection(true, 0);
+                    SetNoteColor(true, 0);
+                    SetNoteLine(true, 0);
+                    SetNoteAttribute();
+                }
+                else //pattern notes
+                {
+                    if (noteKeys[spawnIndex] == noteKeys[spawnIndex - 1])
+                    { // same level
+                        SetNoteColor(true, notes[spawnIndex - 1].coloridx);
+                        SetNoteDirection(true, 0);
+                        SetNoteLine(false, notes[spawnIndex - 1].spawnLine);
+                        SetNoteAttribute();
+                    }
+                    else
+                    {
+                        SetNoteColor(true, 0);
+                        SetNoteDirection(true, 0);
+                        SetNoteLine(true, 0);
+                        SetNoteAttribute();
+                    }
+
+                }
                 note.GetComponent<Note>().assignedTime = (float)timeStamps[spawnIndex];
                 spawnIndex++;
             }
@@ -60,11 +97,11 @@ public class ObjectManager : MonoBehaviour
     {
         if (isRandom)
         {
-            notes[spawnIndex].GetComponent<Note>().spawnLine = UnityEngine.Random.Range(0, floors + 1);
+            notes[spawnIndex].spawnLine = UnityEngine.Random.Range(0, floors + 1);
         }
         else
         {
-            notes[spawnIndex].GetComponent<Note>().spawnLine = line;
+            notes[spawnIndex].spawnLine = line;
         }
     }
 
@@ -72,11 +109,11 @@ public class ObjectManager : MonoBehaviour
     {
         if (isRandom)
         {
-            notes[spawnIndex].GetComponent<Note>().coloridx = UnityEngine.Random.Range(0, 3);
+            notes[spawnIndex].coloridx = UnityEngine.Random.Range(0, 3);
         }
         else
         {
-            notes[spawnIndex].GetComponent<Note>().coloridx = setColor;
+            notes[spawnIndex].coloridx = setColor;
         }
 
         // notePatterns.patternNoteColoridx = note[cnt].GetComponent<Note>().coloridx;
@@ -87,11 +124,11 @@ public class ObjectManager : MonoBehaviour
     {
         if (isRandom)
         {
-            notes[spawnIndex].GetComponent<Note>().arrowidx = UnityEngine.Random.Range(0, 4);
+            notes[spawnIndex].arrowidx = UnityEngine.Random.Range(0, 4);
         }
         else
         {
-            notes[spawnIndex].GetComponent<Note>().arrowidx = setDirection;
+            notes[spawnIndex].arrowidx = setDirection;
         }
 
         // notePatterns.patternNoteArrowidx = note[cnt].GetComponent<Note>().arrowidx;
@@ -102,11 +139,11 @@ public class ObjectManager : MonoBehaviour
     {
 
         if (isSlow)
-            notes[spawnIndex].GetComponent<Note>().speed *= 0.5f;
+            notes[spawnIndex].speed *= 0.5f;
         if (oppositeNoteArrow)
-            notes[spawnIndex].GetComponent<Note>().isOpposite = true;
+            notes[spawnIndex].isOpposite = true;
         if (fadeNote)
-            notes[spawnIndex].GetComponent<Note>().isFaded = true;
+            notes[spawnIndex].isFaded = true;
         if (unifyNote)
         {
             GameObject[] activeNote = GameObject.FindGameObjectsWithTag("Note");
@@ -115,7 +152,7 @@ public class ObjectManager : MonoBehaviour
             {
                 n.GetComponent<Note>().isSame = true;
             }
-            notes[spawnIndex].GetComponent<Note>().isSame = true;
+            notes[spawnIndex].isSame = true;
         }
     }
 
@@ -123,7 +160,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (notes.Count > 0)
         {
-            return notes[currentNote].GetComponent<Note>().noteArrowDirection;
+            return notes[currentNote].noteArrowDirection;
         }
         return 0;
     }
@@ -132,7 +169,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (notes.Count > 0)
         {
-            return notes[currentNote].GetComponent<Note>().noteColor;
+            return notes[currentNote].noteColor;
         }
         return 0;
     }
@@ -141,7 +178,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (notes.Count > 0)
         {
-            return notes[currentNote].GetComponent<Note>().spawnLine;
+            return notes[currentNote].spawnLine;
         }
         return 0;
     }
@@ -150,7 +187,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (notes.Count > 0)
         {
-            return notes[currentNote].GetComponent<Note>().isDestroyed;
+            return notes[currentNote].isDestroyed;
         }
         return false;
     }
@@ -159,7 +196,7 @@ public class ObjectManager : MonoBehaviour
     {
         if (notes.Count > 0)
         {
-            notes[currentNote].GetComponent<Note>().playNoteHitSound();
+            notes[currentNote].playNoteHitSound();
         }
     }
 
@@ -167,13 +204,22 @@ public class ObjectManager : MonoBehaviour
     {
         if (notes.Count > 0)
         {
-            notes[currentNote].GetComponent<Note>().StartMovingToBoss();
+            notes[currentNote].StartMovingToBoss();
         }
     }
 
     public void DestroyNote(int index)
     {
         Destroy(notes[index].gameObject);
+    }
+
+    public string returnNoteName(int currentNote)
+    {
+        if (notes.Count > 0)
+        {
+            return noteKeys[currentNote].ToString();
+        }
+        return null;
     }
 }
 

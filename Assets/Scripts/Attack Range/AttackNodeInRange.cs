@@ -73,7 +73,6 @@ public class AttackNodeInRange : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.DownArrow))
             {
-                Debug.Log("down");
                 attack = true;
                 arrowDirection = ArrowDirectionEnum.down;
             }
@@ -97,6 +96,8 @@ public class AttackNodeInRange : MonoBehaviour
                     objectManager.MoveToBoss(objectManager.inputIndex);
                     objectManager.PlayHitSound(objectManager.inputIndex);
                     objectManager.inputIndex++;
+                    Debug.Log(objectManager.returnNoteName(objectManager.inputIndex));
+
                 }
                 attack = false;
             }
@@ -126,12 +127,10 @@ public class AttackNodeInRange : MonoBehaviour
             playerElement.playerCurrentElement == objectManager.getCurrentNoteColor(objectManager.inputIndex) && // Color 
             attack && objectManager.getCurrentNoteLine(objectManager.inputIndex) == playerMovement.currentFloor - 1) //Floor
         {
-            Debug.Log("TRUE");
             return true;
         }
         else
         {
-            Debug.Log("False");
             return false;
         }
     }
