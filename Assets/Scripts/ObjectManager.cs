@@ -45,6 +45,10 @@ public class ObjectManager : MonoBehaviour
             {
                 noteKeys.Add(1);
             }
+            else if (note.NoteName == noteRestriction[2])
+            {
+                noteKeys.Add(2);
+            }
 
             var metricTimeSpan = TimeConverter.ConvertTo<MetricTimeSpan>(note.Time, SongManager.midiFile.GetTempoMap());
             timeStamps.Add((double)metricTimeSpan.Minutes * 60f + metricTimeSpan.Seconds + (double)metricTimeSpan.Milliseconds / 1000f);
