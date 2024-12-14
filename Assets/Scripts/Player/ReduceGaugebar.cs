@@ -21,6 +21,7 @@ public class ReduceGaugebar : MonoBehaviour
     public float replenishmentSpeed = 1.5f;
 
     public bool isClone;
+    public bool isPow;
 
     Platform plat1;
     Platform plat2;
@@ -72,6 +73,12 @@ public class ReduceGaugebar : MonoBehaviour
         if (platformTime <= 0)
         {
             DisablePlatforms();
+            if(isPow){
+                PlayerDamageUpEffect PD =FindObjectOfType<PlayerDamageUpEffect>();
+                PD.move();
+            }
+            
+            
         }
         else
         {

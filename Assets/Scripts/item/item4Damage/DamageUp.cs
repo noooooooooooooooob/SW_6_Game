@@ -29,6 +29,14 @@ public class DamageUp : MonoBehaviour
         }
        // DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
        // DUE.isPower=true;
+
+       PlayerMovement PM = FindObjectOfType<PlayerMovement>();
+       PM.isPow=true;
+       PlayerDamageUpEffect PD =FindObjectOfType<PlayerDamageUpEffect>();
+       PD.isPower=true;
+       PD.Effect();
+       ReduceGaugebar RG=FindObjectOfType<ReduceGaugebar>();
+       RG.isPow=true;
     
         
        

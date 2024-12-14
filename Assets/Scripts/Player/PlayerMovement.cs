@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public int currentFloor;
 
     public bool isClone;
+    public bool isPow;
 
     [SerializeField] float fallMultiplier;
 
@@ -63,6 +64,11 @@ public class PlayerMovement : MonoBehaviour
                 Instantiate(smokeJumpUpPrefab, playerTransform.position, Quaternion.identity);
                 currentFloor++;
                 playerTransform.position = new Vector2(playerTransform.position.x, playerTransform.position.y + 3f);
+                if(isPow){
+                     PlayerDamageUpEffect PD =FindObjectOfType<PlayerDamageUpEffect>();
+                    PD.move();
+                }
+               
             }
 
             if (rb.velocity.y < 0)
@@ -79,6 +85,10 @@ public class PlayerMovement : MonoBehaviour
 
                     currentFloor--;
                     playerTransform.position = new Vector2(playerTransform.position.x, playerTransform.position.y - 3f);
+                    if(isPow){
+                        PlayerDamageUpEffect PD =FindObjectOfType<PlayerDamageUpEffect>();
+                        PD.move();
+                    }
                 }
 
             }

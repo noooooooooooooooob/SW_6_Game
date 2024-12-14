@@ -15,6 +15,15 @@ public class DamageDown : MonoBehaviour
         healthBarController.isDamageUp = false;
         //DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
         //DUE.isPower=false;
+        PlayerMovement PM = FindObjectOfType<PlayerMovement>();
+       PM.isPow=false;
+       ReduceGaugebar RG=FindObjectOfType<ReduceGaugebar>();
+       RG.isPow=false;
+        PlayerDamageUpEffect PD =FindObjectOfType<PlayerDamageUpEffect>();
+        PD.destroy();
+       PD.isPower=false;
+       
+
     }
 
 }

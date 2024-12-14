@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Rendering;
 
 public class inventory : MonoBehaviour
 {
@@ -115,7 +116,8 @@ public class inventory : MonoBehaviour
     private void UseItem(int slotIndex)
     {
         wait = false;
-        if (slotIndex < 0 || slotIndex >= inventorySize || bools[slotIndex]==true)
+        int number = int.Parse(inventorys[slotIndex]);
+        if (slotIndex < 0 || slotIndex >= inventorySize || bools[number-1]==true)
         {
             Debug.Log("잘못된 슬롯입니다.");
             return;
@@ -123,7 +125,7 @@ public class inventory : MonoBehaviour
 
         if (inventorys[slotIndex] != null)
         {
-            bools[slotIndex]=true;
+            
 
             // itemtype이 "1"일 때 Note를 삭제하는 이벤트 호출
             if (inventorys[slotIndex] == "1")
@@ -135,7 +137,7 @@ public class inventory : MonoBehaviour
                     bomb.InvokeDeleteNotes(); // Bomb 인스턴스가 있을 때만 호출
                     PlayBombSound();
                     flash.FlashScreen();
-                    bools[slotIndex]=false;
+                    
                 }
                 else
                 {
@@ -149,6 +151,7 @@ public class inventory : MonoBehaviour
                 {
                     slow.SlowNotes();
                     wait = true;
+                    bools[1]=true;
 
                     Invoke("stopslow", 5f);
                 }
@@ -164,6 +167,7 @@ public class inventory : MonoBehaviour
                 {
                     AC.sameColor();
                     wait = true;
+                    bools[2]=true;
 
                     Invoke("difColor", 5f);
                 }
@@ -180,6 +184,7 @@ public class inventory : MonoBehaviour
                     DU.damageUp();
                     PlayPowerupSound();
                     wait = true;
+                    bools[3]=true;
 
                     Invoke("damagedown", 5f);
                 }
@@ -279,7 +284,7 @@ public class inventory : MonoBehaviour
 
 
                 wait = true;
-
+                bools[5]=true;
                 //PlayerElement PE= FindObjectOfType<PlayerElement>();
                 //PE.isClone=true;
                 Invoke("clonefin", 5f);
@@ -350,6 +355,7 @@ public class inventory : MonoBehaviour
         if (currentClone)
         {
             currentClone = false;
+            
             //DamageUpEffect DUE=FindObjectOfType<DamageUpEffect>();
             //DUE.isClone=false;
             //DUE.Effect();
@@ -363,6 +369,7 @@ public class inventory : MonoBehaviour
             PlayerMovement PM = FindObjectOfType<PlayerMovement>();
             PM.isClone = false;
             playerFloor = PM.currentFloor;
+            
             //PlayerElement PE= FindObjectOfType<PlayerElement>();
             //PE.fuck();
 
@@ -380,10 +387,19 @@ public class inventory : MonoBehaviour
             }
             if (playerFloor == 1)
             {
+           
                 Vector3 smokePosition = cloneObject2.transform.position;
                 Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
                 smokePosition = cloneObject3.transform.position;
                 Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+                if(bools[3]==true){
+                   
+                    CloneDamageUpEffect destroyPower2 =cloneObject2.GetComponent<CloneDamageUpEffect>();
+                    destroyPower2.destroy();
+                    CloneDamageUpEffect destroyPower3 =cloneObject3.GetComponent<CloneDamageUpEffect>();
+                    destroyPower3.destroy();
+                }
+                
             }
             else if (playerFloor == 2)
             {
@@ -391,6 +407,13 @@ public class inventory : MonoBehaviour
                 Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
                 smokePosition = cloneObject3.transform.position;
                 Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+
+                if(bools[3]==true){
+                    CloneDamageUpEffect destroyPower1 =cloneObject1.GetComponent<CloneDamageUpEffect>();
+                    destroyPower1.destroy();
+                    CloneDamageUpEffect destroyPower3 =cloneObject3.GetComponent<CloneDamageUpEffect>();
+                    destroyPower3.destroy();
+                }
             }
             else if (playerFloor == 3)
             {
@@ -398,10 +421,19 @@ public class inventory : MonoBehaviour
                 Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
                 smokePosition = cloneObject2.transform.position;
                 Instantiate(smokeJumpDownPrefab, smokePosition, Quaternion.identity);
+
+                if(bools[3]==true){
+                    CloneDamageUpEffect destroyPower1 =cloneObject1.GetComponent<CloneDamageUpEffect>();
+                    destroyPower1.destroy();
+                    CloneDamageUpEffect destroyPower2 =cloneObject2.GetComponent<CloneDamageUpEffect>();
+                    destroyPower2.destroy();
+                }
             }
             cloneObject1.SetActive(false);
             cloneObject2.SetActive(false);
             cloneObject3.SetActive(false);
+
+            
             //cloneObject.SetActive(false);
             //playerDisappearObject.SetActive(true);
 
