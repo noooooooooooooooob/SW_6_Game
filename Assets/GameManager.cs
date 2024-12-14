@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     {
         bgmAudio = GameObject.Find("BackGroundMusic").GetComponent<AudioSource>();
         objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
-        Invoke("startBGM", 1f + objectManager.travelTime);
+        // Invoke("startBGM", 1f + objectManager.travelTime);
     }
     void Update()
     {

@@ -12,11 +12,13 @@ public class AttackNodeInRange : MonoBehaviour
     public bool playerInRange = false;
 
     private HealthBarController healthBarController;
+    private ObjectManager objectManager;
     private GameObject player;
     private PlayerElement playerElement;
     private PlayerMovement playerMovement;
     public ArrowDirectionEnum arrowDirection;
     public ParticlePlayer particlePlayer;
+
 
     private GameObject clone;
     public List<Note> notesInTrigger = new List<Note>();
@@ -30,7 +32,7 @@ public class AttackNodeInRange : MonoBehaviour
         player = GameObject.Find("Player");
         playerElement = player.GetComponent<PlayerElement>();
         playerMovement = player.GetComponent<PlayerMovement>();
-
+        objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
         clone = GameObject.Find("clone");
 
 
@@ -39,7 +41,6 @@ public class AttackNodeInRange : MonoBehaviour
 
     public void OnChildTrigger()
     {
-
         if (isClone)
         {
             playerInRange = false;
@@ -53,7 +54,7 @@ public class AttackNodeInRange : MonoBehaviour
 
     void Update()
     {
-        if (hasNote && playerInRange && playerMovement.CanMove)
+        if (playerInRange && playerMovement.CanMove)
         {
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
@@ -80,6 +81,36 @@ public class AttackNodeInRange : MonoBehaviour
         {
             attack = false;
         }
+
+        if (objectManager.inputIndex < objectManager.timeStamps.Count)
+        {
+            double timeStamp = objectManager.timeStamps[objectManager.inputIndex];
+            double marginOfError = SongManager.Instance.marginOfError;
+            double audioTime = SongManager.GetAudioSourceTime() - (SongManager.Instance.inputDelayInMilliseconds / 1000.0);
+
+            if (attackCheck())
+            {
+                if (Math.Abs(audioTime - timeStamp) < marginOfError)
+                {
+                    // objectManager.DestroyNote(objectManager.inputIndex);
+                    objectManager.MoveToBoss(objectManager.inputIndex);
+                    objectManager.PlayHitSound(objectManager.inputIndex);
+                    objectManager.inputIndex++;
+                    Debug.Log(objectManager.returnNoteName(objectManager.inputIndex));
+
+                }
+                attack = false;
+            }
+            if (timeStamp + marginOfError <= audioTime) //If not hit in time
+            {
+                if (!objectManager.isDestroyed(objectManager.inputIndex))
+                {
+                    ShakeAttackBar();
+                }
+                // healthBarController.TakeDamage();
+                objectManager.inputIndex++;
+            }
+        }
     }
 
     void ShakeAttackBar()
@@ -89,78 +120,20 @@ public class AttackNodeInRange : MonoBehaviour
 
     }
 
-    void OnTriggerEnter2D(Collider2D other) // 공격범위에 들어왔을때
+    bool attackCheck()
     {
-        if (other.gameObject.tag == "Note")
+        if (
+            objectManager.GetCurrentNoteArrowDirection(objectManager.inputIndex) == arrowDirection && // Arrow direction
+            playerElement.playerCurrentElement == objectManager.getCurrentNoteColor(objectManager.inputIndex) && // Color 
+            attack && objectManager.getCurrentNoteLine(objectManager.inputIndex) == playerMovement.currentFloor - 1) //Floor
         {
-            hasNote = true;
-            Note note = other.gameObject.GetComponent<Note>();
-            if (note != null && !notesInTrigger.Contains(note))
-            {
-                notesInTrigger.Add(note);
-            }
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Note")
-        {
-            Note note = other.gameObject.GetComponent<Note>();
-
-            if (attack && playerInRange)
-            {
-                if (note.noteArrowDirection == arrowDirection && playerElement.playerCurrentElement == note.noteColor)
-                {
-                    note.StartMovingToBoss();
-                    note.playNoteHitSound();
-                    particlePlayer.isPlay=true;
-
-                    notesInTrigger.Remove(note);
-                    attack = false;
-                    hasNote = notesInTrigger.Count > 0;
-
-                    arrowDirection = ArrowDirectionEnum.none;
-                }
-
-                else
-                {
-                    ShakeAttackBar();
-                    other.gameObject.SetActive(false);
-                    attack = false;
-                    hasNote = notesInTrigger.Count > 0;
-                    arrowDirection = ArrowDirectionEnum.none;
-
-                    if (healthBarController != null)
-                    {
-                        healthBarController.TakeDamage();
-                    }
-                    else
-                    {
-                        Debug.LogError("HealthBarController not found on Player object.");
-                    }
-                }
-
-            }
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Note")
-        {
-            Note note = other.gameObject.GetComponent<Note>();
-            if (note != null && notesInTrigger.Contains(note))
-            {
-                notesInTrigger.Remove(note);
-                note.StartMovingToPlayer();
-            }
-            if (notesInTrigger.Count == 0)
-            {
-                hasNote = false;
-
-            }
-        }
-    }
 }
 

@@ -58,7 +58,7 @@ public class item_spawn : MonoBehaviour
 
     void spawnitem(int index, float posY)
     {
-        Debug.Log("Item Index : " + index);
+        // Debug.Log("Item Index : " + index);
         Vector3 spawnPos = new Vector3(transform.position.x, posY, transform.position.z + 1);
         Instantiate(items[index], spawnPos, Quaternion.identity);
     }

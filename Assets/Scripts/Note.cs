@@ -29,6 +29,7 @@ public class Note : MonoBehaviour
     public ArrowDirectionEnum noteArrowDirection;
 
     //기믹들 추가
+    public bool isDestroyed;
     public bool isOpposite;
     public bool isFaded;
     float noteditance; // fade용 float 변수
@@ -50,6 +51,11 @@ public class Note : MonoBehaviour
     private ReduceGaugebar staminaBar;
 
     float timer = 0.0f;
+
+
+    //MIDI
+    private double timeInstantiated;
+    public float assignedTime;
     void Awake()
     {
         //External components
@@ -64,24 +70,20 @@ public class Note : MonoBehaviour
         opacity = 1.0f;
 
         // 보스가 활성화되어 있으면 보스 위치에서 시작
-        if (Boss != null && Boss.activeInHierarchy)
-        {
-            transform.position = Boss.transform.position; // 보스 위치에서 시작
-        }
-        else
-        {
-            Debug.LogWarning("Boss is not active or missing. Default spawn point will be used.");
-            transform.position = new Vector2(-10f, spawnPointYInWorld); // 기본 위치 설정
-        }
+        // if (Boss != null && Boss.activeInHierarchy)
+        // {
+        //     transform.position = Boss.transform.position; // 보스 위치에서 시작
+        // }
+        // else
+        // {
+        //     Debug.LogWarning("Boss is not active or missing. Default spawn point will be used.");
+        //     transform.position = new Vector2(-10f, spawnPointYInWorld); // 기본 위치 설정
+        // }
 
+        isDestroyed = false;
         isOpposite = false;
         isFaded = false;
         isSame = false;
-
-        // coloridx = Random.Range(0, 3);
-        // arrowidx = Random.Range(0, 4);
-
-
         isHit = false;
     }
 
@@ -138,7 +140,6 @@ public class Note : MonoBehaviour
         // Y축 최종 위치 보정
         transform.position = new Vector2(transform.position.x, spawnPointYInWorld);
     }
-
     void Start()
     {
         // 스폰 위치 설정
@@ -146,10 +147,12 @@ public class Note : MonoBehaviour
         bossObj = FindObjectOfType<Boss>();
         playerObj = FindObjectOfType<Player>();
 
-        transform.position = bossObj.transform.position;
+        // transform.position = bossObj.transform.position;
+
+        timeInstantiated = SongManager.GetAudioSourceTime();
 
         SetNoteColorDirection();
-        StartCoroutine(MoveToSpawnPointY());
+        // StartCoroutine(MoveToSpawnPointY());
 
     }
 
@@ -169,8 +172,7 @@ public class Note : MonoBehaviour
 
     void Update()
     {
-        timer += Time.deltaTime;
-        updatePlayerPosition();
+        // updatePlayerPosition();
 
         if (isMovingToBoss) //현재 플레이어와 충돌하면
         {
@@ -199,14 +201,27 @@ public class Note : MonoBehaviour
                 SetNoteColorDirection();
                 isOpposite = false;
             }
-
             if (isSame)
             {
                 sameColor();
             }
-            transform.Translate(-1.0f * speed * Time.deltaTime, 0, 0); // 등속으로 왼쪽으로 이동
-        }
 
+            //MIDI
+            double timeSinceInstantiated = SongManager.GetAudioSourceTime() - timeInstantiated;
+            float t = (float)(timeSinceInstantiated / (SongManager.Instance.noteTime * 2));
+
+
+            if (t > 1)
+            {
+                gameObject.SetActive(false);
+            }
+            else
+            {
+                float newX = Mathf.Lerp(SongManager.Instance.noteSpawnY, SongManager.Instance.noteDespawnY, t);
+                transform.localPosition = new Vector3(newX, spawnPointYInWorld, transform.localPosition.z);
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
     }
 
     void SetActiveFalseNote()
@@ -273,12 +288,8 @@ public class Note : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "AttackRange")
-        {
-            Debug.Log("Time : " + timer);
-        }
         if (collision.gameObject.tag == "Player")//|| collision.gameObject.tag == "clone"
-        {   
+        {
             // 노트가 플레이어와 충돌 시 데미지를 입음
             damagePlayer();
             gameObject.SetActive(false);
