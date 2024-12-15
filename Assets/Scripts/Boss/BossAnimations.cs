@@ -6,9 +6,9 @@ public class BossAnimations : MonoBehaviour
 {
     public enum animations
     {
-        MoveBack,
+        Idle,
         IsHit,
-        SlimeDie
+        Death,
     }
     Animator animator;
     animations currentState;
@@ -21,7 +21,7 @@ public class BossAnimations : MonoBehaviour
         animator = GetComponent<Animator>();
         boss = GetComponent<Boss>();
 
-        currentState = animations.MoveBack;
+        currentState = animations.Idle;
     }
 
     // Update is called once per frame
@@ -29,7 +29,7 @@ public class BossAnimations : MonoBehaviour
     {
         if (boss.isDead)
         {
-            ChangeAnimationState(animations.SlimeDie);
+            ChangeAnimationState(animations.Death);
         }
         else if (boss.isHit)
         {
@@ -39,7 +39,7 @@ public class BossAnimations : MonoBehaviour
         }
         else if (!inAnimation)
         {
-            ChangeAnimationState(animations.MoveBack);
+            ChangeAnimationState(animations.Idle);
         }
 
 

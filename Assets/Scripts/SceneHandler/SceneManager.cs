@@ -40,6 +40,10 @@ public class SceneManager : MonoBehaviour
     }
     public void NextScene()
     {
+        if (CurrentScene == TotalSceneCount - 1)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        }
         if (preLoadOperation != null && preLoadOperation.progress >= 0.9f)
         {
             preLoadOperation.allowSceneActivation = true;
@@ -58,5 +62,10 @@ public class SceneManager : MonoBehaviour
     public void ManualSelectedScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(SceneToLoad);
+    }
+
+    public bool isLastScene()
+    {
+        return CurrentScene == TotalSceneCount - 1;
     }
 }

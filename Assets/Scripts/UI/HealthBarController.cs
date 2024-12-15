@@ -109,14 +109,14 @@ public class HealthBarController : MonoBehaviour
     {
         // Debug.Log("Player is dead");
         player.PlayerDeath();
-        // objectManager.GameEnd();
+        objectManager.GameEnd();
         gameTransition.SetPlayerDefeated();
     }
 
     private void CallBossDeath()
     {
         boss.BossDeath();
-        // objectManager.GameEnd();
+        objectManager.GameEnd();
         gameTransition.SetBossDefeated();
     }
 

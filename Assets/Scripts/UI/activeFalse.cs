@@ -13,15 +13,16 @@ public class activeFalse : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void onClick()
     {
-        if(isActive)
-            isActive=false;
+        if (isActive)
+            isActive = false;
         else
-            isActive=true;
+            isActive = true;
+
         gameObject.SetActive(isActive);
     }
 }

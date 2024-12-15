@@ -9,6 +9,8 @@ public class GameEnd : MonoBehaviour
     public GameObject panel;
     private ScoreManager scoreManager;
     private SceneManager sceneManager;
+    private GameManager gameManager;
+    public TMP_Text title;
     public TMP_Text scoreText;
     public TMP_Text Hit;
     public TMP_Text Miss;
@@ -16,6 +18,7 @@ public class GameEnd : MonoBehaviour
     void Start()
     {
         scoreManager = GameObject.Find("ScoreManager").GetComponent<ScoreManager>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         sceneManager = GameObject.Find("GameManager").GetComponent<SceneManager>();
 
         GameOver();
@@ -33,12 +36,17 @@ public class GameEnd : MonoBehaviour
     public void GameOver()
     {
         // 게임 오버 스코어 출력
-        string String = string.Join(" ", scoreManager.currentScore);
-        scoreText.text = String;
-        String = string.Join(" ", scoreManager.currentHit);
-        Hit.text = String;
-        String = string.Join(" ", scoreManager.currentMiss);
-        Miss.text = String;
+        if (gameManager.gameWon)
+        {
+            title.text = "Game Clear";
+        }
+        else
+        {
+            title.text = "Game Over";
+        }
+        scoreText.text += scoreManager.currentScore;
+        Hit.text += scoreManager.currentHit;
+        Miss.text += scoreManager.currentMiss;
 
         // 게임 오버 시 초기화
         scoreManager.sortScores();

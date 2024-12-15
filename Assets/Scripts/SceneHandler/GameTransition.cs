@@ -34,17 +34,19 @@ public class GameTransition : MonoBehaviour
         {
             playerMovement.VictoryRun();
         }
-        else
-        {
-            Debug.Log("PlayerMovement is null");
-        }
     }
 
     public void PrepNextScene()
     {
-        Debug.Log("StartFade");
-        StartCoroutine(fade.FadeOut());
-        Invoke("StartNextScene", fade.fadeDuration + 0.3f);
+        if (sceneManager.isLastScene())
+        {
+            gameManager.ShowGameClearUI();
+        }
+        else
+        {
+            StartCoroutine(fade.FadeOut());
+            Invoke("StartNextScene", fade.fadeDuration + 0.3f);
+        }
     }
 
     public void StartNextScene()

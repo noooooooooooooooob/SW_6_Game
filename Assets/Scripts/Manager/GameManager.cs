@@ -7,16 +7,14 @@ public class GameManager : MonoBehaviour
     private bool isPaused = false; // 게임이 일시정지 상태인지 여부를 저장
     private GameObject panel;       // UI 패널
     private AudioSource bgmAudio;   // 배경음악 AudioSource
-
     public GameObject GamePauseUI;
     public GameObject GameOverUI;
 
-    private ObjectManager objectManager;
+    public bool gameWon = false;
+
     void Start()
     {
         bgmAudio = GameObject.Find("BackGroundMusic").GetComponent<AudioSource>();
-        objectManager = GameObject.Find("Object manager").GetComponent<ObjectManager>();
-        // Invoke("startBGM", 1f + objectManager.travelTime);
     }
     void Update()
     {
@@ -34,10 +32,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void startBGM()
-    {
-        bgmAudio.Play();
-    }
     public void PauseGame()
     {
         Time.timeScale = 0f; // 게임 시간을 멈춤
@@ -47,9 +41,8 @@ public class GameManager : MonoBehaviour
         {
             bgmAudio.Pause();
         }
-
-        Debug.Log("Game Paused");
     }
+
     public void ResumeGame()
     {
         Time.timeScale = 1f; // 게임 시간을 다시 정상 속도로
@@ -62,12 +55,18 @@ public class GameManager : MonoBehaviour
         {
             bgmAudio.UnPause();
         }
-
         Destroy(panel);
     }
 
     public void ShowGameOverUI()
     {
+        gameWon = false;
         Instantiate(GameOverUI);
     }
+    public void ShowGameClearUI()
+    {
+        gameWon = true;
+        Instantiate(GameOverUI);
+    }
+
 }

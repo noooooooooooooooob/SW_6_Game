@@ -225,5 +225,18 @@ public class ObjectManager : MonoBehaviour
         }
         return null;
     }
+
+    public void GameEnd()
+    {
+        foreach (Note note in notes)
+        {
+            Destroy(note.gameObject);
+        }
+        notes.Clear();
+        timeStamps.Clear();
+        spawnIndex = 0;
+        inputIndex = 0;
+        noteKeys.Clear();
+    }
 }
 
