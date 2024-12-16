@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ca34198e797f048b344b004baa039e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noteHitSound: {fileID: 8300000, guid: b9b2e926d51e8cf41853fcdf91cf10ea, type: 3}
+  noteHitSound: {fileID: 8300000, guid: 80ebcbd3725e74e498e1fba353836f8b, type: 3}
   player: {fileID: 0}
   spawnPoints:
   - -3.5
@@ -177,11 +177,13 @@ MonoBehaviour:
   coloridx: 0
   noteColor: 0
   noteArrowDirection: 0
+  isDestroyed: 0
   isOpposite: 0
   isFaded: 0
   opacity: 0
   isSame: 0
   healthBarController: {fileID: 0}
+  assignedTime: 0
 --- !u!50 &6437169392336306601
 Rigidbody2D:
   serializedVersion: 4
