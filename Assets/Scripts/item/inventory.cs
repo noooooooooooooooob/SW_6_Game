@@ -116,8 +116,12 @@ public class inventory : MonoBehaviour
     private void UseItem(int slotIndex)
     {
         wait = false;
-        int number;
-        int.TryParse(inventorys[slotIndex], out number);
+        int number=1;
+        if(inventorys[slotIndex]!=null){
+            
+            int.TryParse(inventorys[slotIndex], out number);
+        }
+        
         if (slotIndex < 0 || slotIndex >= inventorySize || bools[number-1]==true)
         {
             Debug.Log("잘못된 슬롯입니다.");
