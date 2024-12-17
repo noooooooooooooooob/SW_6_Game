@@ -9,6 +9,7 @@ public class BossAnimations : MonoBehaviour
         Idle,
         IsHit,
         Death,
+        Walk,
     }
     Animator animator;
     animations currentState;
@@ -36,6 +37,10 @@ public class BossAnimations : MonoBehaviour
             inAnimation = true;
             ChangeAnimationState(animations.IsHit);
             Invoke("AnimationDelay", 0.2f);
+        }
+        else if (boss.doWalk)
+        {
+            ChangeAnimationState(animations.Walk);
         }
         else if (!inAnimation)
         {

@@ -23,7 +23,7 @@ public class item_spawn : MonoBehaviour
     }
     IEnumerator itemRoutine()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         int k = items.Length - 1;
         while (true)
         {
@@ -34,22 +34,18 @@ public class item_spawn : MonoBehaviour
                 k++;
                 if (k == items.Length)
                     k = 0;
-                yield return new WaitForSeconds(spawnTime);
+                yield return new WaitForSeconds(5);
                 continue;
             }
             int i = Random.Range(0, 3);
-            int j = Random.Range(0, 2);
+            int j = Random.Range(0, 4);
             int index = Random.Range(0, items.Length);
 
             if (j == 0)
             {
-                yield return new WaitForSeconds(spawnTime);
-            }
-            else
-            {
                 spawnitem(index, arrPosY[i]);
-                yield return new WaitForSeconds(spawnTime);
             }
+            yield return new WaitForSeconds(5);
 
         }
 

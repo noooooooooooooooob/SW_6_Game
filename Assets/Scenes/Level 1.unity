@@ -159,7 +159,7 @@ MonoBehaviour:
   - {fileID: 1360450819304249517, guid: 13ced09c83945bd42b26b71b588988e1, type: 3}
   - {fileID: 6875706458395463036, guid: 55af55b1a7839ae4a9304c5aecc1dfc5, type: 3}
   spawnTime: 5
-  test: 1
+  test: 0
 --- !u!4 &1683958
 Transform:
   m_ObjectHideFlags: 0

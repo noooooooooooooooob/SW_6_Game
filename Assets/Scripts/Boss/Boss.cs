@@ -8,11 +8,14 @@ public class Boss : MonoBehaviour
 {
     public bool isHit;
     public bool isDead;
+    public bool doWalk;
     public bool doEntrance;
+    public bool doExit;
 
     public AnimationCurve EntranceCurve;
     private MoveToLocation moveToLocation;
     private Transform bossStartLocation;
+    private Transform bossEndLocation;
     void Start()
     {
         isHit = false;
@@ -23,6 +26,7 @@ public class Boss : MonoBehaviour
 
         if (doEntrance)
         {
+            Invoke("StopMoving", 1f);
             StartCoroutine(moveToLocation.StartMoving(bossStartLocation.position, 1f, EntranceCurve));
         }
     }
@@ -37,10 +41,23 @@ public class Boss : MonoBehaviour
         }
     }
 
+    void StopMoving()
+    {
+        doWalk = false;
+    }
+
     public void BossDeath()
     {
-        isDead = true;
-        Invoke("bossActiveFalse", 1f);
+        if (doExit)
+        {
+            bossEndLocation = GameObject.Find("BossEndLocation").GetComponent<Transform>();
+            StartCoroutine(moveToLocation.StartMoving(bossEndLocation.position, 1f, EntranceCurve));
+        }
+        else
+        {
+            isDead = true;
+            Invoke("bossActiveFalse", 1f);
+        }
 
     }
     void bossActiveFalse()
